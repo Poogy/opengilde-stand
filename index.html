@@ -50,6 +50,9 @@ section{display:flex;flex-direction:column;gap:16px}
 .eintrag .k{font-family:'Courier Prime',monospace;font-size:13px;color:var(--leise);text-align:right;padding-top:6px}
 .gruppe{display:flex;flex-direction:column;gap:0;margin-top:8px}
 .gruppe h3{border-bottom:1px solid var(--tinte);padding-bottom:4px}
+.fort{display:flex;flex-direction:column;gap:14px;border:1px solid var(--tinte);padding:20px 24px}
+.fort-z{display:grid;grid-template-columns:260px 1fr 110px;gap:16px;align-items:center;font-size:19px}
+.fort-b{height:16px;border:1px solid var(--tinte);background:var(--kasten)}.fort-b span{display:block;height:100%}
 .fenster{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px 32px;font-size:19px}
 .fenster div{border-bottom:1px dotted var(--linie);padding:4px 0}
 [hidden]{display:none!important}
@@ -58,13 +61,14 @@ section{display:flex;flex-direction:column;gap:16px}
  .bilanz,.schritte,.kacheln,.fenster,.lan{grid-template-columns:1fr}.bilanz>div+div{border-left:0;border-top:1px solid var(--tinte)}
  .auftrag{grid-template-columns:1fr}.rechts{align-items:flex-start;text-align:left}
  .eintrag{grid-template-columns:1fr}.eintrag .k{text-align:left;padding-top:0}
+ .fort-z{grid-template-columns:1fr 90px}.fort-b{grid-column:1/-1;grid-row:2}
  .tag{grid-template-columns:56px 1fr 48px}.uhr div{min-width:56px}.uhr b{font-size:36px}
  .tafel td.z{white-space:normal} .tafel,.tafel tbody,.tafel tr,.tafel td{display:block}.tafel thead{display:none}.tafel td{border:0;padding:2px 0}.tafel tr{border-bottom:1px dotted var(--linie);padding:8px 0}
 }
 </style></head>
 <body><main class="blatt">
 <header style="display:flex;flex-direction:column;gap:14px">
-<div class="kopf"><h1>Hauptbuch des Nachbaus</h1><span class="mono" style="font-size:14px">aktualisiert am: 03.10.2026, 10:55 Uhr</span></div>
+<div class="kopf"><h1>Hauptbuch des Nachbaus</h1><span class="mono" style="font-size:14px">aktualisiert am: 03.10.2026, 11:12 Uhr</span></div>
 <p class="lead">OpenGilde baut „Die Gilde 1400“ nach — das freie Spiel, in Köln. Im Haben steht, was gemessen ist, im Soll, was noch zu messen ist. Dazwischen schwebt, was gemessen, aber noch nicht gebaut oder entschieden ist. Ausgezählt wird bei jedem Abschluß, nicht geschätzt.</p>
 <nav><a href="#lan">LAN-Party</a><a href="#bilanz">Bilanz</a><a href="#arbeit">Wie viel noch zu tun ist</a><a href="#laeuft">Was schon läuft</a><a href="#auftraege">Aufträge</a><a href="#meister">Zu entscheiden</a><a href="#bauen">Noch zu bauen</a><a href="#kontor">Im Kontor</a><a href="#verlauf">Verlauf</a></nav>
 </header>
@@ -90,6 +94,7 @@ section{display:flex;flex-direction:column;gap:16px}
 <div class="posten"><span>Handgriffe mit Fenster</span><span class="mono">80 / 109</span></div>
 <div class="posten"><span>Proben bestanden</span><span class="mono">4820</span></div></div>
 </div>
+<div class="fort"><h3>Fortschritt <span class="mono" style="font-weight:400;font-size:15px">· gezählt, nicht geschätzt</span></h3><div class="fort-z"><span>Original verstanden</span><span class="fort-b" role="img" aria-label="99 Prozent"><span style="width:98.6%;background:var(--blau)"></span></span><span class="mono" style="text-align:right">282/286 · 99 %</span></div><div class="fort-z"><span>Geratenes erledigt</span><span class="fort-b" role="img" aria-label="77 Prozent"><span style="width:77.3%;background:var(--blau)"></span></span><span class="mono" style="text-align:right">221/286 · 77 %</span></div><div class="fort-z"><span>Handgriffe mit Fenster</span><span class="fort-b" role="img" aria-label="73 Prozent"><span style="width:73.4%;background:var(--ocker)"></span></span><span class="mono" style="text-align:right">80/109 · 73 %</span></div><div class="fort-z"><span>Aufträge erfüllt</span><span class="fort-b" role="img" aria-label="52 Prozent"><span style="width:52.4%;background:var(--rot)"></span></span><span class="mono" style="text-align:right">11/21 · 52 %</span></div><div class="fort-z"><span>davon für die LAN ★</span><span class="fort-b" role="img" aria-label="62 Prozent"><span style="width:62.5%;background:var(--rot)"></span></span><span class="mono" style="text-align:right">5/8 · 62 %</span></div><div style="font-size:17px;color:var(--leise)">„Original verstanden“: von allen geratenen Zahlen die, bei denen gemessen ist, wie das Original es macht. „Geratenes erledigt“: die, die auch im Nachbau fertig sind. Für Bauposten, Entscheidungen und Gelände gibt es keinen Balken — dort ist das Ganze nicht zählbar.</div></div>
 <div class="hinweis">Alle Handgriffe des Spiels sind gebaut und über die Tastatur erreichbar — 29 haben im Bild nur noch keinen Knopf. Ungeklärt heißt: Wie das Original es macht, ist noch nicht gemessen. Schwebend heißt: Das Original ist gemessen, aber der Nachbau ist noch nicht so weit oder es fehlt eine Entscheidung.</div>
 </section>
 <section id="arbeit"><h2>Wie viel noch zu tun ist</h2>
