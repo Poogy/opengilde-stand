@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Aufträge · Hauptbuch des Nachbaus</title>
+<meta name="description" content="Projektstand von OpenGilde: was gemessen ist, was noch zu tun ist, und was Mitspieler am Original erspielen können.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,700;1,500&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--grund:#3B2A1E;--blatt:#F4ECD8;--tinte:#2A1F16;--rot:#7A1F1F;--blau:#234A6B;--ocker:#8A5A12;--gelb:#C9A24A;--linie:#A8977A;--leise:#5A4A38;--kasten:#EADFC4}
+*{box-sizing:border-box}
+body{margin:0;background:var(--grund);color:var(--tinte);font-family:'Cormorant Garamond',Georgia,serif}
+a{color:var(--rot)}a:hover{color:#4F1212}
+.mono{font-family:'Courier Prime',monospace}
+.blatt{max-width:1180px;margin:56px auto;background:var(--blatt);padding:56px 64px 72px;display:flex;flex-direction:column;gap:56px}
+h1{margin:0;font-size:60px;line-height:1}h2{margin:0;font-size:34px}h3{margin:0;font-size:24px}
+.kopf{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:12px;border-bottom:2px solid var(--rot);padding-bottom:12px}
+.lead{margin:0;font-size:21px;font-style:italic;max-width:860px}
+nav{display:flex;gap:10px 22px;flex-wrap:wrap;font-size:19px}
+section{display:flex;flex-direction:column;gap:16px}
+.bilanz{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border:1px solid var(--tinte)}
+.bilanz>div{padding:20px 24px;display:flex;flex-direction:column;gap:6px}
+.bilanz>div+div{border-left:1px solid var(--tinte)}
+.spalte{font-size:26px;font-weight:700;border-bottom:1px solid var(--tinte);padding-bottom:6px}
+.posten{display:flex;justify-content:space-between;gap:12px;font-size:20px;border-bottom:1px dotted var(--linie)}
+.summe{display:flex;justify-content:space-between;font-size:22px;font-weight:700;border-top:3px double var(--tinte);margin-top:auto;padding-top:6px}
+.hinweis{border:1px solid var(--blau);padding:14px 20px;font-size:19px}
+.lan{border:3px double var(--rot);padding:24px 28px;display:grid;grid-template-columns:auto 1fr;gap:28px;align-items:center}
+.uhr{display:flex;gap:14px}.uhr div{text-align:center;min-width:72px}
+.uhr b{display:block;font-family:'Courier Prime',monospace;font-size:46px;line-height:1;color:var(--rot)}
+.uhr span{font-size:15px;text-transform:uppercase;letter-spacing:.08em}
+.kacheln{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 32px}
+.kachel{border-bottom:1px dotted var(--linie);padding:10px 0}.kachel b{font-size:21px;display:block}.kachel span{font-size:18px}
+.tafel{width:100%;border-collapse:collapse;font-size:19px}
+.tafel th{text-align:left;border-bottom:2px solid var(--tinte);padding:6px 10px 6px 0;font-size:18px}
+.tafel td{border-bottom:1px dotted var(--linie);padding:10px 10px 10px 0;vertical-align:top}
+.tafel td.z{font-family:'Courier Prime',monospace;font-size:16px;white-space:nowrap}
+.tafel tr.gesamt td{border-top:3px double var(--tinte);border-bottom:0;font-weight:700}
+.tag{display:grid;grid-template-columns:70px 1fr 64px;gap:14px;align-items:center;font-size:14px}
+.balken{height:9px;border-bottom:1px dotted var(--linie);display:flex}.balken span{display:block;height:9px}
+.knoepfe{display:flex;gap:8px;flex-wrap:wrap}
+.knoepfe button{min-height:44px;padding:6px 18px;cursor:pointer;border:1px solid var(--tinte);font:inherit;font-size:18px;background:transparent;color:var(--tinte)}
+.knoepfe button[aria-pressed=true]{background:var(--tinte);color:var(--blatt)}
+.auftrag{display:grid;grid-template-columns:70px 1fr 170px;gap:20px;padding:16px 0;border-bottom:1px solid var(--linie)}
+.auftrag .t{font-size:23px;font-weight:700}.auftrag .w{font-size:19px}
+.rechts{display:flex;flex-direction:column;gap:8px;align-items:flex-end;text-align:right}
+.siegel{font-family:'Courier Prime',monospace;font-weight:700;font-size:14px;text-transform:uppercase;letter-spacing:.1em;padding:4px 10px;border:2px solid}
+.schritte{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;background:var(--kasten);padding:22px 26px;font-size:18px}
+.schritte b{display:block;font-size:22px}
+.eintrag{display:grid;grid-template-columns:1fr 110px;gap:16px;border-bottom:1px dotted var(--linie);padding:12px 0}
+.eintrag .t{font-size:22px;font-weight:700}.eintrag .x{font-size:19px}
+.eintrag .k{font-family:'Courier Prime',monospace;font-size:13px;color:var(--leise);text-align:right;padding-top:6px}
+.gruppe{display:flex;flex-direction:column;gap:0;margin-top:8px}
+.gruppe h3{border-bottom:1px solid var(--tinte);padding-bottom:4px}
+.fort{display:flex;flex-direction:column;gap:14px;border:1px solid var(--tinte);padding:20px 24px}
+.fort-z{display:grid;grid-template-columns:minmax(0,260px) minmax(0,1fr) auto;gap:16px;align-items:center;font-size:19px}
+.fort-b{height:16px;border:1px solid var(--tinte);background:var(--kasten)}.fort-b span{display:block;height:100%}
+.fenster{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px 32px;font-size:19px}
+.fenster div{border-bottom:1px dotted var(--linie);padding:4px 0}
+[hidden]{display:none!important}
+nav a[aria-current=page]{color:var(--tinte);font-weight:700;text-decoration:none}
+.fremd{border:1px solid var(--tinte);background:var(--kasten);padding:10px 16px;display:flex;flex-direction:column;gap:4px;font-size:17px;max-height:60vh;overflow:auto}
+.fremd a{display:block;padding:2px 0}.fremd-seite{font-family:'Courier Prime',monospace;font-size:14px;text-transform:uppercase;letter-spacing:.08em;margin-top:8px}
+.wegweisergitter{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
+.wegweiser{display:flex;flex-direction:column;gap:4px;border:1px solid var(--tinte);padding:14px 18px;text-decoration:none;color:var(--tinte)}
+.wegweiser b{font-size:22px;color:var(--rot)}.wegweiser span{font-size:18px}.wegweiser:hover{background:var(--kasten)}
+[id^=i]:target{background:var(--kasten)}
+.begriff{color:inherit;text-decoration:underline dotted;text-underline-offset:3px;cursor:help}
+.suche{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.suche input{font:inherit;font-size:19px;padding:8px 12px;border:1px solid var(--tinte);background:var(--blatt);color:var(--tinte);width:min(420px,100%)}
+.begriffe{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 32px;font-size:18px}
+.begriffe>div{border-bottom:1px dotted var(--linie);padding:6px 0}.begriffe>div:target{background:var(--kasten)}
+body.suchmodus [data-art][hidden]:not(.such-aus){display:grid!important}
+body.suchmodus .knoepfe{display:none}
+.such-aus{display:none!important}
+@media (max-width:760px){
+ .begriffe{grid-template-columns:1fr}
+ .blatt{margin:0;padding:28px 16px 48px;gap:40px}h1{font-size:40px}
+ .bilanz,.schritte,.kacheln,.fenster,.lan{grid-template-columns:1fr}.bilanz>div+div{border-left:0;border-top:1px solid var(--tinte)}
+ .auftrag{grid-template-columns:1fr}.rechts{align-items:flex-start;text-align:left}
+ .eintrag{grid-template-columns:1fr}.eintrag .k{text-align:left;padding-top:0}
+ .fort-z{grid-template-columns:1fr auto}.fort-b{grid-column:1/-1;grid-row:2}
+ .tag{grid-template-columns:56px 1fr 48px}.uhr div{min-width:56px}.uhr b{font-size:36px}
+ .tafel td.z{white-space:normal} .tafel,.tafel tbody,.tafel tr,.tafel td{display:block}.tafel thead{display:none}.tafel td{border:0;padding:2px 0}.tafel tr{border-bottom:1px dotted var(--linie);padding:8px 0}
+}
+</style></head>
+<body><main class="blatt">
+<header style="display:flex;flex-direction:column;gap:14px">
+<div class="kopf"><h1>Hauptbuch des Nachbaus</h1><span class="mono" style="font-size:14px">aktualisiert am: 07.10.2026, 18:04 Uhr</span></div>
+
+<nav><a href="index.html">Übersicht</a><a href="auftraege.html" aria-current="page">Aufträge</a><a href="entscheidungen.html">Entscheidungen</a><a href="baustellen.html">Baustellen</a><a href="verlauf.html">Verlauf</a><a href="einstieg.html">Was läuft &amp; Begriffe</a></nav>
+<div class="suche"><input type="search" id="suche" placeholder="Auf allen Seiten suchen …" aria-label="Auf allen Seiten suchen"><span id="treffer" class="mono" style="font-size:15px"></span></div>
+<div id="fremd" class="fremd" hidden></div>
+</header>
+<section id="auftraege">
+<div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:12px"><h2>Aufträge an die Mitspieler</h2><span class="mono" style="font-size:14px">9 offen · nur am Original zu klären</span></div>
+<p style="margin:0;font-size:20px;max-width:860px">Was hier steht, kann kein Programm herausfinden, nur jemand, der das Original spielt. Ein Spielstand ist dabei die billigste Hilfe: tausend Zahlen auf einmal. Fotos bitte in 1152 × 864. Die „Versuche“ prüfen Formeln, die aus dem Programm gelesen, aber nie im laufenden Spiel gesehen wurden.</p>
+<div class="knoepfe" data-filter="auftragsliste"><button data-wert="lan" aria-pressed="true">Für die LAN ★</button><button data-wert="*">Alle offenen</button><button data-wert="Spielstand">Spielstände</button><button data-wert="Foto">Fotos</button><button data-wert="im_Spiel">Im Spiel</button><button data-wert="erfüllt">Erfüllt</button></div>
+<div id="auftragsliste" style="border-top:2px solid var(--tinte)"><div class="auftrag" id="i1" data-art="offen Spielstand lan"><div class="mono" style="font-weight:700;font-size:17px;color:var(--rot)">S3</div>
+<div style="display:flex;flex-direction:column;gap:4px"><div class="t">Eine Mehrspielerpartie <span title="lohnt sich auf der LAN">★</span></div><div class="w"><strong>Zu tun:</strong> irgendeinen Stand aus einer Netzwerkpartie schicken, .SRV und .SAV.</div></div>
+<div class="rechts"><span class="siegel" style="color:var(--rot);border-color:var(--rot)">offen</span><span class="mono" style="font-size:13px">Spielstand</span></div></div><div class="auftrag" id="i2" data-art="erfüllt"><div class="mono" style="font-weight:700;font-size:17px;color:var(--rot)">S5</div>
+<div style="display:flex;flex-direction:column;gap:4px"><div class="t">Ein Kanonenturm</div><div class="w"><strong>Zu tun:</strong> einen Stand schicken, in dem irgendwo ein Kanonenturm steht.</div></div>
+<div class="rechts"><span class="siegel" style="color:var(--blau);border-color:var(--blau)">erfüllt</span><span class="mono" style="font-size:13px">Spielstand</span></div></div><div class="auftrag" id="i3" data-art="erfüllt"><div class="mono" style="font-weight:700;font-size:17px;color:var(--rot)">L0</div>
+<div style="display:flex;flex-direction:column;gap:4px"><div class="t">Die Sternskala der Talente <span title="lohnt sich auf der LAN">★</span></div><div class="w"><strong>Zu tun:</strong> eine Figur mit ihren Talentsternen fotografieren (halbe Sterne mit), ihren vollen Namen notieren und gleich danach speichern; zwei Figuren machen es sicher.</div></div>
+<div class="rechts"><span class="siegel" style="color:var(--blau);border-color:var(--blau)">erfüllt</span><span class="mono" style="font-size:13px">Spielstand</span></div></div><div class="auftrag" id="i4" data-art="erfüllt"><div class="mono" style="font-weight:700;font-size:17px;color:var(--rot)">V1</div>
+<div style="display:flex;flex-direction:column;gap:4px"><div class="t">Macht die Gunst der Arbeiter schneller? <span title="lohnt sich auf der LAN">★</span></div><div class="w"><strong>Zu tun:</strong> Produktionsdauer einer Ware notieren, Prämie zahlen, Dauer erneut notieren — gern mehrmals, bis der Gunstbalken oben ist.</div></div>
+<div class="rechts"><span class="siegel" style="color:var(--blau);border-color:var(--blau)">erfüllt</span><span class="mono" style="font-size:13px">im Spiel</span></div></div><div class="auftrag" id="i5" data-art="offen im_Spiel lan"><div class="mono" style="font-weight:700;font-size:17px;color:var(--rot)">V2</div>
+<div style="display:flex;flex-direction:column;gap:4px"><div class="t">Macht ein kranker Arbeiter langsamer? <span title="lohnt sich auf der LAN">★</span></div><div class="w"><strong>Zu tun:</strong> Dauer bei gesunder Belegschaft notieren, warten bis einer erkrankt (oder Krötenschleim), Dauer erneut notieren, ohne ihn zu behandeln.</div></div>
+<div class="rechts"><span class="siegel" style="color:var(--rot);border-color:var(--rot)">offen</span><span class="mono" style="font-size:13px">im Spiel</span></div></div><div class="auftrag" id="i6" data-art="offen im_Spiel lan"><div class="mono" style="font-weight:700;font-size:17px;color:var(--rot)">V3</div>
+<div style="display:flex;flex-direction:column;gap:4px"><div class="t">Was tut der Unkendunk wirklich? <span title="lohnt sich auf der LAN">★</span></div><div class="w"><strong>Zu tun:</strong> den Unkendunk auf einen Betrieb anwenden lassen, den ihr beobachten könnt; läuft die Produktion langsamer, obwohl die angezeigte Dauer gleich bleibt?.</div></div>
+<div class="rechts"><span class="siegel" style="color:var(--rot);border-color:var(--rot)">offen</span><span class="mono" style="font-size:13px">im Spiel</span></div></div><div class="auftrag" id="i7" data-art="erfüllt"><div class="mono" style="font-weight:700;font-size:17px;color:var(--rot)">V4</div>
+<div style="display:flex;flex-direction:column;gap:4px"><div class="t">Die Weidenrute</div><div class="w"><strong>Zu tun:</strong> Dauer notieren, die Weidenrute auf den eigenen Betrieb anwenden, Dauer erneut notieren.</div></div>
+<div class="rechts"><span class="siegel" style="color:var(--blau);border-color:var(--blau)">erfüllt</span><span class="mono" style="font-size:13px">im Spiel</span></div></div><div class="auftrag" id="i8" data-art="erfüllt"><div class="mono" style="font-weight:700;font-size:17px;color:var(--rot)">V5</div>
+<div style="display:flex;flex-direction:column;gap:4px"><div class="t">Beschleunigt die Handwerkskunst? <span title="lohnt sich auf der LAN">★</span></div><div class="w"><strong>Zu tun:</strong> Die bisherigen Zahlen passen, wenn Knochenhammer und Seziermesser zwischendurch gekauft wurden — die Talentwirkung ist darin nicht zu trennen. Bitte: Dauer notieren, einen Talentschritt machen, Dauer erneut notieren, und dazwischen nichts kaufen, keinen Regler im Personalbuch bewegen, keinen Untoten dazuholen. Ein Spielstand direkt danach hilft zusätzlich.</div></div>
+<div class="rechts"><span class="siegel" style="color:var(--blau);border-color:var(--blau)">erfüllt</span><span class="mono" style="font-size:13px">im Spiel</span></div></div><div class="auftrag" id="i9" data-art="offen Foto"><div class="mono" style="font-weight:700;font-size:17px;color:var(--rot)">V6</div>
+<div style="display:flex;flex-direction:column;gap:4px"><div class="t">Gibt es einen Regler für den Arbeitseifer?</div><div class="w"><strong>Zu tun:</strong> im Betriebsfenster nach einem Regler für Tempo, Eifer oder Schichtlänge suchen und fotografieren — auch wenn nichts da ist.</div></div>
+<div class="rechts"><span class="siegel" style="color:var(--rot);border-color:var(--rot)">offen</span><span class="mono" style="font-size:13px">Foto</span></div></div><div class="auftrag" id="i10" data-art="offen im_Spiel"><div class="mono" style="font-weight:700;font-size:17px;color:var(--rot)">R1</div>
+<div style="display:flex;flex-direction:column;gap:4px"><div class="t">Wie viele Zutatenplätze ein Lager hat</div><div class="w"><strong>Zu tun:</strong> im Lager der Goldschmiede zählen, wie viele verschiedene Zutaten Platz haben (die Daten sagen 8, die Erinnerung 5).</div></div>
+<div class="rechts"><span class="siegel" style="color:var(--rot);border-color:var(--rot)">offen</span><span class="mono" style="font-size:13px">im Spiel</span></div></div><div class="auftrag" id="i11" data-art="erfüllt"><div class="mono" style="font-weight:700;font-size:17px;color:var(--rot)">S1</div>
+<div style="display:flex;flex-direction:column;gap:4px"><div class="t">Eine späte Partie</div><div class="w"><strong>Zu tun:</strong> erfüllt durch eine Nürnberger Partie von 1481 und 1505 — mit Erbfolge, vier Schlössern und einer überfüllten Stadt; Kölner Stände ab 1420 bleiben willkommen.</div></div>
+<div class="rechts"><span class="siegel" style="color:var(--blau);border-color:var(--blau)">erfüllt</span><span class="mono" style="font-size:13px">Spielstand</span></div></div><div class="auftrag" id="i12" data-art="erfüllt"><div class="mono" style="font-weight:700;font-size:17px;color:var(--rot)">S2</div>
+<div style="display:flex;flex-direction:column;gap:4px"><div class="t">Mehrere Stände einer Partie</div><div class="w"><strong>Zu tun:</strong> erfüllt durch die Nürnberger Reihe 1405, 1410, 1415.</div></div>
+<div class="rechts"><span class="siegel" style="color:var(--blau);border-color:var(--blau)">erfüllt</span><span class="mono" style="font-size:13px">Spielstand</span></div></div><div class="auftrag" id="i13" data-art="erfüllt"><div class="mono" style="font-weight:700;font-size:17px;color:var(--rot)">S4</div>
+<div style="display:flex;flex-direction:column;gap:4px"><div class="t">Eine andere Stadt als Köln</div><div class="w"><strong>Zu tun:</strong> erfüllt durch Nürnberg; weitere Städte bleiben willkommen.</div></div>
+<div class="rechts"><span class="siegel" style="color:var(--blau);border-color:var(--blau)">erfüllt</span><span class="mono" style="font-size:13px">Spielstand</span></div></div><div class="auftrag" id="i14" data-art="erfüllt"><div class="mono" style="font-weight:700;font-size:17px;color:var(--rot)">B17</div>
+<div style="display:flex;flex-direction:column;gap:4px"><div class="t">Der Preis auf dem Regalschild <span title="lohnt sich auf der LAN">★</span></div><div class="w"><strong>Zu tun:</strong> das Handelsfenster fotografieren und gleich danach speichern; beides schicken.</div></div>
+<div class="rechts"><span class="siegel" style="color:var(--blau);border-color:var(--blau)">erfüllt</span><span class="mono" style="font-size:13px">Spielstand</span></div></div><div class="auftrag" id="i15" data-art="erfüllt"><div class="mono" style="font-weight:700;font-size:17px;color:var(--rot)">B58</div>
+<div style="display:flex;flex-direction:column;gap:4px"><div class="t">Der Preis eines fremden Betriebs <span title="lohnt sich auf der LAN">★</span></div><div class="w"><strong>Zu tun:</strong> wie B17, an einem Betrieb, der nicht dir gehört.</div></div>
+<div class="rechts"><span class="siegel" style="color:var(--blau);border-color:var(--blau)">erfüllt</span><span class="mono" style="font-size:13px">Spielstand</span></div></div><div class="auftrag" id="i16" data-art="offen Foto"><div class="mono" style="font-weight:700;font-size:17px;color:var(--rot)">B45</div>
+<div style="display:flex;flex-direction:column;gap:4px"><div class="t">Das Bild in der Infotafel eines Raumes</div><div class="w">Laut Programm ist es ein fertiges Bild aus dem Archiv, eines je Gebäudeart. Ob das Foto des Originals genau dieses Bild zeigt, sagt ein Blick darauf.</div><div class="w"><strong>Zu tun:</strong> die Infotafel eines Gebäudes öffnen und fotografieren, so dass das Raumbild darin gut zu sehen ist.</div></div>
+<div class="rechts"><span class="siegel" style="color:var(--rot);border-color:var(--rot)">offen</span><span class="mono" style="font-size:13px">Foto</span></div></div><div class="auftrag" id="i17" data-art="erfüllt"><div class="mono" style="font-weight:700;font-size:17px;color:var(--rot)">B46</div>
+<div style="display:flex;flex-direction:column;gap:4px"><div class="t">Welches Bannerwappen dir gehört</div><div class="w"><strong>Zu tun:</strong> das Banner fotografieren und gleich danach speichern.</div></div>
+<div class="rechts"><span class="siegel" style="color:var(--blau);border-color:var(--blau)">erfüllt</span><span class="mono" style="font-size:13px">Spielstand</span></div></div><div class="auftrag" id="i18" data-art="offen Foto"><div class="mono" style="font-weight:700;font-size:17px;color:var(--rot)">B34</div>
+<div style="display:flex;flex-direction:column;gap:4px"><div class="t">Das Personalbuch in anderer Auflösung</div><div class="w">Das Bild des Buches wird vergrößert, aber sein Rand paßt dann nicht. Ein Foto in einer anderen Auflösung zeigt, ob gestreckt oder beschnitten wird.</div><div class="w"><strong>Zu tun:</strong> das Personalbuch in 800 × 600 oder 1024 × 768 fotografieren.</div></div>
+<div class="rechts"><span class="siegel" style="color:var(--rot);border-color:var(--rot)">offen</span><span class="mono" style="font-size:13px">Foto</span></div></div><div class="auftrag" id="i19" data-art="offen Foto"><div class="mono" style="font-weight:700;font-size:17px;color:var(--rot)">B54</div>
+<div style="display:flex;flex-direction:column;gap:4px"><div class="t">Wo ein Handelsfenster steht</div><div class="w">Bei uns genau in der Mitte. Auf zwei Fotos des Originals stand es etwas rechts unter der Mitte, aber beide Male anders.</div><div class="w"><strong>Zu tun:</strong> mehrere Handelsfenster fotografieren, an verschiedenen Gebäuden geöffnet.</div></div>
+<div class="rechts"><span class="siegel" style="color:var(--rot);border-color:var(--rot)">offen</span><span class="mono" style="font-size:13px">Foto</span></div></div><div class="auftrag" id="i20" data-art="offen im_Spiel"><div class="mono" style="font-weight:700;font-size:17px;color:var(--rot)">R2</div>
+<div style="display:flex;flex-direction:column;gap:4px"><div class="t">Wo man Rohstoffe veredelt</div><div class="w"><strong>Zu tun:</strong> herausfinden, wie man im Original das Fenster „Rohstoffe veredeln“ öffnet — an welchem Gebäude, über welchen Knopf — und ein Foto davon.</div></div>
+<div class="rechts"><span class="siegel" style="color:var(--rot);border-color:var(--rot)">offen</span><span class="mono" style="font-size:13px">im Spiel</span></div></div><div class="auftrag" id="i21" data-art="erfüllt"><div class="mono" style="font-weight:700;font-size:17px;color:var(--rot)">B52</div>
+<div style="display:flex;flex-direction:column;gap:4px"><div class="t">Wie man aus Laden und Speichern zurückkommt</div><div class="w"><strong>Zu tun:</strong> ausprobieren: Esc, Rechtsklick, etwas anderes?.</div></div>
+<div class="rechts"><span class="siegel" style="color:var(--blau);border-color:var(--blau)">erfüllt</span><span class="mono" style="font-size:13px">im Spiel</span></div></div></div>
+<div class="schritte"><div><b>1 · Finden</b>In Steam das Spiel rechtsklicken → <i>Verwalten</i> → <i>Lokale Dateien durchsuchen</i>. Dort liegen die Stände in <span class="mono">resources&#92;gamedata&#92;Saves</span>, Netzwerkpartien in <span class="mono">resources&#92;gamedata&#92;network</span>.</div><div><b>2 · Schicken</b>Die ganzen Dateien, je Stand eine <span class="mono">.SAV</span>, bei Netzwerkpartien auch die <span class="mono">.SRV</span>. Fotos unverändert.</div><div><b>3 · Nichts ändern</b>Nicht umbenennen, nichts zuschneiden. Dateiname und Rand werden mitgelesen.</div></div></section>
+</main><script src="suche.js"></script><script>
+(function(){
+  var f=document.getElementById('suche'); if(!f) return;
+  var hier=location.pathname.split('/').pop()||'index.html';
+  var wahl='.eintrag,.auftrag,.fenster>div,.kachel,.begriffe>div';
+  var el=[].slice.call(document.querySelectorAll(wahl)), sek=[].slice.call(document.querySelectorAll('main>section'));
+  var t=document.getElementById('treffer'), fr=document.getElementById('fremd');
+  function zeig(){
+    var q=f.value.trim().toLowerCase(), n=0;
+    document.body.classList.toggle('suchmodus',!!q);
+    el.forEach(function(x){var ja=!q||x.textContent.toLowerCase().indexOf(q)>=0; x.classList.toggle('such-aus',!ja);
+      if(q&&ja){n++; var d=x.closest('details'); if(d) d.open=true;}});
+    sek.forEach(function(s){ if(!q){s.classList.remove('such-aus');return;}
+      s.classList.toggle('such-aus',![].some.call(s.querySelectorAll(wahl),function(x){return !x.classList.contains('such-aus');}));});
+    var fremd=(q&&window.SUCHE)?window.SUCHE.filter(function(e){return e.p!==hier&&e.x.toLowerCase().indexOf(q)>=0;}):[];
+    t.textContent=q?(n+' hier, '+fremd.length+' auf anderen Seiten'):'';
+    if(!fremd.length){fr.hidden=true;fr.innerHTML='';return;}
+    var html='', zuletzt='';
+    fremd.slice(0,40).forEach(function(e){
+      if(e.p!==zuletzt){html+='<div class="fremd-seite">'+window.SEITEN[e.p]+'</div>'; zuletzt=e.p;}
+      var a=document.createElement('a'); a.href=e.p+'?q='+encodeURIComponent(f.value.trim())+'#'+e.i; a.textContent=e.x.length>140?e.x.slice(0,140)+' …':e.x;
+      html+=a.outerHTML;});
+    if(fremd.length>40) html+='<div class="fremd-seite">und '+(fremd.length-40)+' weitere</div>';
+    fr.innerHTML=html; fr.hidden=false;
+  }
+  f.addEventListener('input',zeig);
+  var q=new URLSearchParams(location.search).get('q');
+  if(q){f.value=q; zeig(); var z=location.hash&&document.getElementById(location.hash.slice(1)); if(z) setTimeout(function(){z.scrollIntoView({block:'center'});},50);}
+})();
+document.querySelectorAll('[data-filter]').forEach(function(gruppe){
+  var ziel=document.getElementById(gruppe.dataset.filter);
+  gruppe.querySelectorAll('button').forEach(function(b){
+    b.addEventListener('click',function(){
+      gruppe.querySelectorAll('button').forEach(function(x){x.setAttribute('aria-pressed',x===b)});
+      ziel.querySelectorAll('[data-art]').forEach(function(z){
+        var w=b.dataset.wert, a=z.dataset.art.split(' ');
+        z.hidden = !(w==='*' ? a.indexOf('offen')>=0 : a.indexOf(w)>=0);
+      });
+    });
+  });
+  gruppe.querySelector('button').click();
+});
+(function(){
+  var uhr=document.getElementById('uhr'); if(!uhr) return;
+  var ziel=new Date(+uhr.dataset.ziel);
+  function stell(){
+    var r=ziel-new Date();
+    if(r<=0){uhr.innerHTML='<div><b>jetzt</b><span>die LAN läuft</span></div>';return;}
+    var t=Math.floor(r/864e5), s=Math.floor(r/36e5)%24, m=Math.floor(r/6e4)%60;
+    uhr.querySelector('[data-t]').textContent=t;
+    uhr.querySelector('[data-s]').textContent=s;
+    uhr.querySelector('[data-m]').textContent=m;
+  }
+  stell(); setInterval(stell,30000);
+})();
+</script></body></html>
