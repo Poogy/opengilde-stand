@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Vom Leben und Sterben · Hauptbuch des Nachbaus</title>
+<meta name="description" content="Projektstand von OpenGilde: was gemessen ist, was noch zu tun ist, und was Mitspieler am Original erspielen können.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,700;1,500&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--grund:#3B2A1E;--blatt:#F4ECD8;--tinte:#2A1F16;--rot:#7A1F1F;--blau:#234A6B;--ocker:#8A5A12;--gelb:#C9A24A;--linie:#A8977A;--leise:#5A4A38;--kasten:#EADFC4}
+*{box-sizing:border-box}
+body{margin:0;background:var(--grund);color:var(--tinte);font-family:'Cormorant Garamond',Georgia,serif}
+a{color:var(--rot)}a:hover{color:#4F1212}
+.mono{font-family:'Courier Prime',monospace}
+.blatt{max-width:1180px;margin:56px auto;background:var(--blatt);padding:56px 64px 72px;display:flex;flex-direction:column;gap:56px}
+h1{margin:0;font-size:60px;line-height:1}h2{margin:0;font-size:34px}h3{margin:0;font-size:24px}
+.kopf{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:12px;border-bottom:2px solid var(--rot);padding-bottom:12px}
+.lead{margin:0;font-size:21px;font-style:italic;max-width:860px}
+nav{display:flex;gap:10px 22px;flex-wrap:wrap;font-size:19px}
+section{display:flex;flex-direction:column;gap:16px}
+.bilanz{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border:1px solid var(--tinte)}
+.bilanz>div{padding:20px 24px;display:flex;flex-direction:column;gap:6px}
+.bilanz>div+div{border-left:1px solid var(--tinte)}
+.spalte{font-size:26px;font-weight:700;border-bottom:1px solid var(--tinte);padding-bottom:6px}
+.posten{display:flex;justify-content:space-between;gap:12px;font-size:20px;border-bottom:1px dotted var(--linie)}
+.summe{display:flex;justify-content:space-between;font-size:22px;font-weight:700;border-top:3px double var(--tinte);margin-top:auto;padding-top:6px}
+.hinweis{border:1px solid var(--blau);padding:14px 20px;font-size:19px}
+.lan{border:3px double var(--rot);padding:24px 28px;display:grid;grid-template-columns:auto 1fr;gap:28px;align-items:center}
+.uhr{display:flex;gap:14px}.uhr div{text-align:center;min-width:72px}
+.uhr b{display:block;font-family:'Courier Prime',monospace;font-size:46px;line-height:1;color:var(--rot)}
+.uhr span{font-size:15px;text-transform:uppercase;letter-spacing:.08em}
+.kacheln{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 32px}
+.kachel{border-bottom:1px dotted var(--linie);padding:10px 0}.kachel b{font-size:21px;display:block}.kachel span{font-size:18px}
+.tafel{width:100%;border-collapse:collapse;font-size:19px}
+.tafel th{text-align:left;border-bottom:2px solid var(--tinte);padding:6px 10px 6px 0;font-size:18px}
+.tafel td{border-bottom:1px dotted var(--linie);padding:10px 10px 10px 0;vertical-align:top}
+.tafel td.z{font-family:'Courier Prime',monospace;font-size:16px;white-space:nowrap}
+.tafel tr.gesamt td{border-top:3px double var(--tinte);border-bottom:0;font-weight:700}
+.tag{display:grid;grid-template-columns:70px 1fr 64px;gap:14px;align-items:center;font-size:14px}
+.balken{height:9px;border-bottom:1px dotted var(--linie);display:flex}.balken span{display:block;height:9px}
+.knoepfe{display:flex;gap:8px;flex-wrap:wrap}
+.knoepfe button{min-height:44px;padding:6px 18px;cursor:pointer;border:1px solid var(--tinte);font:inherit;font-size:18px;background:transparent;color:var(--tinte)}
+.knoepfe button[aria-pressed=true]{background:var(--tinte);color:var(--blatt)}
+.auftrag{display:grid;grid-template-columns:70px 1fr 170px;gap:20px;padding:16px 0;border-bottom:1px solid var(--linie)}
+.auftrag .t{font-size:23px;font-weight:700}.auftrag .w{font-size:19px}
+.rechts{display:flex;flex-direction:column;gap:8px;align-items:flex-end;text-align:right}
+.siegel{font-family:'Courier Prime',monospace;font-weight:700;font-size:14px;text-transform:uppercase;letter-spacing:.1em;padding:4px 10px;border:2px solid}
+.schritte{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;background:var(--kasten);padding:22px 26px;font-size:18px}
+.schritte b{display:block;font-size:22px}
+.eintrag{display:grid;grid-template-columns:1fr 110px;gap:16px;border-bottom:1px dotted var(--linie);padding:12px 0}
+.eintrag .t{font-size:22px;font-weight:700}.eintrag .x{font-size:19px}
+.eintrag .k{font-family:'Courier Prime',monospace;font-size:13px;color:var(--leise);text-align:right;padding-top:6px}
+.gruppe{display:flex;flex-direction:column;gap:0;margin-top:8px}
+.gruppe h3{border-bottom:1px solid var(--tinte);padding-bottom:4px}
+.fort{display:flex;flex-direction:column;gap:14px;border:1px solid var(--tinte);padding:20px 24px}
+.fort-z{display:grid;grid-template-columns:minmax(0,260px) minmax(0,1fr) auto;gap:16px;align-items:center;font-size:19px}
+.fort-b{height:16px;border:1px solid var(--tinte);background:var(--kasten)}.fort-b span{display:block;height:100%}
+.fenster{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px 32px;font-size:19px}
+.fenster div{border-bottom:1px dotted var(--linie);padding:4px 0}
+[hidden]{display:none!important}
+nav a[aria-current=page]{color:var(--tinte);font-weight:700;text-decoration:none}
+.fremd{border:1px solid var(--tinte);background:var(--kasten);padding:10px 16px;display:flex;flex-direction:column;gap:4px;font-size:17px;max-height:60vh;overflow:auto}
+.fremd a{display:block;padding:2px 0}.fremd-seite{font-family:'Courier Prime',monospace;font-size:14px;text-transform:uppercase;letter-spacing:.08em;margin-top:8px}
+.wegweisergitter{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
+.wegweiser{display:flex;flex-direction:column;gap:4px;border:1px solid var(--tinte);padding:14px 18px;text-decoration:none;color:var(--tinte)}
+.wegweiser b{font-size:22px;color:var(--rot)}.wegweiser span{font-size:18px}.wegweiser:hover{background:var(--kasten)}
+[id^=i]:target{background:var(--kasten)}
+.begriff{color:inherit;text-decoration:underline dotted;text-underline-offset:3px;cursor:help}
+.suche{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.suche input{font:inherit;font-size:19px;padding:8px 12px;border:1px solid var(--tinte);background:var(--blatt);color:var(--tinte);width:min(420px,100%)}
+.begriffe{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 32px;font-size:18px}
+.begriffe>div{border-bottom:1px dotted var(--linie);padding:6px 0}.begriffe>div:target{background:var(--kasten)}
+body.suchmodus [data-art][hidden]:not(.such-aus){display:grid!important}
+body.suchmodus .knoepfe{display:none}
+.such-aus{display:none!important}
+.w-artikel{max-width:820px;gap:18px}
+.w-zurueck{margin:0;font-size:17px;font-family:'Courier Prime',monospace;text-transform:uppercase;letter-spacing:.06em}
+.w-titel{font-size:46px;line-height:1.05;border-bottom:2px solid var(--rot);padding-bottom:10px}
+.w-inhalt{display:flex;flex-direction:column;gap:2px;font-size:18px;border-left:3px solid var(--linie);padding:4px 0 4px 16px}
+.abschnitt{display:flex;flex-direction:column;gap:10px;font-size:20px;line-height:1.45;padding-top:12px}
+.abschnitt p,.w-artikel>p{margin:0}.abschnitt ul{margin:0;padding-left:24px}
+.abschnitt h3{font-size:28px;color:var(--rot)}
+.w-num{color:var(--gelb);font-family:'Courier Prime',monospace;font-size:18px;margin-right:12px;letter-spacing:.04em}
+.w-kasten{background:var(--kasten);border-left:5px solid var(--ocker);padding:12px 18px;font-size:19px}
+.w-merk{text-align:center;font-style:italic;font-size:22px;border-top:1px solid var(--linie);border-bottom:1px solid var(--linie);padding:10px 24px;color:var(--rot)}
+.w-tafel{width:100%;border-collapse:collapse;font-size:18px}
+.w-tafel th{text-align:left;border-bottom:2px solid var(--tinte);padding:4px 10px 4px 0}
+.w-tafel td{border-bottom:1px dotted var(--linie);padding:6px 10px 6px 0;vertical-align:top}
+.w-tafel .z{text-align:right;font-family:'Courier Prime',monospace;font-size:16px;white-space:nowrap}
+.abschnitt:target{background:var(--kasten)}
+@media (max-width:760px){
+ .w-titel{font-size:34px}.abschnitt{font-size:19px}.w-tafel{display:block;overflow-x:auto}
+ .begriffe{grid-template-columns:1fr}
+ .blatt{margin:0;padding:28px 16px 48px;gap:40px}h1{font-size:40px}
+ .bilanz,.schritte,.kacheln,.fenster,.lan{grid-template-columns:1fr}.bilanz>div+div{border-left:0;border-top:1px solid var(--tinte)}
+ .auftrag{grid-template-columns:1fr}.rechts{align-items:flex-start;text-align:left}
+ .eintrag{grid-template-columns:1fr}.eintrag .k{text-align:left;padding-top:0}
+ .fort-z{grid-template-columns:1fr auto}.fort-b{grid-column:1/-1;grid-row:2}
+ .tag{grid-template-columns:56px 1fr 48px}.uhr div{min-width:56px}.uhr b{font-size:36px}
+ .tafel td.z{white-space:normal} .tafel,.tafel tbody,.tafel tr,.tafel td{display:block}.tafel thead{display:none}.tafel td{border:0;padding:2px 0}.tafel tr{border-bottom:1px dotted var(--linie);padding:8px 0}
+}
+</style></head>
+<body><main class="blatt">
+<header style="display:flex;flex-direction:column;gap:14px">
+<div class="kopf"><h1>Hauptbuch des Nachbaus</h1><span class="mono" style="font-size:14px">aktualisiert am: 09.10.2026, 19:43 Uhr</span></div>
+
+<nav><a href="index.html">Übersicht</a><a href="auftraege.html">Aufträge</a><a href="entscheidungen.html">Entscheidungen</a><a href="baustellen.html">Baustellen</a><a href="verlauf.html">Verlauf</a><a href="einstieg.html">Was läuft &amp; Begriffe</a><a href="wissen.html" aria-current="page">Wissen</a></nav>
+<div class="suche"><input type="search" id="suche" placeholder="Auf allen Seiten suchen …" aria-label="Auf allen Seiten suchen"><span id="treffer" class="mono" style="font-size:15px"></span></div>
+<div id="fremd" class="fremd" hidden></div>
+</header>
+<section class="w-artikel"><p class="w-zurueck"><a href="wissen.html">← alle Artikel</a> · Familie und Leben</p><h2 class="w-titel">Vom Leben und Sterben</h2><p class="lead">Was die Kerze im Charakterbogen wirklich zählt, woran man krank wird und was dagegen hilft</p><nav class="w-inhalt"><a href="#a1">I · Zwei Zähler, nicht einer</a><a href="#a2">II · Das Tempo steht bei der Geburt fest</a><a href="#a3">III · Kinder</a><a href="#a4">IV · Das Dach über dem Kopf verlängert das Leben</a><a href="#a5">V · Neun Krankheiten, und sie vergehen von selbst</a><a href="#a6">VI · Wie man überhaupt krank wird</a><a href="#a7">VII · Die Pest kommt nicht zufällig</a><a href="#a8">VIII · Wunden heilen, und zwar schnell</a><a href="#a9">IX · Was wirklich hilft</a><a href="#a10">X · Wer sonst noch stirbt</a><a href="#a11">XI · Vier Dinge, die anders sind, als sie aussehen</a></nav><div class="abschnitt" id="i245"><h3 id="a1"><span class="w-num">I</span> Zwei Zähler, nicht einer</h3><p>Jede Figur trägt zwei getrennte Größen. Die <b>Lebenskraft</b> ist die Kerze im Charakterbogen: Sie steht mit zwölf Jahren auf vollen 1000 Punkten und brennt danach jedes Jahr ein Stück herunter. Sie wächst nie von allein nach.</p><p>Daneben gibt es die <b>Wunden</b>. Sie kommen von Schlägen, Duellen, Unfällen — und, was niemand vermutet, auch von Krankheiten. Wunden heilen von selbst, und zwar schnell.</p><p>Gestorben wird, wenn die Wunden größer sind als die Lebenskraft, die noch übrig ist. Darum ist ein alter Mann mit fast heruntergebrannter Kerze so verletzlich: Dieselbe Wunde, die einen Zwanzigjährigen kaum anficht, bringt ihn um.</p></div><div class="abschnitt" id="i246"><h3 id="a2"><span class="w-num">II</span> Das Tempo steht bei der Geburt fest</h3><p>Gewürfelt wird nicht der Tod, sondern das <b>Tempo</b>: Jede Figur bekommt bei der Geburt ihr eigenes, festes Brenntempo von rund 24 bis 37 Punkten je Jahr. Daraus folgt ein Sterbealter zwischen etwa 39 und 54 Jahren — wenn nichts dazwischenkommt.</p><p>Es gibt keinen Todeswurf. Es gibt nur eine Kerze, die bei jedem verschieden schnell brennt.</p><p>Wie gut das stimmt, zeigt ein später Spielstand mit 80 Toten: Die Hälfte starb mit 45 oder früher, und vier von fünf zwischen 40 und 49. Der älteste wurde 60 — vermutlich mit Hilfe von Elixier und gutem Haus, nachgeprüft ist das nicht. Weil nicht jeder Tote im Spielstand verzeichnet bleibt, ist die Zählung ein Indiz, kein Beweis.</p><p class="w-merk">Es gibt keinen Todeswurf — nur eine Kerze, die verschieden schnell brennt.</p></div><div class="abschnitt" id="i247"><h3 id="a3"><span class="w-num">III</span> Kinder</h3><p>Unter zwölf Jahren brennt gar nichts: Die Kerze jedes Kindes steht auf vollen 1000, und erst mit dem zwölften Geburtstag beginnt sie zu sinken.</p><p>Dafür ist ein Kind <b>zerbrechlich</b>. Seine Widerstandskraft wächst von einem Viertel bis zwei Fünfteln bei der Geburt gleichmäßig auf den vollen Wert mit zwölf. Der Charakterbogen zeigt trotzdem eine volle Kerze — sichtbar wird der Unterschied erst, wenn dem Kind etwas zustößt. Eine schwere Lungenentzündung schlägt eine Wunde von 300 Punkten: Ein Erwachsener mit voller Kerze übersteht sie, ein Säugling womöglich nicht.</p><p>Und zwölf ist auch die Grenze fürs Erben: Sterbt Ihr, und keines Eurer Kinder ist schon zwölf, ist Eure Dynastie am Ende — Kinder zu haben allein rettet nicht.</p><div class="w-kasten"><p><b>Wie schnell Kinder kommen.</b> Die Hochzeit schiebt die Frau sofort über die Schwelle: Das erste Kind kommt schon im nächsten Jahr. Danach dauert es im Mittel etwa drei Jahre bis zum zweiten Kind, gut fünf bis zum dritten und rund zwölf bis zum vierten. Ein fünftes Kind bekommt keine Mutter, und nach ihrem 38. Lebensjahr wächst die Bereitschaft nicht mehr. Tote Kinder zählen dabei nicht mit. Eine Frau im Kerker empfängt nicht.</p></div></div><div class="abschnitt" id="i248"><h3 id="a4"><span class="w-num">IV</span> Das Dach über dem Kopf verlängert das Leben</h3><p>Das ist der größte Hebel, den man selbst in der Hand hat — und im Spiel steht er nirgends. Die Ausbauten der Wohnstätte (offenes Feuer, Kamin, Vertäfelung, Tapeten, Wintergarten) bringen Punkte, und jeder volle Ausbau senkt das jährliche Brennen.</p><table class="w-tafel"><thead><tr><th>Wohnstätte</th><th class=z>Punkte</th><th>weniger Brennen je Jahr</th></tr></thead><tbody><tr><td>keine</td><td class=z>0</td><td>—</td></tr><tr><td>Haus</td><td class=z>20</td><td>¾</td></tr><tr><td>Bürgerhaus</td><td class=z>30</td><td>1⅛</td></tr><tr><td>Villa</td><td class=z>50</td><td>1⅞</td></tr><tr><td>Palazzo</td><td class=z>80</td><td>3</td></tr></tbody></table><p>Bei einer zähen Figur sind das bis zu <b>sechs Jahre</b> mehr Leben, bei einer kurzlebigen immerhin zwei.</p><div class="w-kasten"><p><b>Der Zustand des Hauses zählt mit.</b> Das Lehrbuch sagt, ein Gebäudezustand von 50 Prozent lasse alle Erweiterungen nur zur Hälfte wirken — und das stimmt, auch für die Lebenskraft. Ein Palazzo, der auf die Hälfte verfallen ist, zählt nur noch 40 statt 80 Punkte — weniger als eine gepflegte Villa. Wer sein Haus verkommen läßt, lebt kürzer.</p></div><p>Dieselben Punkte tragen auch Arbeiterunterkünfte (bis 25) und — man glaubt es kaum — <b>Gefängnisse</b>: Der Kerker kommt mit Feldbett, Waschschüssel und Patrizierbett auf 30, also mehr als ein Haus. Ob ein Eingekerkerter dort aber tatsächlich als Bewohner zählt, ist nicht nachgeprüft.</p></div><div class="abschnitt" id="i249"><h3 id="a5"><span class="w-num">V</span> Neun Krankheiten, und sie vergehen von selbst</h3><p>Pest, Ruhr, Lungenentzündung, Husten, Haarausfall, Angst im Dunkeln, Vergesslichkeit, Lachanfall, Knochenbruch. Jede hat eine <b>Schwere</b>, keinen bloßen Ja-Nein-Zustand, und man kann an mehreren zugleich leiden.</p><p>Beim Ausbruch schlägt die Krankheit einmal zu, und zwar als <b>Wunde</b>, nicht als Verlust an der Kerze. Eine schwere Pest reißt eine Wunde von bis zu 600 Punkten. Bei einem jungen Menschen mit voller Kerze ist das ein schwerer Schlag, den er übersteht — bei einem Alten, dessen Kerze nur noch auf 400 steht, ist es der Tod, und zwar sofort. Haarausfall dagegen kostet ausdrücklich nichts.</p><p>Überlebt man den Ausbruch, heilt die Wunde wie jede andere (siehe unten), und die Krankheit selbst vergeht ebenfalls von allein: Jedes Jahr halbiert sich ihre Schwere. Die schlimmste Pest ist nach vier Jahren verschwunden, ein Lachanfall nach zweien.</p><table class="w-tafel"><thead><tr><th>Krankheit</th><th class=z>Wunde bis</th><th class=z>Dauer höchstens</th></tr></thead><tbody><tr><td>Pest</td><td class=z>600</td><td class=z>4 Jahre</td></tr><tr><td>Lungenentzündung</td><td class=z>300</td><td class=z>4 Jahre</td></tr><tr><td>Ruhr</td><td class=z>225</td><td class=z>4 Jahre</td></tr><tr><td>Knochenbruch</td><td class=z>180</td><td class=z>4 Jahre</td></tr><tr><td>Angst im Dunkeln</td><td class=z>56</td><td class=z>3 Jahre</td></tr><tr><td>Vergesslichkeit</td><td class=z>35</td><td class=z>3 Jahre</td></tr><tr><td>Husten</td><td class=z>30</td><td class=z>2 Jahre</td></tr><tr><td>Lachanfall</td><td class=z>9</td><td class=z>2 Jahre</td></tr><tr><td>Haarausfall</td><td class=z>0</td><td class=z>3 Jahre</td></tr></tbody></table><p>Solange sie andauern, drücken fünf der neun außerdem ein <b>Talent</b> — Husten und Ruhr die Rhetorik, Knochenbruch und Lungenentzündung den Kampf, Vergesslichkeit das Verhandeln, Angst im Dunkeln die Nachtarbeit. Mit der Schwere sinkt auch dieser Abzug, und am Ende ist er fort. Pest, Haarausfall und Lachanfall rühren kein Talent an.</p></div><div class="abschnitt" id="i250"><h3 id="a6"><span class="w-num">VI</span> Wie man überhaupt krank wird</h3><p>Es gibt sieben Wege. Von selbst geschieht es nur auf dreien:</p><table class="w-tafel"><thead><tr><th>Weg</th><th>wen es trifft</th><th>wie oft</th></tr></thead><tbody><tr><td>Zufall des Jahres, schwerer</td><td>nur Euch, nicht die Gegner</td><td>zusammen gut 4 % je Runde</td></tr><tr><td>Zufall des Jahres, leichter</td><td>nur Euch, nicht die Gegner</td><td>(in den 4 % enthalten)</td></tr><tr><td>Siechtum in der Stadt</td><td>nur, wer kein Dach hat</td><td>5 % je Jahr</td></tr><tr><td>Die Pest</td><td>Arbeiter, Meister, Hausherr</td><td>nach der Stadtchronik</td></tr><tr><td>Nebel des Grauens</td><td>alle im Umkreis</td><td>wenn ihn jemand schickt</td></tr><tr><td>Fluch der Sieche</td><td>ein Opfer</td><td>wenn ihn jemand wirkt</td></tr><tr><td>Krötenschleim</td><td>den Bewohner eines Hauses</td><td>wenn ihn jemand anwendet</td></tr></tbody></table><p>Der schwerere Jahreszufall bringt Ruhr, Lungenentzündung, Husten oder Haarausfall und kostet obendrein ein bis fünf Gulden; der leichtere Haarausfall, Angst im Dunkeln, Vergesslichkeit oder Lachanfall. Zwei ebenso häufige Zufälle machen umgekehrt gesund.</p><div class="w-kasten"><p><b>Wer ein Dach hat, wird vom Siechtum gar nicht erst krank.</b> Die dritte Zeile trifft ausschließlich Figuren ohne Wohnstätte. Wer irgendwo wohnt, ist dagegen vollständig gefeit — und Ihr habt immer eine Wohnstätte. Für Euch bleiben damit nur die beiden Jahreszufälle: etwa alle dreiundzwanzig Jahre einmal.</p></div><p class="w-merk">Pest und Knochenbruch bringt Euch nie der Jahreszufall — die Pest schickt die Chronik, den Bruch ein Feind.</p></div><div class="abschnitt" id="i251"><h3 id="a7"><span class="w-num">VII</span> Die Pest kommt nicht zufällig</h3><p>Sie ist ein Ereignis der Stadtgeschichte und steht in den Chroniken an festen Jahren — sechsunddreißigmal in den sechzehn Chroniken des Spiels. Man kann ihr nicht davonlaufen und sie nicht heraufbeschwören, und es zieht immer nur <b>eine</b> Pest zugleich durch die Stadt. Die Chronik legt fest, wie viele Häuser sie heimsucht: eines bis zehn.</p><p>Sichtbar wird sie als Zug von <b>vier Gestalten</b>, die von Haus zu Haus ziehen — zu Werkstätten, Schänken und Wachstuben, also dorthin, wo gearbeitet wird; Wohnhäuser, Kirche, Rathaus und Markt läßt sie aus. In jedem Haus trifft es die Arbeiter am härtesten, den Meister selten, den Hausherrn fast nie:</p><table class="w-tafel"><thead><tr><th>Wen es trifft</th><th>Aussicht</th></tr></thead><tbody><tr><td>Arbeiter im Haus</td><td>immer mindestens einen</td></tr><tr><td>der Meister</td><td>einer von acht</td></tr><tr><td>der Hausherr</td><td>einer von 256</td></tr></tbody></table><p>Bei vier Arbeitern erwischt es im Mittel anderthalb von ihnen — in einem von zehn Durchgängen aber <b>alle</b>.</p><div class="w-kasten"><p><b>Ein kranker Arbeiter wird ersetzt.</b> Trifft die Pest oder der Nebel einen Angestellten so schwer, daß ihm weniger als die Hälfte seiner Kraft bleibt, verliert er seine Stelle. Weil die Kerze mit dem Alter herunterbrennt, trifft dieselbe Krankheit einen alten Arbeiter eher als einen jungen.</p></div></div><div class="abschnitt" id="i252"><h3 id="a8"><span class="w-num">VIII</span> Wunden heilen, und zwar schnell</h3><p>Anders als die Kerze erholen sich Wunden von allein: jede Stunde um <b>elf Prozent</b>, zwischen sechs Uhr morgens und zehn Uhr abends.</p><table class="w-tafel"><thead><tr><th>nach</th><th class=z>bleibt von der Wunde</th></tr></thead><tbody><tr><td>einer Stunde</td><td class=z>89 %</td></tr><tr><td>acht Stunden</td><td class=z>39 %</td></tr><tr><td>einem Spieltag</td><td class=z>15 %</td></tr><tr><td>zwei Spieltagen</td><td class=z>2 %</td></tr></tbody></table><p>Eine Wunde von 100 Punkten ist nach gut anderthalb Tagen restlos fort. Wer also ein Duell oder einen Pestausbruch überlebt hat, braucht nur zu warten — die Gefahr liegt allein im Augenblick des Schlags.</p></div><div class="abschnitt" id="i253"><h3 id="a9"><span class="w-num">IX</span> Was wirklich hilft</h3><table class="w-tafel"><thead><tr><th>Mittel</th><th>was es bringt</th></tr></thead><tbody><tr><td>Medicus</td><td>heilt die halbe Wundenlast — aber nur in der Hälfte der Fälle</td></tr><tr><td>Elixier des Dr. Faustus</td><td>ein Zehntel dessen, was von der Kerze noch übrig ist</td></tr><tr><td>Kräuterschnaps</td><td>mildert eine einzige Krankheit, die erste in der Reihe von der Pest an</td></tr><tr><td>Wohnstätte</td><td>bis zu sechs Jahre, wenn sie in gutem Zustand ist</td></tr><tr><td>Versicherungsbulle</td><td>holt Euch einmal nach dem Tod zurück — für vier bis sechs Jahre</td></tr></tbody></table><div class="w-kasten"><p><b>Das Elixier zur rechten Zeit.</b> Der Trank gibt zehn Prozent des verbliebenen Rests, nicht des vollen Vorrats. Bei voller Kerze sind das gut drei Jahre — bei einem Greis mit fast leerer Kerze fast nichts. Wer es aufspart, bis er es zu brauchen glaubt, hat es verschwendet.</p></div><p>Der <b>Medicus</b> nimmt keinen festen Preis, sondern zwei Prozent Eures Gesamtvermögens, und dazu zwei Aktionspunkte. Mißlingt die Behandlung, zahlt Ihr nichts — die Aktionspunkte sind trotzdem weg. Die Krankheit selbst behandelt er nicht, nur ihre Wunde; das Leiden vergeht ohnehin von allein.</p><p>Der <b>Kräuterschnaps</b> nimmt einen Teil der Schwere weg: Leichte Fälle verschwinden oft ganz, schwere werden nur gemildert oder bleiben, wie sie sind. Er nimmt sich immer nur die erste Krankheit der Liste oben vor. Wer gar nicht krank ist, hat ihn vertan.</p><p>Die <b>Versicherungsbulle</b> kostet je nach Vermögen des Käufers 200 bis 1.666 Gulden. Euch fragt das Spiel bei jedem Tod, ob Ihr sie einlösen wollt — auch nach Hinrichtung oder Duell. Einen Computergegner rettet sie nur vor dem Tod aus Altersschwäche, vor einem gewaltsamen nicht. Nach der Rückkehr brennt die Kerze in einem neu gewürfelten Tempo herunter, gleich wie zäh man vorher war.</p></div><div class="abschnitt" id="i254"><h3 id="a10"><span class="w-num">X</span> Wer sonst noch stirbt</h3><ul><li><b>Bürger ohne Beruf.</b> Ein Städter, der nie ein Handwerk und nie ein Amt hatte, stirbt mit 44 bis 47 Jahren — ganz gleich, wie viel Kerze er noch hat. Eure eigene Familie ist davon ausgenommen, die der Gegner nicht.</li><li><b>Waisen in einer übervollen Stadt.</b> Ist die Stadt zu 85 Prozent voll, sterben auch ungeschützte Waisen, gleich welchen Alters. In den gemessenen Partien wurde diese Grenze allerdings nie erreicht.</li><li><b>Der verschuldete Gegner.</b> Ein Computergegner, dessen Schulden zu groß werden, stirbt daran.</li><li><b>Die Kinder des Teufelsbündners.</b> Wer den Pakt mit dem Teufel nach drei Jahren nicht bezahlen kann, verliert jedes seiner Kinder — und hat er keine, stirbt er selbst.</li></ul></div><div class="abschnitt" id="i255"><h3 id="a11"><span class="w-num">XI</span> Vier Dinge, die anders sind, als sie aussehen</h3><p><b>Der Hauch des Verfalls verjüngt sein Opfer.</b> Die Kunst des Totengräbers soll dem Opfer Jahre stehlen — tatsächlich setzt sie dessen Kerze auf volle 1000 zurück. Wer sie einsetzt, schenkt seinem Feind ein neues Leben. So steht es im Programm; am laufenden Spiel beobachtet ist es nicht.</p><p><b>Und die Séance ebenso.</b> „Je größer Euer Wunsch, um so mehr Lebenskraft müßt Ihr opfern&quot;, verspricht der Totenbeschwörer. Geopfert wird nichts: Alle drei Gefallen füllen die Kerze vollständig auf — der größte Wunsch genauso wie der kleinste. Bezahlt wird allein mit Aktionspunkten.</p><p><b>Der Nebel des Grauens kostet keine Rohstoffe.</b> Das Menü kündigt sie an und hat sogar Zeilen dafür. Angezeigt werden sie nie, abgebucht auch nicht — der Nebel kostet nur 4 bis 16 Aktionspunkte. Und er kann keine Pest bringen: Auf höchster Stufe gibt er Ruhr oder Lungenentzündung, darunter nur leichtere Leiden.</p><p><b>Saubere Wohnstätten schützen nicht vor Krankheit.</b> Kamin und Tapeten wirken auf die Lebensdauer — gegen das Siechtum in der Stadt helfen sie nicht. Das Spiel rechnet ihren Schutz zwar aus, aber an einer Stelle, an der er nichts mehr bewirkt. Dort schützt allein die Tatsache, überhaupt ein Dach zu haben.</p></div></section>
+</main><script src="suche.js"></script><script>
+(function(){
+  var f=document.getElementById('suche'); if(!f) return;
+  var hier=location.pathname.split('/').pop()||'index.html';
+  var wahl='.eintrag,.auftrag,.fenster>div,.kachel,.begriffe>div,.abschnitt';
+  var el=[].slice.call(document.querySelectorAll(wahl)), sek=[].slice.call(document.querySelectorAll('main>section'));
+  var t=document.getElementById('treffer'), fr=document.getElementById('fremd');
+  function zeig(){
+    var q=f.value.trim().toLowerCase(), n=0;
+    document.body.classList.toggle('suchmodus',!!q);
+    el.forEach(function(x){var ja=!q||x.textContent.toLowerCase().indexOf(q)>=0; x.classList.toggle('such-aus',!ja);
+      if(q&&ja){n++; var d=x.closest('details'); if(d) d.open=true;}});
+    sek.forEach(function(s){ if(!q){s.classList.remove('such-aus');return;}
+      s.classList.toggle('such-aus',![].some.call(s.querySelectorAll(wahl),function(x){return !x.classList.contains('such-aus');}));});
+    var fremd=(q&&window.SUCHE)?window.SUCHE.filter(function(e){return e.p!==hier&&e.x.toLowerCase().indexOf(q)>=0;}):[];
+    t.textContent=q?(n+' hier, '+fremd.length+' auf anderen Seiten'):'';
+    if(!fremd.length){fr.hidden=true;fr.innerHTML='';return;}
+    var html='', zuletzt='';
+    fremd.slice(0,40).forEach(function(e){
+      if(e.p!==zuletzt){html+='<div class="fremd-seite">'+window.SEITEN[e.p]+'</div>'; zuletzt=e.p;}
+      var a=document.createElement('a'); a.href=e.p+'?q='+encodeURIComponent(f.value.trim())+'#'+e.i; a.textContent=e.x.length>140?e.x.slice(0,140)+' …':e.x;
+      html+=a.outerHTML;});
+    if(fremd.length>40) html+='<div class="fremd-seite">und '+(fremd.length-40)+' weitere</div>';
+    fr.innerHTML=html; fr.hidden=false;
+  }
+  f.addEventListener('input',zeig);
+  var q=new URLSearchParams(location.search).get('q');
+  if(q){f.value=q; zeig(); var z=location.hash&&document.getElementById(location.hash.slice(1)); if(z) setTimeout(function(){z.scrollIntoView({block:'center'});},50);}
+})();
+document.querySelectorAll('[data-filter]').forEach(function(gruppe){
+  var ziel=document.getElementById(gruppe.dataset.filter);
+  gruppe.querySelectorAll('button').forEach(function(b){
+    b.addEventListener('click',function(){
+      gruppe.querySelectorAll('button').forEach(function(x){x.setAttribute('aria-pressed',x===b)});
+      ziel.querySelectorAll('[data-art]').forEach(function(z){
+        var w=b.dataset.wert, a=z.dataset.art.split(' ');
+        z.hidden = !(w==='*' ? a.indexOf('offen')>=0 : a.indexOf(w)>=0);
+      });
+    });
+  });
+  gruppe.querySelector('button').click();
+});
+(function(){
+  var uhr=document.getElementById('uhr'); if(!uhr) return;
+  var ziel=new Date(+uhr.dataset.ziel);
+  function stell(){
+    var r=ziel-new Date();
+    if(r<=0){uhr.innerHTML='<div><b>jetzt</b><span>die LAN läuft</span></div>';return;}
+    var t=Math.floor(r/864e5), s=Math.floor(r/36e5)%24, m=Math.floor(r/6e4)%60;
+    uhr.querySelector('[data-t]').textContent=t;
+    uhr.querySelector('[data-s]').textContent=s;
+    uhr.querySelector('[data-m]').textContent=m;
+  }
+  stell(); setInterval(stell,30000);
+})();
+</script></body></html>
