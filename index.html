@@ -86,7 +86,14 @@ body.suchmodus .knoepfe{display:none}
 .w-tafel td{border-bottom:1px dotted var(--linie);padding:6px 10px 6px 0;vertical-align:top}
 .w-tafel .z{text-align:right;font-family:'Courier Prime',monospace;font-size:16px;white-space:nowrap}
 .abschnitt:target{background:var(--kasten)}
+.bildgitter{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px 32px;margin-top:14px}
+.bild{display:flex;flex-direction:column;gap:6px}
+.bild img{display:block;width:100%;height:auto;border:1px solid var(--tinte);background:var(--grund)}
+.bild b{font-size:22px}.bild span{font-size:18px}
+.bild-datum{font-size:13px!important;color:var(--leise)}
+.bild:target{background:var(--kasten)}
 @media (max-width:760px){
+ .bildgitter{grid-template-columns:1fr}
  .w-titel{font-size:34px}.abschnitt{font-size:19px}.w-tafel{display:block;overflow-x:auto}
  .begriffe{grid-template-columns:1fr}
  .blatt{margin:0;padding:28px 16px 48px;gap:40px}h1{font-size:40px}
@@ -100,15 +107,15 @@ body.suchmodus .knoepfe{display:none}
 </style></head>
 <body><main class="blatt">
 <header style="display:flex;flex-direction:column;gap:14px">
-<div class="kopf"><h1>Hauptbuch des Nachbaus</h1><span class="mono" style="font-size:14px">aktualisiert am: 12.10.2026, 10:23 Uhr</span></div>
+<div class="kopf"><h1>Hauptbuch des Nachbaus</h1><span class="mono" style="font-size:14px">aktualisiert am: 13.10.2026, 13:37 Uhr</span></div>
 <p class="lead">OpenGilde baut „Die Gilde 1400“ nach — das freie Spiel, in Köln. Im Haben steht, was gemessen ist, im Soll, was noch zu messen ist. Dazwischen schwebt, was gemessen, aber noch nicht gebaut oder entschieden ist. Ausgezählt wird bei jedem Abschluß, nicht geschätzt.</p>
-<nav><a href="index.html" aria-current="page">Übersicht</a><a href="auftraege.html">Aufträge</a><a href="entscheidungen.html">Entscheidungen</a><a href="baustellen.html">Baustellen</a><a href="verlauf.html">Verlauf</a><a href="einstieg.html">Was läuft &amp; Begriffe</a><a href="wissen.html">Wissen</a></nav>
+<nav><a href="index.html" aria-current="page">Übersicht</a><a href="bilder.html">Bilder</a><a href="auftraege.html">Aufträge</a><a href="entscheidungen.html">Entscheidungen</a><a href="baustellen.html">Baustellen</a><a href="verlauf.html">Verlauf</a><a href="einstieg.html">Was läuft &amp; Begriffe</a><a href="wissen.html">Wissen</a></nav>
 <div class="suche"><input type="search" id="suche" placeholder="Auf allen Seiten suchen …" aria-label="Auf allen Seiten suchen"><span id="treffer" class="mono" style="font-size:15px"></span></div>
 <div id="fremd" class="fremd" hidden></div>
 </header>
 <section id="lan" class="lan">
 <div><h2 style="margin-bottom:12px">LAN-Party am 16. Oktober</h2>
-<div class="uhr" id="uhr" data-ziel="1792101600000"><div><b data-t>4</b><span>Tage</span></div><div><b data-s>–</b><span>Stunden</span></div><div><b data-m>–</b><span>Minuten</span></div></div></div>
+<div class="uhr" id="uhr" data-ziel="1792101600000"><div><b data-t>3</b><span>Tage</span></div><div><b data-s>–</b><span>Stunden</span></div><div><b data-m>–</b><span>Minuten</span></div></div></div>
 <div style="font-size:19px">Bis zum 16. Oktober wird der Nachbau nicht fertig — beim Tempo vom August nicht einmal alle Fenster. Gespielt wird der Nachbau ohnehin erst, wenn er fertig ist. Die LAN ist aber genau richtig für das Original: Eine Netzwerkpartie zu dritt erfüllt den Auftrag S3, den es sonst nirgends gibt, und nebenbei lassen sich Fotos und Versuche machen. Die Aufträge mit Stern sind für die LAN am lohnendsten. <a href="auftraege.html">3 Aufträge sind mit ★ markiert.</a></div>
 </section>
 <section id="bilanz"><h2>Bilanz</h2>
@@ -136,12 +143,12 @@ body.suchmodus .knoepfe{display:none}
 <tbody><tr><td><b>Fenster</b></td><td class="z">35 Handgriffe</td><td class="z">bisher bis 29 je Woche; keines mehr seit 11.10.</td><td><b>2 bis 4 Wochen</b><br>Unverändert. Im August entstanden gut ein Dutzend Fenster je Woche, zusammen mit den Befehlen selbst. Seither wuchs die Zahl eher: Neue Handgriffe wie die Handelsroute kamen ohne Fenster hinzu. Die übrigen sind die schwereren, allen voran der Markt.</td></tr><tr><td><b>Bauen</b></td><td class="z">44 Posten</td><td class="z">kein gemessenes Tempo</td><td><b>3 bis 6 Wochen</b><br>Unverändert, obwohl seit dem 6. Oktober große Stücke fertig sind: die Computergegner als Familien mit Erbgang, der Beutel, der Partiebeginn aus der Karte und 37 von 38 Gegenstandswirkungen. Denn jeder Bau findet neue kleine Arbeit — gemessen kamen zuletzt mehr Posten dazu als gebaut wurden. Der größte Brocken steht noch aus: die Stadtbevölkerung als echte Figuren, an der ein halbes Dutzend weiterer Posten hängt. Dazu der Einheitenkampf, der neu geplant werden soll.</td></tr><tr><td><b>Gelände</b></td><td class="z">ein großer Posten</td><td class="z">seit Monaten „teilweise“</td><td><b>2 bis 6 Wochen</b><br>Unverändert die größte Unsicherheit. Der Punkt steht seit Monaten auf „teilweise&quot;, und niemand weiß, wie tief das Problem sitzt.</td></tr><tr><td><b>Entscheidungen</b></td><td class="z">21 Fragen</td><td class="z">bei dir</td><td><b>ein, zwei Abende</b><br>Liegt allein bei dir. Jedes „Umstellen&quot; macht aber neue Bauarbeit — im ungünstigen Fall ein bis drei Wochen mehr.</td></tr><tr><td><b>Messungen</b></td><td class="z">10 offen</td><td class="z">63 Zahlen in den letzten 14 Tagen geklärt</td><td><b>nicht planbar</b><br>Hängt an euch und am Original, nicht am Nachbau. Der Nachbau kann mit gekennzeichneten Schätzwerten fertig werden; jede Messung macht ihn nur genauer.</td></tr><tr class="gesamt"><td colspan="4">7 bis 16 Wochen konzentrierte Arbeit ab dem 6. Oktober, am 8. Oktober so bestätigt. Fertig wäre der Nachbau damit zwischen Ende November 2026 und Ende Januar 2027 — am ehesten kurz vor Weihnachten. Zwei Dinge können das verschieben: Bisher hat fast jeder Bau neue kleine Arbeit gefunden, und für das Gelände gibt es keinen Vergleichswert. Ein gemessenes Datum steht im Verlauf, sobald die Bauliste schneller schrumpft als wächst.</td></tr></tbody></table>
 <div class="hinweis"><b>Zum Vergleich, gemessen:</b> Die Bauliste wächst gerade: 5,6 Posten je Tag kommen dazu, 3,3 werden gebaut. <a href="verlauf.html">Mehr im Verlauf.</a></div>
 </section>
-<section id="wegweiser"><h2>Mehr auf den Unterseiten</h2><div class="wegweisergitter"><a class="wegweiser" href="auftraege.html"><b>Aufträge</b><span>9 Aufträge offen, 3 davon für die LAN</span></a><a class="wegweiser" href="entscheidungen.html"><b>Entscheidungen</b><span>21 Fragen zu entscheiden, 9 zum Ansehen, 45 schon entschieden</span></a><a class="wegweiser" href="baustellen.html"><b>Baustellen</b><span>44 Bauposten offen, 35 Handgriffe ohne Knopf, dazu das Gelände</span></a><a class="wegweiser" href="verlauf.html"><b>Verlauf</b><span>Kurven seit Juli — rund 570 Stunden Arbeit</span></a><a class="wegweiser" href="einstieg.html"><b>Was läuft &amp; Begriffe</b><span>Was im Nachbau schon läuft, und 23 Begriffe erklärt</span></a><a class="wegweiser" href="wissen.html"><b>Wissen</b><span>Was wir aus dem Original gelesen haben, in 8 Artikeln</span></a></div></section>
+<section id="wegweiser"><h2>Mehr auf den Unterseiten</h2><div class="wegweisergitter"><a class="wegweiser" href="bilder.html"><b>Bilder</b><span>24 Bilder aus dem Nachbau, vom Rathaus bis zur Krypta</span></a><a class="wegweiser" href="auftraege.html"><b>Aufträge</b><span>9 Aufträge offen, 3 davon für die LAN</span></a><a class="wegweiser" href="entscheidungen.html"><b>Entscheidungen</b><span>21 Fragen zu entscheiden, 9 zum Ansehen, 45 schon entschieden</span></a><a class="wegweiser" href="baustellen.html"><b>Baustellen</b><span>44 Bauposten offen, 35 Handgriffe ohne Knopf, dazu das Gelände</span></a><a class="wegweiser" href="verlauf.html"><b>Verlauf</b><span>Kurven seit Juli — rund 570 Stunden Arbeit</span></a><a class="wegweiser" href="einstieg.html"><b>Was läuft &amp; Begriffe</b><span>Was im Nachbau schon läuft, und 23 Begriffe erklärt</span></a><a class="wegweiser" href="wissen.html"><b>Wissen</b><span>Was wir aus dem Original gelesen haben, in 8 Artikeln</span></a></div></section>
 </main><script src="suche.js"></script><script>
 (function(){
   var f=document.getElementById('suche'); if(!f) return;
   var hier=location.pathname.split('/').pop()||'index.html';
-  var wahl='.eintrag,.auftrag,.fenster>div,.kachel,.begriffe>div,.abschnitt';
+  var wahl='.eintrag,.auftrag,.fenster>div,.kachel,.begriffe>div,.abschnitt,.bild';
   var el=[].slice.call(document.querySelectorAll(wahl)), sek=[].slice.call(document.querySelectorAll('main>section'));
   var t=document.getElementById('treffer'), fr=document.getElementById('fremd');
   function zeig(){

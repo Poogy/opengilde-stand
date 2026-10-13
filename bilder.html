@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Bilder · Hauptbuch des Nachbaus</title>
+<meta name="description" content="Projektstand von OpenGilde: was gemessen ist, was noch zu tun ist, und was Mitspieler am Original erspielen können.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,700;1,500&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--grund:#3B2A1E;--blatt:#F4ECD8;--tinte:#2A1F16;--rot:#7A1F1F;--blau:#234A6B;--ocker:#8A5A12;--gelb:#C9A24A;--linie:#A8977A;--leise:#5A4A38;--kasten:#EADFC4}
+*{box-sizing:border-box}
+body{margin:0;background:var(--grund);color:var(--tinte);font-family:'Cormorant Garamond',Georgia,serif}
+a{color:var(--rot)}a:hover{color:#4F1212}
+.mono{font-family:'Courier Prime',monospace}
+.blatt{max-width:1180px;margin:56px auto;background:var(--blatt);padding:56px 64px 72px;display:flex;flex-direction:column;gap:56px}
+h1{margin:0;font-size:60px;line-height:1}h2{margin:0;font-size:34px}h3{margin:0;font-size:24px}
+.kopf{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:12px;border-bottom:2px solid var(--rot);padding-bottom:12px}
+.lead{margin:0;font-size:21px;font-style:italic;max-width:860px}
+nav{display:flex;gap:10px 22px;flex-wrap:wrap;font-size:19px}
+section{display:flex;flex-direction:column;gap:16px}
+.bilanz{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border:1px solid var(--tinte)}
+.bilanz>div{padding:20px 24px;display:flex;flex-direction:column;gap:6px}
+.bilanz>div+div{border-left:1px solid var(--tinte)}
+.spalte{font-size:26px;font-weight:700;border-bottom:1px solid var(--tinte);padding-bottom:6px}
+.posten{display:flex;justify-content:space-between;gap:12px;font-size:20px;border-bottom:1px dotted var(--linie)}
+.summe{display:flex;justify-content:space-between;font-size:22px;font-weight:700;border-top:3px double var(--tinte);margin-top:auto;padding-top:6px}
+.hinweis{border:1px solid var(--blau);padding:14px 20px;font-size:19px}
+.lan{border:3px double var(--rot);padding:24px 28px;display:grid;grid-template-columns:auto 1fr;gap:28px;align-items:center}
+.uhr{display:flex;gap:14px}.uhr div{text-align:center;min-width:72px}
+.uhr b{display:block;font-family:'Courier Prime',monospace;font-size:46px;line-height:1;color:var(--rot)}
+.uhr span{font-size:15px;text-transform:uppercase;letter-spacing:.08em}
+.kacheln{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 32px}
+.kachel{border-bottom:1px dotted var(--linie);padding:10px 0}.kachel b{font-size:21px;display:block}.kachel span{font-size:18px}
+.tafel{width:100%;border-collapse:collapse;font-size:19px}
+.tafel th{text-align:left;border-bottom:2px solid var(--tinte);padding:6px 10px 6px 0;font-size:18px}
+.tafel td{border-bottom:1px dotted var(--linie);padding:10px 10px 10px 0;vertical-align:top}
+.tafel td.z{font-family:'Courier Prime',monospace;font-size:16px;white-space:nowrap}
+.tafel tr.gesamt td{border-top:3px double var(--tinte);border-bottom:0;font-weight:700}
+.tag{display:grid;grid-template-columns:70px 1fr 64px;gap:14px;align-items:center;font-size:14px}
+.balken{height:9px;border-bottom:1px dotted var(--linie);display:flex}.balken span{display:block;height:9px}
+.knoepfe{display:flex;gap:8px;flex-wrap:wrap}
+.knoepfe button{min-height:44px;padding:6px 18px;cursor:pointer;border:1px solid var(--tinte);font:inherit;font-size:18px;background:transparent;color:var(--tinte)}
+.knoepfe button[aria-pressed=true]{background:var(--tinte);color:var(--blatt)}
+.auftrag{display:grid;grid-template-columns:70px 1fr 170px;gap:20px;padding:16px 0;border-bottom:1px solid var(--linie)}
+.auftrag .t{font-size:23px;font-weight:700}.auftrag .w{font-size:19px}
+.rechts{display:flex;flex-direction:column;gap:8px;align-items:flex-end;text-align:right}
+.siegel{font-family:'Courier Prime',monospace;font-weight:700;font-size:14px;text-transform:uppercase;letter-spacing:.1em;padding:4px 10px;border:2px solid}
+.schritte{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;background:var(--kasten);padding:22px 26px;font-size:18px}
+.schritte b{display:block;font-size:22px}
+.eintrag{display:grid;grid-template-columns:1fr 110px;gap:16px;border-bottom:1px dotted var(--linie);padding:12px 0}
+.eintrag .t{font-size:22px;font-weight:700}.eintrag .x{font-size:19px}
+.eintrag .k{font-family:'Courier Prime',monospace;font-size:13px;color:var(--leise);text-align:right;padding-top:6px}
+.gruppe{display:flex;flex-direction:column;gap:0;margin-top:8px}
+.gruppe h3{border-bottom:1px solid var(--tinte);padding-bottom:4px}
+.fort{display:flex;flex-direction:column;gap:14px;border:1px solid var(--tinte);padding:20px 24px}
+.fort-z{display:grid;grid-template-columns:minmax(0,260px) minmax(0,1fr) auto;gap:16px;align-items:center;font-size:19px}
+.fort-b{height:16px;border:1px solid var(--tinte);background:var(--kasten)}.fort-b span{display:block;height:100%}
+.fenster{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px 32px;font-size:19px}
+.fenster div{border-bottom:1px dotted var(--linie);padding:4px 0}
+[hidden]{display:none!important}
+nav a[aria-current=page]{color:var(--tinte);font-weight:700;text-decoration:none}
+.fremd{border:1px solid var(--tinte);background:var(--kasten);padding:10px 16px;display:flex;flex-direction:column;gap:4px;font-size:17px;max-height:60vh;overflow:auto}
+.fremd a{display:block;padding:2px 0}.fremd-seite{font-family:'Courier Prime',monospace;font-size:14px;text-transform:uppercase;letter-spacing:.08em;margin-top:8px}
+.wegweisergitter{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
+.wegweiser{display:flex;flex-direction:column;gap:4px;border:1px solid var(--tinte);padding:14px 18px;text-decoration:none;color:var(--tinte)}
+.wegweiser b{font-size:22px;color:var(--rot)}.wegweiser span{font-size:18px}.wegweiser:hover{background:var(--kasten)}
+[id^=i]:target{background:var(--kasten)}
+.begriff{color:inherit;text-decoration:underline dotted;text-underline-offset:3px;cursor:help}
+.suche{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.suche input{font:inherit;font-size:19px;padding:8px 12px;border:1px solid var(--tinte);background:var(--blatt);color:var(--tinte);width:min(420px,100%)}
+.begriffe{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 32px;font-size:18px}
+.begriffe>div{border-bottom:1px dotted var(--linie);padding:6px 0}.begriffe>div:target{background:var(--kasten)}
+body.suchmodus [data-art][hidden]:not(.such-aus){display:grid!important}
+body.suchmodus .knoepfe{display:none}
+.such-aus{display:none!important}
+.w-artikel{max-width:820px;gap:18px}
+.w-zurueck{margin:0;font-size:17px;font-family:'Courier Prime',monospace;text-transform:uppercase;letter-spacing:.06em}
+.w-titel{font-size:46px;line-height:1.05;border-bottom:2px solid var(--rot);padding-bottom:10px}
+.w-inhalt{display:flex;flex-direction:column;gap:2px;font-size:18px;border-left:3px solid var(--linie);padding:4px 0 4px 16px}
+.abschnitt{display:flex;flex-direction:column;gap:10px;font-size:20px;line-height:1.45;padding-top:12px}
+.abschnitt p,.w-artikel>p{margin:0}.abschnitt ul{margin:0;padding-left:24px}
+.abschnitt h3{font-size:28px;color:var(--rot)}
+.w-num{color:var(--gelb);font-family:'Courier Prime',monospace;font-size:18px;margin-right:12px;letter-spacing:.04em}
+.w-kasten{background:var(--kasten);border-left:5px solid var(--ocker);padding:12px 18px;font-size:19px}
+.w-merk{text-align:center;font-style:italic;font-size:22px;border-top:1px solid var(--linie);border-bottom:1px solid var(--linie);padding:10px 24px;color:var(--rot)}
+.w-tafel{width:100%;border-collapse:collapse;font-size:18px}
+.w-tafel th{text-align:left;border-bottom:2px solid var(--tinte);padding:4px 10px 4px 0}
+.w-tafel td{border-bottom:1px dotted var(--linie);padding:6px 10px 6px 0;vertical-align:top}
+.w-tafel .z{text-align:right;font-family:'Courier Prime',monospace;font-size:16px;white-space:nowrap}
+.abschnitt:target{background:var(--kasten)}
+.bildgitter{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px 32px;margin-top:14px}
+.bild{display:flex;flex-direction:column;gap:6px}
+.bild img{display:block;width:100%;height:auto;border:1px solid var(--tinte);background:var(--grund)}
+.bild b{font-size:22px}.bild span{font-size:18px}
+.bild-datum{font-size:13px!important;color:var(--leise)}
+.bild:target{background:var(--kasten)}
+@media (max-width:760px){
+ .bildgitter{grid-template-columns:1fr}
+ .w-titel{font-size:34px}.abschnitt{font-size:19px}.w-tafel{display:block;overflow-x:auto}
+ .begriffe{grid-template-columns:1fr}
+ .blatt{margin:0;padding:28px 16px 48px;gap:40px}h1{font-size:40px}
+ .bilanz,.schritte,.kacheln,.fenster,.lan{grid-template-columns:1fr}.bilanz>div+div{border-left:0;border-top:1px solid var(--tinte)}
+ .auftrag{grid-template-columns:1fr}.rechts{align-items:flex-start;text-align:left}
+ .eintrag{grid-template-columns:1fr}.eintrag .k{text-align:left;padding-top:0}
+ .fort-z{grid-template-columns:1fr auto}.fort-b{grid-column:1/-1;grid-row:2}
+ .tag{grid-template-columns:56px 1fr 48px}.uhr div{min-width:56px}.uhr b{font-size:36px}
+ .tafel td.z{white-space:normal} .tafel,.tafel tbody,.tafel tr,.tafel td{display:block}.tafel thead{display:none}.tafel td{border:0;padding:2px 0}.tafel tr{border-bottom:1px dotted var(--linie);padding:8px 0}
+}
+</style></head>
+<body><main class="blatt">
+<header style="display:flex;flex-direction:column;gap:14px">
+<div class="kopf"><h1>Hauptbuch des Nachbaus</h1><span class="mono" style="font-size:14px">aktualisiert am: 13.10.2026, 13:37 Uhr</span></div>
+
+<nav><a href="index.html">Übersicht</a><a href="bilder.html" aria-current="page">Bilder</a><a href="auftraege.html">Aufträge</a><a href="entscheidungen.html">Entscheidungen</a><a href="baustellen.html">Baustellen</a><a href="verlauf.html">Verlauf</a><a href="einstieg.html">Was läuft &amp; Begriffe</a><a href="wissen.html">Wissen</a></nav>
+<div class="suche"><input type="search" id="suche" placeholder="Auf allen Seiten suchen …" aria-label="Auf allen Seiten suchen"><span id="treffer" class="mono" style="font-size:15px"></span></div>
+<div id="fremd" class="fremd" hidden></div>
+</header>
+<section id="bilder"><h2>So sieht der Nachbau aus</h2><p class="lead">Jedes Bild hier hat der Nachbau selbst gezeichnet. Häuser, Möbel, Figuren, Fenster und Schrift kommen aus den Dateien des Originals, nichts ist nachgemalt. Ein Klick zeigt das Bild in voller Größe. Kommen neue Bilder dazu, tragen sie ihr eigenes Datum.</p><div class="gruppe"><h3>Die Stadt und ihre Räume</h3><div class="bildgitter"><div class="bild" id="i1"><a href="bilder/koeln.jpg"><img src="bilder/koeln.jpg" loading="lazy" width="1100" height="680" alt="Köln von außen"></a><b>Köln von außen</b><span>Die ganze Stadt mit Mauerring, Häusern und Wald, gebaut aus der Kölner Karte des Originals. Draußen stehen die Häuser erst ungefähr an ihrem Platz — das Gelände darunter ist noch nicht ganz eingepaßt.</span><span class="mono bild-datum">aufgenommen am 13.10.2026</span></div><div class="bild" id="i2"><a href="bilder/augsburg.jpg"><img src="bilder/augsburg.jpg" loading="lazy" width="1100" height="680" alt="Augsburg"></a><b>Augsburg</b><span>Eine zweite Stadt des Originals im selben Nachbau. Gespielt wird Köln; die anderen Städte dienen zum Gegenprüfen, weil sie dieselben Dateien mit anderen Zahlen tragen.</span><span class="mono bild-datum">aufgenommen am 13.10.2026</span></div><div class="bild" id="i3"><a href="bilder/schmiede.jpg"><img src="bilder/schmiede.jpg" loading="lazy" width="1100" height="680" alt="Die Schmiede"></a><b>Die Schmiede</b><span>Ein Handwerksbetrieb von oben, Dach und Decke abgenommen. Im laufenden Spiel gehen die Leute die Arbeitswege, die das Original für diesen Raum vorschreibt.</span><span class="mono bild-datum">aufgenommen am 13.10.2026</span></div><div class="bild" id="i4"><a href="bilder/labor.jpg"><img src="bilder/labor.jpg" loading="lazy" width="1100" height="680" alt="Das Labor des Kräuterladens"></a><b>Das Labor des Kräuterladens</b><span>Die rund sechzig Innenräume des Originals stehen im Nachbau, jeder mit seiner ganzen Einrichtung.</span><span class="mono bild-datum">aufgenommen am 13.10.2026</span></div><div class="bild" id="i5"><a href="bilder/figur.jpg"><img src="bilder/figur.jpg" loading="lazy" width="1100" height="680" alt="Ein Bürger"></a><b>Ein Bürger</b><span>Die Figuren bewegen sich mit den Bewegungen aus den Spieldateien, Bild für Bild wie im Original.</span><span class="mono bild-datum">aufgenommen am 13.10.2026</span></div></div></div><div class="gruppe"><h3>Im eigenen Betrieb</h3><div class="bildgitter"><div class="bild" id="i6"><a href="bilder/lager.jpg"><img src="bilder/lager.jpg" loading="lazy" width="1100" height="680" alt="Lager erweitern"></a><b>Lager erweitern</b><span>Wie viele Lagerplätze der Betrieb hat, wie groß sie sind und was der nächste kostet.</span><span class="mono bild-datum">aufgenommen am 13.10.2026</span></div><div class="bild" id="i7"><a href="bilder/transport.jpg"><img src="bilder/transport.jpg" loading="lazy" width="1100" height="680" alt="Verladen und Transportieren"></a><b>Verladen und Transportieren</b><span>Waren aus dem Lager auf den Karren laden: Doppelklick nimmt den ganzen Stapel, Ziehen eine bestimmte Menge — wie im Original.</span><span class="mono bild-datum">aufgenommen am 13.10.2026</span></div><div class="bild" id="i8"><a href="bilder/beutel.jpg"><img src="bilder/beutel.jpg" loading="lazy" width="1100" height="680" alt="Der Beutel"></a><b>Der Beutel</b><span>Ein Klick auf den Geldsack zeigt, was der Spieler bei sich trägt: Tränke, Bücher und andere Gegenstände.</span><span class="mono bild-datum">aufgenommen am 13.10.2026</span></div><div class="bild" id="i9"><a href="bilder/produktion.jpg"><img src="bilder/produktion.jpg" loading="lazy" width="1100" height="680" alt="Freie Produktion"></a><b>Freie Produktion</b><span>Die Werkbank: was der Betrieb herstellen kann und welche Zutaten es dafür braucht.</span><span class="mono bild-datum">aufgenommen am 13.10.2026</span></div><div class="bild" id="i10"><a href="bilder/personalbuch.jpg"><img src="bilder/personalbuch.jpg" loading="lazy" width="1100" height="680" alt="Das Personalbuch"></a><b>Das Personalbuch</b><span>Die Belegschaft mit Bildnis, Lehrjahren und Lohn. Wer vier Lehrjahre hat, kann befördert werden.</span><span class="mono bild-datum">aufgenommen am 13.10.2026</span></div><div class="bild" id="i11"><a href="bilder/praemie.jpg"><img src="bilder/praemie.jpg" loading="lazy" width="1100" height="680" alt="Eine Prämie für alle"></a><b>Eine Prämie für alle</b><span>Jedem Arbeiter eine Prämie zahlen — das Spiel fragt mit denselben Worten wie das Original.</span><span class="mono bild-datum">aufgenommen am 13.10.2026</span></div><div class="bild" id="i12"><a href="bilder/ausbaubaum.jpg"><img src="bilder/ausbaubaum.jpg" loading="lazy" width="1100" height="680" alt="Der Ausbaubaum"></a><b>Der Ausbaubaum</b><span>Welche Einrichtung der Arbeitsraum als Nächstes bekommen kann; jede Kachel ist ein Ausbau aus dem Original.</span><span class="mono bild-datum">aufgenommen am 13.10.2026</span></div><div class="bild" id="i13"><a href="bilder/auswirkungen.jpg"><img src="bilder/auswirkungen.jpg" loading="lazy" width="1100" height="680" alt="Was die Ausbauten bringen"></a><b>Was die Ausbauten bringen</b><span>Mehr Arbeitstempo, weniger Unfälle, Schutz vor Einbrechern — zusammengezählt über alle Ausbauten.</span><span class="mono bild-datum">aufgenommen am 13.10.2026</span></div><div class="bild" id="i14"><a href="bilder/einkauf.jpg"><img src="bilder/einkauf.jpg" loading="lazy" width="1100" height="680" alt="Beim Nachbarn einkaufen"></a><b>Beim Nachbarn einkaufen</b><span>Im Betrieb eines anderen kauft man aus seinem Warenlager — nur die fertigen Waren, nicht die Rohstoffe.</span><span class="mono bild-datum">aufgenommen am 13.10.2026</span></div><div class="bild" id="i15"><a href="bilder/sammeln.jpg"><img src="bilder/sammeln.jpg" loading="lazy" width="1100" height="680" alt="Rohstoffe sammeln"></a><b>Rohstoffe sammeln</b><span>Der Kräuterladen schickt seine Leute Jasmin und Lavendel suchen, bezahlt mit Arbeitszeit statt mit Geld.</span><span class="mono bild-datum">aufgenommen am 13.10.2026</span></div><div class="bild" id="i16"><a href="bilder/pause.jpg"><img src="bilder/pause.jpg" loading="lazy" width="1100" height="680" alt="Das Pausemenü"></a><b>Das Pausemenü</b><span>Laden, Speichern und die Optionen.</span><span class="mono bild-datum">aufgenommen am 13.10.2026</span></div><div class="bild" id="i17"><a href="bilder/grafik.jpg"><img src="bilder/grafik.jpg" loading="lazy" width="1100" height="680" alt="Die Grafikoptionen"></a><b>Die Grafikoptionen</b><span>Die Regler des Originals; der Nachbau beginnt mit denselben Werten, die das Spiel bei der Installation setzt.</span><span class="mono bild-datum">aufgenommen am 13.10.2026</span></div></div></div><div class="gruppe"><h3>Stadt, Kirche, Tod und Teufel</h3><div class="bildgitter"><div class="bild" id="i18"><a href="bilder/buergerrecht.jpg"><img src="bilder/buergerrecht.jpg" loading="lazy" width="1100" height="680" alt="Das Bürgerrecht"></a><b>Das Bürgerrecht</b><span>Wer ein Amt will, braucht erst das Bürgerrecht. Hier bietet die Stadt es zum Kauf an.</span><span class="mono bild-datum">aufgenommen am 13.10.2026</span></div><div class="bild" id="i19"><a href="bilder/liegeplan.jpg"><img src="bilder/liegeplan.jpg" loading="lazy" width="1100" height="680" alt="Das Familiengrab"></a><b>Das Familiengrab</b><span>Der Liegeplan des Friedhofs: wer das Grab gemietet hat und bis wann. Von hier aus läßt sich umbetten.</span><span class="mono bild-datum">aufgenommen am 13.10.2026</span></div><div class="bild" id="i20"><a href="bilder/grabpflege.jpg"><img src="bilder/grabpflege.jpg" loading="lazy" width="1100" height="680" alt="Grabpflege"></a><b>Grabpflege</b><span>Ein Gehilfe des Friedhofs kann eine Grabstätte pflegen.</span><span class="mono bild-datum">aufgenommen am 13.10.2026</span></div><div class="bild" id="i21"><a href="bilder/gehilfen.jpg"><img src="bilder/gehilfen.jpg" loading="lazy" width="1100" height="680" alt="Gehilfen verbessern"></a><b>Gehilfen verbessern</b><span>Im Turm des Nekromanten lernt ein Gehilfe ein Talent: Handwerkskunst, Bei Nacht und Nebel oder Rhetorik.</span><span class="mono bild-datum">aufgenommen am 13.10.2026</span></div><div class="bild" id="i22"><a href="bilder/seance.jpg"><img src="bilder/seance.jpg" loading="lazy" width="1100" height="680" alt="Die Séance"></a><b>Die Séance</b><span>In der Krypta: Informationen, eine Schatzkarte oder ein Pakt mit dem Teufel — bezahlt mit Lebenskraft.</span><span class="mono bild-datum">aufgenommen am 13.10.2026</span></div><div class="bild" id="i23"><a href="bilder/kabinett.jpg"><img src="bilder/kabinett.jpg" loading="lazy" width="1100" height="680" alt="Das Geheimkabinett"></a><b>Das Geheimkabinett</b><span>Wie gründlich die Spione der Gegner aufgespürt werden sollen.</span><span class="mono bild-datum">aufgenommen am 13.10.2026</span></div><div class="bild" id="i24"><a href="bilder/meisterpruefung.jpg"><img src="bilder/meisterpruefung.jpg" loading="lazy" width="1100" height="680" alt="Die Meisterprüfung"></a><b>Die Meisterprüfung</b><span>Im Arbeitszimmer: das Studium für den nächsten Meistertitel, mit dem man größere Betriebe leiten darf.</span><span class="mono bild-datum">aufgenommen am 13.10.2026</span></div></div></div></section>
+</main><script src="suche.js"></script><script>
+(function(){
+  var f=document.getElementById('suche'); if(!f) return;
+  var hier=location.pathname.split('/').pop()||'index.html';
+  var wahl='.eintrag,.auftrag,.fenster>div,.kachel,.begriffe>div,.abschnitt,.bild';
+  var el=[].slice.call(document.querySelectorAll(wahl)), sek=[].slice.call(document.querySelectorAll('main>section'));
+  var t=document.getElementById('treffer'), fr=document.getElementById('fremd');
+  function zeig(){
+    var q=f.value.trim().toLowerCase(), n=0;
+    document.body.classList.toggle('suchmodus',!!q);
+    el.forEach(function(x){var ja=!q||x.textContent.toLowerCase().indexOf(q)>=0; x.classList.toggle('such-aus',!ja);
+      if(q&&ja){n++; var d=x.closest('details'); if(d) d.open=true;}});
+    sek.forEach(function(s){ if(!q){s.classList.remove('such-aus');return;}
+      s.classList.toggle('such-aus',![].some.call(s.querySelectorAll(wahl),function(x){return !x.classList.contains('such-aus');}));});
+    var fremd=(q&&window.SUCHE)?window.SUCHE.filter(function(e){return e.p!==hier&&e.x.toLowerCase().indexOf(q)>=0;}):[];
+    t.textContent=q?(n+' hier, '+fremd.length+' auf anderen Seiten'):'';
+    if(!fremd.length){fr.hidden=true;fr.innerHTML='';return;}
+    var html='', zuletzt='';
+    fremd.slice(0,40).forEach(function(e){
+      if(e.p!==zuletzt){html+='<div class="fremd-seite">'+window.SEITEN[e.p]+'</div>'; zuletzt=e.p;}
+      var a=document.createElement('a'); a.href=e.p+'?q='+encodeURIComponent(f.value.trim())+'#'+e.i; a.textContent=e.x.length>140?e.x.slice(0,140)+' …':e.x;
+      html+=a.outerHTML;});
+    if(fremd.length>40) html+='<div class="fremd-seite">und '+(fremd.length-40)+' weitere</div>';
+    fr.innerHTML=html; fr.hidden=false;
+  }
+  f.addEventListener('input',zeig);
+  var q=new URLSearchParams(location.search).get('q');
+  if(q){f.value=q; zeig(); var z=location.hash&&document.getElementById(location.hash.slice(1)); if(z) setTimeout(function(){z.scrollIntoView({block:'center'});},50);}
+})();
+document.querySelectorAll('[data-filter]').forEach(function(gruppe){
+  var ziel=document.getElementById(gruppe.dataset.filter);
+  gruppe.querySelectorAll('button').forEach(function(b){
+    b.addEventListener('click',function(){
+      gruppe.querySelectorAll('button').forEach(function(x){x.setAttribute('aria-pressed',x===b)});
+      ziel.querySelectorAll('[data-art]').forEach(function(z){
+        var w=b.dataset.wert, a=z.dataset.art.split(' ');
+        z.hidden = !(w==='*' ? a.indexOf('offen')>=0 : a.indexOf(w)>=0);
+      });
+    });
+  });
+  gruppe.querySelector('button').click();
+});
+(function(){
+  var uhr=document.getElementById('uhr'); if(!uhr) return;
+  var ziel=new Date(+uhr.dataset.ziel);
+  function stell(){
+    var r=ziel-new Date();
+    if(r<=0){uhr.innerHTML='<div><b>jetzt</b><span>die LAN läuft</span></div>';return;}
+    var t=Math.floor(r/864e5), s=Math.floor(r/36e5)%24, m=Math.floor(r/6e4)%60;
+    uhr.querySelector('[data-t]').textContent=t;
+    uhr.querySelector('[data-s]').textContent=s;
+    uhr.querySelector('[data-m]').textContent=m;
+  }
+  stell(); setInterval(stell,30000);
+})();
+</script></body></html>
