@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Von Titeln und Ämtern · Hauptbuch des Nachbaus</title>
+<meta name="description" content="Projektstand von OpenGilde: was gemessen ist, was noch zu tun ist, und was Mitspieler am Original erspielen können.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,700;1,500&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--grund:#3B2A1E;--blatt:#F4ECD8;--tinte:#2A1F16;--rot:#7A1F1F;--blau:#234A6B;--ocker:#8A5A12;--gelb:#C9A24A;--linie:#A8977A;--leise:#5A4A38;--kasten:#EADFC4}
+*{box-sizing:border-box}
+body{margin:0;background:var(--grund);color:var(--tinte);font-family:'Cormorant Garamond',Georgia,serif}
+a{color:var(--rot)}a:hover{color:#4F1212}
+.mono{font-family:'Courier Prime',monospace}
+.blatt{max-width:1180px;margin:56px auto;background:var(--blatt);padding:56px 64px 72px;display:flex;flex-direction:column;gap:56px}
+h1{margin:0;font-size:60px;line-height:1}h2{margin:0;font-size:34px}h3{margin:0;font-size:24px}
+.kopf{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:12px;border-bottom:2px solid var(--rot);padding-bottom:12px}
+.lead{margin:0;font-size:21px;font-style:italic;max-width:860px}
+nav{display:flex;gap:10px 22px;flex-wrap:wrap;font-size:19px}
+section{display:flex;flex-direction:column;gap:16px}
+.bilanz{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border:1px solid var(--tinte)}
+.bilanz>div{padding:20px 24px;display:flex;flex-direction:column;gap:6px}
+.bilanz>div+div{border-left:1px solid var(--tinte)}
+.spalte{font-size:26px;font-weight:700;border-bottom:1px solid var(--tinte);padding-bottom:6px}
+.posten{display:flex;justify-content:space-between;gap:12px;font-size:20px;border-bottom:1px dotted var(--linie)}
+.summe{display:flex;justify-content:space-between;font-size:22px;font-weight:700;border-top:3px double var(--tinte);margin-top:auto;padding-top:6px}
+.hinweis{border:1px solid var(--blau);padding:14px 20px;font-size:19px}
+.lan{border:3px double var(--rot);padding:24px 28px;display:grid;grid-template-columns:auto 1fr;gap:28px;align-items:center}
+.uhr{display:flex;gap:14px}.uhr div{text-align:center;min-width:72px}
+.uhr b{display:block;font-family:'Courier Prime',monospace;font-size:46px;line-height:1;color:var(--rot)}
+.uhr span{font-size:15px;text-transform:uppercase;letter-spacing:.08em}
+.kacheln{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 32px}
+.kachel{border-bottom:1px dotted var(--linie);padding:10px 0}.kachel b{font-size:21px;display:block}.kachel span{font-size:18px}
+.tafel{width:100%;border-collapse:collapse;font-size:19px}
+.tafel th{text-align:left;border-bottom:2px solid var(--tinte);padding:6px 10px 6px 0;font-size:18px}
+.tafel td{border-bottom:1px dotted var(--linie);padding:10px 10px 10px 0;vertical-align:top}
+.tafel td.z{font-family:'Courier Prime',monospace;font-size:16px;white-space:nowrap}
+.tafel tr.gesamt td{border-top:3px double var(--tinte);border-bottom:0;font-weight:700}
+.tag{display:grid;grid-template-columns:70px 1fr 64px;gap:14px;align-items:center;font-size:14px}
+.balken{height:9px;border-bottom:1px dotted var(--linie);display:flex}.balken span{display:block;height:9px}
+.knoepfe{display:flex;gap:8px;flex-wrap:wrap}
+.knoepfe button{min-height:44px;padding:6px 18px;cursor:pointer;border:1px solid var(--tinte);font:inherit;font-size:18px;background:transparent;color:var(--tinte)}
+.knoepfe button[aria-pressed=true]{background:var(--tinte);color:var(--blatt)}
+.auftrag{display:grid;grid-template-columns:70px 1fr 170px;gap:20px;padding:16px 0;border-bottom:1px solid var(--linie)}
+.auftrag .t{font-size:23px;font-weight:700}.auftrag .w{font-size:19px}
+.rechts{display:flex;flex-direction:column;gap:8px;align-items:flex-end;text-align:right}
+.siegel{font-family:'Courier Prime',monospace;font-weight:700;font-size:14px;text-transform:uppercase;letter-spacing:.1em;padding:4px 10px;border:2px solid}
+.schritte{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;background:var(--kasten);padding:22px 26px;font-size:18px}
+.schritte b{display:block;font-size:22px}
+.eintrag{display:grid;grid-template-columns:1fr 110px;gap:16px;border-bottom:1px dotted var(--linie);padding:12px 0}
+.eintrag .t{font-size:22px;font-weight:700}.eintrag .x{font-size:19px}
+.eintrag .k{font-family:'Courier Prime',monospace;font-size:13px;color:var(--leise);text-align:right;padding-top:6px}
+.gruppe{display:flex;flex-direction:column;gap:0;margin-top:8px}
+.gruppe h3{border-bottom:1px solid var(--tinte);padding-bottom:4px}
+.fort{display:flex;flex-direction:column;gap:14px;border:1px solid var(--tinte);padding:20px 24px}
+.fort-z{display:grid;grid-template-columns:minmax(0,260px) minmax(0,1fr) auto;gap:16px;align-items:center;font-size:19px}
+.fort-b{height:16px;border:1px solid var(--tinte);background:var(--kasten)}.fort-b span{display:block;height:100%}
+.fenster{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px 32px;font-size:19px}
+.fenster div{border-bottom:1px dotted var(--linie);padding:4px 0}
+[hidden]{display:none!important}
+nav a[aria-current=page]{color:var(--tinte);font-weight:700;text-decoration:none}
+.fremd{border:1px solid var(--tinte);background:var(--kasten);padding:10px 16px;display:flex;flex-direction:column;gap:4px;font-size:17px;max-height:60vh;overflow:auto}
+.fremd a{display:block;padding:2px 0}.fremd-seite{font-family:'Courier Prime',monospace;font-size:14px;text-transform:uppercase;letter-spacing:.08em;margin-top:8px}
+.wegweisergitter{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
+.wegweiser{display:flex;flex-direction:column;gap:4px;border:1px solid var(--tinte);padding:14px 18px;text-decoration:none;color:var(--tinte)}
+.wegweiser b{font-size:22px;color:var(--rot)}.wegweiser span{font-size:18px}.wegweiser:hover{background:var(--kasten)}
+[id^=i]:target{background:var(--kasten)}
+.begriff{color:inherit;text-decoration:underline dotted;text-underline-offset:3px;cursor:help}
+.suche{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.suche input{font:inherit;font-size:19px;padding:8px 12px;border:1px solid var(--tinte);background:var(--blatt);color:var(--tinte);width:min(420px,100%)}
+.begriffe{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 32px;font-size:18px}
+.begriffe>div{border-bottom:1px dotted var(--linie);padding:6px 0}.begriffe>div:target{background:var(--kasten)}
+body.suchmodus [data-art][hidden]:not(.such-aus){display:grid!important}
+body.suchmodus .knoepfe{display:none}
+.such-aus{display:none!important}
+.w-artikel{max-width:820px;gap:18px}
+.w-zurueck{margin:0;font-size:17px;font-family:'Courier Prime',monospace;text-transform:uppercase;letter-spacing:.06em}
+.w-titel{font-size:46px;line-height:1.05;border-bottom:2px solid var(--rot);padding-bottom:10px}
+.w-inhalt{display:flex;flex-direction:column;gap:2px;font-size:18px;border-left:3px solid var(--linie);padding:4px 0 4px 16px}
+.abschnitt{display:flex;flex-direction:column;gap:10px;font-size:20px;line-height:1.45;padding-top:12px}
+.abschnitt p,.w-artikel>p{margin:0}.abschnitt ul{margin:0;padding-left:24px}
+.abschnitt h3{font-size:28px;color:var(--rot)}
+.w-num{color:var(--gelb);font-family:'Courier Prime',monospace;font-size:18px;margin-right:12px;letter-spacing:.04em}
+.w-kasten{background:var(--kasten);border-left:5px solid var(--ocker);padding:12px 18px;font-size:19px}
+.w-merk{text-align:center;font-style:italic;font-size:22px;border-top:1px solid var(--linie);border-bottom:1px solid var(--linie);padding:10px 24px;color:var(--rot)}
+.w-tafel{width:100%;border-collapse:collapse;font-size:18px}
+.w-tafel th{text-align:left;border-bottom:2px solid var(--tinte);padding:4px 10px 4px 0}
+.w-tafel td{border-bottom:1px dotted var(--linie);padding:6px 10px 6px 0;vertical-align:top}
+.w-tafel .z{text-align:right;font-family:'Courier Prime',monospace;font-size:16px;white-space:nowrap}
+.abschnitt:target{background:var(--kasten)}
+.bildgitter{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px 32px;margin-top:14px}
+.bild{display:flex;flex-direction:column;gap:6px}
+.bild img{display:block;width:100%;height:auto;border:1px solid var(--tinte);background:var(--grund)}
+.bild b{font-size:22px}.bild span{font-size:18px}
+.bild-seit{font-size:17px!important;font-style:italic;color:var(--rot)}
+.bild-datum{font-size:13px!important;color:var(--leise)}
+.bild:target{background:var(--kasten)}
+@media (max-width:760px){
+ .bildgitter{grid-template-columns:1fr}
+ .w-titel{font-size:34px}.abschnitt{font-size:19px}.w-tafel{display:block;overflow-x:auto}
+ .begriffe{grid-template-columns:1fr}
+ .blatt{margin:0;padding:28px 16px 48px;gap:40px}h1{font-size:40px}
+ .bilanz,.schritte,.kacheln,.fenster,.lan{grid-template-columns:1fr}.bilanz>div+div{border-left:0;border-top:1px solid var(--tinte)}
+ .auftrag{grid-template-columns:1fr}.rechts{align-items:flex-start;text-align:left}
+ .eintrag{grid-template-columns:1fr}.eintrag .k{text-align:left;padding-top:0}
+ .fort-z{grid-template-columns:1fr auto}.fort-b{grid-column:1/-1;grid-row:2}
+ .tag{grid-template-columns:56px 1fr 48px}.uhr div{min-width:56px}.uhr b{font-size:36px}
+ .tafel td.z{white-space:normal} .tafel,.tafel tbody,.tafel tr,.tafel td{display:block}.tafel thead{display:none}.tafel td{border:0;padding:2px 0}.tafel tr{border-bottom:1px dotted var(--linie);padding:8px 0}
+}
+</style></head>
+<body><main class="blatt">
+<header style="display:flex;flex-direction:column;gap:14px">
+<div class="kopf"><h1>Hauptbuch des Nachbaus</h1><span class="mono" style="font-size:14px">aktualisiert am: 16.10.2026, 08:08 Uhr</span></div>
+
+<nav><a href="index.html">Übersicht</a><a href="bilder.html">Bilder</a><a href="auftraege.html">Aufträge</a><a href="entscheidungen.html">Entscheidungen</a><a href="baustellen.html">Baustellen</a><a href="verlauf.html">Verlauf</a><a href="einstieg.html">Was läuft &amp; Begriffe</a><a href="wissen.html" aria-current="page">Wissen</a></nav>
+<div class="suche"><input type="search" id="suche" placeholder="Auf allen Seiten suchen …" aria-label="Auf allen Seiten suchen"><span id="treffer" class="mono" style="font-size:15px"></span></div>
+<div id="fremd" class="fremd" hidden></div>
+</header>
+<section class="w-artikel"><p class="w-zurueck"><a href="wissen.html">← alle Artikel</a> · Stadt und Ämter</p><h2 class="w-titel">Von Titeln und Ämtern</h2><p class="lead">Was hinter dem eigenen Namen steckt — jedes Vorrecht, was es kostet, und wo das Original schummelt</p><nav class="w-inhalt"><a href="#a1">I · Ein Klick auf den eigenen Namen</a><a href="#a2">II · Grau heißt: Ihr werdet erpreßt</a><a href="#a3">III · Was der Titel bringt</a><a href="#a4">IV · Was jedes Amt darf</a><a href="#a5">V · Becircen: der Rang des Hauses zählt</a><a href="#a6">VI · Haß säen und Frieden stiften</a><a href="#a7">VII · Einschmeicheln und Rauswurf — der Reichskanzler</a><a href="#a8">VIII · Unterschlagung und Bekehren</a><a href="#a9">IX · Die sechs Wunder</a><a href="#a10">X · Erpressung</a><a href="#a11">XI · Anklage und Abbitte</a><a href="#a12">XII · Medicus und Werbung</a></nav><div class="abschnitt" id="i338"><h3 id="a1"><span class="w-num">I</span> Ein Klick auf den eigenen Namen</h3><p>Oben im Banner steht Euer Name, und kaum jemand klickt ihn an. Dahinter liegt das Fenster <b>„Eure Privilegien“</b> — die Liste von allem, was Euch Titel und Amt erlauben. Das Spiel kennt genau <b>58 Vorrechte</b>, und für jedes prüft es eine eigene Regel, ob Ihr es gerade habt. Die Liste ändert sich deshalb, während Ihr spielt: Sie fragt jede halbe Sekunde neu nach.</p><p>Es gibt zwei Sorten:</p><ul><li><b>Handlungen</b> — ein Klick öffnet ein Fenster, und es passiert etwas, meist gegen Aktionspunkte.</li><li><b>Stille Vorrechte</b> — etwas ist Euch fortan erlaubt oder billiger. Ein Klick darauf erklärt es nur.</li></ul><p class="w-merk">Was grau in der Liste steht, habt Ihr — dürft es aber gerade nicht benutzen.</p></div><div class="abschnitt" id="i339"><h3 id="a2"><span class="w-num">II</span> Grau heißt: Ihr werdet erpreßt</h3><p>Eine Zeile wird nur aus einem einzigen Grund grau: <b>Jemand erpreßt Euch.</b> Dann bleiben alle Handlungen Eures Amtes sichtbar, aber gesperrt — vier Jahre lang, so lange hält eine Erpressung. Für jede Amtshandlung fragt das Spiel in derselben Reihenfolge: Habt Ihr das Amt? Werdet Ihr erpreßt? Habt Ihr es diese Runde schon getan?</p><p>Und umgekehrt: <b>Wer selbst jemanden erpreßt, darf keinen Amtsträger anweisen.</b> Beides auf einmal läßt das Spiel nicht zu.</p></div><div class="abschnitt" id="i340"><h3 id="a3"><span class="w-num">III</span> Was der Titel bringt</h3><table class="w-tafel"><thead><tr><th>Titel</th><th>was dazukommt</th></tr></thead><tbody><tr><td>Herr, Bürger</td><td>das einfache Wohnhaus</td></tr><tr><td>Patrizier</td><td>das Bürgerhaus; <b>Furcht einflößen</b> und <b>Beleidigen</b></td></tr><tr><td>Edelmann</td><td>die Villa, ein Leibwächter, 50 % mehr Kredit</td></tr><tr><td>Freiherr</td><td>der Palazzo, ein zweiter Leibwächter, die <b>Scheidung</b></td></tr><tr><td>Graf</td><td>100 % mehr Kredit, und Werbung um eine Braut dauert nur halb so lang</td></tr></tbody></table><p>Ein Wohnsitz verschwindet aus der Liste, sobald der nächste erreicht ist — wer Villa darf, sieht das Bürgerhaus nicht mehr.</p></div><div class="abschnitt" id="i341"><h3 id="a4"><span class="w-num">IV</span> Was jedes Amt darf</h3><p>Die Ämter der Stadt, der Kirche und des Landes bringen ihre eigenen Vorrechte mit. Die stillen:</p><table class="w-tafel"><thead><tr><th>Amt</th><th>stilles Vorrecht</th></tr></thead><tbody><tr><td>Richter, Bürgermeister, Bischof, Landesherr</td><td><b>Immunität</b> — gegen Euch kann niemand Anklage erheben</td></tr><tr><td>Pachtmeister</td><td>ein Anteil an der Pacht</td></tr><tr><td>Baumeister, Kämmerer</td><td>billiger bauen</td></tr><tr><td>Kerkermeister</td><td>Folter vortäuschen, Gefangene vorzeitig entlassen</td></tr><tr><td>Inquisitor, Großinquisitor, Hofrat</td><td>billigere Niedertracht</td></tr><tr><td>Präfekt, Obrist</td><td>Spitzelmeister</td></tr></tbody></table><p>Und die Handlungen, mit ihrem Preis in Aktionspunkten:</p><table class="w-tafel"><thead><tr><th>Handlung</th><th>wer</th><th>Punkte</th><th>was geschieht</th></tr></thead><tbody><tr><td>Verhör</td><td>Richter, Präfekt, Inquisitor, Obrist</td><td>2</td><td>der Verhörte verliert 3 Punkte; einmal je Runde</td></tr><tr><td>Becircen</td><td>Diakon, Geheimrat, Hofrat</td><td>1 bis 5</td><td>Ihr gewinnt die Gunst eines Menschen des anderen Geschlechts</td></tr><tr><td>Gegenspionage</td><td>Präfekt, Inquisitor, Großinquisitor, Erzbischof</td><td>4</td><td>jeder Spion, der auf Euch angesetzt ist, fliegt auf</td></tr><tr><td>Unterschlagung</td><td>Kämmerer</td><td>4</td><td>Geld aus dem Amt; einmal je Runde</td></tr><tr><td>Sessel vertauschen</td><td>Bürgermeister, Bischof, Landesherr</td><td>6</td><td>zwei Ämter unter Euch tauschen ihre Inhaber</td></tr><tr><td>Haß säen</td><td>Großinquisitor</td><td>4</td><td>zwei Menschen werden einander feind — gegen Geld</td></tr><tr><td>Abbitte</td><td>Großinquisitor</td><td>1 bis 9</td><td>so viele Eurer eigenen Taten werden vergeben, wie Ihr Punkte gebt</td></tr><tr><td>Arbeiter ausweisen</td><td>Geheimrat, Hofrat</td><td>5</td><td>ein fremder Arbeiter verläßt die Stadt für immer</td></tr><tr><td>Bekehren</td><td>Bischof, Erzbischof</td><td>6</td><td>Andersgläubige wechseln zu Eurem Glauben — gegen Geld</td></tr><tr><td>Wunder wirken</td><td>Erzbischof</td><td>4</td><td>eines von sechs Wundern, ausgewürfelt</td></tr><tr><td>Frieden stiften</td><td>Landesherr</td><td>3</td><td>zwei Menschen versöhnen sich</td></tr><tr><td>Einschmeicheln</td><td>Reichskanzler</td><td>0</td><td>einmal je Runde, ganz umsonst</td></tr><tr><td>Amtsrauswurf</td><td>Reichskanzler</td><td>8</td><td>ein Amtsträger verliert seinen Sitz; einmal je Runde</td></tr><tr><td>Amtsträger anweisen</td><td>Reichsmarschall, Graue Eminenz</td><td>4</td><td>ein Stadtrat bzw. ein Kirchenmann tut, was Ihr sagt</td></tr></tbody></table><p>Dazu kommen die Handlungen, die jedes Amt mit Gesetzen hat: <b>ein Gesetz ändern</b> kostet 2 Punkte, und der Knopf bleibt gesperrt, bis Ihr wirklich einen anderen Wert eingestellt habt. Und wer ein Amt hat, kann die <b>Absetzung</b> eines Ratskollegen beantragen.</p></div><div class="abschnitt" id="i342"><h3 id="a5"><span class="w-num">V</span> Becircen: der Rang des Hauses zählt</h3><p>Becircen bringt Gunst, und zwar genau <b>so viele Punkte, wie Ihr einsetzt, mal (10 + Rang Eures Hauses − Rang ihres Hauses)</b>. Bei gleichem Rang bringt jeder Punkt also zehn Gunst; steht Euer Haus höher, mehr.</p><p>Das Spiel prüft übrigens erst <i>nach</i> der Wahl, ob die Person das richtige Geschlecht hat. Die Liste zeigt alle, und wer daneben greift, bekommt eine höfliche Absage.</p></div><div class="abschnitt" id="i343"><h3 id="a6"><span class="w-num">VI</span> Haß säen und Frieden stiften</h3><p>Der Großinquisitor wählt zwei Menschen und macht sie zu Feinden. Das kostet vier Punkte und <b>zwei Prozent ihrer beiden Vermögen zusammen</b> — zwei reiche Leute zu verfeinden, ist teuer. Die Zuneigung beider zueinander fällt dabei tief ins Minus; wie tief genau, hängt an einer Stelle, die nicht ganz nachgeprüft ist.</p><p>Das Gegenstück hat der Landesherr: <b>Frieden stiften</b>. Beide gewinnen zwischen 15 und 54 Punkte Zuneigung zueinander. Ein kleiner Fehler des Originals: Das Fenster dafür trägt die Überschrift „Haß erzeugen“.</p><div class="w-kasten"><p><b>Wohin das Geld geht.</b> Den Preis für den Haß zahlt Ihr — aber im Original bekommt ihn <i>niemand</i>, er verschwindet einfach. Der Nachbau gibt ihn der Kirchenkasse.</p></div></div><div class="abschnitt" id="i344"><h3 id="a7"><span class="w-num">VII</span> Einschmeicheln und Rauswurf — der Reichskanzler</h3><p>Der Reichskanzler hat die zwei stärksten Handlungen des Spiels.</p><p><b>Einschmeicheln</b> kostet nichts, weder Punkte noch Geld: Ihr gewinnt bei einem Amtsträger <b>100 Punkte</b> Zuneigung — und bei jedem anderen Mitglied seiner Kammer verliert Ihr 20. Einmal je Runde.</p><p><b>Amtsrauswurf</b> kostet 8 Punkte, und der Sitz ist frei. Auch einmal je Runde. Der Rausgeworfene bekommt eine Nachricht, in der sein Amt genannt sein sollte — bei einem Mann steht dort aber <b>„(Ohne Amt)“</b>. Bei einer Frau stimmt es. Ein Versehen des Originals, das der Nachbau genauso übernimmt.</p></div><div class="abschnitt" id="i345"><h3 id="a8"><span class="w-num">VIII</span> Unterschlagung und Bekehren</h3><p>Der Kämmerer nimmt einmal je Runde Geld aus seinem Amt: <b>zwischen einem Achtel und fast dem ganzen</b> Jahreseinkommen dieses Amtes, ausgewürfelt. Der Text sagt, das Geld komme aus der Stadtkasse.</p><div class="w-kasten"><p><b>Das stimmt im Original nicht.</b> Die Stadtkasse merkt nichts — das Geld kommt von niemandem. Im Nachbau kommt es wirklich aus der Stadtkasse, und höchstens so viel, wie darin ist.</p></div><p>Der Bischof und der Erzbischof können <b>bekehren</b>: sechs Punkte und <b>sechs Prozent Eures Vermögens</b>. Dann würfelt das Spiel für jeden Menschen anderen Glaubens: Bleibt ein Wurf von 0 bis 125 plus <i>seine</i> Redekunst unter <i>Eurer</i> Redekunst, wechselt er. Ohne gute Rhetorik bekehrt Ihr also kaum jemanden.</p></div><div class="abschnitt" id="i346"><h3 id="a9"><span class="w-num">IX</span> Die sechs Wunder</h3><p>Der Erzbischof setzt vier Punkte ein, und das Spiel würfelt eines von sechs Wundern, jedes gleich wahrscheinlich. Alle Spieler lesen davon:</p><table class="w-tafel"><thead><tr><th>Wunder</th><th>was geschieht</th></tr></thead><tbody><tr><td>Madonna</td><td>eine Kirche wird Wallfahrtsort; ihr Besitzer bekommt 2 bis 4 % seines Vermögens</td></tr><tr><td>Gesundheit</td><td>jeder schwer Verwundete hat eine Chance von eins zu zwei, daß seine Wunden heilen</td></tr><tr><td>Blitzschlag</td><td>ein fremdes Gebäude verliert 10 bis 25 Punkte Zustand — einstürzen läßt der Blitz es nie</td></tr><tr><td>Umnachtung</td><td>ein Amtsträger verliert den Verstand und damit seinen Sitz — nie ein Spieler</td></tr><tr><td>Talent</td><td>ein Talent eines Menschen steigt um bis zu 20</td></tr><tr><td>Goldregen</td><td>die ärmste der Dynastien bekommt 3 bis 7 % ihres Vermögens</td></tr></tbody></table><p>Im Spiel steht noch ein siebter Text, der <b>Sensenmann</b> — der Würfel reicht aber nur bis sechs, er kann nie kommen.</p><p>Das Geld von Madonna und Goldregen kommt im Original <b>aus dem Nichts</b>. Ob der Nachbau das so läßt, ist noch nicht entschieden.</p></div><div class="abschnitt" id="i347"><h3 id="a10"><span class="w-num">X</span> Erpressung</h3><p>Erpressen darf jeder, ganz ohne Amt — aber immer nur einen zur Zeit, und nicht jeden. Das Spiel prüft der Reihe nach: zwei Aktionspunkte, wird die Person schon erpreßt, und habt Ihr <b>drei offene Beweise</b> gegen sie. Erst dann kommt die Frage.</p><p>Ob es gelingt, entscheidet ein Wurf von 0 bis 7: Er darf nicht über der Zahl <b>aller</b> Beweise liegen, die Ihr gegen die Person habt.</p><table class="w-tafel"><thead><tr><th class=z>Beweise</th><th class=z>gelingt</th></tr></thead><tbody><tr><td class=z>3</td><td class=z>50 %</td></tr><tr><td class=z>4</td><td class=z>63 %</td></tr><tr><td class=z>5</td><td class=z>75 %</td></tr><tr><td class=z>6</td><td class=z>88 %</td></tr><tr><td class=z>7</td><td class=z>100 %</td></tr></tbody></table><p>Geht es schief, kostet es Euch Ansehen. Gelingt es, ist der andere <b>vier Jahre lang</b> erpreßt — und seine Amtshandlungen stehen bei ihm grau.</p><p class="w-merk">Mit sieben Beweisen ist eine Erpressung sicher.</p></div><div class="abschnitt" id="i348"><h3 id="a11"><span class="w-num">XI</span> Anklage und Abbitte</h3><p><b>Anklage erheben kostet nichts</b> — kein Geld, keinen Punkt. Das Beweisbuch zeigt, wer was gegen wen in der Hand hat, und für jede Tat das Gesetz mit so vielen Paragraphenzeichen, wie schwer sie wiegt. Ohne einen offenen Beweis bleibt der Knopf gesperrt; hat der Beschuldigte Immunität, steht dort „Amtsimmunität“. Ab drei Beweisen kommt bei der Verhandlung auch der Kerkermeister in den Saal.</p><p>Der Großinquisitor hat das Gegenmittel für sich selbst, die <b>Abbitte</b>: Er stellt einen Regler von 1 bis 9 ein, und so viele Punkte er gibt, so viele seiner Taten werden vergeben.</p></div><div class="abschnitt" id="i349"><h3 id="a12"><span class="w-num">XII</span> Medicus und Werbung</h3><p>Zwei Vorrechte hat fast jeder. Den <b>Medicus</b> aufzusuchen, kostet zwei Aktionspunkte und zwei Prozent Eures Vermögens — und im Original gelingt die Behandlung nur in der Hälfte der Fälle; nur dann zahlt Ihr und werdet geheilt.</p><p><b>Um eine Braut werben</b> kostet gar nichts. Das Fenster zeigt bis zu neun Kandidaten mit Bild und der Zahl der Jahre, die die Werbung dauern wird. Mehr dazu steht im Artikel über Werbung und Ehe.</p></div></section>
+</main><script src="suche.js"></script><script>
+(function(){
+  var f=document.getElementById('suche'); if(!f) return;
+  var hier=location.pathname.split('/').pop()||'index.html';
+  var wahl='.eintrag,.auftrag,.fenster>div,.kachel,.begriffe>div,.abschnitt,.bild';
+  var el=[].slice.call(document.querySelectorAll(wahl)), sek=[].slice.call(document.querySelectorAll('main>section'));
+  var t=document.getElementById('treffer'), fr=document.getElementById('fremd');
+  function zeig(){
+    var q=f.value.trim().toLowerCase(), n=0;
+    document.body.classList.toggle('suchmodus',!!q);
+    el.forEach(function(x){var ja=!q||x.textContent.toLowerCase().indexOf(q)>=0; x.classList.toggle('such-aus',!ja);
+      if(q&&ja){n++; var d=x.closest('details'); if(d) d.open=true;}});
+    sek.forEach(function(s){ if(!q){s.classList.remove('such-aus');return;}
+      s.classList.toggle('such-aus',![].some.call(s.querySelectorAll(wahl),function(x){return !x.classList.contains('such-aus');}));});
+    var fremd=(q&&window.SUCHE)?window.SUCHE.filter(function(e){return e.p!==hier&&e.x.toLowerCase().indexOf(q)>=0;}):[];
+    t.textContent=q?(n+' hier, '+fremd.length+' auf anderen Seiten'):'';
+    if(!fremd.length){fr.hidden=true;fr.innerHTML='';return;}
+    var html='', zuletzt='';
+    fremd.slice(0,40).forEach(function(e){
+      if(e.p!==zuletzt){html+='<div class="fremd-seite">'+window.SEITEN[e.p]+'</div>'; zuletzt=e.p;}
+      var a=document.createElement('a'); a.href=e.p+'?q='+encodeURIComponent(f.value.trim())+'#'+e.i; a.textContent=e.x.length>140?e.x.slice(0,140)+' …':e.x;
+      html+=a.outerHTML;});
+    if(fremd.length>40) html+='<div class="fremd-seite">und '+(fremd.length-40)+' weitere</div>';
+    fr.innerHTML=html; fr.hidden=false;
+  }
+  f.addEventListener('input',zeig);
+  var q=new URLSearchParams(location.search).get('q');
+  if(q){f.value=q; zeig(); var z=location.hash&&document.getElementById(location.hash.slice(1)); if(z) setTimeout(function(){z.scrollIntoView({block:'center'});},50);}
+})();
+document.querySelectorAll('[data-filter]').forEach(function(gruppe){
+  var ziel=document.getElementById(gruppe.dataset.filter);
+  gruppe.querySelectorAll('button').forEach(function(b){
+    b.addEventListener('click',function(){
+      gruppe.querySelectorAll('button').forEach(function(x){x.setAttribute('aria-pressed',x===b)});
+      ziel.querySelectorAll('[data-art]').forEach(function(z){
+        var w=b.dataset.wert, a=z.dataset.art.split(' ');
+        z.hidden = !(w==='*' ? a.indexOf('offen')>=0 : a.indexOf(w)>=0);
+      });
+    });
+  });
+  gruppe.querySelector('button').click();
+});
+(function(){
+  var uhr=document.getElementById('uhr'); if(!uhr) return;
+  var ziel=new Date(+uhr.dataset.ziel);
+  function stell(){
+    var r=ziel-new Date();
+    if(r<=0){uhr.innerHTML='<div><b>jetzt</b><span>die LAN läuft</span></div>';return;}
+    var t=Math.floor(r/864e5), s=Math.floor(r/36e5)%24, m=Math.floor(r/6e4)%60;
+    uhr.querySelector('[data-t]').textContent=t;
+    uhr.querySelector('[data-s]').textContent=s;
+    uhr.querySelector('[data-m]').textContent=m;
+  }
+  stell(); setInterval(stell,30000);
+})();
+</script></body></html>
