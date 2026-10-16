@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Vom Kabinett und der Kanone · Hauptbuch des Nachbaus</title>
+<meta name="description" content="Projektstand von OpenGilde: was gemessen ist, was noch zu tun ist, und was Mitspieler am Original erspielen können.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,700;1,500&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--grund:#3B2A1E;--blatt:#F4ECD8;--tinte:#2A1F16;--rot:#7A1F1F;--blau:#234A6B;--ocker:#8A5A12;--gelb:#C9A24A;--linie:#A8977A;--leise:#5A4A38;--kasten:#EADFC4}
+*{box-sizing:border-box}
+body{margin:0;background:var(--grund);color:var(--tinte);font-family:'Cormorant Garamond',Georgia,serif}
+a{color:var(--rot)}a:hover{color:#4F1212}
+.mono{font-family:'Courier Prime',monospace}
+.blatt{max-width:1180px;margin:56px auto;background:var(--blatt);padding:56px 64px 72px;display:flex;flex-direction:column;gap:56px}
+h1{margin:0;font-size:60px;line-height:1}h2{margin:0;font-size:34px}h3{margin:0;font-size:24px}
+.kopf{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:12px;border-bottom:2px solid var(--rot);padding-bottom:12px}
+.lead{margin:0;font-size:21px;font-style:italic;max-width:860px}
+nav{display:flex;gap:10px 22px;flex-wrap:wrap;font-size:19px}
+section{display:flex;flex-direction:column;gap:16px}
+.bilanz{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border:1px solid var(--tinte)}
+.bilanz>div{padding:20px 24px;display:flex;flex-direction:column;gap:6px}
+.bilanz>div+div{border-left:1px solid var(--tinte)}
+.spalte{font-size:26px;font-weight:700;border-bottom:1px solid var(--tinte);padding-bottom:6px}
+.posten{display:flex;justify-content:space-between;gap:12px;font-size:20px;border-bottom:1px dotted var(--linie)}
+.summe{display:flex;justify-content:space-between;font-size:22px;font-weight:700;border-top:3px double var(--tinte);margin-top:auto;padding-top:6px}
+.hinweis{border:1px solid var(--blau);padding:14px 20px;font-size:19px}
+.lan{border:3px double var(--rot);padding:24px 28px;display:grid;grid-template-columns:auto 1fr;gap:28px;align-items:center}
+.uhr{display:flex;gap:14px}.uhr div{text-align:center;min-width:72px}
+.uhr b{display:block;font-family:'Courier Prime',monospace;font-size:46px;line-height:1;color:var(--rot)}
+.uhr span{font-size:15px;text-transform:uppercase;letter-spacing:.08em}
+.kacheln{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 32px}
+.kachel{border-bottom:1px dotted var(--linie);padding:10px 0}.kachel b{font-size:21px;display:block}.kachel span{font-size:18px}
+.tafel{width:100%;border-collapse:collapse;font-size:19px}
+.tafel th{text-align:left;border-bottom:2px solid var(--tinte);padding:6px 10px 6px 0;font-size:18px}
+.tafel td{border-bottom:1px dotted var(--linie);padding:10px 10px 10px 0;vertical-align:top}
+.tafel td.z{font-family:'Courier Prime',monospace;font-size:16px;white-space:nowrap}
+.tafel tr.gesamt td{border-top:3px double var(--tinte);border-bottom:0;font-weight:700}
+.tag{display:grid;grid-template-columns:70px 1fr 64px;gap:14px;align-items:center;font-size:14px}
+.balken{height:9px;border-bottom:1px dotted var(--linie);display:flex}.balken span{display:block;height:9px}
+.knoepfe{display:flex;gap:8px;flex-wrap:wrap}
+.knoepfe button{min-height:44px;padding:6px 18px;cursor:pointer;border:1px solid var(--tinte);font:inherit;font-size:18px;background:transparent;color:var(--tinte)}
+.knoepfe button[aria-pressed=true]{background:var(--tinte);color:var(--blatt)}
+.auftrag{display:grid;grid-template-columns:70px 1fr 170px;gap:20px;padding:16px 0;border-bottom:1px solid var(--linie)}
+.auftrag .t{font-size:23px;font-weight:700}.auftrag .w{font-size:19px}
+.rechts{display:flex;flex-direction:column;gap:8px;align-items:flex-end;text-align:right}
+.siegel{font-family:'Courier Prime',monospace;font-weight:700;font-size:14px;text-transform:uppercase;letter-spacing:.1em;padding:4px 10px;border:2px solid}
+.schritte{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;background:var(--kasten);padding:22px 26px;font-size:18px}
+.schritte b{display:block;font-size:22px}
+.eintrag{display:grid;grid-template-columns:1fr 110px;gap:16px;border-bottom:1px dotted var(--linie);padding:12px 0}
+.eintrag .t{font-size:22px;font-weight:700}.eintrag .x{font-size:19px}
+.eintrag .k{font-family:'Courier Prime',monospace;font-size:13px;color:var(--leise);text-align:right;padding-top:6px}
+.gruppe{display:flex;flex-direction:column;gap:0;margin-top:8px}
+.gruppe h3{border-bottom:1px solid var(--tinte);padding-bottom:4px}
+.fort{display:flex;flex-direction:column;gap:14px;border:1px solid var(--tinte);padding:20px 24px}
+.fort-z{display:grid;grid-template-columns:minmax(0,260px) minmax(0,1fr) auto;gap:16px;align-items:center;font-size:19px}
+.fort-b{height:16px;border:1px solid var(--tinte);background:var(--kasten)}.fort-b span{display:block;height:100%}
+.fenster{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px 32px;font-size:19px}
+.fenster div{border-bottom:1px dotted var(--linie);padding:4px 0}
+[hidden]{display:none!important}
+nav a[aria-current=page]{color:var(--tinte);font-weight:700;text-decoration:none}
+.fremd{border:1px solid var(--tinte);background:var(--kasten);padding:10px 16px;display:flex;flex-direction:column;gap:4px;font-size:17px;max-height:60vh;overflow:auto}
+.fremd a{display:block;padding:2px 0}.fremd-seite{font-family:'Courier Prime',monospace;font-size:14px;text-transform:uppercase;letter-spacing:.08em;margin-top:8px}
+.wegweisergitter{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
+.wegweiser{display:flex;flex-direction:column;gap:4px;border:1px solid var(--tinte);padding:14px 18px;text-decoration:none;color:var(--tinte)}
+.wegweiser b{font-size:22px;color:var(--rot)}.wegweiser span{font-size:18px}.wegweiser:hover{background:var(--kasten)}
+[id^=i]:target{background:var(--kasten)}
+.begriff{color:inherit;text-decoration:underline dotted;text-underline-offset:3px;cursor:help}
+.suche{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.suche input{font:inherit;font-size:19px;padding:8px 12px;border:1px solid var(--tinte);background:var(--blatt);color:var(--tinte);width:min(420px,100%)}
+.begriffe{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 32px;font-size:18px}
+.begriffe>div{border-bottom:1px dotted var(--linie);padding:6px 0}.begriffe>div:target{background:var(--kasten)}
+body.suchmodus [data-art][hidden]:not(.such-aus){display:grid!important}
+body.suchmodus .knoepfe{display:none}
+.such-aus{display:none!important}
+.w-artikel{max-width:820px;gap:18px}
+.w-zurueck{margin:0;font-size:17px;font-family:'Courier Prime',monospace;text-transform:uppercase;letter-spacing:.06em}
+.w-titel{font-size:46px;line-height:1.05;border-bottom:2px solid var(--rot);padding-bottom:10px}
+.w-inhalt{display:flex;flex-direction:column;gap:2px;font-size:18px;border-left:3px solid var(--linie);padding:4px 0 4px 16px}
+.abschnitt{display:flex;flex-direction:column;gap:10px;font-size:20px;line-height:1.45;padding-top:12px}
+.abschnitt p,.w-artikel>p{margin:0}.abschnitt ul{margin:0;padding-left:24px}
+.abschnitt h3{font-size:28px;color:var(--rot)}
+.w-num{color:var(--gelb);font-family:'Courier Prime',monospace;font-size:18px;margin-right:12px;letter-spacing:.04em}
+.w-kasten{background:var(--kasten);border-left:5px solid var(--ocker);padding:12px 18px;font-size:19px}
+.w-merk{text-align:center;font-style:italic;font-size:22px;border-top:1px solid var(--linie);border-bottom:1px solid var(--linie);padding:10px 24px;color:var(--rot)}
+.w-tafel{width:100%;border-collapse:collapse;font-size:18px}
+.w-tafel th{text-align:left;border-bottom:2px solid var(--tinte);padding:4px 10px 4px 0}
+.w-tafel td{border-bottom:1px dotted var(--linie);padding:6px 10px 6px 0;vertical-align:top}
+.w-tafel .z{text-align:right;font-family:'Courier Prime',monospace;font-size:16px;white-space:nowrap}
+.abschnitt:target{background:var(--kasten)}
+.bildgitter{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px 32px;margin-top:14px}
+.bild{display:flex;flex-direction:column;gap:6px}
+.bild img{display:block;width:100%;height:auto;border:1px solid var(--tinte);background:var(--grund)}
+.bild b{font-size:22px}.bild span{font-size:18px}
+.bild-seit{font-size:17px!important;font-style:italic;color:var(--rot)}
+.bild-datum{font-size:13px!important;color:var(--leise)}
+.bild:target{background:var(--kasten)}
+@media (max-width:760px){
+ .bildgitter{grid-template-columns:1fr}
+ .w-titel{font-size:34px}.abschnitt{font-size:19px}.w-tafel{display:block;overflow-x:auto}
+ .begriffe{grid-template-columns:1fr}
+ .blatt{margin:0;padding:28px 16px 48px;gap:40px}h1{font-size:40px}
+ .bilanz,.schritte,.kacheln,.fenster,.lan{grid-template-columns:1fr}.bilanz>div+div{border-left:0;border-top:1px solid var(--tinte)}
+ .auftrag{grid-template-columns:1fr}.rechts{align-items:flex-start;text-align:left}
+ .eintrag{grid-template-columns:1fr}.eintrag .k{text-align:left;padding-top:0}
+ .fort-z{grid-template-columns:1fr auto}.fort-b{grid-column:1/-1;grid-row:2}
+ .tag{grid-template-columns:56px 1fr 48px}.uhr div{min-width:56px}.uhr b{font-size:36px}
+ .tafel td.z{white-space:normal} .tafel,.tafel tbody,.tafel tr,.tafel td{display:block}.tafel thead{display:none}.tafel td{border:0;padding:2px 0}.tafel tr{border-bottom:1px dotted var(--linie);padding:8px 0}
+}
+</style></head>
+<body><main class="blatt">
+<header style="display:flex;flex-direction:column;gap:14px">
+<div class="kopf"><h1>Hauptbuch des Nachbaus</h1><span class="mono" style="font-size:14px">aktualisiert am: 16.10.2026, 08:27 Uhr</span></div>
+
+<nav><a href="index.html">Übersicht</a><a href="bilder.html">Bilder</a><a href="auftraege.html">Aufträge</a><a href="entscheidungen.html">Entscheidungen</a><a href="baustellen.html">Baustellen</a><a href="verlauf.html">Verlauf</a><a href="einstieg.html">Was läuft &amp; Begriffe</a><a href="wissen.html" aria-current="page">Wissen</a></nav>
+<div class="suche"><input type="search" id="suche" placeholder="Auf allen Seiten suchen …" aria-label="Auf allen Seiten suchen"><span id="treffer" class="mono" style="font-size:15px"></span></div>
+<div id="fremd" class="fremd" hidden></div>
+</header>
+<section class="w-artikel"><p class="w-zurueck"><a href="wissen.html">← alle Artikel</a> · Dunkle Künste</p><h2 class="w-titel">Vom Kabinett und der Kanone</h2><p class="lead">Was hinter den beiden dunklen Zimmern des Schlosses steckt — vier Aufträge, eine Kanone, die nach Physik rechnet, und ein Ausbau, der nichts tut</p><nav class="w-inhalt"><a href="#a1">I · Zwei Zimmer im Schloß</a><a href="#a2">II · Das Kabinett: vier Aufträge, nicht mehr</a><a href="#a3">III · Was die vier Aufträge kosten</a><a href="#a4">IV · Der Kanonenturm: ein Blick über die Stadt</a><a href="#a5">V · Die Munition bestimmt das Kaliber</a><a href="#a6">VI · Die Reichweite — und der Knallgasbehälter</a><a href="#a7">VII · Die Kanone rechnet mit Eisen und Schwerkraft</a><a href="#a8">VIII · Zielhilfen machen den Schuß ruhiger, nicht sicherer</a><a href="#a9">IX · Was ein Schuß kostet</a><a href="#a10">X · Ein Treffer legt Feuer</a><a href="#a11">XI · Was offen ist</a></nav><div class="abschnitt" id="i381"><h3 id="a1"><span class="w-num">I</span> Zwei Zimmer im Schloß</h3><p>Wer ein Schloß besitzt, kann darin zwei besondere Räume einrichten: den <b>Kanonenturm</b> und das <b>Geheimkabinett</b>. Beide baut Ihr über das Fenster „Räume&quot;, beide brauchen <b>zwölf Stunden</b> Bauzeit.</p><table class="w-tafel"><thead><tr><th>Raum</th><th class=z>Preis</th><th>wo</th></tr></thead><tbody><tr><td>Kanonenturm</td><td class=z>7.500</td><td>Burg und Schloß</td></tr><tr><td>Geheimkabinett</td><td class=z>15.000</td><td>nur im Schloß</td></tr></tbody></table><p>Den Menüpunkt „Räume&quot; gibt es erst bei einem Wohnsitz, der mindestens zwei solche Zimmer fassen darf — <b>die Burg darf eines, das Schloß zwei.</b> Wie die Burg dann zu ihrem Turm kommt, ist noch nicht nachgelesen.</p><p>Ob die Alchimistenkammer, die im Schloß schon steht, als Raum mitzählt, ist <i>nicht gelesen</i>. Falls ja, hätte das Schloß nur Platz für Turm <b>oder</b> Kabinett — das ist nur gerechnet.</p></div><div class="abschnitt" id="i382"><h3 id="a2"><span class="w-num">II</span> Das Kabinett: vier Aufträge, nicht mehr</h3><p>Im Kabinett stehen genau vier Dinge zur Wahl:</p><ul><li><b>Vergiften</b> — Ihr wählt ein Opfer und die Schwere des Giftes;</li><li><b>Spione ausschalten</b> — ohne Opfer, Ihr wählt nur, wie gründlich gesucht wird;</li><li><b>Beweise fälschen</b> — Ihr wählt ein Opfer und die Schwere des Verbrechens;</li><li><b>Schleichende Lähmung</b> — Ihr wählt ein Opfer, sonst nichts.</li></ul><p>Die ersten drei haben einen Regler mit drei Stufen: <b>leicht, schwer, sehr schwer</b>. Schiebt Ihr ihn, ändert sich der Text im Fenster sofort mit, samt den Kosten. Jeder Auftrag verlangt außerdem einen Attentäter; ohne ihn sagt „Ja&quot; nein.</p><div class="w-kasten"><p><b>Zwietracht säen gibt es hier nicht.</b> Viele Spieler verbinden das Kabinett mit Intrigen aller Art. Gesucht wurde in allen Spieltexten und im ganzen Programm: „Zwietracht&quot; kommt bei einem Gegenstand vor (der Hasstirade), bei einer Blume, bei einer Zunftpolitik, bei einem Vorrecht eines Amtes und beim Verfeinden über eine Liebschaft. <b>Das Kabinett trägt nichts davon.</b></p></div><p class="w-merk">Vier Türen im Kabinett — und keine davon heißt Zwietracht.</p></div><div class="abschnitt" id="i383"><h3 id="a3"><span class="w-num">III</span> Was die vier Aufträge kosten</h3><p>Die Preise hängen an zwei Dingen: am <b>Rang des Amtes</b>, das das Opfer bekleidet, und am <b>Vermögen</b> — Eurem, und beim Fälschen und Lähmen auch dem des Opfers.</p><table class="w-tafel"><thead><tr><th>Auftrag</th><th>Gulden</th><th>Aktionspunkte</th></tr></thead><tbody><tr><td>Vergiften</td><td><b>keine</b></td><td>Amtsrang/3, dazu 5 · 7 · 10 je nach Stufe</td></tr><tr><td>Spione ausschalten</td><td>1 · 1,5 · 2 % Eures Vermögens</td><td><b>keine</b></td></tr><tr><td>Beweise fälschen</td><td>1 · 1,5 · 2 % beider Vermögen zusammen</td><td>(Amtsrang/3 + 2), mal 1 · 1,5 · 2</td></tr><tr><td>Lähmung</td><td>2 % beider Vermögen zusammen</td><td><b>16</b>, immer</td></tr></tbody></table><p>Ein paar Dinge daran überraschen:</p><ul><li><b>Gift kostet kein Geld.</b> Nur Zeit und Kraft — je höher das Amt des Opfers, desto mehr Punkte.</li><li><b>Spione ausschalten kostet keine Punkte</b>, aber Geld. Das Fenster fragt dabei nur nach Eurem Geld und dem Attentäter, nicht danach, ob Euch überhaupt jemand bespitzelt.</li><li><b>Wer einen Reichen fälscht oder lähmt, zahlt mehr.</b> Weil das Vermögen des Opfers mitzählt, wird ein Anschlag auf einen reichen Patrizier teuer, auf einen armen Schlucker billig.</li><li>Ist das Opfer <b>schon gelähmt</b>, lehnt das Fenster ab.</li></ul><div class="w-kasten"><p><b>Die Gesetzeslage prüft erst der Auftrag selbst.</b> Beim Fälschen fragt das Fenster nicht, ob es zu der gewählten Schwere überhaupt ein Gesetz gibt. Ihr zahlt zuerst. Danach sucht das Spiel ein passendes Gesetz, notfalls eines eine Stufe schwerer. Gibt es keines, bekommt Ihr dieselbe Meldung wie bei einem gescheiterten Versuch. Eine eigene Meldung „nicht möglich&quot; steht zwar in den Spieltexten, wird von diesen Wegen aber nie benutzt.</p></div><p>Was danach geschieht — wie wahrscheinlich ein Auftrag gelingt, welche Krankheit das Gift bringt, wie viele Spione getroffen werden —, ist <b>nicht nachgelesen</b>.</p><div class="w-kasten"><p><b>Im Nachbau.</b> Jeder der vier Aufträge hat inzwischen das Fenster des Originals, mit Opferwahl, Regler und Ja/Nein, und rechnet die Kosten wie oben. Die Erfolgsaussichten und Wirkungen sind dort noch geschätzt.</p></div></div><div class="abschnitt" id="i384"><h3 id="a4"><span class="w-num">IV</span> Der Kanonenturm: ein Blick über die Stadt</h3><p>Wer im Turm auf „Mit Kanone schießen&quot; klickt, sieht die Stadt <b>von oben aus dem Turm</b>, mit der Kanone im Bild. Ein Ziel wählt man nicht aus einer Liste: <b>Ihr zielt frei</b>, indem Ihr die Maus zieht oder an den Rand fahrt. Oben zeigen drei Balken Wind, Winkel und den Zustand des Geschützes, dazu die Kosten des Schusses. Unten liegen die Knöpfe für einfaches, doppeltes und dreifaches Rohr und zwei Regler:</p><ul><li><b>Kaliber</b> von 0 bis 4 — vom 15-Pfünder bis zum 40-Pfünder;</li><li><b>Pulver</b> von 0 bis 100.</li></ul><p>Nach dem Schuß steht eine Weile eine Zeile mit dem Ergebnis im Fenster.</p><p>Auch die Computerdynastien benutzen den Turm — auf demselben Rechenweg wie Ihr.</p></div><div class="abschnitt" id="i385"><h3 id="a5"><span class="w-num">V</span> Die Munition bestimmt das Kaliber</h3><p>Das Kaliber, das Ihr einstellen dürft, hängt allein an der <b>besten Kugelart, die Ihr gekauft habt</b> — eine Leiter:</p><table class="w-tafel"><thead><tr><th>Kugelart</th><th class=z>Preis des Ausbaus</th><th>höchstes Kaliber</th><th>Burg</th></tr></thead><tbody><tr><td>Steinkugel</td><td class=z>50</td><td>15 Pfünder</td><td>ja</td></tr><tr><td>Eisenkugel</td><td class=z>400</td><td>20 Pfünder</td><td>ja</td></tr><tr><td>Schrappnell</td><td class=z>600</td><td>25 Pfünder</td><td>ja</td></tr><tr><td>Hundert Pfünder</td><td class=z>800</td><td>30 Pfünder</td><td>ja</td></tr><tr><td>Kartätsche</td><td class=z>1.500</td><td>40 Pfünder</td><td>—</td></tr></tbody></table><p>Das Pulver hat damit nichts zu tun. Daß der 40-Pfünder scheinbar die Melonitladung braucht, liegt nur daran, daß <b>Kartätsche und Melonit beide allein im Schloß</b> stehen.</p><p>Auch die Zahl der Rohre ist ein Kauf: <b>Doppelkanone</b> (1.000) für zwei, <b>Dreifachkanone</b> (1.500, nur Schloß) für drei. <b>Die Burg kann vier Stücke nicht:</b> Fadenkreuz, Melonitladung, Kartätsche und Dreifachkanone.</p></div><div class="abschnitt" id="i386"><h3 id="a6"><span class="w-num">VI</span> Die Reichweite — und der Knallgasbehälter</h3><p>Die Treibladungen machen den Schuß nicht stärker, sondern <b>weiter</b>. So sagt es auch ihr Hilfetext. Gerechnet wird ein Reichweitenfaktor:</p><table class="w-tafel"><thead><tr><th>gekauft</th><th class=z>Faktor</th></tr></thead><tbody><tr><td>nichts</td><td class=z>1,00</td></tr><tr><td>Schwarzpulverladung (400)</td><td class=z>1,05</td></tr><tr><td>dazu Langes Rohr (400)</td><td class=z>1,10</td></tr><tr><td>dazu Melonitladung (800, nur Schloß)</td><td class=z>1,15</td></tr></tbody></table><p>Das <b>Lange Rohr</b> gehört also genau so zur Reichweite wie die Treibmittel.</p><div class="w-kasten"><p><b>Ein Ausbau, der nichts tut.</b> Der <b>Knallgasbehälter</b> kostet 600 Gulden, das Ausbaufenster zeigt ihn mit 30 Punkten Reichweite an — und <b>das Programm fragt nie nach ihm</b>. Seine Nummer kommt im ganzen Programm nicht vor, während alle seine Nachbarn gefunden wurden. Wer ihn kauft, kauft Luft. Ob das Absicht war oder ein Versehen, läßt sich nicht sagen; <i>daß</i> es so rechnet, ist gelesen.</p></div><p class="w-merk">Drei Käufe machen die Kanone weiter. Der vierte macht sie nur ärmer.</p></div><div class="abschnitt" id="i387"><h3 id="a7"><span class="w-num">VII</span> Die Kanone rechnet mit Eisen und Schwerkraft</h3><p>Das Original rechnet den Schuß als echte <b>Physik</b>: mit dem Radius der Kugel in Metern, der <b>Dichte von Eisen (7.874 kg/m³)</b>, der <b>Erdbeschleunigung 9,81</b> und der Bewegungsenergie beim Aufschlag. Rechnet man aus den Radien die Massen aus, liegen sie nahe an den Namen der Kaliber:</p><table class="w-tafel"><thead><tr><th>Kaliber</th><th>Masse der Kugel</th><th class=z>in Pfund à 500 g</th></tr></thead><tbody><tr><td>15 Pfünder</td><td>7,1 kg</td><td class=z>14,2</td></tr><tr><td>20 Pfünder</td><td>9,1 kg</td><td class=z>18,1</td></tr><tr><td>25 Pfünder</td><td>13,9 kg</td><td class=z>27,8</td></tr><tr><td>30 Pfünder</td><td>16,9 kg</td><td class=z>33,8</td></tr><tr><td>40 Pfünder</td><td>20,3 kg</td><td class=z>40,5</td></tr></tbody></table><p>Der kleinste und der größte liegen nahe an ihrem Namen; der 25- und der 30-Pfünder sind in Wahrheit schwerer, als sie heißen.</p><p>Jedes Kaliber hat eine kürzeste und eine weiteste Weite, zwischen denen der Pulverregler wählt; der Reichweitenfaktor streckt nur die weiteste. Eine schwerere Kugel startet bei gleicher Weite langsamer. In welcher Einheit diese Weiten zu lesen sind, ist <i>nicht nachgelesen</i>.</p></div><div class="abschnitt" id="i388"><h3 id="a8"><span class="w-num">VIII</span> Zielhilfen machen den Schuß ruhiger, nicht sicherer</h3><p>Kimme und Korn, Gezogener Lauf und Fadenkreuz geben keinen Zuschlag auf eine Trefferchance. Sie <b>verkleinern die Streuung</b>, mit der jede Kugel von ihrer Bahn abweicht:</p><table class="w-tafel"><thead><tr><th>Zielhilfen</th><th>Streuung in der Weite</th><th>zur Seite</th></tr></thead><tbody><tr><td>keine</td><td>±20 %</td><td>±2 %</td></tr><tr><td>alle drei</td><td>±10 %</td><td>±1 %</td></tr></tbody></table><p>Der Hilfetext sagt es selbst: Genauigkeit erspart Euch den <i>„Haß von Unbeteiligten&quot;</i>. Es geht also darum, <b>wen</b> Ihr trefft, nicht ob. Das Fadenkreuz zeigt übrigens <b>keinen</b> idealen Winkel an — im Programm verkleinert es nur die Streuung.</p></div><div class="abschnitt" id="i389"><h3 id="a9"><span class="w-num">IX</span> Was ein Schuß kostet</h3><ul><li><b>Aktionspunkte: Kaliber + 2</b>, also 2 bis 6.</li><li><b>Gulden: (2 · Pulver + 500) · (1 + Kaliber/4) · Zahl der Kugeln.</b></li></ul><p>Das reicht von <b>500 Gulden</b> (Steinkugel, kein Pulver, ein Rohr) bis <b>4.200</b> (Kartätsche, volles Pulver, drei Rohre). Der Ladenpreis der Kugel ist also nur der Preis, das Kaliber freizuschalten — jeder Schuß kostet danach nach Pulver und Größe.</p><p>Dazu nutzt sich das Geschütz ab. Sein Zustand läuft von leer bis voll, ein Schuß verbraucht <b>15 bis 60 Prozent</b> davon, je nach Kaliber und Pulver, und er erholt sich um <b>ein Zehntel je Stunde</b> — von leer auf voll also in zehn Spielstunden. Jedes der drei Rohre hat seinen eigenen Zustand, und gefeuert wird nur, wenn noch genug davon da ist.</p><div class="w-kasten"><p><b>Ein Vorteil für den Spieler.</b> Schießt Ihr dreifach, verbraucht Euer Geschütz so viel wie bei einem einfachen Schuß. Die Computer zahlen für zwei und drei Kugeln mehr. Ob Absicht oder Versehen, ist nicht belegt.</p></div></div><div class="abschnitt" id="i390"><h3 id="a10"><span class="w-num">X</span> Ein Treffer legt Feuer</h3><p>Beim Aufschlag sucht das Spiel bis zu <b>drei Gebäude je Kugel</b>, die nah genug liegen. Der Schaden ist die Wucht des Aufschlags, die mit der Entfernung abfällt, und reicht bis <b>100</b> — genau die Skala, auf der ein Haus seinen Zustand führt.</p><table class="w-tafel"><thead><tr><th>wo die Kugel einschlägt</th><th>was geschieht</th><th>die Meldung</th></tr></thead><tbody><tr><td>neben dem Haus</td><td>der Zustand des Hauses sinkt sofort um den Schaden</td><td><b>leicht</b></td></tr><tr><td>im Haus, Schaden bis 25</td><td>das Haus <b>fängt Feuer</b></td><td><b>schwer</b></td></tr><tr><td>im Haus, Schaden über 25</td><td>das Haus <b>fängt Feuer</b></td><td><b>sehr schwer</b></td></tr></tbody></table><p>Die Meldung sagt also nicht, <i>wieviel</i> kaputt ist, sondern <i>was</i> geschehen ist: „leicht&quot; heißt angekratzt, „schwer&quot; und „sehr schwer&quot; heißen Brand. Und ein Brand, den niemand löscht, frißt das Haus <b>immer schneller</b> auf.</p><p>Ein Treffer kostet <b>keine Produktivität</b> im üblichen Sinn — er beschädigt das Gebäude. Weil aber alle Ausbauten eines Hauses nur so gut wirken, wie das Haus erhalten ist, verliert ein beschädigter Betrieb im selben Maß auch die Wirkung seiner Ausbauten.</p><p class="w-merk">Die Kanone trifft Häuser, nicht Menschen.</p></div><div class="abschnitt" id="i391"><h3 id="a11"><span class="w-num">XI</span> Was offen ist</h3><ul><li>ob ein Kanonenschuß durch göttlichen Segen abzuwehren ist, und wie daraus die Straftat entsteht, die das Stadtgesetz zum Kanonenturm kennt — <i>nicht nachgelesen</i>;</li><li>welcher Wert hinter dem Windbalken steht — <i>nicht nachgelesen</i>;</li><li>Erfolgsaussichten und Wirkungen der vier Kabinettsaufträge — <i>nicht nachgelesen</i>.</li></ul><div class="w-kasten"><p><b>Im Nachbau.</b> Vom Kanonenturm ist die Bedienung des Originals noch nicht gebaut; das Lange Rohr zählt dort inzwischen zur Reichweite.</p></div></div></section>
+</main><script src="suche.js"></script><script>
+(function(){
+  var f=document.getElementById('suche'); if(!f) return;
+  var hier=location.pathname.split('/').pop()||'index.html';
+  var wahl='.eintrag,.auftrag,.fenster>div,.kachel,.begriffe>div,.abschnitt,.bild';
+  var el=[].slice.call(document.querySelectorAll(wahl)), sek=[].slice.call(document.querySelectorAll('main>section'));
+  var t=document.getElementById('treffer'), fr=document.getElementById('fremd');
+  function zeig(){
+    var q=f.value.trim().toLowerCase(), n=0;
+    document.body.classList.toggle('suchmodus',!!q);
+    el.forEach(function(x){var ja=!q||x.textContent.toLowerCase().indexOf(q)>=0; x.classList.toggle('such-aus',!ja);
+      if(q&&ja){n++; var d=x.closest('details'); if(d) d.open=true;}});
+    sek.forEach(function(s){ if(!q){s.classList.remove('such-aus');return;}
+      s.classList.toggle('such-aus',![].some.call(s.querySelectorAll(wahl),function(x){return !x.classList.contains('such-aus');}));});
+    var fremd=(q&&window.SUCHE)?window.SUCHE.filter(function(e){return e.p!==hier&&e.x.toLowerCase().indexOf(q)>=0;}):[];
+    t.textContent=q?(n+' hier, '+fremd.length+' auf anderen Seiten'):'';
+    if(!fremd.length){fr.hidden=true;fr.innerHTML='';return;}
+    var html='', zuletzt='';
+    fremd.slice(0,40).forEach(function(e){
+      if(e.p!==zuletzt){html+='<div class="fremd-seite">'+window.SEITEN[e.p]+'</div>'; zuletzt=e.p;}
+      var a=document.createElement('a'); a.href=e.p+'?q='+encodeURIComponent(f.value.trim())+'#'+e.i; a.textContent=e.x.length>140?e.x.slice(0,140)+' …':e.x;
+      html+=a.outerHTML;});
+    if(fremd.length>40) html+='<div class="fremd-seite">und '+(fremd.length-40)+' weitere</div>';
+    fr.innerHTML=html; fr.hidden=false;
+  }
+  f.addEventListener('input',zeig);
+  var q=new URLSearchParams(location.search).get('q');
+  if(q){f.value=q; zeig(); var z=location.hash&&document.getElementById(location.hash.slice(1)); if(z) setTimeout(function(){z.scrollIntoView({block:'center'});},50);}
+})();
+document.querySelectorAll('[data-filter]').forEach(function(gruppe){
+  var ziel=document.getElementById(gruppe.dataset.filter);
+  gruppe.querySelectorAll('button').forEach(function(b){
+    b.addEventListener('click',function(){
+      gruppe.querySelectorAll('button').forEach(function(x){x.setAttribute('aria-pressed',x===b)});
+      ziel.querySelectorAll('[data-art]').forEach(function(z){
+        var w=b.dataset.wert, a=z.dataset.art.split(' ');
+        z.hidden = !(w==='*' ? a.indexOf('offen')>=0 : a.indexOf(w)>=0);
+      });
+    });
+  });
+  gruppe.querySelector('button').click();
+});
+(function(){
+  var uhr=document.getElementById('uhr'); if(!uhr) return;
+  var ziel=new Date(+uhr.dataset.ziel);
+  function stell(){
+    var r=ziel-new Date();
+    if(r<=0){uhr.innerHTML='<div><b>jetzt</b><span>die LAN läuft</span></div>';return;}
+    var t=Math.floor(r/864e5), s=Math.floor(r/36e5)%24, m=Math.floor(r/6e4)%60;
+    uhr.querySelector('[data-t]').textContent=t;
+    uhr.querySelector('[data-s]').textContent=s;
+    uhr.querySelector('[data-m]').textContent=m;
+  }
+  stell(); setInterval(stell,30000);
+})();
+</script></body></html>
