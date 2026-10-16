@@ -58,7 +58,8 @@ section{display:flex;flex-direction:column;gap:16px}
 [hidden]{display:none!important}
 nav a[aria-current=page]{color:var(--tinte);font-weight:700;text-decoration:none}
 .fremd{border:1px solid var(--tinte);background:var(--kasten);padding:10px 16px;display:flex;flex-direction:column;gap:4px;font-size:17px;max-height:60vh;overflow:auto}
-.fremd a{display:block;padding:2px 0}.fremd-seite{font-family:'Courier Prime',monospace;font-size:14px;text-transform:uppercase;letter-spacing:.08em;margin-top:8px}
+.fremd a{display:block;padding:6px 0;border-bottom:1px dotted var(--linie)}.fremd-seite{font-family:'Courier Prime',monospace;font-size:13px;text-transform:uppercase;letter-spacing:.08em;margin-top:8px}.fremd a .fremd-seite{margin:0 6px 0 0}
+.fremd mark,.blatt mark{background:transparent;color:var(--rot);font-weight:700}
 .wegweisergitter{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
 .wegweiser{display:flex;flex-direction:column;gap:4px;border:1px solid var(--tinte);padding:14px 18px;text-decoration:none;color:var(--tinte)}
 .wegweiser b{font-size:22px;color:var(--rot)}.wegweiser span{font-size:18px}.wegweiser:hover{background:var(--kasten)}
@@ -108,14 +109,14 @@ body.suchmodus .knoepfe{display:none}
 </style></head>
 <body><main class="blatt">
 <header style="display:flex;flex-direction:column;gap:14px">
-<div class="kopf"><h1>Hauptbuch des Nachbaus</h1><span class="mono" style="font-size:14px">aktualisiert am: 16.10.2026, 21:44 Uhr</span></div>
+<div class="kopf"><h1>Hauptbuch des Nachbaus</h1><span class="mono" style="font-size:14px">aktualisiert am: 17.10.2026, 00:25 Uhr</span></div>
 
 <nav><a href="index.html">Übersicht</a><a href="bilder.html">Bilder</a><a href="auftraege.html" aria-current="page">Aufträge</a><a href="entscheidungen.html">Entscheidungen</a><a href="baustellen.html">Baustellen</a><a href="verlauf.html">Verlauf</a><a href="einstieg.html">Was läuft &amp; Begriffe</a><a href="wissen.html">Wissen</a></nav>
 <div class="suche"><input type="search" id="suche" placeholder="Auf allen Seiten suchen …" aria-label="Auf allen Seiten suchen"><span id="treffer" class="mono" style="font-size:15px"></span></div>
 <div id="fremd" class="fremd" hidden></div>
 </header>
 <section id="auftraege">
-<div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:12px"><h2>Aufträge an die Mitspieler</h2><span class="mono" style="font-size:14px">60 offen · nur am Original zu klären</span></div>
+<div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:12px"><h2>Aufträge an die Mitspieler</h2><span class="mono" style="font-size:14px">57 offen · nur am Original zu klären</span></div>
 <p style="margin:0;font-size:20px;max-width:860px">Was hier steht, kann kein Programm herausfinden, nur jemand, der das Original spielt. Ein Spielstand ist dabei die billigste Hilfe: tausend Zahlen auf einmal. Fotos bitte in 1152 × 864. Die „Versuche“ prüfen Formeln, die aus dem Programm gelesen, aber nie im laufenden Spiel gesehen wurden. Für das LAN-Wochenende hat jeder der drei Spieler seine eigene Liste, mit den Nummern der LAN-Liste; die Aufgaben für alle erscheinen bei jedem.</p>
 <div class="knoepfe" data-filter="auftragsliste"><button data-wert="lan" aria-pressed="true">Für die LAN ★</button><button data-wert="sp1">Kaldo · Friedhofswärter → Geldleiher</button><button data-wert="sp2">Linus · Alchimist → Gaukler</button><button data-wert="sp3">Luca · Steinmetz → Räuber</button><button data-wert="*">Alle offenen</button><button data-wert="Spielstand">Spielstände</button><button data-wert="Foto">Fotos</button><button data-wert="im_Spiel">Im Spiel</button><button data-wert="erfüllt">Erfüllt</button></div>
 <div id="auftragsliste" style="border-top:2px solid var(--tinte)"><div class="auftrag" id="i27" data-art="erfüllt"><div class="mono" style="font-weight:700;font-size:17px;color:var(--rot)">A1</div>
@@ -134,9 +135,9 @@ body.suchmodus .knoepfe{display:none}
 <div style="display:flex;flex-direction:column;gap:4px"><div class="t">Worüber das Spiel im Netz spricht <span title="lohnt sich auf der LAN">★</span></div><div class="w"><strong>Zu tun:</strong> beim Gastgeber und einem Mitspieler nachsehen, welche Verbindung das Spiel benutzt (die Befehle stehen in der Liste).</div></div>
 <div class="rechts"><span class="siegel" style="color:var(--rot);border-color:var(--rot)">offen</span><span class="mono" style="font-size:13px">im Spiel</span><span class="mono" style="font-size:13px">Gastgeber</span></div></div><div class="auftrag" id="i34" data-art="offen Spielstand lan sp1 sp2 sp3"><div class="mono" style="font-weight:700;font-size:17px;color:var(--rot)">A12</div>
 <div style="display:flex;flex-direction:column;gap:4px"><div class="t">Wenn die Partie auseinanderläuft <span title="lohnt sich auf der LAN">★</span></div><div class="w"><strong>Zu tun:</strong> Uhrzeit notieren, die Meldung fotografieren und bei allen dreien sofort speichern.</div></div>
-<div class="rechts"><span class="siegel" style="color:var(--rot);border-color:var(--rot)">offen</span><span class="mono" style="font-size:13px">Spielstand</span><span class="mono" style="font-size:13px">alle</span></div></div><div class="auftrag" id="i35" data-art="offen im_Spiel lan sp1 sp2 sp3"><div class="mono" style="font-weight:700;font-size:17px;color:var(--rot)">A13</div>
+<div class="rechts"><span class="siegel" style="color:var(--rot);border-color:var(--rot)">offen</span><span class="mono" style="font-size:13px">Spielstand</span><span class="mono" style="font-size:13px">alle</span></div></div><div class="auftrag" id="i35" data-art="erfüllt"><div class="mono" style="font-weight:700;font-size:17px;color:var(--rot)">A13</div>
 <div style="display:flex;flex-direction:column;gap:4px"><div class="t">Wie lange ein Meisterstudium dauert <span title="lohnt sich auf der LAN">★</span></div><div class="w"><strong>Zu tun:</strong> bei jedem neuen Meistergrad die Jahre notieren: Balken voll, Studium begonnen, Grad erreicht.</div></div>
-<div class="rechts"><span class="siegel" style="color:var(--rot);border-color:var(--rot)">offen</span><span class="mono" style="font-size:13px">im Spiel</span><span class="mono" style="font-size:13px">alle</span></div></div><div class="auftrag" id="i36" data-art="offen im_Spiel lan sp1 sp2 sp3"><div class="mono" style="font-weight:700;font-size:17px;color:var(--rot)">A14</div>
+<div class="rechts"><span class="siegel" style="color:var(--blau);border-color:var(--blau)">erfüllt</span><span class="mono" style="font-size:13px">im Spiel</span><span class="mono" style="font-size:13px">alle</span></div></div><div class="auftrag" id="i36" data-art="offen im_Spiel lan sp1 sp2 sp3"><div class="mono" style="font-weight:700;font-size:17px;color:var(--rot)">A14</div>
 <div style="display:flex;flex-direction:column;gap:4px"><div class="t">Wie lange ein Bau dauert <span title="lohnt sich auf der LAN">★</span></div><div class="w"><strong>Zu tun:</strong> die Baufrage mit Preis fotografieren und notieren, wann das Gebäude fertig war.</div></div>
 <div class="rechts"><span class="siegel" style="color:var(--rot);border-color:var(--rot)">offen</span><span class="mono" style="font-size:13px">im Spiel</span><span class="mono" style="font-size:13px">alle</span></div></div><div class="auftrag" id="i37" data-art="offen Foto lan sp1"><div class="mono" style="font-weight:700;font-size:17px;color:var(--rot)">1.1</div>
 <div style="display:flex;flex-direction:column;gap:4px"><div class="t">Der Liegeplan des Friedhofs <span title="lohnt sich auf der LAN">★</span></div><div class="w"><strong>Zu tun:</strong> den Liegeplan und die Fenster hinter seinen drei Knöpfen fotografieren.</div></div>
@@ -158,9 +159,9 @@ body.suchmodus .knoepfe{display:none}
 <div style="display:flex;flex-direction:column;gap:4px"><div class="t">Altern lassen <span title="lohnt sich auf der LAN">★</span></div><div class="w"><strong>Zu tun:</strong> einen Mitspieler „altern lassen“ und auf beiden Seiten fotografieren.</div></div>
 <div class="rechts"><span class="siegel" style="color:var(--rot);border-color:var(--rot)">offen</span><span class="mono" style="font-size:13px">Foto</span><span class="mono" style="font-size:13px">Kaldo · Friedhofswärter</span></div></div><div class="auftrag" id="i46" data-art="offen im_Spiel lan sp1"><div class="mono" style="font-weight:700;font-size:17px;color:var(--rot)">1.10</div>
 <div style="display:flex;flex-direction:column;gap:4px"><div class="t">Der Teufelspakt <span title="lohnt sich auf der LAN">★</span></div><div class="w"><strong>Zu tun:</strong> in der Séance einen Pakt schließen, nach einer Ablösung suchen und den Einzug drei Jahre später festhalten.</div></div>
-<div class="rechts"><span class="siegel" style="color:var(--rot);border-color:var(--rot)">offen</span><span class="mono" style="font-size:13px">im Spiel</span><span class="mono" style="font-size:13px">Kaldo · Friedhofswärter</span></div></div><div class="auftrag" id="i47" data-art="offen Foto lan sp1"><div class="mono" style="font-weight:700;font-size:17px;color:var(--rot)">1.11</div>
+<div class="rechts"><span class="siegel" style="color:var(--rot);border-color:var(--rot)">offen</span><span class="mono" style="font-size:13px">im Spiel</span><span class="mono" style="font-size:13px">Kaldo · Friedhofswärter</span></div></div><div class="auftrag" id="i47" data-art="erfüllt"><div class="mono" style="font-weight:700;font-size:17px;color:var(--rot)">1.11</div>
 <div style="display:flex;flex-direction:column;gap:4px"><div class="t">Gibt es Sterbehilfe? <span title="lohnt sich auf der LAN">★</span></div><div class="w"><strong>Zu tun:</strong> am Friedhof nach „Sterbehilfe“ suchen und die Knopfreihen fotografieren.</div></div>
-<div class="rechts"><span class="siegel" style="color:var(--rot);border-color:var(--rot)">offen</span><span class="mono" style="font-size:13px">Foto</span><span class="mono" style="font-size:13px">Kaldo · Friedhofswärter</span></div></div><div class="auftrag" id="i48" data-art="offen Foto lan sp1 sp2 sp3"><div class="mono" style="font-weight:700;font-size:17px;color:var(--rot)">1.12</div>
+<div class="rechts"><span class="siegel" style="color:var(--blau);border-color:var(--blau)">erfüllt</span><span class="mono" style="font-size:13px">Foto</span><span class="mono" style="font-size:13px">Kaldo · Friedhofswärter</span></div></div><div class="auftrag" id="i48" data-art="offen Foto lan sp1 sp2 sp3"><div class="mono" style="font-weight:700;font-size:17px;color:var(--rot)">1.12</div>
 <div style="display:flex;flex-direction:column;gap:4px"><div class="t">Welche Berufe man wechseln kann <span title="lohnt sich auf der LAN">★</span></div><div class="w"><strong>Zu tun:</strong> die Liste „Eure Berufe“ fotografieren, bevor gewählt wird.</div></div>
 <div class="rechts"><span class="siegel" style="color:var(--rot);border-color:var(--rot)">offen</span><span class="mono" style="font-size:13px">Foto</span><span class="mono" style="font-size:13px">alle, beim Wechsel</span></div></div><div class="auftrag" id="i49" data-art="offen im_Spiel lan sp1"><div class="mono" style="font-weight:700;font-size:17px;color:var(--rot)">1.13</div>
 <div style="display:flex;flex-direction:column;gap:4px"><div class="t">An eine Bank kommen <span title="lohnt sich auf der LAN">★</span></div><div class="w"><strong>Zu tun:</strong> der Wechselstube ein Kaufangebot machen und jeden Schritt fotografieren.</div></div>
@@ -170,9 +171,9 @@ body.suchmodus .knoepfe{display:none}
 <div style="display:flex;flex-direction:column;gap:4px"><div class="t">Der Geldbote <span title="lohnt sich auf der LAN">★</span></div><div class="w"><strong>Zu tun:</strong> einen Geldboten losschicken und notieren, wann er zurück ist.</div></div>
 <div class="rechts"><span class="siegel" style="color:var(--rot);border-color:var(--rot)">offen</span><span class="mono" style="font-size:13px">im Spiel</span><span class="mono" style="font-size:13px">Kaldo · Geldleiher</span></div></div><div class="auftrag" id="i52" data-art="offen Foto lan sp2"><div class="mono" style="font-weight:700;font-size:17px;color:var(--rot)">2.1</div>
 <div style="display:flex;flex-direction:column;gap:4px"><div class="t">Der Hinweiskasten einer Ware <span title="lohnt sich auf der LAN">★</span></div><div class="w"><strong>Zu tun:</strong> herausfinden, wie er aufgeht, und ihn mit allen Zeilen fotografieren.</div></div>
-<div class="rechts"><span class="siegel" style="color:var(--rot);border-color:var(--rot)">offen</span><span class="mono" style="font-size:13px">Foto</span><span class="mono" style="font-size:13px">Linus · Alchimist</span></div></div><div class="auftrag" id="i53" data-art="offen Foto lan sp2"><div class="mono" style="font-weight:700;font-size:17px;color:var(--rot)">2.3</div>
+<div class="rechts"><span class="siegel" style="color:var(--rot);border-color:var(--rot)">offen</span><span class="mono" style="font-size:13px">Foto</span><span class="mono" style="font-size:13px">Linus · Alchimist</span></div></div><div class="auftrag" id="i53" data-art="erfüllt"><div class="mono" style="font-weight:700;font-size:17px;color:var(--rot)">2.3</div>
 <div style="display:flex;flex-direction:column;gap:4px"><div class="t">Was das Aufwerten kostet <span title="lohnt sich auf der LAN">★</span></div><div class="w"><strong>Zu tun:</strong> die Frage zum Aufwerten mit Preis fotografieren, einmal zu früh und einmal rechtzeitig.</div></div>
-<div class="rechts"><span class="siegel" style="color:var(--rot);border-color:var(--rot)">offen</span><span class="mono" style="font-size:13px">Foto</span><span class="mono" style="font-size:13px">Linus · Alchimist</span></div></div><div class="auftrag" id="i54" data-art="offen Foto lan sp2"><div class="mono" style="font-weight:700;font-size:17px;color:var(--rot)">2.4</div>
+<div class="rechts"><span class="siegel" style="color:var(--blau);border-color:var(--blau)">erfüllt</span><span class="mono" style="font-size:13px">Foto</span><span class="mono" style="font-size:13px">Linus · Alchimist</span></div></div><div class="auftrag" id="i54" data-art="offen Foto lan sp2"><div class="mono" style="font-weight:700;font-size:17px;color:var(--rot)">2.4</div>
 <div style="display:flex;flex-direction:column;gap:4px"><div class="t">Krötenschleim auf ein fremdes Haus <span title="lohnt sich auf der LAN">★</span></div><div class="w"><strong>Zu tun:</strong> Krötenschleim auf das Haus eines Mitspielers anwenden; der fotografiert, was bei ihm geschieht.</div></div>
 <div class="rechts"><span class="siegel" style="color:var(--rot);border-color:var(--rot)">offen</span><span class="mono" style="font-size:13px">Foto</span><span class="mono" style="font-size:13px">Linus · Alchimist</span></div></div><div class="auftrag" id="i55" data-art="offen Foto lan sp2"><div class="mono" style="font-weight:700;font-size:17px;color:var(--rot)">2.5</div>
 <div style="display:flex;flex-direction:column;gap:4px"><div class="t">Umziehen <span title="lohnt sich auf der LAN">★</span></div><div class="w"><strong>Zu tun:</strong> ein zweites Haus kaufen und es zum Wohnsitz machen, jeden Schritt fotografieren.</div></div>
@@ -283,21 +284,40 @@ body.suchmodus .knoepfe{display:none}
   var wahl='.eintrag,.auftrag,.fenster>div,.kachel,.begriffe>div,.abschnitt,.bild';
   var el=[].slice.call(document.querySelectorAll(wahl)), sek=[].slice.call(document.querySelectorAll('main>section'));
   var t=document.getElementById('treffer'), fr=document.getElementById('fremd');
+  // Gesucht wird Wort fuer Wort, in beliebiger Folge; Umlaute und ß gelten wie ae/oe/ue/ss - die
+  // Seite schreibt "Schloß", gesucht wird "schloss". m merkt sich zu jedem Zeichen der geglaetteten
+  // Form seine Stelle im Original, fuer Ausschnitt und Hervorhebung.
+  function norm(s){var o='',m=[];for(var i=0;i<s.length;i++){var c=s[i].toLowerCase(),
+    r=c==='ä'?'ae':c==='ö'?'oe':c==='ü'?'ue':c==='ß'?'ss':c;for(var j=0;j<r.length;j++){o+=r[j];m.push(i);}}return {s:o,m:m};}
+  function passt(n,w){return w.every(function(x){return n.indexOf(x)>=0;});}
+  function wert(n,w){var p=0;w.forEach(function(x){var k=-1,c=0;if(n.indexOf(x)<120)p+=10;
+    while((k=n.indexOf(x,k+1))>=0&&c<20)c++;p+=c;});return p;}
+  function esc(s){return s.replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+  function ausschnitt(text,w){var N=norm(text),i=N.s.indexOf(w[0]),a=i<0?0:N.m[i];
+    var von=Math.max(0,a-70),bis=Math.min(text.length,a+150),marken=[];
+    w.forEach(function(x){var k=-1;while((k=N.s.indexOf(x,k+1))>=0){var s0=N.m[k],e0=N.m[k+x.length-1]+1;
+      if(s0>=von&&e0<=bis)marken.push([s0,e0]);}});
+    marken.sort(function(p,q){return p[0]-q[0];});
+    var h='',pos=von;marken.forEach(function(r){if(r[0]<pos)return;
+      h+=esc(text.slice(pos,r[0]))+'<mark>'+esc(text.slice(r[0],r[1]))+'</mark>';pos=r[1];});
+    return (von>0?'… ':'')+h+esc(text.slice(pos,bis))+(bis<text.length?' …':'');}
   function zeig(){
-    var q=f.value.trim().toLowerCase(), n=0;
-    document.body.classList.toggle('suchmodus',!!q);
-    el.forEach(function(x){var ja=!q||x.textContent.toLowerCase().indexOf(q)>=0; x.classList.toggle('such-aus',!ja);
+    var w=norm(f.value).s.split(/\s+/).filter(Boolean), q=w.length>0, n=0;
+    document.body.classList.toggle('suchmodus',q);
+    el.forEach(function(x){if(x._n===undefined)x._n=norm(x.textContent).s;
+      var ja=!q||passt(x._n,w); x.classList.toggle('such-aus',!ja);
       if(q&&ja){n++; var d=x.closest('details'); if(d) d.open=true;}});
     sek.forEach(function(s){ if(!q){s.classList.remove('such-aus');return;}
       s.classList.toggle('such-aus',![].some.call(s.querySelectorAll(wahl),function(x){return !x.classList.contains('such-aus');}));});
-    var fremd=(q&&window.SUCHE)?window.SUCHE.filter(function(e){return e.p!==hier&&e.x.toLowerCase().indexOf(q)>=0;}):[];
+    var fremd=(q&&window.SUCHE)?window.SUCHE.filter(function(e){if(e.n===undefined)e.n=norm(e.x).s;
+      return e.p!==hier&&passt(e.n,w);}):[];
+    fremd.sort(function(a,b){return wert(b.n,w)-wert(a.n,w);});
     t.textContent=q?(n+' hier, '+fremd.length+' auf anderen Seiten'):'';
     if(!fremd.length){fr.hidden=true;fr.innerHTML='';return;}
-    var html='', zuletzt='';
+    var html='';
     fremd.slice(0,40).forEach(function(e){
-      if(e.p!==zuletzt){html+='<div class="fremd-seite">'+window.SEITEN[e.p]+'</div>'; zuletzt=e.p;}
-      var a=document.createElement('a'); a.href=e.p+'?q='+encodeURIComponent(f.value.trim())+'#'+e.i; a.textContent=e.x.length>140?e.x.slice(0,140)+' …':e.x;
-      html+=a.outerHTML;});
+      html+='<a href="'+e.p+'?q='+encodeURIComponent(f.value.trim())+'#'+e.i+'"><span class="fremd-seite">'
+        +esc(window.SEITEN[e.p])+'</span> '+ausschnitt(e.x,w)+'</a>';});
     if(fremd.length>40) html+='<div class="fremd-seite">und '+(fremd.length-40)+' weitere</div>';
     fr.innerHTML=html; fr.hidden=false;
   }
