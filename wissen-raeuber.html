@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Vom Räuber · Hauptbuch des Nachbaus</title>
+<meta name="description" content="Projektstand von OpenGilde: was gemessen ist, was noch zu tun ist, und was Mitspieler am Original erspielen können.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,700;1,500&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--grund:#3B2A1E;--blatt:#F4ECD8;--tinte:#2A1F16;--rot:#7A1F1F;--blau:#234A6B;--ocker:#8A5A12;--gelb:#C9A24A;--linie:#A8977A;--leise:#5A4A38;--kasten:#EADFC4}
+*{box-sizing:border-box}
+body{margin:0;background:var(--grund);color:var(--tinte);font-family:'Cormorant Garamond',Georgia,serif}
+a{color:var(--rot)}a:hover{color:#4F1212}
+.mono{font-family:'Courier Prime',monospace}
+.blatt{max-width:1180px;margin:56px auto;background:var(--blatt);padding:56px 64px 72px;display:flex;flex-direction:column;gap:56px}
+h1{margin:0;font-size:60px;line-height:1}h2{margin:0;font-size:34px}h3{margin:0;font-size:24px}
+.kopf{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:12px;border-bottom:2px solid var(--rot);padding-bottom:12px}
+.lead{margin:0;font-size:21px;font-style:italic;max-width:860px}
+nav{display:flex;gap:10px 22px;flex-wrap:wrap;font-size:19px}
+section{display:flex;flex-direction:column;gap:16px}
+.bilanz{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border:1px solid var(--tinte)}
+.bilanz>div{padding:20px 24px;display:flex;flex-direction:column;gap:6px}
+.bilanz>div+div{border-left:1px solid var(--tinte)}
+.spalte{font-size:26px;font-weight:700;border-bottom:1px solid var(--tinte);padding-bottom:6px}
+.posten{display:flex;justify-content:space-between;gap:12px;font-size:20px;border-bottom:1px dotted var(--linie)}
+.summe{display:flex;justify-content:space-between;font-size:22px;font-weight:700;border-top:3px double var(--tinte);margin-top:auto;padding-top:6px}
+.hinweis{border:1px solid var(--blau);padding:14px 20px;font-size:19px}
+.lan{border:3px double var(--rot);padding:24px 28px;display:grid;grid-template-columns:auto 1fr;gap:28px;align-items:center}
+.uhr{display:flex;gap:14px}.uhr div{text-align:center;min-width:72px}
+.uhr b{display:block;font-family:'Courier Prime',monospace;font-size:46px;line-height:1;color:var(--rot)}
+.uhr span{font-size:15px;text-transform:uppercase;letter-spacing:.08em}
+.kacheln{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 32px}
+.kachel{border-bottom:1px dotted var(--linie);padding:10px 0}.kachel b{font-size:21px;display:block}.kachel span{font-size:18px}
+.tafel{width:100%;border-collapse:collapse;font-size:19px}
+.tafel th{text-align:left;border-bottom:2px solid var(--tinte);padding:6px 10px 6px 0;font-size:18px}
+.tafel td{border-bottom:1px dotted var(--linie);padding:10px 10px 10px 0;vertical-align:top}
+.tafel td.z{font-family:'Courier Prime',monospace;font-size:16px;white-space:nowrap}
+.tafel tr.gesamt td{border-top:3px double var(--tinte);border-bottom:0;font-weight:700}
+.tag{display:grid;grid-template-columns:70px 1fr 64px;gap:14px;align-items:center;font-size:14px}
+.balken{height:9px;border-bottom:1px dotted var(--linie);display:flex}.balken span{display:block;height:9px}
+.knoepfe{display:flex;gap:8px;flex-wrap:wrap}
+.knoepfe button{min-height:44px;padding:6px 18px;cursor:pointer;border:1px solid var(--tinte);font:inherit;font-size:18px;background:transparent;color:var(--tinte)}
+.knoepfe button[aria-pressed=true]{background:var(--tinte);color:var(--blatt)}
+.auftrag{display:grid;grid-template-columns:70px 1fr 170px;gap:20px;padding:16px 0;border-bottom:1px solid var(--linie)}
+.auftrag .t{font-size:23px;font-weight:700}.auftrag .w{font-size:19px}
+.rechts{display:flex;flex-direction:column;gap:8px;align-items:flex-end;text-align:right}
+.siegel{font-family:'Courier Prime',monospace;font-weight:700;font-size:14px;text-transform:uppercase;letter-spacing:.1em;padding:4px 10px;border:2px solid}
+.schritte{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;background:var(--kasten);padding:22px 26px;font-size:18px}
+.schritte b{display:block;font-size:22px}
+.eintrag{display:grid;grid-template-columns:1fr 110px;gap:16px;border-bottom:1px dotted var(--linie);padding:12px 0}
+.eintrag .t{font-size:22px;font-weight:700}.eintrag .x{font-size:19px}
+.eintrag .k{font-family:'Courier Prime',monospace;font-size:13px;color:var(--leise);text-align:right;padding-top:6px}
+.gruppe{display:flex;flex-direction:column;gap:0;margin-top:8px}
+.gruppe h3{border-bottom:1px solid var(--tinte);padding-bottom:4px}
+.fort{display:flex;flex-direction:column;gap:14px;border:1px solid var(--tinte);padding:20px 24px}
+.fort-z{display:grid;grid-template-columns:minmax(0,260px) minmax(0,1fr) auto;gap:16px;align-items:center;font-size:19px}
+.fort-b{height:16px;border:1px solid var(--tinte);background:var(--kasten)}.fort-b span{display:block;height:100%}
+.fenster{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px 32px;font-size:19px}
+.fenster div{border-bottom:1px dotted var(--linie);padding:4px 0}
+[hidden]{display:none!important}
+nav a[aria-current=page]{color:var(--tinte);font-weight:700;text-decoration:none}
+.fremd{border:1px solid var(--tinte);background:var(--kasten);padding:10px 16px;display:flex;flex-direction:column;gap:4px;font-size:17px;max-height:60vh;overflow:auto}
+.fremd a{display:block;padding:6px 0;border-bottom:1px dotted var(--linie)}.fremd-seite{font-family:'Courier Prime',monospace;font-size:13px;text-transform:uppercase;letter-spacing:.08em;margin-top:8px}.fremd a .fremd-seite{margin:0 6px 0 0}
+.fremd mark,.blatt mark{background:transparent;color:var(--rot);font-weight:700}
+.wegweisergitter{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
+.wegweiser{display:flex;flex-direction:column;gap:4px;border:1px solid var(--tinte);padding:14px 18px;text-decoration:none;color:var(--tinte)}
+.wegweiser b{font-size:22px;color:var(--rot)}.wegweiser span{font-size:18px}.wegweiser:hover{background:var(--kasten)}
+[id^=i]:target{background:var(--kasten)}
+.begriff{color:inherit;text-decoration:underline dotted;text-underline-offset:3px;cursor:help}
+.suche{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.suche input{font:inherit;font-size:19px;padding:8px 12px;border:1px solid var(--tinte);background:var(--blatt);color:var(--tinte);width:min(420px,100%)}
+.begriffe{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 32px;font-size:18px}
+.begriffe>div{border-bottom:1px dotted var(--linie);padding:6px 0}.begriffe>div:target{background:var(--kasten)}
+body.suchmodus [data-art][hidden]:not(.such-aus){display:grid!important}
+body.suchmodus .knoepfe{display:none}
+.such-aus{display:none!important}
+.w-artikel{max-width:820px;gap:18px}
+.w-zurueck{margin:0;font-size:17px;font-family:'Courier Prime',monospace;text-transform:uppercase;letter-spacing:.06em}
+.w-titel{font-size:46px;line-height:1.05;border-bottom:2px solid var(--rot);padding-bottom:10px}
+.w-inhalt{display:flex;flex-direction:column;gap:2px;font-size:18px;border-left:3px solid var(--linie);padding:4px 0 4px 16px}
+.abschnitt{display:flex;flex-direction:column;gap:10px;font-size:20px;line-height:1.45;padding-top:12px}
+.abschnitt p,.w-artikel>p{margin:0}.abschnitt ul{margin:0;padding-left:24px}
+.abschnitt h3{font-size:28px;color:var(--rot)}
+.w-num{color:var(--gelb);font-family:'Courier Prime',monospace;font-size:18px;margin-right:12px;letter-spacing:.04em}
+.w-kasten{background:var(--kasten);border-left:5px solid var(--ocker);padding:12px 18px;font-size:19px}
+.w-merk{text-align:center;font-style:italic;font-size:22px;border-top:1px solid var(--linie);border-bottom:1px solid var(--linie);padding:10px 24px;color:var(--rot)}
+.w-tafel{width:100%;border-collapse:collapse;font-size:18px}
+.w-tafel th{text-align:left;border-bottom:2px solid var(--tinte);padding:4px 10px 4px 0}
+.w-tafel td{border-bottom:1px dotted var(--linie);padding:6px 10px 6px 0;vertical-align:top}
+.w-tafel .z{text-align:right;font-family:'Courier Prime',monospace;font-size:16px;white-space:nowrap}
+.abschnitt:target{background:var(--kasten)}
+.bildgitter{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px 32px;margin-top:14px}
+.bild{display:flex;flex-direction:column;gap:6px}
+.bild img{display:block;width:100%;height:auto;border:1px solid var(--tinte);background:var(--grund)}
+.bild b{font-size:22px}.bild span{font-size:18px}
+.bild-seit{font-size:17px!important;font-style:italic;color:var(--rot)}
+.bild-datum{font-size:13px!important;color:var(--leise)}
+.bild:target{background:var(--kasten)}
+@media (max-width:760px){
+ .bildgitter{grid-template-columns:1fr}
+ .w-titel{font-size:34px}.abschnitt{font-size:19px}.w-tafel{display:block;overflow-x:auto}
+ .begriffe{grid-template-columns:1fr}
+ .blatt{margin:0;padding:28px 16px 48px;gap:40px}h1{font-size:40px}
+ .bilanz,.schritte,.kacheln,.fenster,.lan{grid-template-columns:1fr}.bilanz>div+div{border-left:0;border-top:1px solid var(--tinte)}
+ .auftrag{grid-template-columns:1fr}.rechts{align-items:flex-start;text-align:left}
+ .eintrag{grid-template-columns:1fr}.eintrag .k{text-align:left;padding-top:0}
+ .fort-z{grid-template-columns:1fr auto}.fort-b{grid-column:1/-1;grid-row:2}
+ .tag{grid-template-columns:56px 1fr 48px}.uhr div{min-width:56px}.uhr b{font-size:36px}
+ .tafel td.z{white-space:normal} .tafel,.tafel tbody,.tafel tr,.tafel td{display:block}.tafel thead{display:none}.tafel td{border:0;padding:2px 0}.tafel tr{border-bottom:1px dotted var(--linie);padding:8px 0}
+}
+</style></head>
+<body><main class="blatt">
+<header style="display:flex;flex-direction:column;gap:14px">
+<div class="kopf"><h1>Hauptbuch des Nachbaus</h1><span class="mono" style="font-size:14px">aktualisiert am: 17.10.2026, 06:28 Uhr</span></div>
+
+<nav><a href="index.html">Übersicht</a><a href="bilder.html">Bilder</a><a href="auftraege.html">Aufträge</a><a href="entscheidungen.html">Entscheidungen</a><a href="baustellen.html">Baustellen</a><a href="verlauf.html">Verlauf</a><a href="einstieg.html">Was läuft &amp; Begriffe</a><a href="wissen.html" aria-current="page">Wissen</a></nav>
+<div class="suche"><input type="search" id="suche" placeholder="Auf allen Seiten suchen …" aria-label="Auf allen Seiten suchen"><span id="treffer" class="mono" style="font-size:15px"></span></div>
+<div id="fremd" class="fremd" hidden></div>
+</header>
+<section class="w-artikel"><p class="w-zurueck"><a href="wissen.html">← alle Artikel</a> · Betrieb und Handel</p><h2 class="w-titel">Vom Räuber</h2><p class="lead">Warum man eine Raubritterfeste nicht bauen kann, warum ein Raubzug immer gelingt und trotzdem meist kein Geld bringt, und an welchem Stück welches Talent trainiert wird</p><nav class="w-inhalt"><a href="#a1">I · Die sechs Grade und die eine Feste</a><a href="#a2">II · Wie man an eine Feste und an Räuber kommt</a><a href="#a3">III · Was man an der Feste tun kann</a><a href="#a4">IV · Auf die Lauer legen</a><a href="#a5">V · Schutzgeld</a><a href="#a6">VI · Der Raubüberfall auf ein Haus</a><a href="#a7">VII · Spionage und Angriff</a><a href="#a8">VIII · Training und Heilen</a><a href="#a9">IX · Die Ausbauten</a><a href="#a10">X · Was die Computer-Räuber tun</a><a href="#a11">XI · Was noch niemand gesehen hat</a></nav><div class="abschnitt" id="i372"><h3 id="a1"><span class="w-num">I</span> Die sechs Grade und die eine Feste</h3><p>Der Beruf beginnt ganz unten beim <b>Halunken</b> und steigt über Schurke, Strauchdieb, Wegelagerer und <b>Räuber</b> bis zum <b>Raubritter</b> auf; die Frau heißt am Ende Räuberbaroneß. <i>Der Name, unter dem das Spiel den Beruf anbietet, ist also erst der fünfte Grad.</i> Beim Spielstart läßt sich der Räuber gar nicht wählen, nur später über „Eure Berufe&quot;.</p><p>Anders als jeder Handwerker hat der Räuber <b>nur ein einziges Gebäude</b>, die <b>Raubritterfeste</b> — ohne Vorstufe und ohne Aufwerten. Jeder Grad darf sie führen.</p><table class="w-tafel"><thead><tr><th></th><th>Raubritterfeste</th></tr></thead><tbody><tr><td>Plätze</td><td>4 Gesellen und 4 Lehrlinge</td></tr><tr><td>Lohn je Runde (auf „Normal&quot;)</td><td>Geselle 112, Lehrling 56 Gulden</td></tr><tr><td>Bauzeit</td><td>4 Jahre</td></tr><tr><td>Kaufpreis</td><td>um 38.250 Gulden</td></tr><tr><td>Lager</td><td>eines für Beute und Waffen, 6 Plätze, ausbaubar auf 12</td></tr></tbody></table><p>Die Feste stellt nichts her, sie verfällt nicht, und abreißen kann man sie nicht.</p></div><div class="abschnitt" id="i373"><h3 id="a2"><span class="w-num">II</span> Wie man an eine Feste und an Räuber kommt</h3><p><b>Bauen kann man eine Feste nicht.</b> Es gibt in der Stadt keinen Bauplatz für sie, und in allen vier Städten, deren Spielstände wir haben, stehen <b>genau drei</b>. Beim Spielstart bekommt <b>nur eine</b> einen Herrn: einen Computergegner, der selbst als Räuber mitarbeitet. Die beiden anderen gehören der Stadt.</p><p>Gemessen an 26 Spielständen wechseln die Festen danach den Besitzer: Computerfamilien übernehmen sie und setzen einen <b>Hauptmann</b> ein, der für sie die Bande führt. In Köln gehörten 1417 zwei der drei demselben Mann, und ein Mann dieses Namens war zur selben Zeit <b>Räuberhauptmann</b> der Zunft. In einer Nürnberger Partie von 1505 gehörten alle drei dem Spieler. Wie man an eine kommt, hat Luca auf der LAN gezeigt: <b>im Rathaus kaufen.</b> Dort standen zwei zum Verkauf — so viele, wie beim Start der Stadt gehören.</p><p><b>Räuber wirbt man über das Personalbuch an</b>, wie Arbeiter in jedem Betrieb. Das Zelt des Hauptmanns steht immer, und sein Hilfetext spricht vom Werben; eine eigene Stelle dafür hat die Feste aber nicht. <i>Gesehen hat das noch niemand.</i></p><div class="w-kasten"><p><b>Zwei Sorten Räuber.</b> Nur wer schon beim Spielstart in einer Feste sitzt, bringt die Talente eines Räubers mit. Jeder später angeworbene kommt wie ein gewöhnlicher Arbeiter: In Verhandeln, Handwerkskunst und Rhetorik ist er ganz zufällig, zwischen einem halben und anderthalb Sternen. Das ist an 29 Räubern in acht Aufnahmen des laufenden Spiels gemessen.</p></div></div><div class="abschnitt" id="i374"><h3 id="a3"><span class="w-num">III</span> Was man an der Feste tun kann</h3><p>Acht Stellen stehen immer: <b>Auf die Lauer legen</b>, <b>Schutzgeld erpressen</b>, <b>Raubüberfall</b>, <b>Gebäude ausspionieren</b>, <b>Gebäude angreifen</b>, <b>Ausrüsten</b>, <b>Gelage</b> und das <b>Lager</b>. Eine neunte, <b>Regeneration</b>, erscheint erst mit dem Heilbrunnen. Die Strohpuppe und die Zielscheibe sind selbst anklickbar und führen zum Training.</p><p><b>Aktionspunkte kostet nur der Raubüberfall, einen</b> — und das sagt Euch das Spiel nicht. Lauer, Schutzgeld, Spionage, Angriff und Training sind frei.</p></div><div class="abschnitt" id="i375"><h3 id="a4"><span class="w-num">IV</span> Auf die Lauer legen</h3><p>Man wählt einen Lauerpunkt an einer Straße und bis zu acht Räuber. Die Lauer hält <b>zwei Runden</b>, und in dieser Zeit sieht die Bande alle zehn bis vierzehn Minuten nach Karren. Wie wertvoll ein Karren sein muß, damit sie ihn überhaupt ansieht, hängt an ihrem <b>Bei Nacht und Nebel</b>: Eine schwache Bande lauert nur Karren mit wenig Ladung auf — unter fünf Sternen kaum einen beladenen Handelskarren, es sei denn, er fährt ihr direkt vor die Nase. Findet sie einen, greift sie mit etwa <b>einer von fünf Aussichten</b> an — und <b>eine Lauer bringt höchstens einen Überfall</b>.</p><p>Der Besitzer des Karrens wählt dann: Waren zurücklassen oder sich zum Kampf stellen. <i>Das Menü verspricht beim größten Opfer acht Zehntel der Ladung — genommen werden neun Zehntel.</i> Mehr dazu steht im Artikel über das Fuhrwesen.</p><div class="w-kasten"><p><b>Ein Karrenüberfall steht in keiner Akte.</b> Das Stadtgesetz kennt das „Räubertum&quot;, aber kein Überfall erzeugt eine Straftat dafür. In Köln fehlt außerdem einer der acht Lauerpunkte, die die Computer-Räuber blind auswürfeln: Jede achte ihrer Lauern geht ins Leere, und die Räuber stehen zwei Runden lang vor ihrer Feste.</p></div></div><div class="abschnitt" id="i376"><h3 id="a5"><span class="w-num">V</span> Schutzgeld</h3><p>Ein Räuber geht zu einem fremden Haus und bietet dem Besitzer Schutz an, für <b>6,5 Prozent des Gebäudewerts</b>. Ein Mensch wird gefragt; ein Computergegner zahlt sicher, wenn ihm Sicherheit viel bedeutet, sonst mit halber Aussicht. Bezahlt wird <b>vom Opfer an den Räuber</b> — das Geld verschwindet nicht —, und das Haus ist <b>zwei Runden lang geschützt</b>: gegen Einbruch, Spionage, Raubüberfall und die Angriffe der Computer-Räuber.</p></div><div class="abschnitt" id="i377"><h3 id="a6"><span class="w-num">VI</span> Der Raubüberfall auf ein Haus</h3><p>Man wählt ein fremdes Haus, die Räuber gehen hin. <b>Steht dann eine Stadtwache auf Streife in der Nähe, ist es aus:</b> Der Besitzer der Räuber zahlt 550 bis 750 Gulden Strafe, jeder Räuber wird verletzt, und alle gehen heim. <b>Steht keine in der Nähe, gelingt der Überfall immer.</b></p><div class="w-kasten"><p><b>Kein Talent, kein Schutz.</b> Anders als beim Einbruch der Diebe gibt es keinen Wurf: Wie gut die Räuber sind, fragt das Spiel zwar ab, verwirft die Antwort aber gleich wieder. Die Sicherungen des Hauses — Zaun, Eisentür, Wachhund —, die gegen den Einbruch so viel helfen, zählen hier nicht. Nur ein bezahltes Schutzgeld hält die Räuber auf.</p></div><p>Die Beute:</p><ul><li><b>Waren:</b> jeder Stapel im Lager des Opfers mit knapp halber Aussicht, und von ihm ein Zehntel je Räuber.</li><li><b>Geld:</b> <b>35 Prozent des ganzen Vermögens</b> des Opfers — Häuser und Waren mitgerechnet.</li></ul><p class="w-merk">Der Haken: Das Geld fließt nur, wenn das Opfer so viel Bargeld hat. Sonst fließt gar nichts.</p><p>Wer ein Haus besitzt, hat fast nie ein Drittel seines Vermögens in bar. <b>Ein Raubüberfall bringt also meist nur Waren</b> — und die Meldung nennt den Geldbetrag trotzdem. <i>Das ist aus dem Programm gerechnet; gesehen hat es noch niemand.</i></p><p>Jeder Raubüberfall wird als <b>Diebstahl</b> aktenkundig, auch wenn niemand zugesehen hat. Die Computer-Räuber rauben übrigens <b>nie</b> — diese Tat steht nur dem Spieler offen.</p></div><div class="abschnitt" id="i378"><h3 id="a7"><span class="w-num">VII</span> Spionage und Angriff</h3><p><b>Spionieren</b> geht wie bei den Diebesgilden: bis zu acht Räuber, und das Ergebnis liegt danach in der Feste. Der Text, der dafür Aktionspunkte verlangen würde, wird nie gezeigt; die Spionage ist frei.</p><div class="w-kasten"><p><b>Eine Grenze, die man nicht heben kann.</b> Wie viele Berichte man halten darf, rechnet das Spiel nach der Größe des <b>ausgespähten</b> Hauses statt nach der eigenen Feste: zwei bei einer Hütte, sechs bei einem großen Haus. Die Absage rät, die Feste zu erweitern — die hat aber keine zweite Stufe. <i>Aus dem Programm gelesen, nicht gesehen.</i></p></div><p><b>Angreifen</b> dürfen höchstens <b>sechs</b> Räuber; wer mehr auswählt, bekommt einen Hinweis, und es gehen trotzdem sechs. Läuft schon ein Angriff auf dasselbe Haus, schließen sie sich ihm an. Gewinnen die Räuber gegen eine Diebesgilde oder eine andere Feste, geht sie in den Besitz des Angreifers über.</p></div><div class="abschnitt" id="i379"><h3 id="a8"><span class="w-num">VIII</span> Training und Heilen</h3><p>Räuber werden nur in zwei Talenten besser, und dafür braucht die Feste zwei Stücke:</p><table class="w-tafel"><thead><tr><th>Stück</th><th class=z>Preis</th><th>schaltet frei</th></tr></thead><tbody><tr><td>Strohpuppe (steht immer)</td><td class=z>25</td><td><b>Bei Nacht und Nebel</b></td></tr><tr><td>Zielscheibe</td><td class=z>35</td><td><b>Kampf</b></td></tr></tbody></table><p><i>Die Hilfetexte sagen es anders</i> — dort trainiert man an der Strohpuppe Schwerter und an der Zielscheibe Schußwaffen, beides also Kampf. Das Programm gibt der Strohpuppe aber die Nacht und Nebel.</p><p>Ein Training dauert <b>sechs Stunden</b>, kostet nichts, und höchstens <b>drei</b> trainieren zugleich. Je mehr Trainingsstücke die Feste hat (Strohpuppe, Zielscheibe, Maske), desto schneller geht es, und je besser ein Räuber schon ist, desto weniger bringt es. Bei voller Arbeitszeit gerechnet:</p><table class="w-tafel"><thead><tr><th>Talent vorher</th><th>ohne weitere Stücke</th><th>mit allen Stücken</th></tr></thead><tbody><tr><td>0 Sterne</td><td>+ 1,9 Sterne</td><td>+ 2,9 Sterne</td></tr><tr><td>2 Sterne</td><td>+ 1,5</td><td>+ 2,3</td></tr><tr><td>4 Sterne</td><td>+ 1,1</td><td>+ 1,9</td></tr></tbody></table><p>Mehr als sechs Sterne gibt es nicht. <i>Nachgerechnet, nicht am Spiel gesehen.</i></p><p><b>Heilen</b> — die „Regeneration&quot; — gibt einem Verletzten alle zehn Minuten ein Stück Lebenskraft zurück, bis er wieder ganz gesund ist. <b>Der Heilbrunnen macht das nicht schneller</b>, auch wenn sein Hilfetext es verspricht: Er schaltet die Stelle nur frei.</p></div><div class="abschnitt" id="i380"><h3 id="a9"><span class="w-num">IX</span> Die Ausbauten</h3><table class="w-tafel"><thead><tr><th>wofür</th><th>Stücke</th><th class=z>zusammen</th></tr></thead><tbody><tr><td>Kampfkraft, wenn die Feste angegriffen wird</td><td>Rumfaß, Wildschweinspieß, Abwehrstellung, Schatztruhe, Fluchtseil, Sprossen</td><td class=z>85</td></tr><tr><td>Tarnung — zählt in der Probe vor einem Angriff oder einer Razzia</td><td>Tarnung der Abzweigung und des Torbogens, Ausguck mit Ausbau, Rutsche</td><td class=z>90</td></tr><tr><td>Training</td><td>Strohpuppe, Zielscheibe, Maske des Zorro</td><td class=z>70</td></tr><tr><td>Schutz vor Unfällen</td><td>Feldbett, Öllampe, Strohlager, Kerze</td><td class=z>80</td></tr></tbody></table><p>Die Kampfkraft zählt nur, wenn die Feste selbst angegriffen wird — etwa von der Stadtwache —, nicht wenn die Räuber ausziehen. Räuberzelt und Fluchthütte haben eigene Bilder, aber keine Wirkung.</p></div><div class="abschnitt" id="i381"><h3 id="a10"><span class="w-num">X</span> Was die Computer-Räuber tun</h3><p>Ein Computer-Räuber entscheidet <b>jede dritte Stunde ab sieben Uhr</b>, und nur, wenn mindestens die Hälfte seiner Leute daheim und frei ist. Dann legt er sich fast immer auf die Lauer, mit zwei bis vier Mann, an einem blind ausgewürfelten Punkt; sonst erpreßt er Schutzgeld. Oft spioniert er vorher ein Haus aus oder greift es an. Seine Leute schickt er auf Ausbildung, sobald einer ein Talent unter vier Sternen hat — und sie trainieren bis an die Grenze: Viele seiner Gesellen stehen in Kampf und Nacht und Nebel auf sechs Sternen. Raubüberfälle auf Häuser macht er nie.</p><div class="w-kasten"><p><b>Im Nachbau.</b> Die Festen stehen in Köln, und beim Spielstart bekommt die erste wie im Original einen Herrn; arbeiten tut dort noch niemand. Die Zunft der Raubritter mit ihrem Räuberhauptmann gibt es. Lauer, Überfall, Schutzgeld, Raubzug, Training und die Computer-Räuber sind noch nicht gebaut.</p></div></div><div class="abschnitt" id="i382"><h3 id="a11"><span class="w-num">XI</span> Was noch niemand gesehen hat</h3><p>Fast alles hier ist aus dem Programm gelesen. Wer einen Räuber spielt, kann es prüfen: wie man an eine Feste kommt, ob ohne Zielscheibe wirklich der Kampf gesperrt ist, ob ein Raubüberfall das Bargeld des Opfers unangetastet läßt, und wo die Spionage ihre Grenze zieht. Die Aufgaben stehen unter „Aufträge an die Mitspieler&quot;, beim Beruf „Räuber&quot;.</p></div></section>
+</main><script src="suche.js"></script><script>
+(function(){
+  var f=document.getElementById('suche'); if(!f) return;
+  var hier=location.pathname.split('/').pop()||'index.html';
+  var wahl='.eintrag,.auftrag,.fenster>div,.kachel,.begriffe>div,.abschnitt,.bild';
+  var el=[].slice.call(document.querySelectorAll(wahl)), sek=[].slice.call(document.querySelectorAll('main>section'));
+  var t=document.getElementById('treffer'), fr=document.getElementById('fremd');
+  // Gesucht wird Wort fuer Wort, in beliebiger Folge; Umlaute und ß gelten wie ae/oe/ue/ss - die
+  // Seite schreibt "Schloß", gesucht wird "schloss". m merkt sich zu jedem Zeichen der geglaetteten
+  // Form seine Stelle im Original, fuer Ausschnitt und Hervorhebung.
+  function norm(s){var o='',m=[];for(var i=0;i<s.length;i++){var c=s[i].toLowerCase(),
+    r=c==='ä'?'ae':c==='ö'?'oe':c==='ü'?'ue':c==='ß'?'ss':c;for(var j=0;j<r.length;j++){o+=r[j];m.push(i);}}return {s:o,m:m};}
+  function passt(n,w){return w.every(function(x){return n.indexOf(x)>=0;});}
+  function wert(n,w){var p=0;w.forEach(function(x){var k=-1,c=0;if(n.indexOf(x)<120)p+=10;
+    while((k=n.indexOf(x,k+1))>=0&&c<20)c++;p+=c;});return p;}
+  function esc(s){return s.replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+  function ausschnitt(text,w){var N=norm(text),i=N.s.indexOf(w[0]),a=i<0?0:N.m[i];
+    var von=Math.max(0,a-70),bis=Math.min(text.length,a+150),marken=[];
+    w.forEach(function(x){var k=-1;while((k=N.s.indexOf(x,k+1))>=0){var s0=N.m[k],e0=N.m[k+x.length-1]+1;
+      if(s0>=von&&e0<=bis)marken.push([s0,e0]);}});
+    marken.sort(function(p,q){return p[0]-q[0];});
+    var h='',pos=von;marken.forEach(function(r){if(r[0]<pos)return;
+      h+=esc(text.slice(pos,r[0]))+'<mark>'+esc(text.slice(r[0],r[1]))+'</mark>';pos=r[1];});
+    return (von>0?'… ':'')+h+esc(text.slice(pos,bis))+(bis<text.length?' …':'');}
+  function zeig(){
+    var w=norm(f.value).s.split(/\s+/).filter(Boolean), q=w.length>0, n=0;
+    document.body.classList.toggle('suchmodus',q);
+    el.forEach(function(x){if(x._n===undefined)x._n=norm(x.textContent).s;
+      var ja=!q||passt(x._n,w); x.classList.toggle('such-aus',!ja);
+      if(q&&ja){n++; var d=x.closest('details'); if(d) d.open=true;}});
+    sek.forEach(function(s){ if(!q){s.classList.remove('such-aus');return;}
+      s.classList.toggle('such-aus',![].some.call(s.querySelectorAll(wahl),function(x){return !x.classList.contains('such-aus');}));});
+    var fremd=(q&&window.SUCHE)?window.SUCHE.filter(function(e){if(e.n===undefined)e.n=norm(e.x).s;
+      return e.p!==hier&&passt(e.n,w);}):[];
+    fremd.sort(function(a,b){return wert(b.n,w)-wert(a.n,w);});
+    t.textContent=q?(n+' hier, '+fremd.length+' auf anderen Seiten'):'';
+    if(!fremd.length){fr.hidden=true;fr.innerHTML='';return;}
+    var html='';
+    fremd.slice(0,40).forEach(function(e){
+      html+='<a href="'+e.p+'?q='+encodeURIComponent(f.value.trim())+'#'+e.i+'"><span class="fremd-seite">'
+        +esc(window.SEITEN[e.p])+'</span> '+ausschnitt(e.x,w)+'</a>';});
+    if(fremd.length>40) html+='<div class="fremd-seite">und '+(fremd.length-40)+' weitere</div>';
+    fr.innerHTML=html; fr.hidden=false;
+  }
+  f.addEventListener('input',zeig);
+  var q=new URLSearchParams(location.search).get('q');
+  if(q){f.value=q; zeig(); var z=location.hash&&document.getElementById(location.hash.slice(1)); if(z) setTimeout(function(){z.scrollIntoView({block:'center'});},50);}
+})();
+document.querySelectorAll('[data-filter]').forEach(function(gruppe){
+  var ziel=document.getElementById(gruppe.dataset.filter);
+  gruppe.querySelectorAll('button').forEach(function(b){
+    b.addEventListener('click',function(){
+      gruppe.querySelectorAll('button').forEach(function(x){x.setAttribute('aria-pressed',x===b)});
+      ziel.querySelectorAll('[data-art]').forEach(function(z){
+        var w=b.dataset.wert, a=z.dataset.art.split(' ');
+        z.hidden = !(w==='*' ? a.indexOf('offen')>=0 : a.indexOf(w)>=0);
+      });
+    });
+  });
+  gruppe.querySelector('button').click();
+});
+(function(){
+  var uhr=document.getElementById('uhr'); if(!uhr) return;
+  var ziel=new Date(+uhr.dataset.ziel);
+  function stell(){
+    var r=ziel-new Date();
+    if(r<=0){uhr.innerHTML='<div><b>jetzt</b><span>die LAN läuft</span></div>';return;}
+    var t=Math.floor(r/864e5), s=Math.floor(r/36e5)%24, m=Math.floor(r/6e4)%60;
+    uhr.querySelector('[data-t]').textContent=t;
+    uhr.querySelector('[data-s]').textContent=s;
+    uhr.querySelector('[data-m]').textContent=m;
+  }
+  stell(); setInterval(stell,30000);
+})();
+</script></body></html>

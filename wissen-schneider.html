@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Vom Schneider · Hauptbuch des Nachbaus</title>
+<meta name="description" content="Projektstand von OpenGilde: was gemessen ist, was noch zu tun ist, und was Mitspieler am Original erspielen können.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,700;1,500&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--grund:#3B2A1E;--blatt:#F4ECD8;--tinte:#2A1F16;--rot:#7A1F1F;--blau:#234A6B;--ocker:#8A5A12;--gelb:#C9A24A;--linie:#A8977A;--leise:#5A4A38;--kasten:#EADFC4}
+*{box-sizing:border-box}
+body{margin:0;background:var(--grund);color:var(--tinte);font-family:'Cormorant Garamond',Georgia,serif}
+a{color:var(--rot)}a:hover{color:#4F1212}
+.mono{font-family:'Courier Prime',monospace}
+.blatt{max-width:1180px;margin:56px auto;background:var(--blatt);padding:56px 64px 72px;display:flex;flex-direction:column;gap:56px}
+h1{margin:0;font-size:60px;line-height:1}h2{margin:0;font-size:34px}h3{margin:0;font-size:24px}
+.kopf{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:12px;border-bottom:2px solid var(--rot);padding-bottom:12px}
+.lead{margin:0;font-size:21px;font-style:italic;max-width:860px}
+nav{display:flex;gap:10px 22px;flex-wrap:wrap;font-size:19px}
+section{display:flex;flex-direction:column;gap:16px}
+.bilanz{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border:1px solid var(--tinte)}
+.bilanz>div{padding:20px 24px;display:flex;flex-direction:column;gap:6px}
+.bilanz>div+div{border-left:1px solid var(--tinte)}
+.spalte{font-size:26px;font-weight:700;border-bottom:1px solid var(--tinte);padding-bottom:6px}
+.posten{display:flex;justify-content:space-between;gap:12px;font-size:20px;border-bottom:1px dotted var(--linie)}
+.summe{display:flex;justify-content:space-between;font-size:22px;font-weight:700;border-top:3px double var(--tinte);margin-top:auto;padding-top:6px}
+.hinweis{border:1px solid var(--blau);padding:14px 20px;font-size:19px}
+.lan{border:3px double var(--rot);padding:24px 28px;display:grid;grid-template-columns:auto 1fr;gap:28px;align-items:center}
+.uhr{display:flex;gap:14px}.uhr div{text-align:center;min-width:72px}
+.uhr b{display:block;font-family:'Courier Prime',monospace;font-size:46px;line-height:1;color:var(--rot)}
+.uhr span{font-size:15px;text-transform:uppercase;letter-spacing:.08em}
+.kacheln{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 32px}
+.kachel{border-bottom:1px dotted var(--linie);padding:10px 0}.kachel b{font-size:21px;display:block}.kachel span{font-size:18px}
+.tafel{width:100%;border-collapse:collapse;font-size:19px}
+.tafel th{text-align:left;border-bottom:2px solid var(--tinte);padding:6px 10px 6px 0;font-size:18px}
+.tafel td{border-bottom:1px dotted var(--linie);padding:10px 10px 10px 0;vertical-align:top}
+.tafel td.z{font-family:'Courier Prime',monospace;font-size:16px;white-space:nowrap}
+.tafel tr.gesamt td{border-top:3px double var(--tinte);border-bottom:0;font-weight:700}
+.tag{display:grid;grid-template-columns:70px 1fr 64px;gap:14px;align-items:center;font-size:14px}
+.balken{height:9px;border-bottom:1px dotted var(--linie);display:flex}.balken span{display:block;height:9px}
+.knoepfe{display:flex;gap:8px;flex-wrap:wrap}
+.knoepfe button{min-height:44px;padding:6px 18px;cursor:pointer;border:1px solid var(--tinte);font:inherit;font-size:18px;background:transparent;color:var(--tinte)}
+.knoepfe button[aria-pressed=true]{background:var(--tinte);color:var(--blatt)}
+.auftrag{display:grid;grid-template-columns:70px 1fr 170px;gap:20px;padding:16px 0;border-bottom:1px solid var(--linie)}
+.auftrag .t{font-size:23px;font-weight:700}.auftrag .w{font-size:19px}
+.rechts{display:flex;flex-direction:column;gap:8px;align-items:flex-end;text-align:right}
+.siegel{font-family:'Courier Prime',monospace;font-weight:700;font-size:14px;text-transform:uppercase;letter-spacing:.1em;padding:4px 10px;border:2px solid}
+.schritte{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;background:var(--kasten);padding:22px 26px;font-size:18px}
+.schritte b{display:block;font-size:22px}
+.eintrag{display:grid;grid-template-columns:1fr 110px;gap:16px;border-bottom:1px dotted var(--linie);padding:12px 0}
+.eintrag .t{font-size:22px;font-weight:700}.eintrag .x{font-size:19px}
+.eintrag .k{font-family:'Courier Prime',monospace;font-size:13px;color:var(--leise);text-align:right;padding-top:6px}
+.gruppe{display:flex;flex-direction:column;gap:0;margin-top:8px}
+.gruppe h3{border-bottom:1px solid var(--tinte);padding-bottom:4px}
+.fort{display:flex;flex-direction:column;gap:14px;border:1px solid var(--tinte);padding:20px 24px}
+.fort-z{display:grid;grid-template-columns:minmax(0,260px) minmax(0,1fr) auto;gap:16px;align-items:center;font-size:19px}
+.fort-b{height:16px;border:1px solid var(--tinte);background:var(--kasten)}.fort-b span{display:block;height:100%}
+.fenster{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px 32px;font-size:19px}
+.fenster div{border-bottom:1px dotted var(--linie);padding:4px 0}
+[hidden]{display:none!important}
+nav a[aria-current=page]{color:var(--tinte);font-weight:700;text-decoration:none}
+.fremd{border:1px solid var(--tinte);background:var(--kasten);padding:10px 16px;display:flex;flex-direction:column;gap:4px;font-size:17px;max-height:60vh;overflow:auto}
+.fremd a{display:block;padding:6px 0;border-bottom:1px dotted var(--linie)}.fremd-seite{font-family:'Courier Prime',monospace;font-size:13px;text-transform:uppercase;letter-spacing:.08em;margin-top:8px}.fremd a .fremd-seite{margin:0 6px 0 0}
+.fremd mark,.blatt mark{background:transparent;color:var(--rot);font-weight:700}
+.wegweisergitter{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
+.wegweiser{display:flex;flex-direction:column;gap:4px;border:1px solid var(--tinte);padding:14px 18px;text-decoration:none;color:var(--tinte)}
+.wegweiser b{font-size:22px;color:var(--rot)}.wegweiser span{font-size:18px}.wegweiser:hover{background:var(--kasten)}
+[id^=i]:target{background:var(--kasten)}
+.begriff{color:inherit;text-decoration:underline dotted;text-underline-offset:3px;cursor:help}
+.suche{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.suche input{font:inherit;font-size:19px;padding:8px 12px;border:1px solid var(--tinte);background:var(--blatt);color:var(--tinte);width:min(420px,100%)}
+.begriffe{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 32px;font-size:18px}
+.begriffe>div{border-bottom:1px dotted var(--linie);padding:6px 0}.begriffe>div:target{background:var(--kasten)}
+body.suchmodus [data-art][hidden]:not(.such-aus){display:grid!important}
+body.suchmodus .knoepfe{display:none}
+.such-aus{display:none!important}
+.w-artikel{max-width:820px;gap:18px}
+.w-zurueck{margin:0;font-size:17px;font-family:'Courier Prime',monospace;text-transform:uppercase;letter-spacing:.06em}
+.w-titel{font-size:46px;line-height:1.05;border-bottom:2px solid var(--rot);padding-bottom:10px}
+.w-inhalt{display:flex;flex-direction:column;gap:2px;font-size:18px;border-left:3px solid var(--linie);padding:4px 0 4px 16px}
+.abschnitt{display:flex;flex-direction:column;gap:10px;font-size:20px;line-height:1.45;padding-top:12px}
+.abschnitt p,.w-artikel>p{margin:0}.abschnitt ul{margin:0;padding-left:24px}
+.abschnitt h3{font-size:28px;color:var(--rot)}
+.w-num{color:var(--gelb);font-family:'Courier Prime',monospace;font-size:18px;margin-right:12px;letter-spacing:.04em}
+.w-kasten{background:var(--kasten);border-left:5px solid var(--ocker);padding:12px 18px;font-size:19px}
+.w-merk{text-align:center;font-style:italic;font-size:22px;border-top:1px solid var(--linie);border-bottom:1px solid var(--linie);padding:10px 24px;color:var(--rot)}
+.w-tafel{width:100%;border-collapse:collapse;font-size:18px}
+.w-tafel th{text-align:left;border-bottom:2px solid var(--tinte);padding:4px 10px 4px 0}
+.w-tafel td{border-bottom:1px dotted var(--linie);padding:6px 10px 6px 0;vertical-align:top}
+.w-tafel .z{text-align:right;font-family:'Courier Prime',monospace;font-size:16px;white-space:nowrap}
+.abschnitt:target{background:var(--kasten)}
+.bildgitter{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px 32px;margin-top:14px}
+.bild{display:flex;flex-direction:column;gap:6px}
+.bild img{display:block;width:100%;height:auto;border:1px solid var(--tinte);background:var(--grund)}
+.bild b{font-size:22px}.bild span{font-size:18px}
+.bild-seit{font-size:17px!important;font-style:italic;color:var(--rot)}
+.bild-datum{font-size:13px!important;color:var(--leise)}
+.bild:target{background:var(--kasten)}
+@media (max-width:760px){
+ .bildgitter{grid-template-columns:1fr}
+ .w-titel{font-size:34px}.abschnitt{font-size:19px}.w-tafel{display:block;overflow-x:auto}
+ .begriffe{grid-template-columns:1fr}
+ .blatt{margin:0;padding:28px 16px 48px;gap:40px}h1{font-size:40px}
+ .bilanz,.schritte,.kacheln,.fenster,.lan{grid-template-columns:1fr}.bilanz>div+div{border-left:0;border-top:1px solid var(--tinte)}
+ .auftrag{grid-template-columns:1fr}.rechts{align-items:flex-start;text-align:left}
+ .eintrag{grid-template-columns:1fr}.eintrag .k{text-align:left;padding-top:0}
+ .fort-z{grid-template-columns:1fr auto}.fort-b{grid-column:1/-1;grid-row:2}
+ .tag{grid-template-columns:56px 1fr 48px}.uhr div{min-width:56px}.uhr b{font-size:36px}
+ .tafel td.z{white-space:normal} .tafel,.tafel tbody,.tafel tr,.tafel td{display:block}.tafel thead{display:none}.tafel td{border:0;padding:2px 0}.tafel tr{border-bottom:1px dotted var(--linie);padding:8px 0}
+}
+</style></head>
+<body><main class="blatt">
+<header style="display:flex;flex-direction:column;gap:14px">
+<div class="kopf"><h1>Hauptbuch des Nachbaus</h1><span class="mono" style="font-size:14px">aktualisiert am: 17.10.2026, 06:28 Uhr</span></div>
+
+<nav><a href="index.html">Übersicht</a><a href="bilder.html">Bilder</a><a href="auftraege.html">Aufträge</a><a href="entscheidungen.html">Entscheidungen</a><a href="baustellen.html">Baustellen</a><a href="verlauf.html">Verlauf</a><a href="einstieg.html">Was läuft &amp; Begriffe</a><a href="wissen.html" aria-current="page">Wissen</a></nav>
+<div class="suche"><input type="search" id="suche" placeholder="Auf allen Seiten suchen …" aria-label="Auf allen Seiten suchen"><span id="treffer" class="mono" style="font-size:15px"></span></div>
+<div id="fremd" class="fremd" hidden></div>
+</header>
+<section class="w-artikel"><p class="w-zurueck"><a href="wissen.html">← alle Artikel</a> · Betrieb und Handel</p><h2 class="w-titel">Vom Schneider</h2><p class="lead">Warum es beim Pläuschchen gleich ist, wen Ihr einladet, warum die Nähstube nie Wolle findet, und womit ein Schneidergeselle anfängt</p><nav class="w-inhalt"><a href="#a1">I · Die sechs Grade und die drei Häuser</a><a href="#a2">II · Das Pläuschchen</a><a href="#a3">III · Welche Talente zählen</a><a href="#a4">IV · Womit Gesellen anfangen</a><a href="#a5">V · Was die Rohstoffsuche findet</a><a href="#a6">VI · Die Ausbauten</a><a href="#a7">VII · Wie die Computergegner Schneider spielen</a><a href="#a8">VIII · Was noch niemand gesehen hat</a></nav><div class="abschnitt" id="i383"><h3 id="a1"><span class="w-num">I</span> Die sechs Grade und die drei Häuser</h3><p>Der Beruf beginnt ganz unten beim <b>Weber</b> und steigt über Näher, <b>Schneider</b>, Kleidermacher und Gewandschneider bis zum <b>Maßschneider</b> auf; im dritten Grad heißt die Frau Schneiderin. <i>Der Name, unter dem das Spiel den Beruf beim Start anbietet, ist also erst der dritte Grad</i> — wie beim Gaukler und beim Totengräber.</p><table class="w-tafel"><thead><tr><th>Haus</th><th>ab Grad</th><th class=z>Bauzeit</th><th class=z>Plätze</th><th class=z>Waren</th><th class=z>Kaufpreis um</th></tr></thead><tbody><tr><td>Nähstube</td><td>1. (Weber)</td><td class=z>1 Jahr</td><td class=z>3</td><td class=z>3</td><td class=z>7.350</td></tr><tr><td>Schneiderei</td><td>3. (Schneider)</td><td class=z>2 Jahre</td><td class=z>4</td><td class=z>5</td><td class=z>15.750</td></tr><tr><td>Gewandschneiderei</td><td>5. (Gewandschneider)</td><td class=z>4 Jahre</td><td class=z>5</td><td class=z>7</td><td class=z>33.750</td></tr></tbody></table><p>Das Rohstofflager läßt sich bis auf 3, 6 und 8 ausbauen, das Warenlager bis auf 2, 4 und 6. Ein Geselle kostet 112, ein Lehrling 56 Gulden je Runde auf „Normal&quot;, wie in den anderen Handwerken.</p><p><b>Aufwerten</b> kostet drei Zehntel des nächsten Baupreises — von der Nähstube zur Schneiderei <b>4.725 Gulden</b>, von dort zur Gewandschneiderei <b>10.125</b> — und dauert so lange wie der Unterschied der Bauzeiten: <b>ein Jahr</b>, dann <b>zwei</b>.</p><p>Die Schneider haben <b>keine Zunft</b>. Sie zahlen Umsatzsteuer statt Gildensteuer. Geöffnet ist von 9 bis 20 Uhr, und wer als Schneider anfängt, bekommt 750 Gulden Startgeld.</p><p>### Wie man an einen Betrieb kommt</p><p>Wer als Schneider beginnt, fängt als Weber an — und ein Weber darf nur die Nähstube führen. Er bekommt also, wie in jedem Beruf, die erste freie Nähstube. <i>Für den Schneider eigens nachgeprüft ist das nicht.</i> Später baut man selbst oder kauft.</p><div class="w-kasten"><p><b>Ein Haus allein macht keinen Schneider.</b> Herstellung, Rohstoffsuche und Pläuschchen zeigt die Werkstatt nur einem Besitzer, der selbst Schneider ist, und zwar in einem Grad, der zu diesem Haus paßt. <i>Wer eine Schneiderei kauft, ohne Schneider zu sein, sieht dort also nichts davon</i> — das ist aus dem Programm geschlossen, nicht gesehen.</p></div></div><div class="abschnitt" id="i384"><h3 id="a2"><span class="w-num">II</span> Das Pläuschchen</h3><p>Das ist die Kunst, die nur der Schneider hat. An der <b>Sitzecke</b> im Arbeitsraum wählt Ihr „Pläuschchen halten&quot;, sucht Euch eine Person aus und ladet sie auf ein Glas Wein ein. Dafür bekommt Ihr <b>Beweise für die Vergehen Eurer Konkurrenten</b>.</p><p><b>Was es kostet:</b> je <b>einen Aktionspunkt</b> — Euch und der eingeladenen Person. Geld, Talent oder Ansehen spielen keine Rolle. Und es geht <b>nur einmal im Jahr</b>; wer es im selben Jahr noch einmal versucht, wird auf das nächste vertröstet.</p><p><b>Wen Ihr einladen könnt:</b> jeden Erwachsenen außer Euch selbst, außer wer im Kerker sitzt, und außer den Inhabern zweier bestimmter Ämter. Wer nicht paßt, steht zwar in der Liste, läßt sich aber nicht wählen.</p><p><b>Was es bringt:</b> Beweise gegen <b>einen einzigen</b> Konkurrenten, nämlich den mit den <b>meisten offenen Taten</b>, für die Ihr noch keinen Beweis habt. Höchstens vier. Gibt es keinen solchen, bleibt der Knopf „Ja, ich hole schon mal den Wein!&quot; gesperrt.</p><div class="w-kasten"><p><b>Wen Ihr einladet, ist gleich.</b> Die Frage im Fenster nennt die Person, als hielte sie die Beweise in Händen. Ausgerechnet wird die Zahl aber allein aus <b>Eurer</b> Lage — die Person trägt nichts bei außer ihrem Aktionspunkt. Wer zwei Gegner belasten will, braucht zwei Jahre.</p></div><p><b>Wie viele Beweise, sagt die Einrichtung.</b> Ohne ein einziges Stück gibt es <b>einen</b>. Jedes der vier Plausch-Stücke hebt die Zahl um eins:</p><table class="w-tafel"><thead><tr><th>Haus</th><th>Stücke, die mitzählen</th><th class=z>höchstens Beweise</th></tr></thead><tbody><tr><td>Nähstube</td><td>Umkleidekabine</td><td class=z>2</td></tr><tr><td>Schneiderei</td><td>Umkleidekabine, Laufsteg</td><td class=z>3</td></tr><tr><td>Gewandschneiderei</td><td>Umkleidekabine, Laufsteg, Weinregal, Spiegel</td><td class=z>4</td></tr></tbody></table><p>In der Gewandschneiderei reichte die Einrichtung für fünf, aber mehr als vier gibt das Spiel nie her. Ein heruntergekommenes Haus drückt die Zahl: Bei halbem Zustand bringen alle vier Stücke höchstens drei Beweise.</p><p class="w-merk">Beim Pläuschchen zählt nicht, wen Ihr fragt, sondern was in Eurer Stube steht.</p><p><b>Eine Meldung bekommt die Person nur, wenn sie ein Spieler oder ein Familienmitglied eines Spielers ist.</b> Einen Bürger, einen Amtsträger oder einen Computergegner kostet das Pläuschchen still einen Punkt. <i>Ob dabei die Aktionspunkte der Person unter null fallen können, ist offen</i> — geprüft werden nur Eure.</p><p><i>All das ist aus dem Programm gelesen. Gesehen hat das Pläuschchen noch niemand</i> — auch die Zahl im Fenster ist nur gerechnet.</p></div><div class="abschnitt" id="i385"><h3 id="a3"><span class="w-num">III</span> Welche Talente zählen</h3><p>Gesucht wurde auf drei voneinander unabhängigen Wegen durchs ganze Programm. <b>Keine Kunst, die nur der Schneider hat, fragt ein Talent</b> — weder das Pläuschchen noch die Rohstoffsuche.</p><table class="w-tafel"><thead><tr><th>Wo</th><th>Talent</th><th>wessen</th><th>Wirkung</th></tr></thead><tbody><tr><td>Herstellung</td><td>Handwerkskunst</td><td>Eure, als Herr des Betriebs</td><td>bis zu ein Viertel schneller, wie in jedem Betrieb</td></tr><tr><td>Meisterstudium</td><td>Handwerkskunst</td><td>Eure</td><td>verkürzt die Wartezeit bis um ein Viertel</td></tr><tr><td>Lehre der Kinder</td><td>Handwerkskunst und Verhandeln</td><td>Eure Kinder</td><td>wie in jedem Handwerk</td></tr><tr><td>Pläuschchen, Rohstoffsuche</td><td>keines</td><td>—</td><td>—</td></tr></tbody></table><p><b>Die Talente Eurer Gesellen zählen an keiner gelesenen Stelle.</b> Daß ein Arbeiter mit seinem eigenen Talent schneller wird, gibt es nur am Friedhof.</p></div><div class="abschnitt" id="i386"><h3 id="a4"><span class="w-num">IV</span> Womit Gesellen anfangen</h3><p>Jeder Grad des Schneiders hat im Spiel eine feste Grundausstattung an Talenten, vom Weber bis zum Maßschneider. <b>Für Schneidergesellen und -lehrlinge ist diese Zeile leer.</b> Sie würfeln deshalb jedes Talent ganz zufällig aus, auch die Handwerkskunst — in der Zählung des Spiels zwischen 21 und 62. Zum Vergleich: Ein Weber beginnt in der Handwerkskunst bei 84 und etwas darüber.</p><p>Fast jedes andere Gewerk gibt seinen Gesellen eine Prägung mit; leer ist die Zeile nur bei ganz wenigen, darunter den Schneidern. <i>Gegengeprüft an sieben Schneidergesellen in Aufnahmen des laufenden Spiels:</i> alle 35 Talentwerte lagen zwischen 21 und 62. Für die Werkstatt ist es ohnehin gleich, weil die Talente der Gesellen nicht zählen.</p></div><div class="abschnitt" id="i387"><h3 id="a5"><span class="w-num">V</span> Was die Rohstoffsuche findet</h3><p>Was sich suchen läßt, hängt nur am Haus, nicht an der Ware, die gerade läuft:</p><table class="w-tafel"><thead><tr><th></th><th>Nähstube</th><th>Schneiderei, Gewandschneiderei</th></tr></thead><tbody><tr><td>suchen läßt sich</td><td><b>Flachs</b></td><td><b>Flachs</b> und <b>Pflanzenfarbstoff</b></td></tr><tr><td>Wolle</td><td><b>nie</b> — sie kommt vom Markt</td><td>ebenso</td></tr></tbody></table><p>Das paßt zu den Waren: Was die Nähstube herstellt, braucht Wolle und Flachs, aber keinen Farbstoff; den braucht erst der Waffenrock der Schneiderei.</p><p><b>Wie viel</b> ein Sammelgang bringt, hängt am Zufall, an der Zahl der Sucher und an den Suchstücken Sichel, Zutatenregal und Webstuhl. Im Winter wird der Fund halbiert — außer mit <b>Warmen Socken</b>, die die Nähstube selbst herstellt.</p></div><div class="abschnitt" id="i388"><h3 id="a6"><span class="w-num">VI</span> Die Ausbauten</h3><p>Gesucht wurde in den Beschreibungen der Stücke und in den Szenen, wo eine Stelle zum Anklicken hängt.</p><table class="w-tafel"><thead><tr><th>wirkt auf</th><th>Stücke</th><th class=z>im größten Haus zusammen</th></tr></thead><tbody><tr><td><b>das Pläuschchen überhaupt erst möglich</b></td><td>Sitzecke (250 Gulden, schon in der Nähstube)</td><td class=z>—</td></tr><tr><td><b>ein Beweis mehr je Stück</b></td><td>Umkleidekabine, Laufsteg, Weinregal, Spiegel</td><td class=z>4</td></tr><tr><td><b>schnellere Arbeit</b></td><td>Schnittmusterkatalog, Walktrommel, Anziehpuppe</td><td class=z>80</td></tr><tr><td><b>mehr Fund bei der Rohstoffsuche</b></td><td>Sichel, Zutatenregal, Webstuhl</td><td class=z>80</td></tr><tr><td><b>Schutz vor Unfällen</b></td><td>Fingerhut, Nadelkissen, Nähmaschine</td><td class=z>80</td></tr><tr><td><b>Schutz vor Einbruch</b></td><td>Fensterläden, Einfriedung, Fenstergitter, Scharfe Eisenteile, Dornenhecke, Eisentür, Wachhund, Wachhundtraining</td><td class=z>80</td></tr><tr><td><b>Pflicht</b></td><td>Schild, Arbeitsraum, Kleiderschrank</td><td class=z>—</td></tr></tbody></table><ul><li><b>Ohne Sitzecke kein Pläuschchen.</b> Die Stelle zum Anklicken hängt an ihr; sie selbst trägt sonst keine Wirkung. <i>Aus der Szene gelesen, am laufenden Spiel noch nicht gesehen.</i></li><li><b>Der Laufsteg</b> zählt nicht nur beim Pläuschchen: Betretet Ihr den Arbeitsraum, läuft etwa jedes fünfte Mal eine von drei Frauen als Modell über den Steg, hin und zurück, bis Ihr wieder geht. <i>Das steht so im Spiel; gefilmt hat es noch niemand.</i></li><li>Die Plausch-Stücke kommen verteilt: die Umkleidekabine schon in der Nähstube, der Laufsteg mit der Schneiderei, Weinregal und Spiegel erst mit der Gewandschneiderei.</li></ul></div><div class="abschnitt" id="i389"><h3 id="a7"><span class="w-num">VII</span> Wie die Computergegner Schneider spielen</h3><p><b>Ein Computergegner plauscht nie.</b> Die Quelle, aus der das Pläuschchen seine Beweise schöpft, nutzen im ganzen Spiel nur zwei Künste — das Pläuschchen und die Séance des Totengräbers —, und beide stehen nur Menschen offen.</p><p><b>Suchen läßt er wie Ihr:</b> Flachs und Pflanzenfarbstoff holt sein Meister selbst, <b>Wolle kauft er</b>. Sonst führt er die Schneiderei wie jedes Handwerk; die Ware wählt sein Meister um 8 und um 13 Uhr.</p><p><b>Kein Einwanderer wird Schneider.</b> Neue Bürger, die in die Stadt ziehen, werden nie Nekromant, Gaukler oder Schneider.</p><div class="w-kasten"><p><b>Im Nachbau.</b> Das Pläuschchen fehlt noch. Es gibt nur den Namen seiner Wirkung und eine Zeile im Ausbaufenster; die Quelle der Beweise steht schon, weil die Séance sie braucht. Die Rohstoffsuche richtet sich im Nachbau nach der Ware statt nach dem Haus — die Nähstube ließe dort also Wolle suchen, anders als im Original. Gesellen würfeln ihre Talente ohne Rücksicht auf den Beruf. Und der Laufsteg bleibt still, weil der Nachbau die Abläufe beim Betreten eines Raums bewußt ausläßt.</p></div></div><div class="abschnitt" id="i390"><h3 id="a8"><span class="w-num">VIII</span> Was noch niemand gesehen hat</h3><p>Fast alles hier ist aus dem Programm gelesen, und auf dem LAN-Wochenende spielt keiner Schneider. Wer einen spielt, kann es prüfen: wie das Pläuschchen Schritt für Schritt aussieht, ob die Zahl der Beweise dieselbe bleibt, wen man auch fragt, ob ein neues Plausch-Stück einen Beweis mehr bringt, ob es ohne Sitzecke wirklich kein Pläuschchen gibt, was ein eingeladener Mitspieler zu lesen bekommt, was das Suchfenster anbietet und ob auf dem Laufsteg ein Modell läuft. Die Aufgaben stehen unter „Aufträge an die Mitspieler&quot;, beim Beruf „Schneider&quot;.</p></div></section>
+</main><script src="suche.js"></script><script>
+(function(){
+  var f=document.getElementById('suche'); if(!f) return;
+  var hier=location.pathname.split('/').pop()||'index.html';
+  var wahl='.eintrag,.auftrag,.fenster>div,.kachel,.begriffe>div,.abschnitt,.bild';
+  var el=[].slice.call(document.querySelectorAll(wahl)), sek=[].slice.call(document.querySelectorAll('main>section'));
+  var t=document.getElementById('treffer'), fr=document.getElementById('fremd');
+  // Gesucht wird Wort fuer Wort, in beliebiger Folge; Umlaute und ß gelten wie ae/oe/ue/ss - die
+  // Seite schreibt "Schloß", gesucht wird "schloss". m merkt sich zu jedem Zeichen der geglaetteten
+  // Form seine Stelle im Original, fuer Ausschnitt und Hervorhebung.
+  function norm(s){var o='',m=[];for(var i=0;i<s.length;i++){var c=s[i].toLowerCase(),
+    r=c==='ä'?'ae':c==='ö'?'oe':c==='ü'?'ue':c==='ß'?'ss':c;for(var j=0;j<r.length;j++){o+=r[j];m.push(i);}}return {s:o,m:m};}
+  function passt(n,w){return w.every(function(x){return n.indexOf(x)>=0;});}
+  function wert(n,w){var p=0;w.forEach(function(x){var k=-1,c=0;if(n.indexOf(x)<120)p+=10;
+    while((k=n.indexOf(x,k+1))>=0&&c<20)c++;p+=c;});return p;}
+  function esc(s){return s.replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+  function ausschnitt(text,w){var N=norm(text),i=N.s.indexOf(w[0]),a=i<0?0:N.m[i];
+    var von=Math.max(0,a-70),bis=Math.min(text.length,a+150),marken=[];
+    w.forEach(function(x){var k=-1;while((k=N.s.indexOf(x,k+1))>=0){var s0=N.m[k],e0=N.m[k+x.length-1]+1;
+      if(s0>=von&&e0<=bis)marken.push([s0,e0]);}});
+    marken.sort(function(p,q){return p[0]-q[0];});
+    var h='',pos=von;marken.forEach(function(r){if(r[0]<pos)return;
+      h+=esc(text.slice(pos,r[0]))+'<mark>'+esc(text.slice(r[0],r[1]))+'</mark>';pos=r[1];});
+    return (von>0?'… ':'')+h+esc(text.slice(pos,bis))+(bis<text.length?' …':'');}
+  function zeig(){
+    var w=norm(f.value).s.split(/\s+/).filter(Boolean), q=w.length>0, n=0;
+    document.body.classList.toggle('suchmodus',q);
+    el.forEach(function(x){if(x._n===undefined)x._n=norm(x.textContent).s;
+      var ja=!q||passt(x._n,w); x.classList.toggle('such-aus',!ja);
+      if(q&&ja){n++; var d=x.closest('details'); if(d) d.open=true;}});
+    sek.forEach(function(s){ if(!q){s.classList.remove('such-aus');return;}
+      s.classList.toggle('such-aus',![].some.call(s.querySelectorAll(wahl),function(x){return !x.classList.contains('such-aus');}));});
+    var fremd=(q&&window.SUCHE)?window.SUCHE.filter(function(e){if(e.n===undefined)e.n=norm(e.x).s;
+      return e.p!==hier&&passt(e.n,w);}):[];
+    fremd.sort(function(a,b){return wert(b.n,w)-wert(a.n,w);});
+    t.textContent=q?(n+' hier, '+fremd.length+' auf anderen Seiten'):'';
+    if(!fremd.length){fr.hidden=true;fr.innerHTML='';return;}
+    var html='';
+    fremd.slice(0,40).forEach(function(e){
+      html+='<a href="'+e.p+'?q='+encodeURIComponent(f.value.trim())+'#'+e.i+'"><span class="fremd-seite">'
+        +esc(window.SEITEN[e.p])+'</span> '+ausschnitt(e.x,w)+'</a>';});
+    if(fremd.length>40) html+='<div class="fremd-seite">und '+(fremd.length-40)+' weitere</div>';
+    fr.innerHTML=html; fr.hidden=false;
+  }
+  f.addEventListener('input',zeig);
+  var q=new URLSearchParams(location.search).get('q');
+  if(q){f.value=q; zeig(); var z=location.hash&&document.getElementById(location.hash.slice(1)); if(z) setTimeout(function(){z.scrollIntoView({block:'center'});},50);}
+})();
+document.querySelectorAll('[data-filter]').forEach(function(gruppe){
+  var ziel=document.getElementById(gruppe.dataset.filter);
+  gruppe.querySelectorAll('button').forEach(function(b){
+    b.addEventListener('click',function(){
+      gruppe.querySelectorAll('button').forEach(function(x){x.setAttribute('aria-pressed',x===b)});
+      ziel.querySelectorAll('[data-art]').forEach(function(z){
+        var w=b.dataset.wert, a=z.dataset.art.split(' ');
+        z.hidden = !(w==='*' ? a.indexOf('offen')>=0 : a.indexOf(w)>=0);
+      });
+    });
+  });
+  gruppe.querySelector('button').click();
+});
+(function(){
+  var uhr=document.getElementById('uhr'); if(!uhr) return;
+  var ziel=new Date(+uhr.dataset.ziel);
+  function stell(){
+    var r=ziel-new Date();
+    if(r<=0){uhr.innerHTML='<div><b>jetzt</b><span>die LAN läuft</span></div>';return;}
+    var t=Math.floor(r/864e5), s=Math.floor(r/36e5)%24, m=Math.floor(r/6e4)%60;
+    uhr.querySelector('[data-t]').textContent=t;
+    uhr.querySelector('[data-s]').textContent=s;
+    uhr.querySelector('[data-m]').textContent=m;
+  }
+  stell(); setInterval(stell,30000);
+})();
+</script></body></html>
