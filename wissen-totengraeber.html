@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Vom Totengräber · Hauptbuch des Nachbaus</title>
+<meta name="description" content="Projektstand von OpenGilde: was gemessen ist, was noch zu tun ist, und was Mitspieler am Original erspielen können.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,700;1,500&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--grund:#3B2A1E;--blatt:#F4ECD8;--tinte:#2A1F16;--rot:#7A1F1F;--blau:#234A6B;--ocker:#8A5A12;--gelb:#C9A24A;--linie:#A8977A;--leise:#5A4A38;--kasten:#EADFC4}
+*{box-sizing:border-box}
+body{margin:0;background:var(--grund);color:var(--tinte);font-family:'Cormorant Garamond',Georgia,serif}
+a{color:var(--rot)}a:hover{color:#4F1212}
+.mono{font-family:'Courier Prime',monospace}
+.blatt{max-width:1180px;margin:56px auto;background:var(--blatt);padding:56px 64px 72px;display:flex;flex-direction:column;gap:56px}
+h1{margin:0;font-size:60px;line-height:1}h2{margin:0;font-size:34px}h3{margin:0;font-size:24px}
+.kopf{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:12px;border-bottom:2px solid var(--rot);padding-bottom:12px}
+.lead{margin:0;font-size:21px;font-style:italic;max-width:860px}
+nav{display:flex;gap:10px 22px;flex-wrap:wrap;font-size:19px}
+section{display:flex;flex-direction:column;gap:16px}
+.bilanz{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border:1px solid var(--tinte)}
+.bilanz>div{padding:20px 24px;display:flex;flex-direction:column;gap:6px}
+.bilanz>div+div{border-left:1px solid var(--tinte)}
+.spalte{font-size:26px;font-weight:700;border-bottom:1px solid var(--tinte);padding-bottom:6px}
+.posten{display:flex;justify-content:space-between;gap:12px;font-size:20px;border-bottom:1px dotted var(--linie)}
+.summe{display:flex;justify-content:space-between;font-size:22px;font-weight:700;border-top:3px double var(--tinte);margin-top:auto;padding-top:6px}
+.hinweis{border:1px solid var(--blau);padding:14px 20px;font-size:19px}
+.lan{border:3px double var(--rot);padding:24px 28px;display:grid;grid-template-columns:auto 1fr;gap:28px;align-items:center}
+.uhr{display:flex;gap:14px}.uhr div{text-align:center;min-width:72px}
+.uhr b{display:block;font-family:'Courier Prime',monospace;font-size:46px;line-height:1;color:var(--rot)}
+.uhr span{font-size:15px;text-transform:uppercase;letter-spacing:.08em}
+.kacheln{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 32px}
+.kachel{border-bottom:1px dotted var(--linie);padding:10px 0}.kachel b{font-size:21px;display:block}.kachel span{font-size:18px}
+.tafel{width:100%;border-collapse:collapse;font-size:19px}
+.tafel th{text-align:left;border-bottom:2px solid var(--tinte);padding:6px 10px 6px 0;font-size:18px}
+.tafel td{border-bottom:1px dotted var(--linie);padding:10px 10px 10px 0;vertical-align:top}
+.tafel td.z{font-family:'Courier Prime',monospace;font-size:16px;white-space:nowrap}
+.tafel tr.gesamt td{border-top:3px double var(--tinte);border-bottom:0;font-weight:700}
+.tag{display:grid;grid-template-columns:70px 1fr 64px;gap:14px;align-items:center;font-size:14px}
+.balken{height:9px;border-bottom:1px dotted var(--linie);display:flex}.balken span{display:block;height:9px}
+.knoepfe{display:flex;gap:8px;flex-wrap:wrap}
+.knoepfe button{min-height:44px;padding:6px 18px;cursor:pointer;border:1px solid var(--tinte);font:inherit;font-size:18px;background:transparent;color:var(--tinte)}
+.knoepfe button[aria-pressed=true]{background:var(--tinte);color:var(--blatt)}
+.auftrag{display:grid;grid-template-columns:70px 1fr 170px;gap:20px;padding:16px 0;border-bottom:1px solid var(--linie)}
+.auftrag .t{font-size:23px;font-weight:700}.auftrag .w{font-size:19px}
+.rechts{display:flex;flex-direction:column;gap:8px;align-items:flex-end;text-align:right}
+.siegel{font-family:'Courier Prime',monospace;font-weight:700;font-size:14px;text-transform:uppercase;letter-spacing:.1em;padding:4px 10px;border:2px solid}
+.schritte{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;background:var(--kasten);padding:22px 26px;font-size:18px}
+.schritte b{display:block;font-size:22px}
+.eintrag{display:grid;grid-template-columns:1fr 110px;gap:16px;border-bottom:1px dotted var(--linie);padding:12px 0}
+.eintrag .t{font-size:22px;font-weight:700}.eintrag .x{font-size:19px}
+.eintrag .k{font-family:'Courier Prime',monospace;font-size:13px;color:var(--leise);text-align:right;padding-top:6px}
+.gruppe{display:flex;flex-direction:column;gap:0;margin-top:8px}
+.gruppe h3{border-bottom:1px solid var(--tinte);padding-bottom:4px}
+.fort{display:flex;flex-direction:column;gap:14px;border:1px solid var(--tinte);padding:20px 24px}
+.fort-z{display:grid;grid-template-columns:minmax(0,260px) minmax(0,1fr) auto;gap:16px;align-items:center;font-size:19px}
+.fort-b{height:16px;border:1px solid var(--tinte);background:var(--kasten)}.fort-b span{display:block;height:100%}
+.fenster{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px 32px;font-size:19px}
+.fenster div{border-bottom:1px dotted var(--linie);padding:4px 0}
+[hidden]{display:none!important}
+nav a[aria-current=page]{color:var(--tinte);font-weight:700;text-decoration:none}
+.fremd{border:1px solid var(--tinte);background:var(--kasten);padding:10px 16px;display:flex;flex-direction:column;gap:4px;font-size:17px;max-height:60vh;overflow:auto}
+.fremd a{display:block;padding:6px 0;border-bottom:1px dotted var(--linie)}.fremd-seite{font-family:'Courier Prime',monospace;font-size:13px;text-transform:uppercase;letter-spacing:.08em;margin-top:8px}.fremd a .fremd-seite{margin:0 6px 0 0}
+.fremd mark,.blatt mark{background:transparent;color:var(--rot);font-weight:700}
+.wegweisergitter{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
+.wegweiser{display:flex;flex-direction:column;gap:4px;border:1px solid var(--tinte);padding:14px 18px;text-decoration:none;color:var(--tinte)}
+.wegweiser b{font-size:22px;color:var(--rot)}.wegweiser span{font-size:18px}.wegweiser:hover{background:var(--kasten)}
+[id^=i]:target{background:var(--kasten)}
+.begriff{color:inherit;text-decoration:underline dotted;text-underline-offset:3px;cursor:help}
+.suche{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.suche input{font:inherit;font-size:19px;padding:8px 12px;border:1px solid var(--tinte);background:var(--blatt);color:var(--tinte);width:min(420px,100%)}
+.begriffe{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 32px;font-size:18px}
+.begriffe>div{border-bottom:1px dotted var(--linie);padding:6px 0}.begriffe>div:target{background:var(--kasten)}
+body.suchmodus [data-art][hidden]:not(.such-aus){display:grid!important}
+body.suchmodus .knoepfe{display:none}
+.such-aus{display:none!important}
+.w-artikel{max-width:820px;gap:18px}
+.w-zurueck{margin:0;font-size:17px;font-family:'Courier Prime',monospace;text-transform:uppercase;letter-spacing:.06em}
+.w-titel{font-size:46px;line-height:1.05;border-bottom:2px solid var(--rot);padding-bottom:10px}
+.w-inhalt{display:flex;flex-direction:column;gap:2px;font-size:18px;border-left:3px solid var(--linie);padding:4px 0 4px 16px}
+.abschnitt{display:flex;flex-direction:column;gap:10px;font-size:20px;line-height:1.45;padding-top:12px}
+.abschnitt p,.w-artikel>p{margin:0}.abschnitt ul{margin:0;padding-left:24px}
+.abschnitt h3{font-size:28px;color:var(--rot)}
+.w-num{color:var(--gelb);font-family:'Courier Prime',monospace;font-size:18px;margin-right:12px;letter-spacing:.04em}
+.w-kasten{background:var(--kasten);border-left:5px solid var(--ocker);padding:12px 18px;font-size:19px}
+.w-merk{text-align:center;font-style:italic;font-size:22px;border-top:1px solid var(--linie);border-bottom:1px solid var(--linie);padding:10px 24px;color:var(--rot)}
+.w-tafel{width:100%;border-collapse:collapse;font-size:18px}
+.w-tafel th{text-align:left;border-bottom:2px solid var(--tinte);padding:4px 10px 4px 0}
+.w-tafel td{border-bottom:1px dotted var(--linie);padding:6px 10px 6px 0;vertical-align:top}
+.w-tafel .z{text-align:right;font-family:'Courier Prime',monospace;font-size:16px;white-space:nowrap}
+.abschnitt:target{background:var(--kasten)}
+.bildgitter{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px 32px;margin-top:14px}
+.bild{display:flex;flex-direction:column;gap:6px}
+.bild img{display:block;width:100%;height:auto;border:1px solid var(--tinte);background:var(--grund)}
+.bild b{font-size:22px}.bild span{font-size:18px}
+.bild-seit{font-size:17px!important;font-style:italic;color:var(--rot)}
+.bild-datum{font-size:13px!important;color:var(--leise)}
+.bild:target{background:var(--kasten)}
+@media (max-width:760px){
+ .bildgitter{grid-template-columns:1fr}
+ .w-titel{font-size:34px}.abschnitt{font-size:19px}.w-tafel{display:block;overflow-x:auto}
+ .begriffe{grid-template-columns:1fr}
+ .blatt{margin:0;padding:28px 16px 48px;gap:40px}h1{font-size:40px}
+ .bilanz,.schritte,.kacheln,.fenster,.lan{grid-template-columns:1fr}.bilanz>div+div{border-left:0;border-top:1px solid var(--tinte)}
+ .auftrag{grid-template-columns:1fr}.rechts{align-items:flex-start;text-align:left}
+ .eintrag{grid-template-columns:1fr}.eintrag .k{text-align:left;padding-top:0}
+ .fort-z{grid-template-columns:1fr auto}.fort-b{grid-column:1/-1;grid-row:2}
+ .tag{grid-template-columns:56px 1fr 48px}.uhr div{min-width:56px}.uhr b{font-size:36px}
+ .tafel td.z{white-space:normal} .tafel,.tafel tbody,.tafel tr,.tafel td{display:block}.tafel thead{display:none}.tafel td{border:0;padding:2px 0}.tafel tr{border-bottom:1px dotted var(--linie);padding:8px 0}
+}
+</style></head>
+<body><main class="blatt">
+<header style="display:flex;flex-direction:column;gap:14px">
+<div class="kopf"><h1>Hauptbuch des Nachbaus</h1><span class="mono" style="font-size:14px">aktualisiert am: 17.10.2026, 03:18 Uhr</span></div>
+
+<nav><a href="index.html">Übersicht</a><a href="bilder.html">Bilder</a><a href="auftraege.html">Aufträge</a><a href="entscheidungen.html">Entscheidungen</a><a href="baustellen.html">Baustellen</a><a href="verlauf.html">Verlauf</a><a href="einstieg.html">Was läuft &amp; Begriffe</a><a href="wissen.html" aria-current="page">Wissen</a></nav>
+<div class="suche"><input type="search" id="suche" placeholder="Auf allen Seiten suchen …" aria-label="Auf allen Seiten suchen"><span id="treffer" class="mono" style="font-size:15px"></span></div>
+<div id="fremd" class="fremd" hidden></div>
+</header>
+<section class="w-artikel"><p class="w-zurueck"><a href="wissen.html">← alle Artikel</a> · Betrieb und Handel</p><h2 class="w-titel">Vom Totengräber</h2><p class="lead">Was die Gehilfen wirklich können, welcher Ausbau welche Kunst freischaltet, und warum die Hälfte der dunklen Dienste anders wirkt, als sie verspricht</p><nav class="w-inhalt"><a href="#a1">I · Die sechs Grade und die drei Friedhöfe</a><a href="#a2">II · Die Gehilfen</a><a href="#a3">III · Welche Talente zählen</a><a href="#a4">IV · Gräber und Pächter</a><a href="#a5">V · Die dunklen Dienste</a><a href="#a6">VI · Was die Ausbauten wirklich tun</a><a href="#a7">VII · Wie die Computergegner Totengräber spielen</a></nav><div class="abschnitt" id="i345"><h3 id="a1"><span class="w-num">I</span> Die sechs Grade und die drei Friedhöfe</h3><p>Der Beruf beginnt ganz unten beim <b>Totengräber</b> und steigt über Sargträger, <b>Friedhofswärter</b>, Balsamierer und Bestatter bis zum <b>Nekromanten</b> auf. <i>Der Name, unter dem das Spiel den Beruf beim Start anbietet, ist also erst der dritte Grad</i> — wie beim Gaukler.</p><table class="w-tafel"><thead><tr><th>Friedhof</th><th>ab Grad</th><th class=z>Bauzeit</th><th class=z>Gehilfen</th><th class=z>Gräber</th></tr></thead><tbody><tr><td>Totenfeld</td><td>1. (Totengräber)</td><td class=z>1 Jahr</td><td class=z>3</td><td class=z>12</td></tr><tr><td>Gottesacker</td><td>3. (Friedhofswärter)</td><td class=z>4 Jahre</td><td class=z>4</td><td class=z>20</td></tr><tr><td>Friedhof</td><td>5. (Bestatter)</td><td class=z>8 Jahre</td><td class=z>5</td><td class=z>30</td></tr></tbody></table><p><b>Das Aufwerten dauert so lange wie der Unterschied der beiden Bauzeiten:</b> vom Totenfeld zum Gottesacker <b>drei Jahre</b>, vom Gottesacker zum Friedhof <b>vier</b>. Das gilt für jeden Betrieb — darum dauerte es bei Alchimistenstube und Steinmetzhütte zwei. Es kostet drei Zehntel des Grundpreises.</p><p>Wer als Totengräber beginnt, bekommt ein Totenfeld. Wer später wechselt, bekommt keinen Betrieb und fängt im 1. Grad an; dann bleibt Bauen — das Totenfeld darf man ab dem ersten Grad — oder einem Besitzer ein Kaufangebot machen. Das Kölner Totenfeld, das auf der Karte keinem gehört, bekommt beim Spielbeginn ein Computergegner, wenn kein Spieler als Totengräber anfängt. <i>Das ist aus dem Programm geschlossen, wie beim Lager des Gauklers.</i></p></div><div class="abschnitt" id="i346"><h3 id="a2"><span class="w-num">II</span> Die Gehilfen</h3><p>Gehilfen werden nicht eingestellt, sondern <b>aus Leichen gemacht</b>, am Steinkreis — umsonst, ohne Aktionspunkte. Gebraucht wird nur ein freier Platz (drei, vier oder fünf je Friedhof) und ein belegtes Grab. Der neue Gehilfe trägt <b>Namen und halbe Talente des Toten</b>, und das Grab ist danach um einen Bewohner ärmer. Leer läuft der Friedhof dabei nicht: Liegen weniger als vier darin, erfindet er sich selbst neue Tote.</p><p><b>Ein Gehilfe hält nur einige Jahre.</b> Er zehrt jedes Jahr ein gutes Stück seiner Lebenskraft auf; die Lebenszeit-Ausbauten bremsen das (siehe unten). Ein Gehilfe ohne Friedhof stirbt zum nächsten Jahreswechsel.</p><p><b>Füttern</b> (im Gehilfenbuch) kostet, was Ihr am Regler einstellt — <b>10 bis höchstens 150 Gulden</b>. Das Geld bekommen die Gehilfen in die eigene Tasche, und Euer <b>Ansehen bei jedem</b> steigt um ein Drittel seines Anteils. Das ist mehr als eine Geste: Wie gern die Belegschaft für Euch arbeitet, macht die Arbeit um <b>bis zu ein Achtel schneller oder langsamer</b>, und die Gehilfen zählen dabei mit. <i>Am Personalbuch ist das am laufenden Spiel bestätigt; am Gehilfenbuch noch nicht.</i></p><p><b>Einschläfern</b> kostet nichts. Der Gehilfe ist sofort tot und macht Platz.</p><p>### Gehilfen verbessern — nur im Herbst</p><p>Im <b>Nekromantenturm</b> schnallt Ihr einen Gehilfen auf den Experimentiertisch und wählt Handwerkskunst, Bei Nacht und Nebel oder Rhetorik. Das kostet nichts, geht aber nur im <b>Herbst</b> und nur mit einem Gehilfen zur Zeit. Die Sitzung dauert dreieinhalb Stunden; dabei steigt das Talent in bis zu sechs Schritten, von null aus um gut einen Stern zusammen. Je höher das Talent schon ist, desto weniger bringt der nächste Schritt.</p><div class="w-kasten"><p><b>Euer Meister kann es besser.</b> Habt Ihr einen Meister eingestellt und steht der Turm, schnallt er selbst Gehilfen auf den Tisch — <b>in jeder Jahreszeit</b>, mit einem Viertel Aussicht je Runde, sobald einer ein Talent unter vier Sternen hat. Er nimmt Handwerkskunst, wenn sie unter Bei Nacht und Nebel liegt — sonst eines der beiden anderen.</p></div></div><div class="abschnitt" id="i347"><h3 id="a3"><span class="w-num">III</span> Welche Talente zählen</h3><p>Gesucht wurde auf drei voneinander unabhängigen Wegen durchs ganze Programm.</p><table class="w-tafel"><thead><tr><th>Wo</th><th>Talent</th><th>wessen</th><th>Wirkung</th></tr></thead><tbody><tr><td><b>Herstellung</b></td><td>Handwerkskunst</td><td><b>jedes Gehilfen</b></td><td>ein Gehilfe arbeitet mit <b>halber Kraft plus seiner Handwerkskunst</b> — ohne Talent halb so schnell wie ein Arbeiter anderswo, mit vollem anderthalbmal</td></tr><tr><td>Herstellung</td><td>Handwerkskunst</td><td>Eure</td><td>wie in jedem Betrieb ein wenig schneller</td></tr><tr><td><b>Altern lassen</b></td><td>Bei Nacht und Nebel</td><td>des Gehilfen gegen das des Opfers</td><td>wie oft der Hauch trifft</td></tr><tr><td>Aufstieg</td><td>Handwerkskunst</td><td>Eure</td><td>wie lange Ihr auf das Meisterstudium wartet</td></tr></tbody></table><p>Die Rhetorik eines Gehilfen zählt <b>nirgends</b>. Heimsuchung, Séance, Versicherung, Grabpflege, Knochensuche und Nebel fragen <b>kein</b> Talent.</p><p class="w-merk">Wer Gehilfen verbessert, nimmt Handwerkskunst — sie ist das einzige Talent, das jeden Tag zählt.</p><p><i>Ein Stern mehr bei einem von drei Gehilfen macht die Arbeit um etwa fünf bis sieben Prozent schneller. So steht es im Programm; gesehen hat es noch niemand.</i> Bis vor kurzem stand in unseren eigenen Unterlagen das Gegenteil.</p><div class="w-kasten"><p><b>Ein Mensch am Friedhof taugt wenig.</b> Ein bezahlter Arbeiter zählt in der Herstellung kaum, bei der Grabpflege zu einem Viertel und bei der Knochensuche gar nicht. Am Friedhof arbeiten die Toten.</p></div></div><div class="abschnitt" id="i348"><h3 id="a4"><span class="w-num">IV</span> Gräber und Pächter</h3><p>Ein Grab vermietet Ihr für <b>zehn Jahre</b>. Die Miete richtet sich nach dem <b>Vermögen des Mieters</b>, nicht nach Eurem: beim Grabhügel 400 bis 900 Gulden, beim kleinen Grab das Doppelte, beim mittleren das Dreifache, bei der Gruft das Vierfache. Davon behaltet Ihr <b>vier Fünftel</b> beim Grabhügel, sieben Zehntel beim kleinen, drei Fünftel beim mittleren Grab und die Hälfte bei der Gruft; der Rest verschwindet. Für Euch selbst kostet ein Grab nichts. Umbetten kostet 500 Gulden, und nur innerhalb desselben Friedhofs.</p><p><b>Gräber verwildern</b> — ein frisch gepflegtes schnell, ein verwildertes kaum noch; ganz auf null fällt keines. Sinkt ein vermietetes Grab unter zwei Drittel, beschwert sich der Pächter: Euer Ansehen bei ihm fällt <b>alle vier Jahre um 5 bis 20</b>. Pflegen läßt Ihr es mit einem Gehilfen (Komposthaufen nötig); das Grab wählt Ihr im Pflegefenster selbst. Kleine Gräber erholen sich schneller als große.</p><div class="w-kasten"><p><b>Ein Fehler des Originals.</b> Euer Meister soll laut Programm verwilderte Gräber von sich aus pflegen lassen. Er sucht dafür den Komposthaufen aber auf die falsche Weise und findet ihn nie. <i>Ob das am laufenden Spiel stimmt, prüfen wir gerade über viele Spieljahre.</i></p></div></div><div class="abschnitt" id="i349"><h3 id="a5"><span class="w-num">V</span> Die dunklen Dienste</h3><table class="w-tafel"><thead><tr><th>Dienst</th><th>Stelle</th><th>Aktionspunkte</th><th>Geld</th><th>was er tut</th></tr></thead><tbody><tr><td><b>Heimsuchung</b></td><td>Gargoylenkopf</td><td>4 bis 12</td><td>—</td><td>soll das Opfer drei bis sieben Jahre von Drohbrief, Pamphlet, Sabotage und Prügel abhalten</td></tr><tr><td><b>Altern lassen</b></td><td>Ruinen</td><td>4</td><td>—</td><td>soll dem Opfer Jahre stehlen — <b>verjüngt es</b> (eigener Artikel)</td></tr><tr><td><b>Nebel des Grauens</b></td><td>Nebelmaschine im Turm</td><td>4 bis 16</td><td>—</td><td>macht Leute im Umkreis krank</td></tr><tr><td><b>Versicherung</b></td><td>Engelsstatue</td><td>—</td><td>der Käufer zahlt Euch</td><td>ein Gehilfe bietet anderen die Bulle an</td></tr><tr><td><b>Séance</b></td><td>Krypta</td><td>4, 6 oder 8</td><td>—</td><td>Beweise, ein Trank oder ein Pakt mit dem Teufel</td></tr></tbody></table><p><b>Die Heimsuchung gelingt immer, und sie bewirkt praktisch nichts.</b> Mehr Punkte kaufen nur mehr Dauer, und zwar ein Jahr je <b>zwei</b> Punkte — fünf Punkte dauern so lange wie vier. Am Opfer ändert sie nichts; ihre ganze Wirkung soll eine Sperre sein. Die Abfrage dieser Sperre ist aber doppelt verdreht: Sie würde den <b>Auftraggeber</b> sperren statt des Opfers, und sie vergleicht zwei Zahlen, die nie zusammenpassen. <i>In keinem unserer Spielstände hätte sie je gegriffen.</i></p><p><b>Der Nebel des Grauens</b> zieht viermal im Abstand einer halben Stunde über die Gegend und trifft die Leute in den Häusern im Umkreis mit 25 bis 75 Prozent — je näher am Friedhof, desto eher. Die Stärke bestimmt die Krankheit: niedrig Angst im Dunkeln, Vergeßlichkeit oder Lachanfall, mittel Husten oder Haarausfall, hoch <b>Ruhr oder Lungenentzündung</b>. Rohstoffe, wie das Menü sie ankündigt, kostet er nicht. <i>Am LAN-Wochenende gesehen:</i> bei mittlerer Stärke zwei von vier Arbeitern mit Haarausfall.</p><p><b>Die Versicherung</b> verkauft Ihr nicht selbst — ein Gehilfe klappert bis zu fünf fremde Wohnhäuser ab und fragt, wer in der Nähe ist. Ein Mitspieler bekommt ein Fenster mit dem Preis; ein Computergegner sagt mit halber Chance zu. Der Preis liegt je nach Vermögen des Käufers zwischen <b>200 und 1.666 Gulden</b>, und gefragt wird nur, wer mehr als das Zweiunddreißigfache besitzt. Die Bulle holt ihren Besitzer nach dem Tod für <b>vier bis sechs Jahre</b> zurück. <b>Wer einen Erben hat, wird beim Sterben gefragt; wer keinen hat, wird ohne Frage gerettet.</b></p><p><b>Die Séance</b> kostet 4, 6 oder 8 Punkte, und die sind auch bei einer Absage weg. Die Geister lehnen ohne Ausbauten oft ab, mit allen vier Séance-Stücken selten:</p><table class="w-tafel"><thead><tr><th>Wunsch</th><th class=z>Punkte</th><th>Absage ohne / mit allen Stücken</th><th>was er bringt</th></tr></thead><tbody><tr><td>Informationen</td><td class=z>4</td><td>60 % / 10 %</td><td>bis zu vier Beweise gegen einen Übeltäter — gibt es keinen, 512 bis 1.023 Gulden</td></tr><tr><td>Schatzkarte</td><td class=z>6</td><td>70 % / 20 %</td><td>einen von fünfzehn Tränken — ist der Beutel voll, eine Truhe mit 1.000 bis 2.023 Gulden</td></tr><tr><td>Pakt mit dem Teufel</td><td class=z>8</td><td>90 % / 40 %</td><td>ein Viertel Eures Vermögens, 5.000 bis 25.000 Gulden — in drei Jahren zurückzuzahlen</td></tr></tbody></table><p>Jeder gelungene Wunsch füllt Eure <b>Lebenskraft ganz auf</b>, obwohl der Geist verspricht, sie zu nehmen. Und wer den Pakt nach drei Jahren nicht bezahlen kann, <b>verliert seine Kinder</b> — hat er keine, stirbt er selbst.</p></div><div class="abschnitt" id="i350"><h3 id="a6"><span class="w-num">VI</span> Was die Ausbauten wirklich tun</h3><p>Ein Ausbau wirkt auf einem von drei Wegen: über eine Zahl in seiner Beschreibung, weil das Spiel ihn ausdrücklich abfragt, oder weil an ihm <b>eine Stelle zum Anklicken hängt</b>. Nach allen dreien wurde gesucht.</p><table class="w-tafel"><thead><tr><th>wirkt auf</th><th>Ausbauten</th></tr></thead><tbody><tr><td><b>eine Kunst überhaupt erst möglich</b></td><td>Komposthaufen (Grabpflege), Gargoylenkopf (Heimsuchung), Engelsstatue (Versicherung), Ruinen (Altern lassen), Nekromantenturm (Verbessern), <b>Nebelmaschine</b> im Turm (Nebel), Krypta (Séance)</td></tr><tr><td><b>schnellere Arbeit</b></td><td>Knochenhammer, Seziermesser, Friedhofsleuchter, Kohlebecken</td></tr><tr><td><b>mehr Fund bei der Knochensuche</b></td><td>Schaufel und Eimer, Urnen, Okular, Urnenregal, Geheimes Grab</td></tr><tr><td><b>Gehilfen leben länger</b></td><td>Sanduhr, Steinkreis mit Drudenfuß, Kapellenaltar, Bildnis des Lebens, Friedhofsbank, Balsamierkit, Blume im Steinmund</td></tr><tr><td><b>weniger faule Gehilfen</b></td><td>Abgehängtes Kreuz, Rabenfigurine, Versteinerter Gehilfe</td></tr><tr><td><b>seltener eine Absage in der Séance</b></td><td>Sandrelief, Schutzzeichen, Mechanischer Geist, Bildnis des Vaters</td></tr><tr><td><b>Schutz vor Einbruch</b></td><td>Friedhofshecken, Friedhofstor, Friedhofsstatuen</td></tr><tr><td><b>mehr und größere Gräber</b></td><td>Gräber klein, Gräber mittel, Gruft</td></tr><tr><td><b>nichts gefunden</b></td><td>Opferstein, Ledergurte, Liebesgestirne, Gehilfenkontrolle, Ikonenschrein, Spinnennetz, <b>Knorriger Baum</b></td></tr></tbody></table><ul><li><b>Die Nebelmaschine braucht Ihr eigens.</b> Der Turm allein reicht für den Nebel nicht.</li><li><b>Der Gargoylenkopf und der Komposthaufen passen schon ins Totenfeld</b> — Heimsuchung und Grabpflege gehen also ab dem ersten Grad. Engelsstatue und Turm kommen mit dem Gottesacker, Ruinen und Krypta erst mit dem Friedhof.</li><li><b>Sechs Stücke versprechen Frieden unter den Gehilfen.</b> Gestritten wird aber gar nicht — das Spiel kennt keinen Streit unter Gehilfen. Und der <b>Knorrige Baum</b> soll einen Raben beherbergen, der faule Gehilfen meldet; er tut nichts. Zusammen 1.850 Gulden für Zierde.</li><li><b>Das Totenfeld hat keinen Raben:</b> Dort faulenzen die Gehilfen bei einem Viertel der Gelegenheiten, und kein Ausbau ändert das. Mit allen Raben-Stücken kommt man im Gottesacker auf 15 Prozent, im Friedhof auf 5.</li><li><b>Das Bildnis des Lebens</b> zeigt im Gottesacker 15 an, wirkt aber wie überall mit 10.</li><li><i>Daß eine Stelle wirklich fehlt, solange ihr Stück nicht steht, ist aus den Szenen des Spiels gelesen und am laufenden Spiel noch nicht gesehen.</i></li></ul></div><div class="abschnitt" id="i351"><h3 id="a7"><span class="w-num">VII</span> Wie die Computergegner Totengräber spielen</h3><p>Ein Computergegner mit Friedhof kennt genau <b>vier</b> Künste und wählt jedesmal zufällig eine, die gerade geht:</p><ul><li><b>Heimsuchung</b> — nur mit Gargoylenkopf, und nur, wenn er <b>zwei freie Gehilfen</b> hat; den letzten schickt er nie. Er setzt immer <b>vier Punkte</b>, also drei Jahre.</li><li><b>Nebel des Grauens</b> — nur mit Nekromantenturm.</li><li><b>Altern lassen</b> — nur mit Ruinen.</li><li><b>Versicherung</b> — nur mit Engelsstatue. <i>Ihr könnt also auch von einem Computergegner eine Bulle angeboten bekommen.</i></li></ul><p><b>Was er nie tut:</b> Gräber pflegen, Gehilfen füttern, eine Séance halten. Gehilfen macht und schult bei ihm der <b>Meister</b>, nicht der Herr. Seine Grabpflege scheitert am selben Fehler wie Eure (siehe oben).</p><p>Seine Kundschaft kommt von selbst: Bürger ab Ende zwanzig mieten sich Gräber, ohne daß irgendwer dafür etwas tun muß.</p><div class="w-kasten"><p><b>Was ihm den Beruf verdirbt:</b> Sein Altern lassen verjüngt das Opfer, seine Heimsuchung hält niemanden ab. <i>Ein Computergegner, der Euch heimsucht oder altern läßt, tut Euch also eher einen Gefallen.</i> Gefährlich ist von seinen vier Künsten nur der Nebel. Gesehen haben wir einen Computer-Totengräber bei der Arbeit noch nicht — wer einen erlebt, bitte notieren.</p></div><p class="w-merk">Am Friedhof arbeiten die Toten — füttert sie, schult ihre Hände, und vertraut keinem Hilfetext.</p></div></section>
+</main><script src="suche.js"></script><script>
+(function(){
+  var f=document.getElementById('suche'); if(!f) return;
+  var hier=location.pathname.split('/').pop()||'index.html';
+  var wahl='.eintrag,.auftrag,.fenster>div,.kachel,.begriffe>div,.abschnitt,.bild';
+  var el=[].slice.call(document.querySelectorAll(wahl)), sek=[].slice.call(document.querySelectorAll('main>section'));
+  var t=document.getElementById('treffer'), fr=document.getElementById('fremd');
+  // Gesucht wird Wort fuer Wort, in beliebiger Folge; Umlaute und ß gelten wie ae/oe/ue/ss - die
+  // Seite schreibt "Schloß", gesucht wird "schloss". m merkt sich zu jedem Zeichen der geglaetteten
+  // Form seine Stelle im Original, fuer Ausschnitt und Hervorhebung.
+  function norm(s){var o='',m=[];for(var i=0;i<s.length;i++){var c=s[i].toLowerCase(),
+    r=c==='ä'?'ae':c==='ö'?'oe':c==='ü'?'ue':c==='ß'?'ss':c;for(var j=0;j<r.length;j++){o+=r[j];m.push(i);}}return {s:o,m:m};}
+  function passt(n,w){return w.every(function(x){return n.indexOf(x)>=0;});}
+  function wert(n,w){var p=0;w.forEach(function(x){var k=-1,c=0;if(n.indexOf(x)<120)p+=10;
+    while((k=n.indexOf(x,k+1))>=0&&c<20)c++;p+=c;});return p;}
+  function esc(s){return s.replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+  function ausschnitt(text,w){var N=norm(text),i=N.s.indexOf(w[0]),a=i<0?0:N.m[i];
+    var von=Math.max(0,a-70),bis=Math.min(text.length,a+150),marken=[];
+    w.forEach(function(x){var k=-1;while((k=N.s.indexOf(x,k+1))>=0){var s0=N.m[k],e0=N.m[k+x.length-1]+1;
+      if(s0>=von&&e0<=bis)marken.push([s0,e0]);}});
+    marken.sort(function(p,q){return p[0]-q[0];});
+    var h='',pos=von;marken.forEach(function(r){if(r[0]<pos)return;
+      h+=esc(text.slice(pos,r[0]))+'<mark>'+esc(text.slice(r[0],r[1]))+'</mark>';pos=r[1];});
+    return (von>0?'… ':'')+h+esc(text.slice(pos,bis))+(bis<text.length?' …':'');}
+  function zeig(){
+    var w=norm(f.value).s.split(/\s+/).filter(Boolean), q=w.length>0, n=0;
+    document.body.classList.toggle('suchmodus',q);
+    el.forEach(function(x){if(x._n===undefined)x._n=norm(x.textContent).s;
+      var ja=!q||passt(x._n,w); x.classList.toggle('such-aus',!ja);
+      if(q&&ja){n++; var d=x.closest('details'); if(d) d.open=true;}});
+    sek.forEach(function(s){ if(!q){s.classList.remove('such-aus');return;}
+      s.classList.toggle('such-aus',![].some.call(s.querySelectorAll(wahl),function(x){return !x.classList.contains('such-aus');}));});
+    var fremd=(q&&window.SUCHE)?window.SUCHE.filter(function(e){if(e.n===undefined)e.n=norm(e.x).s;
+      return e.p!==hier&&passt(e.n,w);}):[];
+    fremd.sort(function(a,b){return wert(b.n,w)-wert(a.n,w);});
+    t.textContent=q?(n+' hier, '+fremd.length+' auf anderen Seiten'):'';
+    if(!fremd.length){fr.hidden=true;fr.innerHTML='';return;}
+    var html='';
+    fremd.slice(0,40).forEach(function(e){
+      html+='<a href="'+e.p+'?q='+encodeURIComponent(f.value.trim())+'#'+e.i+'"><span class="fremd-seite">'
+        +esc(window.SEITEN[e.p])+'</span> '+ausschnitt(e.x,w)+'</a>';});
+    if(fremd.length>40) html+='<div class="fremd-seite">und '+(fremd.length-40)+' weitere</div>';
+    fr.innerHTML=html; fr.hidden=false;
+  }
+  f.addEventListener('input',zeig);
+  var q=new URLSearchParams(location.search).get('q');
+  if(q){f.value=q; zeig(); var z=location.hash&&document.getElementById(location.hash.slice(1)); if(z) setTimeout(function(){z.scrollIntoView({block:'center'});},50);}
+})();
+document.querySelectorAll('[data-filter]').forEach(function(gruppe){
+  var ziel=document.getElementById(gruppe.dataset.filter);
+  gruppe.querySelectorAll('button').forEach(function(b){
+    b.addEventListener('click',function(){
+      gruppe.querySelectorAll('button').forEach(function(x){x.setAttribute('aria-pressed',x===b)});
+      ziel.querySelectorAll('[data-art]').forEach(function(z){
+        var w=b.dataset.wert, a=z.dataset.art.split(' ');
+        z.hidden = !(w==='*' ? a.indexOf('offen')>=0 : a.indexOf(w)>=0);
+      });
+    });
+  });
+  gruppe.querySelector('button').click();
+});
+(function(){
+  var uhr=document.getElementById('uhr'); if(!uhr) return;
+  var ziel=new Date(+uhr.dataset.ziel);
+  function stell(){
+    var r=ziel-new Date();
+    if(r<=0){uhr.innerHTML='<div><b>jetzt</b><span>die LAN läuft</span></div>';return;}
+    var t=Math.floor(r/864e5), s=Math.floor(r/36e5)%24, m=Math.floor(r/6e4)%60;
+    uhr.querySelector('[data-t]').textContent=t;
+    uhr.querySelector('[data-s]').textContent=s;
+    uhr.querySelector('[data-m]').textContent=m;
+  }
+  stell(); setInterval(stell,30000);
+})();
+</script></body></html>
