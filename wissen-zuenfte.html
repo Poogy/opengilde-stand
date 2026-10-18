@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Von Zünften und Gildenmeistern · Hauptbuch des Nachbaus</title>
+<meta name="description" content="Projektstand von OpenGilde: was gemessen ist, was noch zu tun ist, und was Mitspieler am Original erspielen können.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,700;1,500&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--grund:#3B2A1E;--blatt:#F4ECD8;--tinte:#2A1F16;--rot:#7A1F1F;--blau:#234A6B;--ocker:#8A5A12;--gelb:#C9A24A;--linie:#A8977A;--leise:#5A4A38;--kasten:#EADFC4}
+*{box-sizing:border-box}
+body{margin:0;background:var(--grund);color:var(--tinte);font-family:'Cormorant Garamond',Georgia,serif}
+a{color:var(--rot)}a:hover{color:#4F1212}
+.mono{font-family:'Courier Prime',monospace}
+.blatt{max-width:1180px;margin:56px auto;background:var(--blatt);padding:56px 64px 72px;display:flex;flex-direction:column;gap:56px}
+h1{margin:0;font-size:60px;line-height:1}h2{margin:0;font-size:34px}h3{margin:0;font-size:24px}
+.kopf{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:12px;border-bottom:2px solid var(--rot);padding-bottom:12px}
+.lead{margin:0;font-size:21px;font-style:italic;max-width:860px}
+nav{display:flex;gap:10px 22px;flex-wrap:wrap;font-size:19px}
+section{display:flex;flex-direction:column;gap:16px}
+.bilanz{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border:1px solid var(--tinte)}
+.bilanz>div{padding:20px 24px;display:flex;flex-direction:column;gap:6px}
+.bilanz>div+div{border-left:1px solid var(--tinte)}
+.spalte{font-size:26px;font-weight:700;border-bottom:1px solid var(--tinte);padding-bottom:6px}
+.posten{display:flex;justify-content:space-between;gap:12px;font-size:20px;border-bottom:1px dotted var(--linie)}
+.summe{display:flex;justify-content:space-between;font-size:22px;font-weight:700;border-top:3px double var(--tinte);margin-top:auto;padding-top:6px}
+.hinweis{border:1px solid var(--blau);padding:14px 20px;font-size:19px}
+.lan{border:3px double var(--rot);padding:24px 28px;display:grid;grid-template-columns:auto 1fr;gap:28px;align-items:center}
+.lanzahlen{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border:1px solid var(--tinte)}
+.lanzahlen>div{padding:16px 20px;border-bottom:1px dotted var(--linie)}
+.lanzahlen b{display:block;font-family:'Courier Prime',monospace;font-size:40px;line-height:1.1;color:var(--rot)}
+.lanzahlen span{font-size:18px}
+.lan-gruppe{margin-top:18px;border-bottom:1px solid var(--tinte);padding-bottom:4px}
+.folge{font-size:16px;color:var(--leise);font-style:italic}
+.kacheln{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 32px}
+.kachel{border-bottom:1px dotted var(--linie);padding:10px 0}.kachel b{font-size:21px;display:block}.kachel span{font-size:18px}
+.tafel{width:100%;border-collapse:collapse;font-size:19px}
+.tafel th{text-align:left;border-bottom:2px solid var(--tinte);padding:6px 10px 6px 0;font-size:18px}
+.tafel td{border-bottom:1px dotted var(--linie);padding:10px 10px 10px 0;vertical-align:top}
+.tafel td.z{font-family:'Courier Prime',monospace;font-size:16px;white-space:nowrap}
+.tafel tr.gesamt td{border-top:3px double var(--tinte);border-bottom:0;font-weight:700}
+.tag{display:grid;grid-template-columns:70px 1fr 64px;gap:14px;align-items:center;font-size:14px}
+.balken{height:9px;border-bottom:1px dotted var(--linie);display:flex}.balken span{display:block;height:9px}
+.knoepfe{display:flex;gap:8px;flex-wrap:wrap}
+.knoepfe button{min-height:44px;padding:6px 18px;cursor:pointer;border:1px solid var(--tinte);font:inherit;font-size:18px;background:transparent;color:var(--tinte)}
+.knoepfe button[aria-pressed=true]{background:var(--tinte);color:var(--blatt)}
+/* Ausblenden statt Filtern (Nutzer, 18.10.2026): wirkt neben jedem Filterknopf, darum eine Klasse an der
+   Liste und kein weiterer Knopf in der Filtergruppe, die immer nur einen gedrueckt haelt */
+body:not(.suchmodus) #auftragsliste.ohne-optik .auftrag[data-art~="optisch"]{display:none}
+.auftrag{display:grid;grid-template-columns:70px 1fr 170px;gap:20px;padding:16px 0;border-bottom:1px solid var(--linie)}
+.auftrag .t{font-size:23px;font-weight:700}.auftrag .w{font-size:19px}
+.rechts{display:flex;flex-direction:column;gap:8px;align-items:flex-end;text-align:right}
+.siegel{font-family:'Courier Prime',monospace;font-weight:700;font-size:14px;text-transform:uppercase;letter-spacing:.1em;padding:4px 10px;border:2px solid}
+.schritte{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;background:var(--kasten);padding:22px 26px;font-size:18px}
+.schritte b{display:block;font-size:22px}
+.eintrag{display:grid;grid-template-columns:1fr 110px;gap:16px;border-bottom:1px dotted var(--linie);padding:12px 0}
+.eintrag .t{font-size:22px;font-weight:700}.eintrag .x{font-size:19px}
+.eintrag .k{font-family:'Courier Prime',monospace;font-size:13px;color:var(--leise);text-align:right;padding-top:6px}
+.gruppe{display:flex;flex-direction:column;gap:0;margin-top:8px}
+.gruppe h3{border-bottom:1px solid var(--tinte);padding-bottom:4px}
+.fort{display:flex;flex-direction:column;gap:14px;border:1px solid var(--tinte);padding:20px 24px}
+.fort-z{display:grid;grid-template-columns:minmax(0,260px) minmax(0,1fr) auto;gap:16px;align-items:center;font-size:19px}
+.fort-b{height:16px;border:1px solid var(--tinte);background:var(--kasten)}.fort-b span{display:block;height:100%}
+.fenster{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px 32px;font-size:19px}
+.fenster div{border-bottom:1px dotted var(--linie);padding:4px 0}
+[hidden]{display:none!important}
+nav a[aria-current=page]{color:var(--tinte);font-weight:700;text-decoration:none}
+.fremd{border:1px solid var(--tinte);background:var(--kasten);padding:10px 16px;display:flex;flex-direction:column;gap:4px;font-size:17px;max-height:60vh;overflow:auto}
+.fremd a{display:block;padding:6px 0;border-bottom:1px dotted var(--linie)}.fremd-seite{font-family:'Courier Prime',monospace;font-size:13px;text-transform:uppercase;letter-spacing:.08em;margin-top:8px}.fremd a .fremd-seite{margin:0 6px 0 0}
+.fremd mark,.blatt mark{background:transparent;color:var(--rot);font-weight:700}
+.wegweisergitter{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
+.wegweiser{display:flex;flex-direction:column;gap:4px;border:1px solid var(--tinte);padding:14px 18px;text-decoration:none;color:var(--tinte)}
+.wegweiser b{font-size:22px;color:var(--rot)}.wegweiser span{font-size:18px}.wegweiser:hover{background:var(--kasten)}
+[id^=i]:target{background:var(--kasten)}
+.begriff{color:inherit;text-decoration:underline dotted;text-underline-offset:3px;cursor:help}
+.suche{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.suche input{font:inherit;font-size:19px;padding:8px 12px;border:1px solid var(--tinte);background:var(--blatt);color:var(--tinte);width:min(420px,100%)}
+.begriffe{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 32px;font-size:18px}
+.begriffe>div{border-bottom:1px dotted var(--linie);padding:6px 0}.begriffe>div:target{background:var(--kasten)}
+body.suchmodus [data-art][hidden]:not(.such-aus){display:grid!important}
+body.suchmodus .knoepfe{display:none}
+.such-aus{display:none!important}
+.w-artikel{max-width:820px;gap:18px}
+.w-zurueck{margin:0;font-size:17px;font-family:'Courier Prime',monospace;text-transform:uppercase;letter-spacing:.06em}
+.w-titel{font-size:46px;line-height:1.05;border-bottom:2px solid var(--rot);padding-bottom:10px}
+.w-inhalt{display:flex;flex-direction:column;gap:2px;font-size:18px;border-left:3px solid var(--linie);padding:4px 0 4px 16px}
+.abschnitt{display:flex;flex-direction:column;gap:10px;font-size:20px;line-height:1.45;padding-top:12px}
+.abschnitt p,.w-artikel>p{margin:0}.abschnitt ul{margin:0;padding-left:24px}
+.abschnitt h3{font-size:28px;color:var(--rot)}
+.w-num{color:var(--gelb);font-family:'Courier Prime',monospace;font-size:18px;margin-right:12px;letter-spacing:.04em}
+.w-kasten{background:var(--kasten);border-left:5px solid var(--ocker);padding:12px 18px;font-size:19px}
+.w-merk{text-align:center;font-style:italic;font-size:22px;border-top:1px solid var(--linie);border-bottom:1px solid var(--linie);padding:10px 24px;color:var(--rot)}
+.w-tafel{width:100%;border-collapse:collapse;font-size:18px}
+.w-tafel th{text-align:left;border-bottom:2px solid var(--tinte);padding:4px 10px 4px 0}
+.w-tafel td{border-bottom:1px dotted var(--linie);padding:6px 10px 6px 0;vertical-align:top}
+.w-tafel .z{text-align:right;font-family:'Courier Prime',monospace;font-size:16px;white-space:nowrap}
+.abschnitt:target{background:var(--kasten)}
+.bildgitter{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px 32px;margin-top:14px}
+.bild{display:flex;flex-direction:column;gap:6px}
+.bild img{display:block;width:100%;height:auto;border:1px solid var(--tinte);background:var(--grund)}
+.bild b{font-size:22px}.bild span{font-size:18px}
+.bild-seit{font-size:17px!important;font-style:italic;color:var(--rot)}
+.bild-datum{font-size:13px!important;color:var(--leise)}
+.bild:target{background:var(--kasten)}
+@media (max-width:760px){
+ .bildgitter{grid-template-columns:1fr}
+ .w-titel{font-size:34px}.abschnitt{font-size:19px}.w-tafel{display:block;overflow-x:auto}
+ .begriffe{grid-template-columns:1fr}
+ .blatt{margin:0;padding:28px 16px 48px;gap:40px}h1{font-size:40px}
+ .bilanz,.schritte,.kacheln,.fenster,.lan{grid-template-columns:1fr}.bilanz>div+div{border-left:0;border-top:1px solid var(--tinte)}
+ .auftrag{grid-template-columns:1fr}.rechts{align-items:flex-start;text-align:left}
+ .eintrag{grid-template-columns:1fr}.eintrag .k{text-align:left;padding-top:0}
+ .fort-z{grid-template-columns:1fr auto}.fort-b{grid-column:1/-1;grid-row:2}
+ .tag{grid-template-columns:56px 1fr 48px}.lanzahlen{grid-template-columns:1fr}
+ .tafel td.z{white-space:normal} .tafel,.tafel tbody,.tafel tr,.tafel td{display:block}.tafel thead{display:none}.tafel td{border:0;padding:2px 0}.tafel tr{border-bottom:1px dotted var(--linie);padding:8px 0}
+}
+</style></head>
+<body><main class="blatt">
+<header style="display:flex;flex-direction:column;gap:14px">
+<div class="kopf"><h1>Hauptbuch des Nachbaus</h1><span class="mono" style="font-size:14px">aktualisiert am: 18.10.2026, 16:40 Uhr</span></div>
+
+<nav><a href="index.html">Übersicht</a><a href="lan.html">LAN-Wochenende</a><a href="bilder.html">Bilder</a><a href="auftraege.html">Aufträge</a><a href="entscheidungen.html">Entscheidungen</a><a href="baustellen.html">Baustellen</a><a href="verlauf.html">Verlauf</a><a href="einstieg.html">Was läuft &amp; Begriffe</a><a href="wissen.html" aria-current="page">Wissen</a></nav>
+<div class="suche"><input type="search" id="suche" placeholder="Auf allen Seiten suchen …" aria-label="Auf allen Seiten suchen"><span id="treffer" class="mono" style="font-size:15px"></span></div>
+<div id="fremd" class="fremd" hidden></div>
+</header>
+<section class="w-artikel"><p class="w-zurueck"><a href="wissen.html">← alle Artikel</a> · Stadt und Ämter</p><h2 class="w-titel">Von Zünften und Gildenmeistern</h2><p class="lead">Welche Gewerke eine Zunft haben, wie das Zunfthaus entsteht, wer Gildenmeister wird — und was der Meister damit anfangen kann</p><nav class="w-inhalt"><a href="#a1">I · Vier Zünfte, nicht mehr</a><a href="#a2">II · Das Zunfthaus baut die Stadt von selbst</a><a href="#a3">III · Die Gildensteuer</a><a href="#a4">IV · Wie man Gildenmeister wird</a><a href="#a5">V · Was das Amt einbringt</a><a href="#a6">VI · Die drei Maßnahmen</a><a href="#a7">VII · Das Preisgerücht</a><a href="#a8">VIII · Arbeiter aufwiegeln</a><a href="#a9">IX · Politik — je nach Zunft etwas anderes</a><a href="#a10">X · Wie das Zunfthaus wächst — und wer es bezahlt</a><a href="#a11">XI · Was die Texte versprechen — und das Programm nicht hält</a><a href="#a12">XII · Im Nachbau</a></nav><div class="abschnitt" id="i709"><h3 id="a1"><span class="w-num">I</span> Vier Zünfte, nicht mehr</h3><p>Eine Zunft im vollen Sinn — mit eigenem Haus, eigenem Meister und eigener Steuer — haben im Spiel genau <b>vier Gewerke</b>:</p><table class="w-tafel"><thead><tr><th>Zunft</th><th>ihre Betriebe</th><th>das Ehrenamt</th></tr></thead><tbody><tr><td>Parfumeure</td><td>Siederei, Duftwerkstatt, Parfumerie</td><td>Gildenmeister der Parfumeure</td></tr><tr><td>Schmiede</td><td>Gießerei, Schmiede, Goldschmiede</td><td>Gildenmeister der Schmiede</td></tr><tr><td>Steinmetze</td><td>Maurerei, Steinschneiderei, Steinmetzhütte</td><td>Gildenmeister der Steinmetze</td></tr><tr><td>Tischler</td><td>Tischlerei, Drechslerei, Sägewerk</td><td>Gildenmeister der Tischler</td></tr></tbody></table><p>Alle anderen haben keine: Wirte, Schneider, Alchimisten, Händler, Geldleiher, Geistliche, Diebe, Räuber, Totengräber und Gaukler. Für die Steuer und für das Amt zählen nur diese vier.</p><div class="w-kasten"><p><b>Warum das Spiel trotzdem überall von Innungen redet.</b> Jeder der fünfzehn Berufsstände trägt im Spiel einen Vereinsnamen: die <b>Schmiede-Innung</b>, die <b>Steinmetzen-Gaffel</b> — ein kölnisches Wort —, die <i>Versammlung der Tischler</i>, die <i>olfaktorische Gesellschaft</i> der Parfumeure, aber eben auch die <b>Schneider-Innung</b>, die <i>Vereinigung gegen die Sperrstunde</i> der Wirte oder der <i>Eidgenössische Geldleiher-Verbund</i>. Das sind Namen für den Berufsstand, an dem die Meistergrade hängen. Ein Zunfthaus folgt daraus nicht. Die Schneider-Innung hat keines, keinen Gildenmeister und keine Gildensteuer. In diesem Artikel heißt „Zunft“ darum nur eine der vier.</p></div></div><div class="abschnitt" id="i710"><h3 id="a2"><span class="w-num">II</span> Das Zunfthaus baut die Stadt von selbst</h3><p>Kein Spieler gründet ein Zunfthaus. Zu jedem Jahresbeginn sieht das Spiel nach, ob eine Zunft in der Stadt schon ein Haus hat. Hat sie keines, aber <b>mindestens drei Betriebe</b> ihres Gewerks — gleich wem sie gehören —, gibt die Stadt eines in Bau. In Köln steht zu Beginn der Partie keines.</p><p>Das Haus hat drei Stufen, und jede ist ein eigenes Gebäude:</p><table class="w-tafel"><thead><tr><th class=z>Stufe</th><th>Name</th><th class=z>Grundpreis</th></tr></thead><tbody><tr><td class=z>1</td><td>Handwerkshaus</td><td class=z>7.400</td></tr><tr><td class=z>2</td><td>Zunfthaus</td><td class=z>17.600</td></tr><tr><td class=z>3</td><td>Gildensitz</td><td class=z>39.200</td></tr></tbody></table><p>Die Stadt baut nur die erste Stufe. Höher kommt das Haus nur, wenn der Gildenmeister es aufwertet (siehe unten).</p><p><b>Drinnen</b> gibt es auf jeder Stufe dieselben drei Räume: die <b>Halle</b>, das <b>Sekretariat</b> und den <b>Sitzungssaal</b>, dazu die <b>Gildenkasse</b>. Was dazukommt, ist Zierde: das Zunftwappen, ab der zweiten Stufe ein roter Teppich und die Gildenvitrine, im Gildensitz Säulen und ein großes Bild des Gildenmeisters.</p><p><b>Geöffnet</b> ist das Zunfthaus von 7 bis 22 Uhr. Kaufen, verkaufen oder abreißen kann es niemand.</p></div><div class="abschnitt" id="i711"><h3 id="a3"><span class="w-num">III</span> Die Gildensteuer</h3><p>Wer einer Zunft angehört, zahlt <b>Gildensteuer</b> statt Umsatzsteuer. Beide werden auf das erhoben, was Ihr im Jahr verkauft habt, und beide gehen in die <b>Stadtkasse</b>. Die Gildensteuer bekommt die Zunft also nicht. Den Satz bestimmt der Bürgermeister, zwischen 6 und 18 Prozent, zu Beginn 10.</p><p>Aber: <b>Ohne fertiges Zunfthaus keine Gildensteuer.</b> Solange das Haus Eurer Zunft nicht steht oder noch im Bau ist, zahlt Ihr Umsatzsteuer wie alle anderen. Die Gildensteuer beginnt also erst, wenn die Zunft drei Betriebe hat und die Stadt das Haus fertig gebaut hat.</p></div><div class="abschnitt" id="i712"><h3 id="a4"><span class="w-num">IV</span> Wie man Gildenmeister wird</h3><p>Der Amtstext verspricht, das Ehrenamt gehe „in regelmäßigen Abständen“ an den mit dem <i>relativ größten finanziellen Erfolg in den zurückliegenden Jahren</i>. Das klingt nach dem, der am meisten zugelegt hat. Gerechnet wird etwas anderes:</p><ul><li><b>Geprüft wird jedes Jahr</b>, zu Jahresbeginn, für alle vier Zünfte.</li><li><b>Anwärter</b> ist, wer einen Betrieb des Gewerks führt und selbst diesem Beruf angehört, gleich welcher Meistergrad. Computergegner zählen genauso.</li><li>Die Zunft braucht <b>mindestens drei Betriebe</b> in der Stadt und ein <b>stehendes Zunfthaus</b>. Fehlt eines davon, wird niemand Gildenmeister.</li><li>Es gewinnt der Anwärter mit dem <b>größten Gesamtvermögen</b> — aber nur, wenn er das <i>jetzige</i> Vermögen des Amtsinhabers <b>übertrifft</b>. Gleichstand reicht nicht, der Inhaber bleibt.</li></ul><p>„Relativ“ heißt also: relativ zum Inhaber, nicht zum eigenen Vorjahr. Eine Amtszeit gibt es nicht. Wer Gildenmeister ist, bleibt es, bis ein Reicherer kommt.</p><p><b>Verlieren kann man das Amt auch ohne Nebenbuhler.</b> Wer den Beruf wechselt, ist es zum nächsten Jahresbeginn los; wer stirbt oder hingerichtet wird, ebenso. Der Sitz bleibt dann leer, bis jemand die Regeln oben erfüllt. Beide Wechsel, Aufstieg wie Rauswurf, meldet das Spiel mit einer Nachricht.</p><div class="w-kasten"><p><b>Ein Ereignis, das die Zünfte lahmlegt.</b> Die Chroniken kennen den Befehl „Gildensitze brach“. Solange er läuft, vergibt das Spiel kein Gildenmeisteramt, und die vier Ämter werden geräumt. Vorgesehen ist er ein einziges Mal, in der Augsburger Chronik — und dort in einer Schreibweise, an der das Original selbst scheitert. In Köln kommt er nicht vor.</p></div></div><div class="abschnitt" id="i713"><h3 id="a5"><span class="w-num">V</span> Was das Amt einbringt</h3><ul><li><b>Geld:</b> jedes Jahr <b>3.000 Gulden</b>, wie jedes der sieben Ehrenämter. Wer zugleich ein Stadtamt hat, bekommt beides.</li><li><b>Ansehen:</b> Das Zunfthaus der eigenen Zunft macht Eindruck, wie ein schönes Wohnhaus. Jedes Zierstück zählt — Wappen, Teppich, Säulen und Vitrine je einen Punkt, das Bild des Gildenmeisters zwei. Ein voll ausgestattetes Haus bringt so bis zu <b>1</b>, <b>3</b> oder <b>6</b> Prozentpunkte Sympathie, je nach Stufe.</li><li><b>Ein eigener Schlüssel:</b> Der Gildenmeister kommt zu jeder Stunde in das Haus seiner Zunft, auch nach 22 Uhr. <i>Im Programm gelesen, am laufenden Spiel nicht ausprobiert.</i></li><li><b>Die besonderen Maßnahmen:</b> Nur er darf die drei Maßnahmen im Zunfthaus ergreifen und das Haus ausbauen. Jeder andere bekommt den Bescheid, Zutritt und Nutzung seien „nur dem Gildenmeister gestattet“.</li></ul><div class="w-kasten"><p><b>Eine Ausstellung, die nur Meister trifft.</b> Unter den Zufällen des Jahres gibt es einen, der nur einem Gildenmeister zustoßen kann: Ihr richtet eine städtische Ausstellung Eurer Zunft aus. Sie kostet <b>1 bis 4 Prozent Eures Vermögens</b>, und jedes Mitglied Eures Berufsstands mag Euch danach um 1 bis 8 Punkte lieber — jedes einzeln gewürfelt. Einen Teil der Spielerfiguren überspringt die Ausstellung; welche genau, ist <i>nicht ganz geklärt</i>.</p></div></div><div class="abschnitt" id="i714"><h3 id="a6"><span class="w-num">VI</span> Die drei Maßnahmen</h3><p>Im Zunfthaus kann der Gildenmeister drei Maßnahmen ergreifen:</p><table class="w-tafel"><thead><tr><th>Maßnahme</th><th>Raum im Zunfthaus</th><th>Ausbau nötig</th><th class=z>Aktionspunkte</th></tr></thead><tbody><tr><td>Warenpreise manipulieren</td><td>Sekretariat</td><td>—</td><td class=z>3</td></tr><tr><td>Arbeiter aufwiegeln</td><td>Halle</td><td>ab Stufe 2</td><td class=z>5</td></tr><tr><td>Politik</td><td>Sitzungssaal</td><td>ab Stufe 3</td><td class=z>8</td></tr></tbody></table><p>Für die zweite und dritte muss das Zunfthaus <b>Eurer eigenen Zunft</b> weit genug ausgebaut sein und darf gerade nicht im Bau stehen.</p><p>Jede Maßnahme geht <b>einmal je Jahr</b>. Ist sie verbraucht, sagt das Spiel es Euch; zu Beginn des nächsten Jahres ist sie wieder frei.</p><p>Dieselben drei Maßnahmen stehen auch den <b>Computerspielern</b> offen — als eigene Handlungen ihrer Planung, nicht über das Menü.</p></div><div class="abschnitt" id="i715"><h3 id="a7"><span class="w-num">VII</span> Das Preisgerücht</h3><p>Der Menütext verspricht, Ihr könntet die Preise von <b>zwei zufälligen Waren</b> einer Berufsgruppe „erhöhen“ oder „verfallen lassen“. Zur Wahl stehen <b>sieben Gewerke</b>, jedes mit seinem Wappen: Schmiede, Steinmetze, Tischler, Wirtshäuser, Parfumeure, Alchimisten — und die <b>Kirche</b>. Händler, Geldleiher oder Wache sind nicht dabei; sie stellen nichts her, woran man drehen könnte.</p><p>So geht das Spiel vor:</p><p>1. Es sucht das <b>am höchsten ausgebaute Gebäude</b> dieses Gewerks — in der ganzen Stadt, gleich wem es gehört. Ihr könnt also den Markt Eures Konkurrenten treffen, ohne seinen Betrieb zu kennen. 2. Aus dessen Warenliste zieht es <b>zwei Waren</b>. 3. Beide bekommen <b>denselben</b> Faktor.</p><div class="w-kasten"><p><b>Der Text sagt „Preise“, das Spiel dreht an der Nachfrage.</b> Im Augenblick der Tat springt kein Preis. Verändert wird, wie gefragt eine Ware am Markt gilt — und zwar wird diese Kennzahl nicht verschoben, sondern <b>überschrieben</b>. Der Preis wandert danach mit jedem Markttakt ein Stück auf sein neues Ziel zu, über dieselbe Preiskurve, die auch sonst läuft.</p></div><p>Wie stark, hängt am Talent <b>„Bei Nacht und Nebel“</b> — nicht an der Rhetorik. Wer Gerüchte streut, tut es heimlich. Im ungestörten Markt liegt die Kennzahl im Mittel bei genau 1:</p><table class="w-tafel"><thead><tr><th></th><th class=z>ohne Talent</th><th>volles Talent</th></tr></thead><tbody><tr><td>Erhöhen</td><td class=z>1,2</td><td>1,6 bis 2,0</td></tr><tr><td>Verfallen lassen</td><td class=z>0,8</td><td>0,5 bis 0,2</td></tr></tbody></table><p>Ein Meister im Verborgenen kann die Nachfrage also verdoppeln — oder auf ein Fünftel drücken.</p><p>Die Nachricht geht an <b>alle Spieler</b>, in einer von drei Fassungen, mit Gewerk und den Namen beider Waren. <b>Wer das Gerücht gestreut hat, steht nicht darin.</b></p><div class="w-kasten"><p><b>Schon wieder die Steinmetze?</b> Ein Computer-Zunftmeister soll das Gewerk wählen, bei dem er selbst am wenigsten zu verlieren hat. An der Stelle, wo er sich für ein Gewerk entscheidet, steht im Programm des Originals aber fest „das zweite“, und das zweite in der Liste sind die Steinmetze — offenbar ein Versehen. Darum treffen die Gerüchte der Computergegner in Köln nur Schmiede oder Steinmetze: die Schmiede nur, wenn sie ohnehin die beste Wahl wären, sonst die Steinmetze. Tischler, Wirte, Parfumeure, Alchimisten und Kirche kommen nie dran. <i>Das ist im Programm gelesen; wie oft es im Spiel vorkommt, ist nicht gezählt.</i> Wer selbst ein Gerücht streut, wählt das Gewerk frei.</p></div></div><div class="abschnitt" id="i716"><h3 id="a8"><span class="w-num">VIII</span> Arbeiter aufwiegeln</h3><p>Ihr wählt auf der Stadtkarte den Betrieb eines Konkurrenten — der eigene geht nicht — und bezahlt die Belegschaft dafür, dass sie ihrem Herrn gram wird. Die Summe ist <b>ein Hundertstel Eures Vermögens</b>, aber nie weniger als <b>160</b>. Das Spiel prüft vorher, ob Ihr sie habt.</p><p>Dann:</p><ul><li><b>Jeder Arbeiter</b> des Betriebs verliert Gunst für seinen Arbeitgeber. Wie viel, sagt Eure <b>Rhetorik</b> und ein Wurf: von <b>12</b> ohne Rhetorik bis <b>89</b> bei voller; mit voller Rhetorik nie unter 51.</li><li>Die Summe wird <b>unter den Arbeitern aufgeteilt</b>.</li></ul><div class="w-kasten"><p><b>Geld aus dem Nichts.</b> Jeder Arbeiter bekommt seinen Anteil — und einen kleinen festen Betrag <b>obendrauf</b>, den niemand bezahlt hat. Die Belegschaft erhält also mehr, als Ihr ausgegeben habt. Gemessen ist der Zuschlag; wie viele Gulden er genau ausmacht, ist <i>nicht ganz geklärt</i>, und ob er Absicht war, steht nirgends.</p></div><p>Der Betriebsinhaber erfährt davon, die übrigen Spieler bekommen eine allgemeine Nachricht.</p></div><div class="abschnitt" id="i717"><h3 id="a9"><span class="w-num">IX</span> Politik — je nach Zunft etwas anderes</h3><p>Die teuerste Maßnahme heißt bei jeder Zunft anders und tut auch anders:</p><table class="w-tafel"><thead><tr><th>Zunft</th><th>Überschrift</th><th>was wirklich geschieht</th></tr></thead><tbody><tr><td>Schmiede, Tischler</td><td>Zwist in einer Kammer säen</td><td>in der gewählten Kammer verliert <b>jeder bei jedem</b> Gunst, in beide Richtungen; Ihr selbst bleibt außen vor</td></tr><tr><td>Steinmetze</td><td>Bewunderung erzeugen</td><td><b>Eure</b> Gunst steigt bei jedem Mitglied der gewählten Kammer</td></tr><tr><td>Parfumeure</td><td>Jemanden aus dem Amt „entfernen“</td><td>ein gewählter Amtsträger verliert seinen Sitz</td></tr></tbody></table><p>Die Kammern tragen Namen: bei den Stadtdienern, unter den Miliz-Ämtern, bei den städtischen Informanten, im Stadtrat, auf kirchlicher Ebene, auf Landesebene. Die Reichsebene ist im Menü gesperrt.</p><p>Der Betrag für Zwist und Bewunderung ist <b>derselbe wie beim Aufwiegeln</b>: 12 bis 89, nach Rhetorik und Wurf.</p><p><b>Ob es glückt, entscheidet ein Wurf — und sonst nichts.</b> Die Politik gelingt in <b>70 von 100</b> Fällen, ganz gleich, wie begabt Ihr seid. Das Talent bestimmt nur, wie stark sie wirkt, wenn sie wirkt. Für jede Zunft gibt es eigene Meldungen für Gelingen und Fehlschlag — an Euch, an die Betroffenen und an alle anderen.</p><div class="w-kasten"><p><b>Die Statue gibt es nicht.</b> Der Text der Steinmetze erzählt von einer Statue für das Rathaus. Im Programm kommt weder ein Gebäude noch ein Gegenstand noch eine Ausgabe dafür vor — nur die Gunst. Ähnlich beim Duft der Parfumeure: Im Text legt das Opfer sein Amt „nieder“, im Programm wird der Sitz schlicht geräumt.</p></div><p class="w-merk">Der Text erzählt eine Geschichte; gerechnet wird mit Gunst und Nachfrage.</p></div><div class="abschnitt" id="i718"><h3 id="a10"><span class="w-num">X</span> Wie das Zunfthaus wächst — und wer es bezahlt</h3><p>Den Ausbau besorgt der Gildenmeister selbst, und zwar über <b>dasselbe Gebäudemenü wie bei einem Betrieb</b>: „Gebäude um eine Stufe aufwerten“. Ein eigenes Menü im Zunfthaus gibt es dafür nicht.</p><ul><li><b>Das Menü bekommt nur er.</b> Klickt ein anderer auf das Zunfthaus, sieht er nur, in welchem Zustand es ist und was es wert ist — keinen einzigen Knopf. Auch der Meister einer fremden Zunft nicht.</li><li><b>Sein Menü ist schmal:</b> Renovieren, Anbauen, Räume, Aufwerten. Verkaufen oder Abreißen kann er das Haus nicht.</li><li><b>Bezahlt wird aus der Zunftkasse, nicht aus seinem Beutel.</b> Der Preis ist derselbe wie beim Betrieb: drei Zehntel des Grundpreises der nächsten Stufe, also <b>5.280</b> zum Zunfthaus und <b>11.760</b> zum Gildensitz. Aktionspunkte kostet es nicht, und einen Titel verlangt das Spiel dafür auch nicht. Reicht die Kasse nicht, lest Ihr, in der Zunftkasse sei nicht genug Geld.</li><li><b>Das Geld geht an niemanden.</b> Es verläßt die Zunftkasse und kommt nirgends an.</li><li><b>Es dauert</b> so lange wie bei jedem Gebäude: den Unterschied der beiden Bauzeiten, mindestens ein Jahr.</li></ul><p><b>Woher die Kasse ihr Geld hat: nur vom Gildenmeister.</b> An der Gildenkasse im Sitzungssaal sieht <b>jeder</b>, wieviel darin liegt, aber nur der Gildenmeister dieser Zunft bekommt das Betragsfeld zum Einzahlen. <b>Abheben kann niemand.</b> Eine andere Einnahme hat die Kasse nicht gefunden: Die Gildensteuer geht an die Stadt, und die Miete der Arbeiter ebenso. <i>Hier stand bis zum 18.10.2026, die Miete gehe je nach Fall auch an die Zunftkasse — nachgesehen im Programm: sie geht immer an die Stadt.</i></p><p>Ein Gildenmeister unter den <b>Computerspielern</b> baut auf demselben Weg aus, zum selben Preis. Er wartet aber, bis die Kasse ein Polster hat: Erst wenn mehr als <b>vier Zehntel</b> des Grundpreises darin liegen, wertet er auf. Einzahlen tut er nur, wenn er mehr als 2.500 Gulden Bargeld hat und die Hälfte des Überschusses für die Einlage reicht. <i>Ob eine Kasse dieses Polster im laufenden Spiel je erreicht, ist nicht gemessen.</i></p><p>Vermutlich gehen auch Renovieren und Anbauen am Zunfthaus aus der Zunftkasse — <i>geschlossen aus dem, was diese Menüpunkte aufrufen, nicht im Einzelnen nachgelesen.</i></p><div class="w-kasten"><p><b>Im Netz gesehen.</b> In der Partie vom LAN-Wochenende wertete Linus nach dem Spielstand ab 1463 das Zunfthaus der Tischler zum <b>Gildensitz</b> auf; fertig sollte es 1465 sein. Ein Foto davon gibt es noch nicht.</p></div></div><div class="abschnitt" id="i719"><h3 id="a11"><span class="w-num">XI</span> Was die Texte versprechen — und das Programm nicht hält</h3><p>Um die Zünfte herum steht im Spiel viel mehr Text, als je gebraucht wird. Gemessen ist, daß all das nie geladen oder nie ausgeführt wird:</p><ul><li><b>Die Räume beschreiben sich falsch.</b> Die Halle soll „Auskunft über die Zunftmitglieder und über die Preisvorgaben“ geben — dort wiegelt man Arbeiter auf. Im Sekretariat sollen „Zunftgesetze eingesehen und Anträge gestellt“ werden — dort streut man das Preisgerücht. Im Sitzungssaal soll „über die Preisgestaltung und über die Besetzung des Zunftmeister-Amtes abgestimmt“ werden.</li><li><b>Eine Zunftsitzung gibt es nicht.</b> Im Sitzungssaal tagt zwar eine Versammlung, aber nicht die Zunft: Es ist die Kammer der <b>Stadtdiener</b>, eine der sechs Ämterkammern der Stadt, die dort ihren Saal hat. Über das Gildenmeisteramt stimmt niemand ab; es wird verliehen, wie oben beschrieben.</li><li><b>Die Zunftanträge sind tot.</b> Getextet sind <i>Gildengesetze ändern</i>, <i>Gildenmitglied anklagen</i>, <i>Ausschüttung vornehmen</i> — ein Teil der Zunftkasse an die Mitglieder — und <i>Wiederaufbauhilfe beantragen</i>, die Hälfte des Gebäudewerts nach einem Verlust. Keiner davon ist zu erreichen.</li><li><b>Das Mitglied des Jahres</b> mit einer Prämie für den „geschäftstüchtigsten Handwerker“ gehört zu derselben nie geladenen Sitzung. Ausgezeichnet wird im Original nur mit einem Amt.</li><li><b>Die Vitrine zahlt nichts.</b> Ihr Hilfetext verspricht dem Meister, dessen Werkstück darin ausgestellt ist, „jede Runde eine finanzielle Belohnung“. Im Programm kommt die Vitrine nur als Zierstück vor, das einen Punkt Ansehen bringt. <i>Gesucht ist über ihre Nummer; einen Weg, der sie auf Umwegen erreicht, schließt diese Suche nicht ganz aus.</i></li></ul><p class="w-merk">Die Zunft als Versammlung hat das Original geplant, getextet und dann fallen lassen. Geblieben sind ein Haus, ein Meister und drei Maßnahmen.</p></div><div class="abschnitt" id="i720"><h3 id="a12"><span class="w-num">XII</span> Im Nachbau</h3><div class="w-kasten"><p><b>Was davon schon steht.</b> Das Zunfthaus entsteht wie im Original, sobald eine Zunft drei Betriebe hat — vorerst nur auf der ersten Stufe, ohne Bauplatz und ohne Bauzeit. Die Gildensteuer hängt am fertigen Haus. Gildenmeister werden vergeben, aber noch nach der alten Lesart des Amtstexts: alle vier Jahre, an den mit dem größten Zuwachs. Daß das Original jedes Jahr den Reichsten nimmt, ist vermerkt und noch nicht umgebaut. Vom Gildenmeister steht das Preisgerücht samt seiner Tafel; Aufwiegeln und Politik warten noch auf ein Zunfthaus, das ausgebaut werden kann. Die Zunftkasse fehlt noch ganz, ebenso Gildenmeister unter den Computerfiguren.</p></div></div></section>
+</main><script src="suche.js"></script><script>
+(function(){
+  var f=document.getElementById('suche'); if(!f) return;
+  var hier=location.pathname.split('/').pop()||'index.html';
+  var wahl='.eintrag,.auftrag,.fenster>div,.kachel,.begriffe>div,.abschnitt,.bild';
+  var el=[].slice.call(document.querySelectorAll(wahl)), sek=[].slice.call(document.querySelectorAll('main>section'));
+  var t=document.getElementById('treffer'), fr=document.getElementById('fremd');
+  // Gesucht wird Wort fuer Wort, in beliebiger Folge; Umlaute und ß gelten wie ae/oe/ue/ss - die
+  // Seite schreibt "Schloß", gesucht wird "schloss". m merkt sich zu jedem Zeichen der geglaetteten
+  // Form seine Stelle im Original, fuer Ausschnitt und Hervorhebung.
+  function norm(s){var o='',m=[];for(var i=0;i<s.length;i++){var c=s[i].toLowerCase(),
+    r=c==='ä'?'ae':c==='ö'?'oe':c==='ü'?'ue':c==='ß'?'ss':c;for(var j=0;j<r.length;j++){o+=r[j];m.push(i);}}return {s:o,m:m};}
+  function passt(n,w){return w.every(function(x){return n.indexOf(x)>=0;});}
+  function wert(n,w){var p=0;w.forEach(function(x){var k=-1,c=0;if(n.indexOf(x)<120)p+=10;
+    while((k=n.indexOf(x,k+1))>=0&&c<20)c++;p+=c;});return p;}
+  function esc(s){return s.replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+  function ausschnitt(text,w){var N=norm(text),i=N.s.indexOf(w[0]),a=i<0?0:N.m[i];
+    var von=Math.max(0,a-70),bis=Math.min(text.length,a+150),marken=[];
+    w.forEach(function(x){var k=-1;while((k=N.s.indexOf(x,k+1))>=0){var s0=N.m[k],e0=N.m[k+x.length-1]+1;
+      if(s0>=von&&e0<=bis)marken.push([s0,e0]);}});
+    marken.sort(function(p,q){return p[0]-q[0];});
+    var h='',pos=von;marken.forEach(function(r){if(r[0]<pos)return;
+      h+=esc(text.slice(pos,r[0]))+'<mark>'+esc(text.slice(r[0],r[1]))+'</mark>';pos=r[1];});
+    return (von>0?'… ':'')+h+esc(text.slice(pos,bis))+(bis<text.length?' …':'');}
+  function zeig(){
+    var w=norm(f.value).s.split(/\s+/).filter(Boolean), q=w.length>0, n=0;
+    document.body.classList.toggle('suchmodus',q);
+    el.forEach(function(x){if(x._n===undefined)x._n=norm(x.textContent).s;
+      var ja=!q||passt(x._n,w); x.classList.toggle('such-aus',!ja);
+      if(q&&ja){n++; var d=x.closest('details'); if(d) d.open=true;}});
+    sek.forEach(function(s){ if(!q){s.classList.remove('such-aus');return;}
+      s.classList.toggle('such-aus',![].some.call(s.querySelectorAll(wahl),function(x){return !x.classList.contains('such-aus');}));});
+    var fremd=(q&&window.SUCHE)?window.SUCHE.filter(function(e){if(e.n===undefined)e.n=norm(e.x).s;
+      return e.p!==hier&&passt(e.n,w);}):[];
+    fremd.sort(function(a,b){return wert(b.n,w)-wert(a.n,w);});
+    t.textContent=q?(n+' hier, '+fremd.length+' auf anderen Seiten'):'';
+    if(!fremd.length){fr.hidden=true;fr.innerHTML='';return;}
+    var html='';
+    fremd.slice(0,40).forEach(function(e){
+      html+='<a href="'+e.p+'?q='+encodeURIComponent(f.value.trim())+'#'+e.i+'"><span class="fremd-seite">'
+        +esc(window.SEITEN[e.p])+'</span> '+ausschnitt(e.x,w)+'</a>';});
+    if(fremd.length>40) html+='<div class="fremd-seite">und '+(fremd.length-40)+' weitere</div>';
+    fr.innerHTML=html; fr.hidden=false;
+  }
+  f.addEventListener('input',zeig);
+  var q=new URLSearchParams(location.search).get('q');
+  if(q){f.value=q; zeig(); var z=location.hash&&document.getElementById(location.hash.slice(1)); if(z) setTimeout(function(){z.scrollIntoView({block:'center'});},50);}
+})();
+document.querySelectorAll('[data-filter]').forEach(function(gruppe){
+  var ziel=document.getElementById(gruppe.dataset.filter);
+  gruppe.querySelectorAll('button').forEach(function(b){
+    b.addEventListener('click',function(){
+      gruppe.querySelectorAll('button').forEach(function(x){x.setAttribute('aria-pressed',x===b)});
+      ziel.querySelectorAll('[data-art]').forEach(function(z){
+        var w=b.dataset.wert, a=z.dataset.art.split(' ');
+        z.hidden = !(w==='*' ? a.indexOf('offen')>=0 : a.indexOf(w)>=0);
+      });
+    });
+  });
+  gruppe.querySelector('button').click();
+});
+(function(){
+  var b=document.getElementById('ohneoptik'), l=document.getElementById('auftragsliste'); if(!b||!l) return;
+  b.addEventListener('click',function(){
+    var an=b.getAttribute('aria-pressed')!=='true';
+    b.setAttribute('aria-pressed',an); l.classList.toggle('ohne-optik',an);
+  });
+})();
+(function(){
+  // Die Funde des LAN-Wochenendes: dieselben Eintraege, gruppiert nach Gebiet, Spieler oder Tag.
+  // Ein Fund mit zwei Spielern steht in der Spieleransicht bei beiden.
+  var liste=document.getElementById('lanfunde'); if(!liste) return;
+  var ordnung=JSON.parse(liste.dataset.ordnung);
+  var funde=[].slice.call(liste.querySelectorAll('.eintrag'));
+  function bau(nach){
+    liste.innerHTML='';
+    ordnung[nach].forEach(function(g){
+      var drin=funde.filter(function(f){return f.dataset[nach].split('|').indexOf(g[0])>=0;});
+      if(!drin.length) return;
+      var h=document.createElement('h3'); h.className='lan-gruppe'; h.textContent=g[1]+' · '+drin.length;
+      liste.appendChild(h);
+      drin.forEach(function(f){liste.appendChild(f.cloneNode(true));});
+    });
+  }
+  document.querySelectorAll('[data-gruppierung] button').forEach(function(b){
+    b.addEventListener('click',function(){
+      b.parentNode.querySelectorAll('button').forEach(function(x){x.setAttribute('aria-pressed',x===b)});
+      bau(b.dataset.wert);
+    });
+  });
+})();
+</script></body></html>
