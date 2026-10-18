@@ -24,9 +24,12 @@ section{display:flex;flex-direction:column;gap:16px}
 .summe{display:flex;justify-content:space-between;font-size:22px;font-weight:700;border-top:3px double var(--tinte);margin-top:auto;padding-top:6px}
 .hinweis{border:1px solid var(--blau);padding:14px 20px;font-size:19px}
 .lan{border:3px double var(--rot);padding:24px 28px;display:grid;grid-template-columns:auto 1fr;gap:28px;align-items:center}
-.uhr{display:flex;gap:14px}.uhr div{text-align:center;min-width:72px}
-.uhr b{display:block;font-family:'Courier Prime',monospace;font-size:46px;line-height:1;color:var(--rot)}
-.uhr span{font-size:15px;text-transform:uppercase;letter-spacing:.08em}
+.lanzahlen{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border:1px solid var(--tinte)}
+.lanzahlen>div{padding:16px 20px;border-bottom:1px dotted var(--linie)}
+.lanzahlen b{display:block;font-family:'Courier Prime',monospace;font-size:40px;line-height:1.1;color:var(--rot)}
+.lanzahlen span{font-size:18px}
+.lan-gruppe{margin-top:18px;border-bottom:1px solid var(--tinte);padding-bottom:4px}
+.folge{font-size:16px;color:var(--leise);font-style:italic}
 .kacheln{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 32px}
 .kachel{border-bottom:1px dotted var(--linie);padding:10px 0}.kachel b{font-size:21px;display:block}.kachel span{font-size:18px}
 .tafel{width:100%;border-collapse:collapse;font-size:19px}
@@ -103,15 +106,15 @@ body.suchmodus .knoepfe{display:none}
  .auftrag{grid-template-columns:1fr}.rechts{align-items:flex-start;text-align:left}
  .eintrag{grid-template-columns:1fr}.eintrag .k{text-align:left;padding-top:0}
  .fort-z{grid-template-columns:1fr auto}.fort-b{grid-column:1/-1;grid-row:2}
- .tag{grid-template-columns:56px 1fr 48px}.uhr div{min-width:56px}.uhr b{font-size:36px}
+ .tag{grid-template-columns:56px 1fr 48px}.lanzahlen{grid-template-columns:1fr}
  .tafel td.z{white-space:normal} .tafel,.tafel tbody,.tafel tr,.tafel td{display:block}.tafel thead{display:none}.tafel td{border:0;padding:2px 0}.tafel tr{border-bottom:1px dotted var(--linie);padding:8px 0}
 }
 </style></head>
 <body><main class="blatt">
 <header style="display:flex;flex-direction:column;gap:14px">
-<div class="kopf"><h1>Hauptbuch des Nachbaus</h1><span class="mono" style="font-size:14px">aktualisiert am: 18.10.2026, 05:05 Uhr</span></div>
+<div class="kopf"><h1>Hauptbuch des Nachbaus</h1><span class="mono" style="font-size:14px">aktualisiert am: 18.10.2026, 13:24 Uhr</span></div>
 
-<nav><a href="index.html">Übersicht</a><a href="bilder.html">Bilder</a><a href="auftraege.html">Aufträge</a><a href="entscheidungen.html">Entscheidungen</a><a href="baustellen.html">Baustellen</a><a href="verlauf.html" aria-current="page">Verlauf</a><a href="einstieg.html">Was läuft &amp; Begriffe</a><a href="wissen.html">Wissen</a></nav>
+<nav><a href="index.html">Übersicht</a><a href="lan.html">LAN-Wochenende</a><a href="bilder.html">Bilder</a><a href="auftraege.html">Aufträge</a><a href="entscheidungen.html">Entscheidungen</a><a href="baustellen.html">Baustellen</a><a href="verlauf.html" aria-current="page">Verlauf</a><a href="einstieg.html">Was läuft &amp; Begriffe</a><a href="wissen.html">Wissen</a></nav>
 <div class="suche"><input type="search" id="suche" placeholder="Auf allen Seiten suchen …" aria-label="Auf allen Seiten suchen"><span id="treffer" class="mono" style="font-size:15px"></span></div>
 <div id="fremd" class="fremd" hidden></div>
 </header>
@@ -127,8 +130,8 @@ body.suchmodus .knoepfe{display:none}
 <h3 style="margin-top:20px">Proben, je Woche <span class="mono" style="font-weight:400;font-size:15px">· die höchste Zahl der Woche, abgelesen aus den gespeicherten Ständen</span></h3>
 <div style="display:flex;flex-direction:column;gap:3px"><div class="tag"><span class="mono">31.08.</span><span class="balken"><span style="width:31.8%;background:var(--gelb)"></span></span><span class="mono" style="text-align:right">2100</span></div><div class="tag"><span class="mono">07.09.</span><span class="balken"><span style="width:45.3%;background:var(--gelb)"></span></span><span class="mono" style="text-align:right">2992</span></div><div class="tag"><span class="mono">14.09.</span><span class="balken"><span style="width:55.5%;background:var(--gelb)"></span></span><span class="mono" style="text-align:right">3667</span></div><div class="tag"><span class="mono">21.09.</span><span class="balken"><span style="width:67.9%;background:var(--gelb)"></span></span><span class="mono" style="text-align:right">4491</span></div><div class="tag"><span class="mono">28.09.</span><span class="balken"><span style="width:74.5%;background:var(--gelb)"></span></span><span class="mono" style="text-align:right">4924</span></div><div class="tag"><span class="mono">05.10.</span><span class="balken"><span style="width:83.3%;background:var(--gelb)"></span></span><span class="mono" style="text-align:right">5507</span></div><div class="tag"><span class="mono">12.10.</span><span class="balken"><span style="width:100.0%;background:var(--gelb)"></span></span><span class="mono" style="text-align:right">6610</span></div></div>
 <h3 style="margin-top:20px">Arbeitszeit, je Woche <span class="mono" style="font-weight:400;font-size:15px">· ab Montag, die laufende Woche ist nicht voll</span></h3>
-<p class="lead" style="font-size:19px">Seit dem 19.07.2026 sind rund <b>630 Stunden</b> in das Projekt geflossen, verteilt auf 150 Sitzungen. Das ist eine Schätzung: Gezählt sind nur die Zeitpunkte, zu denen Arbeit gespeichert wurde; wie lange davor und dazwischen gearbeitet wurde, ist angenommen. Je nach Annahme sind es 500 bis 700 Stunden.</p>
-<div style="display:flex;flex-direction:column;gap:3px"><div class="tag"><span class="mono">13.07.</span><span class="balken"><span style="width:9.8%;background:var(--ocker)"></span></span><span class="mono" style="text-align:right">8 h</span></div><div class="tag"><span class="mono">20.07.</span><span class="balken"><span style="width:46.7%;background:var(--ocker)"></span></span><span class="mono" style="text-align:right">38 h</span></div><div class="tag"><span class="mono">27.07.</span><span class="balken"><span style="width:31.4%;background:var(--ocker)"></span></span><span class="mono" style="text-align:right">25 h</span></div><div class="tag"><span class="mono">03.08.</span><span class="balken"><span style="width:44.0%;background:var(--ocker)"></span></span><span class="mono" style="text-align:right">36 h</span></div><div class="tag"><span class="mono">10.08.</span><span class="balken"><span style="width:14.6%;background:var(--ocker)"></span></span><span class="mono" style="text-align:right">12 h</span></div><div class="tag"><span class="mono">17.08.</span><span class="balken"><span style="width:54.9%;background:var(--ocker)"></span></span><span class="mono" style="text-align:right">44 h</span></div><div class="tag"><span class="mono">24.08.</span><span class="balken"><span style="width:16.6%;background:var(--ocker)"></span></span><span class="mono" style="text-align:right">13 h</span></div><div class="tag"><span class="mono">31.08.</span><span class="balken"><span style="width:72.7%;background:var(--ocker)"></span></span><span class="mono" style="text-align:right">59 h</span></div><div class="tag"><span class="mono">07.09.</span><span class="balken"><span style="width:81.0%;background:var(--ocker)"></span></span><span class="mono" style="text-align:right">66 h</span></div><div class="tag"><span class="mono">14.09.</span><span class="balken"><span style="width:100.0%;background:var(--ocker)"></span></span><span class="mono" style="text-align:right">81 h</span></div><div class="tag"><span class="mono">21.09.</span><span class="balken"><span style="width:77.0%;background:var(--ocker)"></span></span><span class="mono" style="text-align:right">62 h</span></div><div class="tag"><span class="mono">28.09.</span><span class="balken"><span style="width:70.9%;background:var(--ocker)"></span></span><span class="mono" style="text-align:right">57 h</span></div><div class="tag"><span class="mono">05.10.</span><span class="balken"><span style="width:78.6%;background:var(--ocker)"></span></span><span class="mono" style="text-align:right">64 h</span></div><div class="tag"><span class="mono">12.10.</span><span class="balken"><span style="width:78.8%;background:var(--ocker)"></span></span><span class="mono" style="text-align:right">64 h</span></div></div></section>
+<p class="lead" style="font-size:19px">Seit dem 19.07.2026 sind rund <b>630 Stunden</b> in das Projekt geflossen, verteilt auf 151 Sitzungen. Das ist eine Schätzung: Gezählt sind nur die Zeitpunkte, zu denen Arbeit gespeichert wurde; wie lange davor und dazwischen gearbeitet wurde, ist angenommen. Je nach Annahme sind es 500 bis 700 Stunden.</p>
+<div style="display:flex;flex-direction:column;gap:3px"><div class="tag"><span class="mono">13.07.</span><span class="balken"><span style="width:9.8%;background:var(--ocker)"></span></span><span class="mono" style="text-align:right">8 h</span></div><div class="tag"><span class="mono">20.07.</span><span class="balken"><span style="width:46.7%;background:var(--ocker)"></span></span><span class="mono" style="text-align:right">38 h</span></div><div class="tag"><span class="mono">27.07.</span><span class="balken"><span style="width:31.4%;background:var(--ocker)"></span></span><span class="mono" style="text-align:right">25 h</span></div><div class="tag"><span class="mono">03.08.</span><span class="balken"><span style="width:44.0%;background:var(--ocker)"></span></span><span class="mono" style="text-align:right">36 h</span></div><div class="tag"><span class="mono">10.08.</span><span class="balken"><span style="width:14.6%;background:var(--ocker)"></span></span><span class="mono" style="text-align:right">12 h</span></div><div class="tag"><span class="mono">17.08.</span><span class="balken"><span style="width:54.9%;background:var(--ocker)"></span></span><span class="mono" style="text-align:right">44 h</span></div><div class="tag"><span class="mono">24.08.</span><span class="balken"><span style="width:16.6%;background:var(--ocker)"></span></span><span class="mono" style="text-align:right">13 h</span></div><div class="tag"><span class="mono">31.08.</span><span class="balken"><span style="width:72.7%;background:var(--ocker)"></span></span><span class="mono" style="text-align:right">59 h</span></div><div class="tag"><span class="mono">07.09.</span><span class="balken"><span style="width:81.0%;background:var(--ocker)"></span></span><span class="mono" style="text-align:right">66 h</span></div><div class="tag"><span class="mono">14.09.</span><span class="balken"><span style="width:100.0%;background:var(--ocker)"></span></span><span class="mono" style="text-align:right">81 h</span></div><div class="tag"><span class="mono">21.09.</span><span class="balken"><span style="width:77.0%;background:var(--ocker)"></span></span><span class="mono" style="text-align:right">62 h</span></div><div class="tag"><span class="mono">28.09.</span><span class="balken"><span style="width:70.9%;background:var(--ocker)"></span></span><span class="mono" style="text-align:right">57 h</span></div><div class="tag"><span class="mono">05.10.</span><span class="balken"><span style="width:78.6%;background:var(--ocker)"></span></span><span class="mono" style="text-align:right">64 h</span></div><div class="tag"><span class="mono">12.10.</span><span class="balken"><span style="width:80.5%;background:var(--ocker)"></span></span><span class="mono" style="text-align:right">65 h</span></div></div></section>
 </main><script src="suche.js"></script><script>
 (function(){
   var f=document.getElementById('suche'); if(!f) return;
@@ -191,16 +194,26 @@ document.querySelectorAll('[data-filter]').forEach(function(gruppe){
   gruppe.querySelector('button').click();
 });
 (function(){
-  var uhr=document.getElementById('uhr'); if(!uhr) return;
-  var ziel=new Date(+uhr.dataset.ziel);
-  function stell(){
-    var r=ziel-new Date();
-    if(r<=0){uhr.innerHTML='<div><b>jetzt</b><span>die LAN läuft</span></div>';return;}
-    var t=Math.floor(r/864e5), s=Math.floor(r/36e5)%24, m=Math.floor(r/6e4)%60;
-    uhr.querySelector('[data-t]').textContent=t;
-    uhr.querySelector('[data-s]').textContent=s;
-    uhr.querySelector('[data-m]').textContent=m;
+  // Die Funde des LAN-Wochenendes: dieselben Eintraege, gruppiert nach Gebiet, Spieler oder Tag.
+  // Ein Fund mit zwei Spielern steht in der Spieleransicht bei beiden.
+  var liste=document.getElementById('lanfunde'); if(!liste) return;
+  var ordnung=JSON.parse(liste.dataset.ordnung);
+  var funde=[].slice.call(liste.querySelectorAll('.eintrag'));
+  function bau(nach){
+    liste.innerHTML='';
+    ordnung[nach].forEach(function(g){
+      var drin=funde.filter(function(f){return f.dataset[nach].split('|').indexOf(g[0])>=0;});
+      if(!drin.length) return;
+      var h=document.createElement('h3'); h.className='lan-gruppe'; h.textContent=g[1]+' · '+drin.length;
+      liste.appendChild(h);
+      drin.forEach(function(f){liste.appendChild(f.cloneNode(true));});
+    });
   }
-  stell(); setInterval(stell,30000);
+  document.querySelectorAll('[data-gruppierung] button').forEach(function(b){
+    b.addEventListener('click',function(){
+      b.parentNode.querySelectorAll('button').forEach(function(x){x.setAttribute('aria-pressed',x===b)});
+      bau(b.dataset.wert);
+    });
+  });
 })();
 </script></body></html>

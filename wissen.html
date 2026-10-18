@@ -24,9 +24,12 @@ section{display:flex;flex-direction:column;gap:16px}
 .summe{display:flex;justify-content:space-between;font-size:22px;font-weight:700;border-top:3px double var(--tinte);margin-top:auto;padding-top:6px}
 .hinweis{border:1px solid var(--blau);padding:14px 20px;font-size:19px}
 .lan{border:3px double var(--rot);padding:24px 28px;display:grid;grid-template-columns:auto 1fr;gap:28px;align-items:center}
-.uhr{display:flex;gap:14px}.uhr div{text-align:center;min-width:72px}
-.uhr b{display:block;font-family:'Courier Prime',monospace;font-size:46px;line-height:1;color:var(--rot)}
-.uhr span{font-size:15px;text-transform:uppercase;letter-spacing:.08em}
+.lanzahlen{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border:1px solid var(--tinte)}
+.lanzahlen>div{padding:16px 20px;border-bottom:1px dotted var(--linie)}
+.lanzahlen b{display:block;font-family:'Courier Prime',monospace;font-size:40px;line-height:1.1;color:var(--rot)}
+.lanzahlen span{font-size:18px}
+.lan-gruppe{margin-top:18px;border-bottom:1px solid var(--tinte);padding-bottom:4px}
+.folge{font-size:16px;color:var(--leise);font-style:italic}
 .kacheln{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 32px}
 .kachel{border-bottom:1px dotted var(--linie);padding:10px 0}.kachel b{font-size:21px;display:block}.kachel span{font-size:18px}
 .tafel{width:100%;border-collapse:collapse;font-size:19px}
@@ -103,15 +106,15 @@ body.suchmodus .knoepfe{display:none}
  .auftrag{grid-template-columns:1fr}.rechts{align-items:flex-start;text-align:left}
  .eintrag{grid-template-columns:1fr}.eintrag .k{text-align:left;padding-top:0}
  .fort-z{grid-template-columns:1fr auto}.fort-b{grid-column:1/-1;grid-row:2}
- .tag{grid-template-columns:56px 1fr 48px}.uhr div{min-width:56px}.uhr b{font-size:36px}
+ .tag{grid-template-columns:56px 1fr 48px}.lanzahlen{grid-template-columns:1fr}
  .tafel td.z{white-space:normal} .tafel,.tafel tbody,.tafel tr,.tafel td{display:block}.tafel thead{display:none}.tafel td{border:0;padding:2px 0}.tafel tr{border-bottom:1px dotted var(--linie);padding:8px 0}
 }
 </style></head>
 <body><main class="blatt">
 <header style="display:flex;flex-direction:column;gap:14px">
-<div class="kopf"><h1>Hauptbuch des Nachbaus</h1><span class="mono" style="font-size:14px">aktualisiert am: 18.10.2026, 05:05 Uhr</span></div>
+<div class="kopf"><h1>Hauptbuch des Nachbaus</h1><span class="mono" style="font-size:14px">aktualisiert am: 18.10.2026, 13:24 Uhr</span></div>
 
-<nav><a href="index.html">Übersicht</a><a href="bilder.html">Bilder</a><a href="auftraege.html">Aufträge</a><a href="entscheidungen.html">Entscheidungen</a><a href="baustellen.html">Baustellen</a><a href="verlauf.html">Verlauf</a><a href="einstieg.html">Was läuft &amp; Begriffe</a><a href="wissen.html" aria-current="page">Wissen</a></nav>
+<nav><a href="index.html">Übersicht</a><a href="lan.html">LAN-Wochenende</a><a href="bilder.html">Bilder</a><a href="auftraege.html">Aufträge</a><a href="entscheidungen.html">Entscheidungen</a><a href="baustellen.html">Baustellen</a><a href="verlauf.html">Verlauf</a><a href="einstieg.html">Was läuft &amp; Begriffe</a><a href="wissen.html" aria-current="page">Wissen</a></nav>
 <div class="suche"><input type="search" id="suche" placeholder="Auf allen Seiten suchen …" aria-label="Auf allen Seiten suchen"><span id="treffer" class="mono" style="font-size:15px"></span></div>
 <div id="fremd" class="fremd" hidden></div>
 </header>
@@ -178,16 +181,26 @@ document.querySelectorAll('[data-filter]').forEach(function(gruppe){
   gruppe.querySelector('button').click();
 });
 (function(){
-  var uhr=document.getElementById('uhr'); if(!uhr) return;
-  var ziel=new Date(+uhr.dataset.ziel);
-  function stell(){
-    var r=ziel-new Date();
-    if(r<=0){uhr.innerHTML='<div><b>jetzt</b><span>die LAN läuft</span></div>';return;}
-    var t=Math.floor(r/864e5), s=Math.floor(r/36e5)%24, m=Math.floor(r/6e4)%60;
-    uhr.querySelector('[data-t]').textContent=t;
-    uhr.querySelector('[data-s]').textContent=s;
-    uhr.querySelector('[data-m]').textContent=m;
+  // Die Funde des LAN-Wochenendes: dieselben Eintraege, gruppiert nach Gebiet, Spieler oder Tag.
+  // Ein Fund mit zwei Spielern steht in der Spieleransicht bei beiden.
+  var liste=document.getElementById('lanfunde'); if(!liste) return;
+  var ordnung=JSON.parse(liste.dataset.ordnung);
+  var funde=[].slice.call(liste.querySelectorAll('.eintrag'));
+  function bau(nach){
+    liste.innerHTML='';
+    ordnung[nach].forEach(function(g){
+      var drin=funde.filter(function(f){return f.dataset[nach].split('|').indexOf(g[0])>=0;});
+      if(!drin.length) return;
+      var h=document.createElement('h3'); h.className='lan-gruppe'; h.textContent=g[1]+' · '+drin.length;
+      liste.appendChild(h);
+      drin.forEach(function(f){liste.appendChild(f.cloneNode(true));});
+    });
   }
-  stell(); setInterval(stell,30000);
+  document.querySelectorAll('[data-gruppierung] button').forEach(function(b){
+    b.addEventListener('click',function(){
+      b.parentNode.querySelectorAll('button').forEach(function(x){x.setAttribute('aria-pressed',x===b)});
+      bau(b.dataset.wert);
+    });
+  });
 })();
 </script></body></html>
