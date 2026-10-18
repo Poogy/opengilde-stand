@@ -29,6 +29,29 @@ section{display:flex;flex-direction:column;gap:16px}
 .lanzahlen b{display:block;font-family:'Courier Prime',monospace;font-size:40px;line-height:1.1;color:var(--rot)}
 .lanzahlen span{font-size:18px}
 .lan-gruppe{margin-top:18px;border-bottom:1px solid var(--tinte);padding-bottom:4px}
+.lan-kopf{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:12px}
+.lan-klar{font-size:21px;margin:0;border-left:4px solid var(--rot);padding:4px 0 4px 16px}
+.lan-klar b{font-family:'Courier Prime',monospace;color:var(--rot)}
+.hoehepunkte{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.hoehepunkt{border:1px solid var(--tinte);padding:14px 18px;background:var(--kasten)}
+.hoehepunkt h3{margin:0 0 6px;font-size:22px}.hoehepunkt p{margin:0;font-size:18px}
+.legende{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:16px}
+.legende i{display:inline-block;width:14px;height:14px;margin-right:6px;vertical-align:-2px;border:1px solid var(--tinte)}
+.stapelgruppe{display:flex;flex-direction:column;gap:10px}
+.stapel-z{display:grid;grid-template-columns:minmax(0,280px) 1fr;gap:12px;align-items:center}
+.stapel-t{font-size:17px}
+.stapel{display:flex;height:26px;border:1px solid var(--tinte);background:var(--blatt);overflow:hidden}
+.stapel>span{display:flex;align-items:center;justify-content:center;color:var(--blatt);font-family:'Courier Prime',monospace;font-size:14px;overflow:hidden}
+.lan-svg{width:100%;height:auto;font-family:'Courier Prime',monospace;font-size:14px;fill:var(--tinte)}
+.matrix{border-collapse:collapse;width:100%;font-size:18px}
+.matrix th,.matrix td{border-bottom:1px dotted var(--linie);padding:6px 10px;text-align:left}
+.mz{display:block;height:10px;background:var(--rot);opacity:.75;margin-bottom:2px}
+.vergleich{display:flex;flex-direction:column}
+.vgl-z{display:grid;grid-template-columns:minmax(0,230px) 1fr 48px;gap:12px;align-items:center;background:none;border:0;border-bottom:1px dotted var(--linie);padding:7px 4px;font:inherit;font-size:18px;text-align:left;cursor:pointer;color:var(--tinte)}
+.vgl-z:hover{background:var(--kasten)}
+.vgl-z[aria-pressed=true]{background:var(--kasten);box-shadow:inset 3px 0 0 var(--rot)}
+.vgl-b{display:block}.vgl-b .stapel{height:20px}
+.vgl-zahl{text-align:right}
 .folge{font-size:16px;color:var(--leise);font-style:italic}
 .kacheln{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 32px}
 .kachel{border-bottom:1px dotted var(--linie);padding:10px 0}.kachel b{font-size:21px;display:block}.kachel span{font-size:18px}
@@ -109,13 +132,13 @@ body.suchmodus .knoepfe{display:none}
  .auftrag{grid-template-columns:1fr}.rechts{align-items:flex-start;text-align:left}
  .eintrag{grid-template-columns:1fr}.eintrag .k{text-align:left;padding-top:0}
  .fort-z{grid-template-columns:1fr auto}.fort-b{grid-column:1/-1;grid-row:2}
- .tag{grid-template-columns:56px 1fr 48px}.lanzahlen{grid-template-columns:1fr}
+ .tag{grid-template-columns:56px 1fr 48px}.lanzahlen{grid-template-columns:1fr}.hoehepunkte,.stapel-z{grid-template-columns:1fr}.vgl-z{grid-template-columns:96px 1fr 36px;font-size:16px}.matrix{font-size:16px}
  .tafel td.z{white-space:normal} .tafel,.tafel tbody,.tafel tr,.tafel td{display:block}.tafel thead{display:none}.tafel td{border:0;padding:2px 0}.tafel tr{border-bottom:1px dotted var(--linie);padding:8px 0}
 }
 </style></head>
 <body><main class="blatt">
 <header style="display:flex;flex-direction:column;gap:14px">
-<div class="kopf"><h1>Hauptbuch des Nachbaus</h1><span class="mono" style="font-size:14px">aktualisiert am: 18.10.2026, 16:40 Uhr</span></div>
+<div class="kopf"><h1>Hauptbuch des Nachbaus</h1><span class="mono" style="font-size:14px">aktualisiert am: 18.10.2026, 19:06 Uhr</span></div>
 <p class="lead">OpenGilde baut „Die Gilde 1400“ nach — das freie Spiel, in Köln. Im Haben steht, was gemessen ist, im Soll, was noch zu messen ist. Dazwischen schwebt, was gemessen, aber noch nicht gebaut oder entschieden ist. Ausgezählt wird bei jedem Abschluß, nicht geschätzt.</p>
 <nav><a href="index.html" aria-current="page">Übersicht</a><a href="lan.html">LAN-Wochenende</a><a href="bilder.html">Bilder</a><a href="auftraege.html">Aufträge</a><a href="entscheidungen.html">Entscheidungen</a><a href="baustellen.html">Baustellen</a><a href="verlauf.html">Verlauf</a><a href="einstieg.html">Was läuft &amp; Begriffe</a><a href="wissen.html">Wissen</a></nav>
 <div class="suche"><input type="search" id="suche" placeholder="Auf allen Seiten suchen …" aria-label="Auf allen Seiten suchen"><span id="treffer" class="mono" style="font-size:15px"></span></div>
@@ -123,7 +146,7 @@ body.suchmodus .knoepfe{display:none}
 </header>
 <section id="lan" class="lan">
 <div><h2 style="margin-bottom:12px">Das LAN-Wochenende</h2><span class="mono" style="font-size:15px">16. bis 18. Oktober</span></div>
-<div style="font-size:19px">Gespielt wurde das Original, zu dritt im Netz. Am Wochenende wurden <b>87</b> Aufträge erfüllt, 575 Fotos und 11 Spielstände kamen herein, und 102 neue Aufträge kamen dazu, viele aus dem, was zu sehen war. <a href="lan.html">Alles, was herauskam — nach Gebiet, Spieler und Tag.</a></div>
+<div style="font-size:19px">Die LAN ist vorbei. Gespielt wurde das Original, zu dritt im Netz, und am Wochenende wurden <b>99</b> Aufträge erfüllt — vorher waren es 15. 632 Fotos und 12 Spielstände kamen herein, und 102 neue Aufträge kamen dazu, viele aus dem, was zu sehen war. <a href="lan.html">Die ganze Bilanz mit Höhepunkten und Graphen — nach Gebiet, Spieler und Tag.</a></div>
 </section>
 <section id="bilanz"><h2>Bilanz</h2>
 <div class="bilanz">
@@ -142,7 +165,7 @@ body.suchmodus .knoepfe{display:none}
 <div class="posten"><span>Handgriffe mit Fenster</span><span class="mono">132 / 132</span></div>
 <div class="posten"><span>Proben bestanden</span><span class="mono">6616</span></div></div>
 </div>
-<div class="fort" style="--zahl:15ch"><h3>Fortschritt <span class="mono" style="font-weight:400;font-size:15px">· gezählt, nicht geschätzt</span></h3><div class="fort-z"><span>Original verstanden</span><span class="fort-b" role="img" aria-label="99 Prozent"><span style="width:99.5%;background:var(--blau)"></span></span><span class="mono" style="text-align:right;white-space:nowrap;min-width:var(--zahl)">370/372 · 99 %</span></div><div class="fort-z"><span>Geratenes erledigt</span><span class="fort-b" role="img" aria-label="76 Prozent"><span style="width:75.8%;background:var(--blau)"></span></span><span class="mono" style="text-align:right;white-space:nowrap;min-width:var(--zahl)">282/372 · 76 %</span></div><div class="fort-z"><span>Handgriffe mit Fenster</span><span class="fort-b" role="img" aria-label="100 Prozent"><span style="width:100.0%;background:var(--ocker)"></span></span><span class="mono" style="text-align:right;white-space:nowrap;min-width:var(--zahl)">132/132 · 100 %</span></div><div class="fort-z"><span>Bauposten gebaut</span><span class="fort-b" role="img" aria-label="41 Prozent"><span style="width:41.0%;background:var(--ocker)"></span></span><span class="mono" style="text-align:right;white-space:nowrap;min-width:var(--zahl)">48/117 · 41 %</span></div><div class="fort-z"><span>Skriptbefehle zugeordnet</span><span class="fort-b" role="img" aria-label="93 Prozent"><span style="width:93.2%;background:var(--ocker)"></span></span><span class="mono" style="text-align:right;white-space:nowrap;min-width:var(--zahl)">730/783 · 93 %</span></div><div class="fort-z"><span>Aufträge erfüllt</span><span class="fort-b" role="img" aria-label="56 Prozent"><span style="width:56.1%;background:var(--rot)"></span></span><span class="mono" style="text-align:right;white-space:nowrap;min-width:var(--zahl)">101/180 · 56 %</span></div><div class="fort-z"><span>davon für die LAN ★</span><span class="fort-b" role="img" aria-label="66 Prozent"><span style="width:66.3%;background:var(--rot)"></span></span><span class="mono" style="text-align:right;white-space:nowrap;min-width:var(--zahl)">57/86 · 66 %</span></div><div style="font-size:17px;color:var(--leise)">„Original verstanden“: von allen geratenen Zahlen die, bei denen gemessen ist, wie das Original es macht. „Geratenes erledigt“: die, die auch im Nachbau fertig sind. „Bauposten gebaut“: was seit dem 2. Oktober auf der Bauliste stand und inzwischen gebaut ist — was davor gebaut wurde, zählt hier nicht mit. „Skriptbefehle zugeordnet“: Befehlsaufrufe in den Skripten des Originals, die unser Lesewerkzeug versteht. Für Bauposten, Entscheidungen und Gelände gibt es keinen Balken — dort ist das Ganze nicht zählbar.</div></div>
+<div class="fort" style="--zahl:15ch"><h3>Fortschritt <span class="mono" style="font-weight:400;font-size:15px">· gezählt, nicht geschätzt</span></h3><div class="fort-z"><span>Original verstanden</span><span class="fort-b" role="img" aria-label="99 Prozent"><span style="width:99.5%;background:var(--blau)"></span></span><span class="mono" style="text-align:right;white-space:nowrap;min-width:var(--zahl)">370/372 · 99 %</span></div><div class="fort-z"><span>Geratenes erledigt</span><span class="fort-b" role="img" aria-label="76 Prozent"><span style="width:75.8%;background:var(--blau)"></span></span><span class="mono" style="text-align:right;white-space:nowrap;min-width:var(--zahl)">282/372 · 76 %</span></div><div class="fort-z"><span>Handgriffe mit Fenster</span><span class="fort-b" role="img" aria-label="100 Prozent"><span style="width:100.0%;background:var(--ocker)"></span></span><span class="mono" style="text-align:right;white-space:nowrap;min-width:var(--zahl)">132/132 · 100 %</span></div><div class="fort-z"><span>Bauposten gebaut</span><span class="fort-b" role="img" aria-label="41 Prozent"><span style="width:41.0%;background:var(--ocker)"></span></span><span class="mono" style="text-align:right;white-space:nowrap;min-width:var(--zahl)">48/117 · 41 %</span></div><div class="fort-z"><span>Skriptbefehle zugeordnet</span><span class="fort-b" role="img" aria-label="93 Prozent"><span style="width:93.2%;background:var(--ocker)"></span></span><span class="mono" style="text-align:right;white-space:nowrap;min-width:var(--zahl)">730/783 · 93 %</span></div><div class="fort-z"><span>Aufträge erfüllt</span><span class="fort-b" role="img" aria-label="63 Prozent"><span style="width:62.8%;background:var(--rot)"></span></span><span class="mono" style="text-align:right;white-space:nowrap;min-width:var(--zahl)">113/180 · 63 %</span></div><div style="font-size:17px;color:var(--leise)">„Original verstanden“: von allen geratenen Zahlen die, bei denen gemessen ist, wie das Original es macht. „Geratenes erledigt“: die, die auch im Nachbau fertig sind. „Bauposten gebaut“: was seit dem 2. Oktober auf der Bauliste stand und inzwischen gebaut ist — was davor gebaut wurde, zählt hier nicht mit. „Skriptbefehle zugeordnet“: Befehlsaufrufe in den Skripten des Originals, die unser Lesewerkzeug versteht. Für Bauposten, Entscheidungen und Gelände gibt es keinen Balken — dort ist das Ganze nicht zählbar.</div></div>
 <div class="hinweis">Alle Handgriffe des Spiels sind gebaut und über die Tastatur erreichbar — 0 haben im Bild nur noch keinen Knopf. Ungeklärt heißt: Wie das Original es macht, ist noch nicht gemessen. Schwebend heißt: Das Original ist gemessen, aber der Nachbau ist noch nicht so weit oder es fehlt eine Entscheidung.</div>
 </section>
 <section id="arbeit"><h2>Wie viel noch zu tun ist</h2>
@@ -150,7 +173,7 @@ body.suchmodus .knoepfe{display:none}
 <tbody><tr><td><b>Fenster</b></td><td class="z">0 Handgriffe</td><td class="z">bisher bis 50 je Woche; keines mehr seit 18.10.</td><td><b>1 bis 2 Wochen</b><br>Wieder kürzer. In drei Tagen kamen das Gebäudemenü samt Verkauf, der Beutel, das ganze Fenster „Eure Privilegien“, die Stadtkarte, das Routenfenster der Karren, das Schwarze Brett und das Geheimkabinett dazu; die Handgriffe ohne Knopf fielen von 35 auf 6.</td></tr><tr><td><b>Bauen</b></td><td class="z">69 Posten</td><td class="z">kein gemessenes Tempo</td><td><b>4 bis 7 Wochen</b><br>Eine Woche mehr als am 8. Oktober. Gebaut ist viel: die Schenke ganz, die Bürger der Stadt, Gottesdienst, Zuzug, Katastrophen und die Handlungswahl der Computergegner. Aber gemessen kamen zuletzt doppelt so viele Posten dazu wie gebaut wurden; die Liste steht bei 55 statt 32. Die Bevölkerung ist erst begonnen, und der Einheitenkampf wartet auf seine Neuplanung.</td></tr><tr><td><b>Gelände</b></td><td class="z">ein kleiner Rest</td><td class="z">nicht zählbar</td><td><b>unter einer Woche</b><br>Der große Sprung der Woche. Seit dem 13. Oktober stehen Kölns Häuser auf dem Gelände, der Boden ist bemalt wie im Original, man klickt ein Haus an und geht hinein, und die Stadt dämmert, regnet und schneit nach der Uhr des Spiels. Seit dem 17. Oktober wächst eine Baustelle Stufe um Stufe zum fertigen Haus, das man betreten kann, und Bauarbeiter roden erst die Bäume und mauern dann daran, und die Kamera schaut durch denselben Ausschnitt und mit demselben Blickwinkel wie im Original. Offen ist vor allem, daß die Räume drinnen noch mit eigenem Licht zeichnen statt wie draußen.</td></tr><tr><td><b>Entscheidungen</b></td><td class="z">14 Fragen</td><td class="z">bei dir</td><td><b>ein, zwei Abende</b><br>Liegt allein bei dir. Jedes „Umstellen&quot; macht aber neue Bauarbeit — im ungünstigen Fall ein bis drei Wochen mehr.</td></tr><tr><td><b>Messungen</b></td><td class="z">4 offen</td><td class="z">60 Zahlen in den letzten 14 Tagen geklärt</td><td><b>nicht planbar</b><br>Hängt an euch und am Original, nicht am Nachbau. Der Nachbau kann mit gekennzeichneten Schätzwerten fertig werden; jede Messung macht ihn nur genauer.</td></tr><tr class="gesamt"><td colspan="4">5 bis 10 Wochen konzentrierte Arbeit ab dem 16. Oktober. Fertig wäre der Nachbau damit zwischen Ende November 2026 und dem Jahresende — am ehesten weiter kurz vor Weihnachten: Das Gelände ist fast vom Tisch, dafür wächst die Bauliste schneller als gedacht. Ein gemessenes Datum steht im Verlauf, sobald sie schneller schrumpft als wächst.</td></tr></tbody></table>
 <div class="hinweis"><b>Zum Vergleich, gemessen:</b> Die Bauliste wächst gerade: 5,7 Posten je Tag kommen dazu, 1,7 werden gebaut. <a href="verlauf.html">Mehr im Verlauf.</a></div>
 </section>
-<section id="wegweiser"><h2>Mehr auf den Unterseiten</h2><div class="wegweisergitter"><a class="wegweiser" href="bilder.html"><b>Bilder</b><span>26 Bilder aus dem Nachbau, vom Rathaus bis zur Krypta</span></a><a class="wegweiser" href="lan.html"><b>LAN-Wochenende</b><span>87 Aufträge am Wochenende erfüllt — was die LAN gebracht hat</span></a><a class="wegweiser" href="auftraege.html"><b>Aufträge</b><span>79 Aufträge offen, 29 davon für die LAN</span></a><a class="wegweiser" href="entscheidungen.html"><b>Entscheidungen</b><span>14 Fragen zu entscheiden, 16 zum Ansehen, 64 schon entschieden</span></a><a class="wegweiser" href="baustellen.html"><b>Baustellen</b><span>69 Bauposten offen, 0 Handgriffe ohne Knopf, dazu das Gelände</span></a><a class="wegweiser" href="verlauf.html"><b>Verlauf</b><span>Kurven seit Juli — rund 630 Stunden Arbeit</span></a><a class="wegweiser" href="einstieg.html"><b>Was läuft &amp; Begriffe</b><span>Was im Nachbau schon läuft, und 23 Begriffe erklärt</span></a><a class="wegweiser" href="wissen.html"><b>Wissen</b><span>Was wir aus dem Original gelesen haben, in 22 Artikeln</span></a></div></section>
+<section id="wegweiser"><h2>Mehr auf den Unterseiten</h2><div class="wegweisergitter"><a class="wegweiser" href="bilder.html"><b>Bilder</b><span>26 Bilder aus dem Nachbau, vom Rathaus bis zur Krypta</span></a><a class="wegweiser" href="lan.html"><b>LAN-Wochenende</b><span>99 Aufträge am Wochenende erfüllt — die Bilanz der LAN, mit Höhepunkten und Graphen</span></a><a class="wegweiser" href="auftraege.html"><b>Aufträge</b><span>67 Aufträge offen — wer das Original spielt, kann jeden davon erledigen</span></a><a class="wegweiser" href="entscheidungen.html"><b>Entscheidungen</b><span>14 Fragen zu entscheiden, 16 zum Ansehen, 64 schon entschieden</span></a><a class="wegweiser" href="baustellen.html"><b>Baustellen</b><span>69 Bauposten offen, 0 Handgriffe ohne Knopf, dazu das Gelände</span></a><a class="wegweiser" href="verlauf.html"><b>Verlauf</b><span>Kurven seit Juli — rund 640 Stunden Arbeit</span></a><a class="wegweiser" href="einstieg.html"><b>Was läuft &amp; Begriffe</b><span>Was im Nachbau schon läuft, und 23 Begriffe erklärt</span></a><a class="wegweiser" href="wissen.html"><b>Wissen</b><span>Was wir aus dem Original gelesen haben, in 22 Artikeln</span></a></div></section>
 </main><script src="suche.js"></script><script>
 (function(){
   var f=document.getElementById('suche'); if(!f) return;
@@ -221,13 +244,16 @@ document.querySelectorAll('[data-filter]').forEach(function(gruppe){
 })();
 (function(){
   // Die Funde des LAN-Wochenendes: dieselben Eintraege, gruppiert nach Gebiet, Spieler oder Tag.
-  // Ein Fund mit zwei Spielern steht in der Spieleransicht bei beiden.
+  // Ein Fund mit zwei Spielern steht in der Spieleransicht bei beiden. Die Vergleichstafel derselben
+  // Ansicht steht darueber; ein Klick auf eine ihrer Zeilen laesst nur deren Gruppe stehen.
   var liste=document.getElementById('lanfunde'); if(!liste) return;
   var ordnung=JSON.parse(liste.dataset.ordnung);
   var funde=[].slice.call(liste.querySelectorAll('.eintrag'));
-  function bau(nach){
+  var jetzt='gebiet';
+  function bau(nach, nur){
     liste.innerHTML='';
     ordnung[nach].forEach(function(g){
+      if(nur && g[0]!==nur) return;
       var drin=funde.filter(function(f){return f.dataset[nach].split('|').indexOf(g[0])>=0;});
       if(!drin.length) return;
       var h=document.createElement('h3'); h.className='lan-gruppe'; h.textContent=g[1]+' · '+drin.length;
@@ -235,10 +261,24 @@ document.querySelectorAll('[data-filter]').forEach(function(gruppe){
       drin.forEach(function(f){liste.appendChild(f.cloneNode(true));});
     });
   }
+  function tafel(nach){
+    document.querySelectorAll('.vergleich').forEach(function(v){
+      v.hidden=v.dataset.nach!==nach;
+      v.querySelectorAll('.vgl-z').forEach(function(z){z.setAttribute('aria-pressed','false');});
+    });
+  }
   document.querySelectorAll('[data-gruppierung] button').forEach(function(b){
     b.addEventListener('click',function(){
       b.parentNode.querySelectorAll('button').forEach(function(x){x.setAttribute('aria-pressed',x===b)});
-      bau(b.dataset.wert);
+      jetzt=b.dataset.wert; tafel(jetzt); bau(jetzt);
+    });
+  });
+  document.querySelectorAll('.vgl-z').forEach(function(z){
+    z.addEventListener('click',function(){
+      var an=z.getAttribute('aria-pressed')!=='true';
+      z.parentNode.querySelectorAll('.vgl-z').forEach(function(x){x.setAttribute('aria-pressed','false');});
+      z.setAttribute('aria-pressed',an);
+      bau(jetzt, an?z.dataset.wert:null);
     });
   });
 })();

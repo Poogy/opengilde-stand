@@ -29,6 +29,29 @@ section{display:flex;flex-direction:column;gap:16px}
 .lanzahlen b{display:block;font-family:'Courier Prime',monospace;font-size:40px;line-height:1.1;color:var(--rot)}
 .lanzahlen span{font-size:18px}
 .lan-gruppe{margin-top:18px;border-bottom:1px solid var(--tinte);padding-bottom:4px}
+.lan-kopf{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:12px}
+.lan-klar{font-size:21px;margin:0;border-left:4px solid var(--rot);padding:4px 0 4px 16px}
+.lan-klar b{font-family:'Courier Prime',monospace;color:var(--rot)}
+.hoehepunkte{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.hoehepunkt{border:1px solid var(--tinte);padding:14px 18px;background:var(--kasten)}
+.hoehepunkt h3{margin:0 0 6px;font-size:22px}.hoehepunkt p{margin:0;font-size:18px}
+.legende{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:16px}
+.legende i{display:inline-block;width:14px;height:14px;margin-right:6px;vertical-align:-2px;border:1px solid var(--tinte)}
+.stapelgruppe{display:flex;flex-direction:column;gap:10px}
+.stapel-z{display:grid;grid-template-columns:minmax(0,280px) 1fr;gap:12px;align-items:center}
+.stapel-t{font-size:17px}
+.stapel{display:flex;height:26px;border:1px solid var(--tinte);background:var(--blatt);overflow:hidden}
+.stapel>span{display:flex;align-items:center;justify-content:center;color:var(--blatt);font-family:'Courier Prime',monospace;font-size:14px;overflow:hidden}
+.lan-svg{width:100%;height:auto;font-family:'Courier Prime',monospace;font-size:14px;fill:var(--tinte)}
+.matrix{border-collapse:collapse;width:100%;font-size:18px}
+.matrix th,.matrix td{border-bottom:1px dotted var(--linie);padding:6px 10px;text-align:left}
+.mz{display:block;height:10px;background:var(--rot);opacity:.75;margin-bottom:2px}
+.vergleich{display:flex;flex-direction:column}
+.vgl-z{display:grid;grid-template-columns:minmax(0,230px) 1fr 48px;gap:12px;align-items:center;background:none;border:0;border-bottom:1px dotted var(--linie);padding:7px 4px;font:inherit;font-size:18px;text-align:left;cursor:pointer;color:var(--tinte)}
+.vgl-z:hover{background:var(--kasten)}
+.vgl-z[aria-pressed=true]{background:var(--kasten);box-shadow:inset 3px 0 0 var(--rot)}
+.vgl-b{display:block}.vgl-b .stapel{height:20px}
+.vgl-zahl{text-align:right}
 .folge{font-size:16px;color:var(--leise);font-style:italic}
 .kacheln{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 32px}
 .kachel{border-bottom:1px dotted var(--linie);padding:10px 0}.kachel b{font-size:21px;display:block}.kachel span{font-size:18px}
@@ -109,19 +132,19 @@ body.suchmodus .knoepfe{display:none}
  .auftrag{grid-template-columns:1fr}.rechts{align-items:flex-start;text-align:left}
  .eintrag{grid-template-columns:1fr}.eintrag .k{text-align:left;padding-top:0}
  .fort-z{grid-template-columns:1fr auto}.fort-b{grid-column:1/-1;grid-row:2}
- .tag{grid-template-columns:56px 1fr 48px}.lanzahlen{grid-template-columns:1fr}
+ .tag{grid-template-columns:56px 1fr 48px}.lanzahlen{grid-template-columns:1fr}.hoehepunkte,.stapel-z{grid-template-columns:1fr}.vgl-z{grid-template-columns:96px 1fr 36px;font-size:16px}.matrix{font-size:16px}
  .tafel td.z{white-space:normal} .tafel,.tafel tbody,.tafel tr,.tafel td{display:block}.tafel thead{display:none}.tafel td{border:0;padding:2px 0}.tafel tr{border-bottom:1px dotted var(--linie);padding:8px 0}
 }
 </style></head>
 <body><main class="blatt">
 <header style="display:flex;flex-direction:column;gap:14px">
-<div class="kopf"><h1>Hauptbuch des Nachbaus</h1><span class="mono" style="font-size:14px">aktualisiert am: 18.10.2026, 16:40 Uhr</span></div>
+<div class="kopf"><h1>Hauptbuch des Nachbaus</h1><span class="mono" style="font-size:14px">aktualisiert am: 18.10.2026, 19:06 Uhr</span></div>
 
 <nav><a href="index.html">Übersicht</a><a href="lan.html">LAN-Wochenende</a><a href="bilder.html">Bilder</a><a href="auftraege.html">Aufträge</a><a href="entscheidungen.html">Entscheidungen</a><a href="baustellen.html">Baustellen</a><a href="verlauf.html">Verlauf</a><a href="einstieg.html">Was läuft &amp; Begriffe</a><a href="wissen.html" aria-current="page">Wissen</a></nav>
 <div class="suche"><input type="search" id="suche" placeholder="Auf allen Seiten suchen …" aria-label="Auf allen Seiten suchen"><span id="treffer" class="mono" style="font-size:15px"></span></div>
 <div id="fremd" class="fremd" hidden></div>
 </header>
-<section class="w-artikel"><p class="w-zurueck"><a href="wissen.html">← alle Artikel</a> · Stadt und Ämter</p><h2 class="w-titel">Vom Gardisten</h2><p class="lead">Wie man an eine Stadtwache kommt, was in ihren drei Räumen zu tun ist, und was eine Streife einbringt</p><nav class="w-inhalt"><a href="#a1">I · Kein Beruf zum Anfangen</a><a href="#a2">II · Wie man an eine Wache kommt</a><a href="#a3">III · Die drei Räume</a><a href="#a4">IV · Streife, Betriebsprüfung, Razzia</a><a href="#a5">V · Der Kampf</a></nav><div class="abschnitt" id="i670"><h3 id="a1"><span class="w-num">I</span> Kein Beruf zum Anfangen</h3><p>Den Gardisten gibt es nicht im Startmenü. Man wechselt zu ihm über die eigenen Privilegien und „Eure Berufe“ und beginnt im untersten Grad, als Unteroffizier, ohne eigenes Haus. Ein Haus des Gardisten ist eine <b>Stadtwache</b> — Wachhaus, Stadtwache oder Garnison. Im Baumenü steht dafür ein eigener Reiter, „Verteidigungsanlagen“, den nur Gardisten sehen.</p></div><div class="abschnitt" id="i671"><h3 id="a2"><span class="w-num">II</span> Wie man an eine Wache kommt</h3><p>Bauen, kaufen — oder <b>erobern</b>. <i>Auf der LAN gesehen:</i> Luca griff als Räuber mit fünf Mann ein Wachhaus an, schlug die drei Verteidiger und nahm das Haus in Besitz: <i>„… Eure Mannen haben nun die Kontrolle über das Wachhaus! Was wollt Ihr tun?“</i> — mit der Wahl, es zu nehmen, das Lager zu plündern, randalieren zu lassen oder mit der Ehre heimzugehen.</p><div class="w-kasten"><p><b>Besitzen ist nicht bedienen.</b> Luca behielt das Wachhaus, konnte darin aber nichts tun — bis er selbst den Gardisten wählte. Die Räume einer Wache bedient nur ein Besitzer, der Gardist ist.</p></div></div><div class="abschnitt" id="i672"><h3 id="a3"><span class="w-num">III</span> Die drei Räume</h3><p><i>Auf der LAN fotografiert:</i></p><table class="w-tafel"><thead><tr><th>Raum</th><th>was man dort anklickt</th></tr></thead><tbody><tr><td>Waffenkammer</td><td>Gebäude auskundschaften, Razzia, Gebäude-Infos, Warenlager, Karren verschicken, mit Waffen ausrüsten</td></tr><tr><td>Wachzimmer</td><td>im Umland patrouillieren, Streife, einen Betrieb überprüfen, die Zollkasse, Meisterbrief, Personalbuch</td></tr><tr><td>Mannschaftsraum</td><td>Kampf und Nacht und Nebel trainieren lassen, Regeneration</td></tr></tbody></table><p>Die Leute heißen wie überall Lehrling und Geselle und kosten auch dasselbe: Ein Geselle und zwei Lehrlinge machen <b>224 Gulden</b> Lohn, 112 und zweimal 56. Keiner der Aufträge der Wache kostet Aktionspunkte.</p><p><b>Auskundschaften</b> darf die Wache nur Diebesgilden, Räuberfesten und andere Wachen — die Unterwelt, nicht die Bürger.</p></div><div class="abschnitt" id="i673"><h3 id="a4"><span class="w-num">IV</span> Streife, Betriebsprüfung, Razzia</h3><ul><li>Die <b>Streife</b> schickt die Söldner zu einem Haus und zurück; sie kämpft nicht und bringt Geld. <i>Auf der LAN:</i> Drei Söldner kamen mit <b>155 Gulden</b> zurück. Woraus sich der Betrag rechnet, ist noch nicht gelesen.</li><li>Die <b>Betriebsprüfung</b> schickt einen einzigen Söldner in einen fremden Betrieb. Geht es dort „nicht ganz tadellos“ zu, zahlt der Besitzer eine Strafe an den Gardisten. <i>Auf der LAN</i> war zweimal <i>„nichts zu beanstanden. Somit geht Ihr diesmal leer aus.“</i> — und der Geprüfte bekam <i>„Ihr lächelt, da es in Eurem Gebäude nichts zu beanstanden gab.“</i> Später prüfte Luca elf Betriebe, und <b>zehn</b> waren „nicht ganz tadellos“ — die Strafen lagen zwischen 121 und 685 Gulden, und der Geprüfte liest dieselbe Summe: <i>„… müßt Ihr eine Strafe in Höhe von 270 zahlen.“</i> Nach dem Programm ist ein Betrieb „nicht ganz tadellos“, wenn das Gebäude unter 80 Prozent Zustand steht oder einer seiner Karren unter 80. Die Strafe beträgt 0,07 Prozent des Gebäudewerts je fehlendem Zustandspunkt, abgerundet — bei 70 Prozent Zustand also 2,1 Prozent des Werts. Ist nur ein Karren schuld und das Haus selbst bei 100, kommt dieselbe Meldung mit einer Strafe von <b>null</b>. <i>Gelesen, nicht im Spiel gesehen; die Gegenprobe mit Wert und Zustand eines geprüften Hauses steht noch aus.</i> Die beiden Betriebe ohne Beanstandung passen dazu, wenn sie mindestens 80 Prozent Zustand und heile Karren hatten.</li><li>Die <b>Razzia</b> hebt einen ausgekundschafteten Unterschlupf aus, mit Kampf und Beute.</li><li>Die <b>Umlandpatrouille</b> zieht einen Tag lang über das Land und sieht alle zehn Minuten nach, ob sie auf Räuber trifft — dann wird gekämpft, bis zu sechs gegen sechs.</li></ul></div><div class="abschnitt" id="i674"><h3 id="a5"><span class="w-num">V</span> Der Kampf</h3><p>Gekämpft wird in einem eigenen Bild: oben die eigenen Leute mit ihrer Lebenskraft, unten ein Knopf „Aufgeben“ und eine Leiste, die abläuft. Am Ende zeigt eine Tafel Angreifer und Verteidiger mit dem, was von ihnen übrig ist. <i>Auf der LAN gesehen:</i> Fünf Diebe griffen eine Räuberfeste an und verloren gegen deren sechs Verteidiger — mehr als sechs verteidigen nie.</p></div></section>
+<section class="w-artikel"><p class="w-zurueck"><a href="wissen.html">← alle Artikel</a> · Stadt und Ämter</p><h2 class="w-titel">Vom Gardisten</h2><p class="lead">Wie man an eine Stadtwache kommt, was in ihren drei Räumen zu tun ist, und was eine Streife einbringt</p><nav class="w-inhalt"><a href="#a1">I · Kein Beruf zum Anfangen</a><a href="#a2">II · Wie man an eine Wache kommt</a><a href="#a3">III · Die drei Räume</a><a href="#a4">IV · Streife, Betriebsprüfung, Razzia</a><a href="#a5">V · Der Kampf</a></nav><div class="abschnitt" id="i689"><h3 id="a1"><span class="w-num">I</span> Kein Beruf zum Anfangen</h3><p>Den Gardisten gibt es nicht im Startmenü. Man wechselt zu ihm über die eigenen Privilegien und „Eure Berufe“ und beginnt im untersten Grad, als Unteroffizier, ohne eigenes Haus. Ein Haus des Gardisten ist eine <b>Stadtwache</b> — Wachhaus, Stadtwache oder Garnison. Im Baumenü steht dafür ein eigener Reiter, „Verteidigungsanlagen“, den nur Gardisten sehen.</p></div><div class="abschnitt" id="i690"><h3 id="a2"><span class="w-num">II</span> Wie man an eine Wache kommt</h3><p>Bauen, kaufen — oder <b>erobern</b>. <i>Auf der LAN gesehen:</i> Luca griff als Räuber mit fünf Mann ein Wachhaus an, schlug die drei Verteidiger und nahm das Haus in Besitz: <i>„… Eure Mannen haben nun die Kontrolle über das Wachhaus! Was wollt Ihr tun?“</i> — mit der Wahl, es zu nehmen, das Lager zu plündern, randalieren zu lassen oder mit der Ehre heimzugehen.</p><div class="w-kasten"><p><b>Besitzen ist nicht bedienen.</b> Luca behielt das Wachhaus, konnte darin aber nichts tun — bis er selbst den Gardisten wählte. Die Räume einer Wache bedient nur ein Besitzer, der Gardist ist.</p></div></div><div class="abschnitt" id="i691"><h3 id="a3"><span class="w-num">III</span> Die drei Räume</h3><p><i>Auf der LAN fotografiert:</i></p><table class="w-tafel"><thead><tr><th>Raum</th><th>was man dort anklickt</th></tr></thead><tbody><tr><td>Waffenkammer</td><td>Gebäude auskundschaften, Razzia, Gebäude-Infos, Warenlager, Karren verschicken, mit Waffen ausrüsten</td></tr><tr><td>Wachzimmer</td><td>im Umland patrouillieren, Streife, einen Betrieb überprüfen, die Zollkasse, Meisterbrief, Personalbuch</td></tr><tr><td>Mannschaftsraum</td><td>Kampf und Nacht und Nebel trainieren lassen, Regeneration</td></tr></tbody></table><p>Die Leute heißen wie überall Lehrling und Geselle und kosten auch dasselbe: Ein Geselle und zwei Lehrlinge machen <b>224 Gulden</b> Lohn, 112 und zweimal 56. Keiner der Aufträge der Wache kostet Aktionspunkte.</p><p><b>Auskundschaften</b> darf die Wache nur Diebesgilden, Räuberfesten und andere Wachen — die Unterwelt, nicht die Bürger.</p></div><div class="abschnitt" id="i692"><h3 id="a4"><span class="w-num">IV</span> Streife, Betriebsprüfung, Razzia</h3><ul><li>Die <b>Streife</b> schickt die Söldner zu einem Haus und zurück; sie kämpft nicht und bringt Geld. <i>Auf der LAN:</i> Drei Söldner kamen mit <b>155 Gulden</b> zurück. Woraus sich der Betrag rechnet, ist noch nicht gelesen.</li><li>Die <b>Betriebsprüfung</b> schickt einen einzigen Söldner in einen fremden Betrieb. Geht es dort „nicht ganz tadellos“ zu, zahlt der Besitzer eine Strafe an den Gardisten. <i>Auf der LAN</i> war zweimal <i>„nichts zu beanstanden. Somit geht Ihr diesmal leer aus.“</i> — und der Geprüfte bekam <i>„Ihr lächelt, da es in Eurem Gebäude nichts zu beanstanden gab.“</i> Später prüfte Luca elf Betriebe, und <b>zehn</b> waren „nicht ganz tadellos“ — die Strafen lagen zwischen 121 und 685 Gulden, und der Geprüfte liest dieselbe Summe: <i>„… müßt Ihr eine Strafe in Höhe von 270 zahlen.“</i> Nach dem Programm ist ein Betrieb „nicht ganz tadellos“, wenn das Gebäude unter 80 Prozent Zustand steht oder einer seiner Karren unter 80. Die Strafe beträgt 0,07 Prozent des Gebäudewerts je fehlendem Zustandspunkt, abgerundet — bei 70 Prozent Zustand also 2,1 Prozent des Werts. Ist nur ein Karren schuld und das Haus selbst bei 100, kommt dieselbe Meldung mit einer Strafe von <b>null</b>. <i>Gelesen, nicht im Spiel gesehen; die Gegenprobe mit Wert und Zustand eines geprüften Hauses steht noch aus.</i> Die beiden Betriebe ohne Beanstandung passen dazu, wenn sie mindestens 80 Prozent Zustand und heile Karren hatten.</li><li>Die <b>Razzia</b> hebt einen ausgekundschafteten Unterschlupf aus, mit Kampf und Beute.</li><li>Die <b>Umlandpatrouille</b> zieht einen Tag lang über das Land und sieht alle zehn Minuten nach, ob sie auf Räuber trifft — dann wird gekämpft, bis zu sechs gegen sechs.</li></ul></div><div class="abschnitt" id="i693"><h3 id="a5"><span class="w-num">V</span> Der Kampf</h3><p>Gekämpft wird in einem eigenen Bild: oben die eigenen Leute mit ihrer Lebenskraft, unten ein Knopf „Aufgeben“ und eine Leiste, die abläuft. Am Ende zeigt eine Tafel Angreifer und Verteidiger mit dem, was von ihnen übrig ist. <i>Auf der LAN gesehen:</i> Fünf Diebe griffen eine Räuberfeste an und verloren gegen deren sechs Verteidiger — mehr als sechs verteidigen nie.</p></div></section>
 </main><script src="suche.js"></script><script>
 (function(){
   var f=document.getElementById('suche'); if(!f) return;
@@ -192,13 +215,16 @@ document.querySelectorAll('[data-filter]').forEach(function(gruppe){
 })();
 (function(){
   // Die Funde des LAN-Wochenendes: dieselben Eintraege, gruppiert nach Gebiet, Spieler oder Tag.
-  // Ein Fund mit zwei Spielern steht in der Spieleransicht bei beiden.
+  // Ein Fund mit zwei Spielern steht in der Spieleransicht bei beiden. Die Vergleichstafel derselben
+  // Ansicht steht darueber; ein Klick auf eine ihrer Zeilen laesst nur deren Gruppe stehen.
   var liste=document.getElementById('lanfunde'); if(!liste) return;
   var ordnung=JSON.parse(liste.dataset.ordnung);
   var funde=[].slice.call(liste.querySelectorAll('.eintrag'));
-  function bau(nach){
+  var jetzt='gebiet';
+  function bau(nach, nur){
     liste.innerHTML='';
     ordnung[nach].forEach(function(g){
+      if(nur && g[0]!==nur) return;
       var drin=funde.filter(function(f){return f.dataset[nach].split('|').indexOf(g[0])>=0;});
       if(!drin.length) return;
       var h=document.createElement('h3'); h.className='lan-gruppe'; h.textContent=g[1]+' · '+drin.length;
@@ -206,10 +232,24 @@ document.querySelectorAll('[data-filter]').forEach(function(gruppe){
       drin.forEach(function(f){liste.appendChild(f.cloneNode(true));});
     });
   }
+  function tafel(nach){
+    document.querySelectorAll('.vergleich').forEach(function(v){
+      v.hidden=v.dataset.nach!==nach;
+      v.querySelectorAll('.vgl-z').forEach(function(z){z.setAttribute('aria-pressed','false');});
+    });
+  }
   document.querySelectorAll('[data-gruppierung] button').forEach(function(b){
     b.addEventListener('click',function(){
       b.parentNode.querySelectorAll('button').forEach(function(x){x.setAttribute('aria-pressed',x===b)});
-      bau(b.dataset.wert);
+      jetzt=b.dataset.wert; tafel(jetzt); bau(jetzt);
+    });
+  });
+  document.querySelectorAll('.vgl-z').forEach(function(z){
+    z.addEventListener('click',function(){
+      var an=z.getAttribute('aria-pressed')!=='true';
+      z.parentNode.querySelectorAll('.vgl-z').forEach(function(x){x.setAttribute('aria-pressed','false');});
+      z.setAttribute('aria-pressed',an);
+      bau(jetzt, an?z.dataset.wert:null);
     });
   });
 })();
