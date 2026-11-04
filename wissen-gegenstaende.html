@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Von den Gegenständen · Hauptbuch des Nachbaus</title>
+<meta name="description" content="Projektstand von OpenGilde: was gemessen ist, was noch zu tun ist, und was Mitspieler am Original erspielen können.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,700;1,500&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--grund:#3B2A1E;--blatt:#F4ECD8;--tinte:#2A1F16;--rot:#7A1F1F;--blau:#234A6B;--ocker:#8A5A12;--gelb:#C9A24A;--linie:#A8977A;--leise:#5A4A38;--kasten:#EADFC4}
+*{box-sizing:border-box}
+body{margin:0;background:var(--grund);color:var(--tinte);font-family:'Cormorant Garamond',Georgia,serif}
+a{color:var(--rot)}a:hover{color:#4F1212}
+.mono{font-family:'Courier Prime',monospace}
+.blatt{max-width:1180px;margin:56px auto;background:var(--blatt);padding:56px 64px 72px;display:flex;flex-direction:column;gap:56px}
+h1{margin:0;font-size:60px;line-height:1}h2{margin:0;font-size:34px}h3{margin:0;font-size:24px}
+.kopf{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:12px;border-bottom:2px solid var(--rot);padding-bottom:12px}
+.lead{margin:0;font-size:21px;font-style:italic;max-width:860px}
+nav{display:flex;gap:10px 22px;flex-wrap:wrap;font-size:19px}
+section{display:flex;flex-direction:column;gap:16px}
+.bilanz{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border:1px solid var(--tinte)}
+.bilanz>div{padding:20px 24px;display:flex;flex-direction:column;gap:6px}
+.bilanz>div+div{border-left:1px solid var(--tinte)}
+.spalte{font-size:26px;font-weight:700;border-bottom:1px solid var(--tinte);padding-bottom:6px}
+.posten{display:flex;justify-content:space-between;gap:12px;font-size:20px;border-bottom:1px dotted var(--linie)}
+.summe{display:flex;justify-content:space-between;font-size:22px;font-weight:700;border-top:3px double var(--tinte);margin-top:auto;padding-top:6px}
+.hinweis{border:1px solid var(--blau);padding:14px 20px;font-size:19px}
+.lan{border:3px double var(--rot);padding:24px 28px;display:grid;grid-template-columns:auto 1fr;gap:28px;align-items:center}
+.lanzahlen{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border:1px solid var(--tinte)}
+.lanzahlen>div{padding:16px 20px;border-bottom:1px dotted var(--linie)}
+.lanzahlen b{display:block;font-family:'Courier Prime',monospace;font-size:40px;line-height:1.1;color:var(--rot)}
+.lanzahlen span{font-size:18px}
+.lan-gruppe{margin-top:18px;border-bottom:1px solid var(--tinte);padding-bottom:4px}
+.lan-kopf{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:12px}
+.lan-klar{font-size:21px;margin:0;border-left:4px solid var(--rot);padding:4px 0 4px 16px}
+.lan-klar b{font-family:'Courier Prime',monospace;color:var(--rot)}
+.hoehepunkte{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.hoehepunkt{border:1px solid var(--tinte);padding:14px 18px;background:var(--kasten)}
+.hoehepunkt h3{margin:0 0 6px;font-size:22px}.hoehepunkt p{margin:0;font-size:18px}
+.legende{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:16px}
+.legende i{display:inline-block;width:14px;height:14px;margin-right:6px;vertical-align:-2px;border:1px solid var(--tinte)}
+.stapelgruppe{display:flex;flex-direction:column;gap:10px}
+.stapel-z{display:grid;grid-template-columns:minmax(0,280px) 1fr;gap:12px;align-items:center}
+.stapel-t{font-size:17px}
+.stapel{display:flex;height:26px;border:1px solid var(--tinte);background:var(--blatt);overflow:hidden}
+.stapel>span{display:flex;align-items:center;justify-content:center;color:var(--blatt);font-family:'Courier Prime',monospace;font-size:14px;overflow:hidden}
+.lan-svg{width:100%;height:auto;font-family:'Courier Prime',monospace;font-size:14px;fill:var(--tinte)}
+.matrix{border-collapse:collapse;width:100%;font-size:18px}
+.matrix th,.matrix td{border-bottom:1px dotted var(--linie);padding:6px 10px;text-align:left}
+.mz{display:block;height:10px;background:var(--rot);opacity:.75;margin-bottom:2px}
+.vergleich{display:flex;flex-direction:column}
+.vgl-z{display:grid;grid-template-columns:minmax(0,230px) 1fr 48px;gap:12px;align-items:center;background:none;border:0;border-bottom:1px dotted var(--linie);padding:7px 4px;font:inherit;font-size:18px;text-align:left;cursor:pointer;color:var(--tinte)}
+.vgl-z:hover{background:var(--kasten)}
+.vgl-z[aria-pressed=true]{background:var(--kasten);box-shadow:inset 3px 0 0 var(--rot)}
+.vgl-b{display:block}.vgl-b .stapel{height:20px}
+.vgl-zahl{text-align:right}
+.folge{font-size:16px;color:var(--leise);font-style:italic}
+.kacheln{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 32px}
+.kachel{border-bottom:1px dotted var(--linie);padding:10px 0}.kachel b{font-size:21px;display:block}.kachel span{font-size:18px}
+.tafel{width:100%;border-collapse:collapse;font-size:19px}
+.tafel th{text-align:left;border-bottom:2px solid var(--tinte);padding:6px 10px 6px 0;font-size:18px}
+.tafel td{border-bottom:1px dotted var(--linie);padding:10px 10px 10px 0;vertical-align:top}
+.tafel td.z{font-family:'Courier Prime',monospace;font-size:16px;white-space:nowrap}
+.tafel tr.gesamt td{border-top:3px double var(--tinte);border-bottom:0;font-weight:700}
+.tag{display:grid;grid-template-columns:70px 1fr 64px;gap:14px;align-items:center;font-size:14px}
+.balken{height:9px;border-bottom:1px dotted var(--linie);display:flex}.balken span{display:block;height:9px}
+.knoepfe{display:flex;gap:8px;flex-wrap:wrap}
+.knoepfe button{min-height:44px;padding:6px 18px;cursor:pointer;border:1px solid var(--tinte);font:inherit;font-size:18px;background:transparent;color:var(--tinte)}
+.knoepfe button[aria-pressed=true]{background:var(--tinte);color:var(--blatt)}
+/* Ausblenden statt Filtern (Nutzer, 18.10.2026): wirkt neben jedem Filterknopf, darum eine Klasse an der
+   Liste und kein weiterer Knopf in der Filtergruppe, die immer nur einen gedrueckt haelt */
+body:not(.suchmodus) #auftragsliste.ohne-optik .auftrag[data-art~="optisch"]{display:none}
+.auftrag{display:grid;grid-template-columns:70px 1fr 170px;gap:20px;padding:16px 0;border-bottom:1px solid var(--linie)}
+.auftrag .t{font-size:23px;font-weight:700}.auftrag .w{font-size:19px}
+.rechts{display:flex;flex-direction:column;gap:8px;align-items:flex-end;text-align:right}
+.siegel{font-family:'Courier Prime',monospace;font-weight:700;font-size:14px;text-transform:uppercase;letter-spacing:.1em;padding:4px 10px;border:2px solid}
+.schritte{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;background:var(--kasten);padding:22px 26px;font-size:18px}
+.schritte b{display:block;font-size:22px}
+.eintrag{display:grid;grid-template-columns:1fr 110px;gap:16px;border-bottom:1px dotted var(--linie);padding:12px 0}
+.eintrag .t{font-size:22px;font-weight:700}.eintrag .x{font-size:19px}
+.eintrag .k{font-family:'Courier Prime',monospace;font-size:13px;color:var(--leise);text-align:right;padding-top:6px}
+.gruppe{display:flex;flex-direction:column;gap:0;margin-top:8px}
+.gruppe h3{border-bottom:1px solid var(--tinte);padding-bottom:4px}
+.fort{display:flex;flex-direction:column;gap:14px;border:1px solid var(--tinte);padding:20px 24px}
+.fort-z{display:grid;grid-template-columns:minmax(0,260px) minmax(0,1fr) auto;gap:16px;align-items:center;font-size:19px}
+.fort-b{height:16px;border:1px solid var(--tinte);background:var(--kasten)}.fort-b span{display:block;height:100%}
+.fenster{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px 32px;font-size:19px}
+.fenster div{border-bottom:1px dotted var(--linie);padding:4px 0}
+[hidden]{display:none!important}
+nav a[aria-current=page]{color:var(--tinte);font-weight:700;text-decoration:none}
+.fremd{border:1px solid var(--tinte);background:var(--kasten);padding:10px 16px;display:flex;flex-direction:column;gap:4px;font-size:17px;max-height:60vh;overflow:auto}
+.fremd a{display:block;padding:6px 0;border-bottom:1px dotted var(--linie)}.fremd-seite{font-family:'Courier Prime',monospace;font-size:13px;text-transform:uppercase;letter-spacing:.08em;margin-top:8px}.fremd a .fremd-seite{margin:0 6px 0 0}
+.fremd mark,.blatt mark{background:transparent;color:var(--rot);font-weight:700}
+.wegweisergitter{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
+.wegweiser{display:flex;flex-direction:column;gap:4px;border:1px solid var(--tinte);padding:14px 18px;text-decoration:none;color:var(--tinte)}
+.wegweiser b{font-size:22px;color:var(--rot)}.wegweiser span{font-size:18px}.wegweiser:hover{background:var(--kasten)}
+[id^=i]:target{background:var(--kasten)}
+.begriff{color:inherit;text-decoration:underline dotted;text-underline-offset:3px;cursor:help}
+.suche{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.suche input{font:inherit;font-size:19px;padding:8px 12px;border:1px solid var(--tinte);background:var(--blatt);color:var(--tinte);width:min(420px,100%)}
+.begriffe{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 32px;font-size:18px}
+.begriffe>div{border-bottom:1px dotted var(--linie);padding:6px 0}.begriffe>div:target{background:var(--kasten)}
+body.suchmodus [data-art][hidden]:not(.such-aus){display:grid!important}
+body.suchmodus .knoepfe{display:none}
+.such-aus{display:none!important}
+.w-artikel{max-width:820px;gap:18px}
+.w-zurueck{margin:0;font-size:17px;font-family:'Courier Prime',monospace;text-transform:uppercase;letter-spacing:.06em}
+.w-titel{font-size:46px;line-height:1.05;border-bottom:2px solid var(--rot);padding-bottom:10px}
+.w-inhalt{display:flex;flex-direction:column;gap:2px;font-size:18px;border-left:3px solid var(--linie);padding:4px 0 4px 16px}
+.abschnitt{display:flex;flex-direction:column;gap:10px;font-size:20px;line-height:1.45;padding-top:12px}
+.abschnitt p,.w-artikel>p{margin:0}.abschnitt ul{margin:0;padding-left:24px}
+.abschnitt h3{font-size:28px;color:var(--rot)}
+.w-num{color:var(--gelb);font-family:'Courier Prime',monospace;font-size:18px;margin-right:12px;letter-spacing:.04em}
+.w-kasten{background:var(--kasten);border-left:5px solid var(--ocker);padding:12px 18px;font-size:19px}
+.w-merk{text-align:center;font-style:italic;font-size:22px;border-top:1px solid var(--linie);border-bottom:1px solid var(--linie);padding:10px 24px;color:var(--rot)}
+.w-tafel{width:100%;border-collapse:collapse;font-size:18px}
+.w-tafel th{text-align:left;border-bottom:2px solid var(--tinte);padding:4px 10px 4px 0}
+.w-tafel td{border-bottom:1px dotted var(--linie);padding:6px 10px 6px 0;vertical-align:top}
+.w-tafel .z{text-align:right;font-family:'Courier Prime',monospace;font-size:16px;white-space:nowrap}
+.abschnitt:target{background:var(--kasten)}
+.bildgitter{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px 32px;margin-top:14px}
+.bild{display:flex;flex-direction:column;gap:6px}
+.bild img{display:block;width:100%;height:auto;border:1px solid var(--tinte);background:var(--grund)}
+.bild b{font-size:22px}.bild span{font-size:18px}
+.bild-seit{font-size:17px!important;font-style:italic;color:var(--rot)}
+.bild-datum{font-size:13px!important;color:var(--leise)}
+.bild:target{background:var(--kasten)}
+@media (max-width:760px){
+ .bildgitter{grid-template-columns:1fr}
+ .w-titel{font-size:34px}.abschnitt{font-size:19px}.w-tafel{display:block;overflow-x:auto}
+ .begriffe{grid-template-columns:1fr}
+ .blatt{margin:0;padding:28px 16px 48px;gap:40px}h1{font-size:40px}
+ .bilanz,.schritte,.kacheln,.fenster,.lan{grid-template-columns:1fr}.bilanz>div+div{border-left:0;border-top:1px solid var(--tinte)}
+ .auftrag{grid-template-columns:1fr}.rechts{align-items:flex-start;text-align:left}
+ .eintrag{grid-template-columns:1fr}.eintrag .k{text-align:left;padding-top:0}
+ .fort-z{grid-template-columns:1fr auto}.fort-b{grid-column:1/-1;grid-row:2}
+ .tag{grid-template-columns:56px 1fr 48px}.lanzahlen{grid-template-columns:1fr}.hoehepunkte,.stapel-z{grid-template-columns:1fr}.vgl-z{grid-template-columns:96px 1fr 36px;font-size:16px}.matrix{font-size:16px}
+ .tafel td.z{white-space:normal} .tafel,.tafel tbody,.tafel tr,.tafel td{display:block}.tafel thead{display:none}.tafel td{border:0;padding:2px 0}.tafel tr{border-bottom:1px dotted var(--linie);padding:8px 0}
+}
+</style></head>
+<body><main class="blatt">
+<header style="display:flex;flex-direction:column;gap:14px">
+<div class="kopf"><h1>Hauptbuch des Nachbaus</h1><span class="mono" style="font-size:14px">aktualisiert am: 04.11.2026, 18:36 Uhr</span></div>
+
+<nav><a href="index.html">Übersicht</a><a href="lan.html">LAN-Wochenende</a><a href="bilder.html">Bilder</a><a href="auftraege.html">Aufträge</a><a href="entscheidungen.html">Entscheidungen</a><a href="baustellen.html">Baustellen</a><a href="verlauf.html">Verlauf</a><a href="einstieg.html">Was läuft &amp; Begriffe</a><a href="wissen.html" aria-current="page">Wissen</a></nav>
+<div class="suche"><input type="search" id="suche" placeholder="Auf allen Seiten suchen …" aria-label="Auf allen Seiten suchen"><span id="treffer" class="mono" style="font-size:15px"></span></div>
+<div id="fremd" class="fremd" hidden></div>
+</header>
+<section class="w-artikel"><p class="w-zurueck"><a href="wissen.html">← alle Artikel</a> · Familie und Leben</p><h2 class="w-titel">Von den Gegenständen</h2><p class="lead">Was in den Beutel paßt, auf wen man was anwenden darf, wie lange es wirkt — und wo die Beschreibung etwas anderes sagt, als der Gegenstand tut</p><p>Fünfundsechzig Gegenstände kann man im Original benutzen, vom Silberring bis zum Angstgift. Jeder trägt eine Beschreibung, und die meisten halten, was sie versprechen. Was die Beschreibungen nicht sagen: wieviel überhaupt in den Beutel geht, wen man treffen darf und wen nicht, und was mit einer Wirkung geschieht, wenn man den Gegenstand wegwirft.</p><nav class="w-inhalt"><a href="#a1">I · Der Beutel</a><a href="#a2">II · Wie lange etwas wirkt, und wie oft man darf</a><a href="#a3">III · Auf wen man was anwenden darf</a><a href="#a4">IV · Was die Gegenstände tun — ein Überblick</a><a href="#a5">V · Wo die Beschreibung etwas anderes sagt</a><a href="#a6">VI · Auch die Computergegner benutzen Gegenstände</a></nav><div class="abschnitt" id="i678"><h3 id="a1"><span class="w-num">I</span> Der Beutel</h3><p>Ihr tragt höchstens <b>sechs Sorten</b> bei Euch, von jeder <b>höchstens drei Stück</b>. Das Geld zählt nicht mit. Ausbauen läßt sich der Beutel nicht — beide Grenzen stehen fest im Spiel.</p><p>In den Beutel kommen nur Gegenstände: Bücher, Urkunden, Schmuck und Ausrüstung, Talentbücher, Tränke und Gifte. <b>Waren nicht</b> — Eisen, Leder oder Tuch liegen im Betrieb, im Lager oder auf dem Karren, nie bei Euch. Waffen darf ein Spieler gar nicht tragen; die Computergegner dürfen es.</p><p>Verkaufen kann man aus dem Beutel nichts. <b>Wegwerfen</b> schon — aber Vorsicht: Wer einen Gegenstand wegwirft, dessen Wirkung gerade läuft, wirft die Wirkung mit weg. Gürtel, Wollumhang, Schädelkerze, Antidot und die Düfte hören in diesem Augenblick auf. Nur was als befristete Talentänderung läuft — Flöte, Starkbier, Schädelbrand, Dunkler Verfall —, läuft weiter.</p></div><div class="abschnitt" id="i679"><h3 id="a2"><span class="w-num">II</span> Wie lange etwas wirkt, und wie oft man darf</h3><p>Gut die Hälfte der Gegenstände wirkt <b>eine Zeitlang</b>: eine bis sechs Runden. Läuft die Frist ab, meldet das Spiel es Euch. Ein paar wirken nur Stunden — das Hypnosependel anderthalb, Krötenschleim und Unkendunk drei.</p><p>Die andere Hälfte wirkt <b>auf einmal</b>, dafür gilt eine <b>Rundensperre</b>: Jeden dieser Gegenstände darf eine Figur nur einmal je Runde benutzen. Vier haben beides, eine Frist und die Sperre — Krötenschleim, Unkendunk, Starkbier und Schädelbrand.</p><div class="w-kasten"><p><b>Eine Zahl, die nicht paßt.</b> Fast alle Fristen sind ganze Runden. Nur das Fahnenbräu Pilsener wirkt vierzig Minuten weniger als eine Runde. Ob das Absicht ist oder ein Zahlendreher, ist nicht herauszufinden. Im Nachbau wirkt es eine volle Runde, wie sein Text sagt.</p></div><p>Und noch etwas Tröstliches: Findet ein Gegenstand kein Ziel, weil Ihr die Auswahl abbrecht oder keiner paßt, wird er <b>nicht verbraucht</b>.</p></div><div class="abschnitt" id="i680"><h3 id="a3"><span class="w-num">III</span> Auf wen man was anwenden darf</h3><p><b>Nie auf sich selbst.</b> Das gilt für jeden Gegenstand, den man an jemandem anwendet — achtzehn sind es. Dazu fallen immer heraus: wer im Kerker sitzt und die Inhaber zweier Hofämter, und außer bei den Spielzeugen auch jedes Kind. Wen man trifft, sucht man in der Übersicht der neun Kammern aus — Dynastien, Stadtrat, Kirche, Reich und so fort —, nicht in einer Liste der Mitspieler. Treffen kann man also <b>jede erwachsene Figur der Stadt</b>, nicht nur die Konkurrenten.</p><p>Ein paar haben eigene Regeln:</p><table class="w-tafel"><thead><tr><th>Gegenstand</th><th>wen er trifft</th></tr></thead><tbody><tr><td>Gedicht</td><td>jemanden vom <b>anderen</b> Geschlecht</td></tr><tr><td>Knochenarmreif</td><td>jemanden vom <b>eigenen</b> Geschlecht</td></tr><tr><td>Haßtirade, Blume der Zwietracht</td><td>zwei Personen, und die zweite darf nicht die erste sein</td></tr><tr><td>Brodem der Berserkerwut</td><td>erst ein Gebäude, dann eine Person, die nicht sein Besitzer ist</td></tr><tr><td>Krötenschleim</td><td>den Wohnsitz eines Konkurrenten</td></tr><tr><td>Unkendunk, Schleifstein</td><td>einen Betrieb</td></tr><tr><td>Steinkreisel, Steinsoldat, Schiefertafel</td><td><b>ein Kind des eigenen Hauses</b></td></tr></tbody></table><p>Die drei Spielzeuge wählt man nicht in der Kammerübersicht, sondern im <b>Spielerbogen</b>, auf dem Reiter „Familie“. In Frage kommt nur ein Kind, das zum eigenen Haushalt gehört — fremde Kinder nicht.</p><p><b>Und manche wirken nur auf Euch selbst</b>, ganz ohne Auswahl: Ausdauertrank, Flöte und alles, was man trägt, wie Schmuck, Gürtel oder Wollumhang.</p></div><div class="abschnitt" id="i681"><h3 id="a4"><span class="w-num">IV</span> Was die Gegenstände tun — ein Überblick</h3><p><b>Schmuck und Ansehen.</b> Silberring, Silber- und Goldkette, Kamm, Stab des Edelmanns, Diamant, Glücksstein, Lagerplan und Goldgewirkte Schärpe heben Euer Ansehen, solange sie wirken. Sie tun dafür nichts Sichtbares — das Spiel fragt nach, wenn es das Ansehen rechnet. Im Beutel liegen allein genügt aber nicht: Man muß den Schmuck einmal <b>anlegen</b>, dann läuft seine Frist, und solange sie läuft und das Stück im Beutel bleibt, zählt es. Im Original gibt jedes Stück einen festen Betrag; im Nachbau den Anteil, den sein Text nennt — etwa fünf Prozent des Ansehens, das man gerade hat.</p><p><b>Talente auf Dauer.</b> Die drei Spielzeuge üben je ein Talent eines Kindes: der Steinkreisel die Handwerkskunst, der Steinsoldat den Kampf, die Schiefertafel die Rhetorik. Die beiden Bücher „Über Talente“ üben ein zufälliges Talent dessen, der liest. Ein schwaches Talent gewinnt dabei bis zu <b>einem Stern</b>, ein starkes immer weniger, und kurz vor dem Höchstwert fast nichts mehr. Bei der LAN hob der Steinsoldat den Kampf eines dreijährigen Sohnes von zwei auf zweieinhalb Sterne.</p><p><b>Talente auf Zeit.</b> Die Flöte gibt Euch für eine Runde je einen Stern in Rhetorik und Verhandeln und nimmt dafür je einen in Kampf und „Bei Nacht und Nebel“. Starkbier, Schädelbrand und Dunkler Verfall tun dem Opfer ähnliches an, nur ohne den Gewinn. Der Gürtel der Metaphysik gibt einen Stern im Kampf, solange er wirkt.</p><p><b>Schutz.</b> Das Fahnenbräu schützt vor Prügeln und Entführung, das Lederwams mildert Prügel, der Duft der Manipulation läßt Saboteure ihren Auftrag vergessen, die Schädelkerze verbirgt etwa die Hälfte Eurer Verbrechen vor Spionen, die Nekromantenrobe hilft im Prozeß, und der Duft der Willfährigkeit hilft vor einer Abstimmung oder Amtswahl. Die Robe stimmt Richter und Beisitzer um ein Zehntel günstiger und macht die Strafe um eine Stufe milder — das zweite sagt ihr Text im Original nicht, im Nachbau schon. Der Duft der Willfährigkeit hebt im Nachbau das Ansehen bei jedem Kammermitglied um ein Fünftel, wie sein Text verspricht. Wollumhang, Antidot und Kräuterschnaps gehören zu den Krankheiten; mehr dazu im Artikel vom Leben und Sterben.</p><p><b>Arbeit.</b> Der Trunk der Arbeitsfreude steigert die Arbeit in <b>allen</b> Euren Betrieben eine Runde lang um ein Viertel — gefragt wird, ob der Besitzer ihn getrunken hat, nicht der Arbeiter. Warme Socken schützen einen Betrieb vor dem Winter — aber nur, wenn man sie in der Winterrunde selbst anwendet, und je Figur nur einen Betrieb je Runde.</p><p><b>Gegen andere.</b> Die <b>Voodoopuppe</b> sticht viermal im Lauf einer Runde zu, alle drei bis fünf Stunden, und jeder Stich kostet das Opfer ein oder zwei Aktionspunkte. Bei der LAN waren es zwei und dann einer. Traumgift und Lähmungsgift ziehen dem Opfer beim Rundenbeginn Aktionspunkte ab — drei und acht —, außer es trägt ein Antidot. Das <b>Angstgift</b> bringt ein Opfer für ein Jahr in den Kerker; ein Antidot rettet es im Original in drei von vier Fällen, im Nachbau in einem von vier, wie der Text des Antidots es sagt. Der Brodem der Vergeßlichkeit läßt einen halben Stern für immer vergessen.</p><p><b>Und der Ablaß:</b> Wer unter dem Trunk des siebten Sinns steht, zahlt in der Kirche nur den halben Preis.</p></div><div class="abschnitt" id="i682"><h3 id="a5"><span class="w-num">V</span> Wo die Beschreibung etwas anderes sagt</h3><p>Gut zwei Dutzend Gegenstände tun im Original etwas anderes, als ihr Text sagt — mal weniger, mal mehr, mal gar nichts. <b>Im Nachbau gilt der Text:</b> Wer eine Beschreibung liest, soll sich auf sie verlassen können. So entschieden am 3. November. Wo der Text vage war, wird er genauer; wo das Original mehr tut, als er sagt, wird er ergänzt. Erfunden wird dabei keine Zahl.</p><table class="w-tafel"><thead><tr><th>Gegenstand</th><th>Text</th><th>Original</th><th>Nachbau</th></tr></thead><tbody><tr><td>Knochenarmreif</td><td>weniger Gunst, je höher das Amt, ab Landesebene keine</td><td>bei jedem gleich viel</td><td>wie der Text, in drei Stufen</td></tr><tr><td>Brief aus Rom</td><td>nur Amtspersonen gleichen Glaubens</td><td>fragt den Glauben nicht</td><td>wie der Text</td></tr><tr><td>Wollumhang</td><td>halber Schutz vor Ansteckung</td><td>nur ein Viertel</td><td>halb</td></tr><tr><td>Krötenschleim</td><td>jedes zweite Mal krank</td><td>immer krank</td><td>jedes zweite Mal</td></tr><tr><td>Kräuterschnaps</td><td>heilt alle Krankheiten</td><td>mildert eine</td><td>heilt alle</td></tr><tr><td>Antidot</td><td>eine Runde, mit genannten Schutzchancen</td><td>zwei Runden, andere Chancen</td><td>wie der Text</td></tr><tr><td>Fahnenbräu</td><td>auch kein Duell, Rhetorik halbiert</td><td>beides nicht</td><td>wie der Text</td></tr><tr><td>D&#x27;Artagnans Duft</td><td>der Gegner trifft schlechter</td><td>Ihr trefft besser</td><td>wie der Text</td></tr><tr><td>Unkendunk</td><td>jeden Angestellten zu einem Drittel verjagen</td><td>acht Würfe zu je der Hälfte</td><td>ein Wurf, ein Drittel</td></tr><tr><td>Zauberhut</td><td>drei Jahre lang Zufall</td><td>ein Wurf; jeder fünfte bringt nichts</td><td>drei Würfe, und der Gegenstand kommt an</td></tr><tr><td>Brodem der Vergeßlichkeit</td><td>das Opfer vergißt</td><td>prüft das Talent dessen, der ihn anwendet</td><td>prüft das Opfer</td></tr><tr><td>Brodem der Berserkerwut</td><td>das Opfer verscherzt es sich mit dem Hausherrn</td><td>kommt fast nie an</td><td>kommt an</td></tr><tr><td>Duft der blinden Eifersucht</td><td>Rauferei mit drei Amtspersonen</td><td>das Opfer wird bei ihnen <b>beliebter</b></td><td>das Opfer wird unbeliebter</td></tr><tr><td>Duft der Manipulation</td><td>Saboteure vergessen ihren Auftrag</td><td>das Haus brennt trotzdem</td><td>brennt nicht</td></tr><tr><td>Dornröschenspindel</td><td>wirkt während der Wahl</td><td>wirkt bis zum Erbgang</td><td>bis nach der nächsten Wahl</td></tr><tr><td>Kristallkugel</td><td>vier Jahre keine bösen Zufälle</td><td>fragt einen anderen Gegenstand, hält drei Runden</td><td>vier Runden, wirkt — sobald der Nachbau die persönlichen Zufälle zieht</td></tr></tbody></table><p><b>„Prozent“ heißt im Nachbau ein Anteil.</b> Gedicht, Haßtirade, Moschusduft, Brief aus Rom, Schmuck und Lagerplan versprechen „Prozent“ Gunst oder Ansehen. Das Original gibt dafür feste Punkte — ein Gedicht wiegt bei einem Freund so viel wie bei einem Feind. Im Nachbau ist es der genannte Anteil vom <b>jetzigen</b> Ansehen: Ein Gedicht hebt es um fünf Prozent dessen, was schon da ist, mit Magischer Tinte um zehn. Bei jemandem, der Euch schätzt, bringt es also mehr als bei einem, der Euch nicht leiden kann.</p><p>Gleich in Text und Original sind gut zwanzig andere, vom Gehstock über die Gifte bis zur Voodoopuppe.</p></div><div class="abschnitt" id="i683"><h3 id="a6"><span class="w-num">VI</span> Auch die Computergegner benutzen Gegenstände</h3><p>Die Gegner tragen einen Beutel wie Ihr, sechs Sorten zu je drei, und anders als Ihr auch Waffen. Fehlt ihnen ein Gegenstand, den sie brauchen, gehen sie an den Marktstand und kaufen ihn — mit einem Teil ihres Bargelds und nur, was dort vorrätig ist. Danach benutzen sie ihn, nach denselben Regeln und mit derselben Rundensperre wie ein Spieler:</p><ul><li>Gehstock und Ausdauertrank für mehr Aktionspunkte,</li><li>Bücher, Flöte und Zauberhut, um zu lernen,</li><li>Lebenselixier und Kräuterschnaps — den Schnaps nur, wenn sie krank sind,</li><li>Schutzkleidung, Amulette und Düfte,</li><li>Schmuck, und Gedichte für die Gunst anderer.</li></ul><p>Welchen Schmuck ein Gegner zuerst kaufen will, hängt an seinem Amt, nicht am Zufall. Zwei Dinge kann ein Gegner allerdings nicht kaufen, weil kein Marktstand sie führt: das zweite Buch „Über Talente“ und den Zauberhut.</p><p>Dazu setzen die Gegner <b>gemeine Gegenstände gegen andere</b> ein, zwölf an der Zahl: Haßtirade und Blume der Zwietracht gegen zwei Personen, den Krötenschleim an eine Haustür, den Unkendunk in einen Betrieb — den eines Fehdegegners zuerst —, die Dornröschenspindel gegen einen Amtsträger. Um ihre <b>Familie</b> kümmern sie sich auch: ein Spielzeug für ein Kind, ein Gedicht an die, um die sie gerade werben, und wer ledig ist, legt Moschusduft auf.</p><p>Die <b>Tränke des Alchemisten</b> bekommt ein Gegner einmal im Leben geschenkt — frühestens ab 1420 und erst mit einem gehobenen Titel —, danach benutzt er sie gegen eine Person, einen Betrieb oder für sich. Nur der Brodem der Berserkerwut mißlingt einem Gegner dabei, im Original wie im Nachbau.</p><div class="w-kasten"><p><b>Im Nachbau</b> stehen die Ziele der Gegenstände seit dem 21. Oktober wie im Original, samt dem Spielerbogen für die Spielzeuge. Seit dem 3. November wirkt jeder Gegenstand für Spieler und Gegner gleich — auch Gehstock und Waffenrock, die bis dahin beim Spieler nichts taten —, und die Gegner können krank werden. Es fehlen noch Schleifstein und Waffengift; sie zählen nur im Kampf mit Einheiten, und der wird neu geplant. Die Kristallkugel wartet auf die persönlichen Zufälle, und vom Trunk des siebten Sinns ist das „Beweise sehen“ noch nicht gelesen.</p></div></div></section>
+</main><script src="suche.js"></script><script>
+(function(){
+  var f=document.getElementById('suche'); if(!f) return;
+  var hier=location.pathname.split('/').pop()||'index.html';
+  var wahl='.eintrag,.auftrag,.fenster>div,.kachel,.begriffe>div,.abschnitt,.bild';
+  var el=[].slice.call(document.querySelectorAll(wahl)), sek=[].slice.call(document.querySelectorAll('main>section'));
+  var t=document.getElementById('treffer'), fr=document.getElementById('fremd');
+  // Gesucht wird Wort fuer Wort, in beliebiger Folge; Umlaute und ß gelten wie ae/oe/ue/ss - die
+  // Seite schreibt "Schloß", gesucht wird "schloss". m merkt sich zu jedem Zeichen der geglaetteten
+  // Form seine Stelle im Original, fuer Ausschnitt und Hervorhebung.
+  function norm(s){var o='',m=[];for(var i=0;i<s.length;i++){var c=s[i].toLowerCase(),
+    r=c==='ä'?'ae':c==='ö'?'oe':c==='ü'?'ue':c==='ß'?'ss':c;for(var j=0;j<r.length;j++){o+=r[j];m.push(i);}}return {s:o,m:m};}
+  function passt(n,w){return w.every(function(x){return n.indexOf(x)>=0;});}
+  function wert(n,w){var p=0;w.forEach(function(x){var k=-1,c=0;if(n.indexOf(x)<120)p+=10;
+    while((k=n.indexOf(x,k+1))>=0&&c<20)c++;p+=c;});return p;}
+  function esc(s){return s.replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+  function ausschnitt(text,w){var N=norm(text),i=N.s.indexOf(w[0]),a=i<0?0:N.m[i];
+    var von=Math.max(0,a-70),bis=Math.min(text.length,a+150),marken=[];
+    w.forEach(function(x){var k=-1;while((k=N.s.indexOf(x,k+1))>=0){var s0=N.m[k],e0=N.m[k+x.length-1]+1;
+      if(s0>=von&&e0<=bis)marken.push([s0,e0]);}});
+    marken.sort(function(p,q){return p[0]-q[0];});
+    var h='',pos=von;marken.forEach(function(r){if(r[0]<pos)return;
+      h+=esc(text.slice(pos,r[0]))+'<mark>'+esc(text.slice(r[0],r[1]))+'</mark>';pos=r[1];});
+    return (von>0?'… ':'')+h+esc(text.slice(pos,bis))+(bis<text.length?' …':'');}
+  function zeig(){
+    var w=norm(f.value).s.split(/\s+/).filter(Boolean), q=w.length>0, n=0;
+    document.body.classList.toggle('suchmodus',q);
+    el.forEach(function(x){if(x._n===undefined)x._n=norm(x.textContent).s;
+      var ja=!q||passt(x._n,w); x.classList.toggle('such-aus',!ja);
+      if(q&&ja){n++; var d=x.closest('details'); if(d) d.open=true;}});
+    sek.forEach(function(s){ if(!q){s.classList.remove('such-aus');return;}
+      s.classList.toggle('such-aus',![].some.call(s.querySelectorAll(wahl),function(x){return !x.classList.contains('such-aus');}));});
+    var fremd=(q&&window.SUCHE)?window.SUCHE.filter(function(e){if(e.n===undefined)e.n=norm(e.x).s;
+      return e.p!==hier&&passt(e.n,w);}):[];
+    fremd.sort(function(a,b){return wert(b.n,w)-wert(a.n,w);});
+    t.textContent=q?(n+' hier, '+fremd.length+' auf anderen Seiten'):'';
+    if(!fremd.length){fr.hidden=true;fr.innerHTML='';return;}
+    var html='';
+    fremd.slice(0,40).forEach(function(e){
+      html+='<a href="'+e.p+'?q='+encodeURIComponent(f.value.trim())+'#'+e.i+'"><span class="fremd-seite">'
+        +esc(window.SEITEN[e.p])+'</span> '+ausschnitt(e.x,w)+'</a>';});
+    if(fremd.length>40) html+='<div class="fremd-seite">und '+(fremd.length-40)+' weitere</div>';
+    fr.innerHTML=html; fr.hidden=false;
+  }
+  f.addEventListener('input',zeig);
+  var q=new URLSearchParams(location.search).get('q');
+  if(q){f.value=q; zeig(); var z=location.hash&&document.getElementById(location.hash.slice(1)); if(z) setTimeout(function(){z.scrollIntoView({block:'center'});},50);}
+})();
+document.querySelectorAll('[data-filter]').forEach(function(gruppe){
+  var ziel=document.getElementById(gruppe.dataset.filter);
+  gruppe.querySelectorAll('button').forEach(function(b){
+    b.addEventListener('click',function(){
+      gruppe.querySelectorAll('button').forEach(function(x){x.setAttribute('aria-pressed',x===b)});
+      ziel.querySelectorAll('[data-art]').forEach(function(z){
+        var w=b.dataset.wert, a=z.dataset.art.split(' ');
+        z.hidden = !(w==='*' ? a.indexOf('offen')>=0 : a.indexOf(w)>=0);
+      });
+    });
+  });
+  gruppe.querySelector('button').click();
+});
+(function(){
+  var b=document.getElementById('ohneoptik'), l=document.getElementById('auftragsliste'); if(!b||!l) return;
+  b.addEventListener('click',function(){
+    var an=b.getAttribute('aria-pressed')!=='true';
+    b.setAttribute('aria-pressed',an); l.classList.toggle('ohne-optik',an);
+  });
+})();
+(function(){
+  // Die Funde des LAN-Wochenendes: dieselben Eintraege, gruppiert nach Gebiet, Spieler oder Tag.
+  // Ein Fund mit zwei Spielern steht in der Spieleransicht bei beiden. Die Vergleichstafel derselben
+  // Ansicht steht darueber; ein Klick auf eine ihrer Zeilen laesst nur deren Gruppe stehen.
+  var liste=document.getElementById('lanfunde'); if(!liste) return;
+  var ordnung=JSON.parse(liste.dataset.ordnung);
+  var funde=[].slice.call(liste.querySelectorAll('.eintrag'));
+  var jetzt='gebiet';
+  function bau(nach, nur){
+    liste.innerHTML='';
+    ordnung[nach].forEach(function(g){
+      if(nur && g[0]!==nur) return;
+      var drin=funde.filter(function(f){return f.dataset[nach].split('|').indexOf(g[0])>=0;});
+      if(!drin.length) return;
+      var h=document.createElement('h3'); h.className='lan-gruppe'; h.textContent=g[1]+' · '+drin.length;
+      liste.appendChild(h);
+      drin.forEach(function(f){liste.appendChild(f.cloneNode(true));});
+    });
+  }
+  function tafel(nach){
+    document.querySelectorAll('.vergleich').forEach(function(v){
+      v.hidden=v.dataset.nach!==nach;
+      v.querySelectorAll('.vgl-z').forEach(function(z){z.setAttribute('aria-pressed','false');});
+    });
+  }
+  document.querySelectorAll('[data-gruppierung] button').forEach(function(b){
+    b.addEventListener('click',function(){
+      b.parentNode.querySelectorAll('button').forEach(function(x){x.setAttribute('aria-pressed',x===b)});
+      jetzt=b.dataset.wert; tafel(jetzt); bau(jetzt);
+    });
+  });
+  document.querySelectorAll('.vgl-z').forEach(function(z){
+    z.addEventListener('click',function(){
+      var an=z.getAttribute('aria-pressed')!=='true';
+      z.parentNode.querySelectorAll('.vgl-z').forEach(function(x){x.setAttribute('aria-pressed','false');});
+      z.setAttribute('aria-pressed',an);
+      bau(jetzt, an?z.dataset.wert:null);
+    });
+  });
+})();
+</script></body></html>
